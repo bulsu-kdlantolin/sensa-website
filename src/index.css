@@ -75,6 +75,30 @@ html {
   }
 }
 
+@keyframes float-purple {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(30px, -25px) scale(1.2);
+  }
+}
+
+@keyframes float-cyan {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(-30px, 25px) scale(1.1);
+  }
+}
+
 @keyframes logo-light-flow {
   0% {
     filter: drop-shadow(0 0 0px transparent);
@@ -120,6 +144,14 @@ html {
 
 .animate-float-orange {
   animation: float-orange 9s ease-in-out infinite 0.5s;
+}
+
+.animate-float-purple {
+  animation: float-purple 11s ease-in-out infinite 1s;
+}
+
+.animate-float-cyan {
+  animation: float-cyan 10s ease-in-out infinite 2s;
 }
 
 .animate-logo-light {
