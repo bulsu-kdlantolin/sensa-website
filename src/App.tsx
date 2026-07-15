@@ -264,11 +264,10 @@ export default function App() {
         <div className="absolute inset-0 bg-grid-pattern pointer-events-none [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_75%,transparent_100%)] -z-10" />
 
         {/* ModeSelection Starter Popup Background Shade (Dual-Mode Fusion Aurora) */}
-        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[520px] rounded-full blur-[165px] pointer-events-none -z-10 transition-all duration-700 ${
-          isDark
+        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[520px] rounded-full blur-[165px] pointer-events-none -z-10 transition-all duration-700 ${isDark
             ? 'bg-gradient-to-tr from-[#0A44FF]/26 via-[#8A56FF]/18 to-[#FF7A2F]/26'
             : 'bg-gradient-to-tr from-[#0A44FF]/16 via-[#8A56FF]/10 to-[#FF7A2F]/16'
-        }`} />
+          }`} />
 
         <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
 
@@ -403,14 +402,12 @@ export default function App() {
       <section id="features" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[76px] py-20 md:py-28 border-t transition-colors duration-500 ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
         }`}>
         {/* VisualWelcomeOverlay Starter Shade (#0A44FF Royal Blue Behind Visual Mode Cards) */}
-        <div className={`absolute top-[28%] left-1/4 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[420px] rounded-full blur-[160px] pointer-events-none -z-10 transition-all duration-700 ${
-          isDark ? 'bg-[#0A44FF]/24' : 'bg-[#0A44FF]/14'
-        }`} />
+        <div className={`absolute top-[28%] left-1/4 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[420px] rounded-full blur-[160px] pointer-events-none -z-10 transition-all duration-700 ${isDark ? 'bg-[#0A44FF]/24' : 'bg-[#0A44FF]/14'
+          }`} />
 
         {/* AuditoryWelcomeOverlay Starter Shade (#FF7A2F Sunset Orange Behind Auditory Mode Cards) */}
-        <div className={`absolute top-[75%] right-1/4 translate-x-1/2 -translate-y-1/2 w-[700px] h-[420px] rounded-full blur-[160px] pointer-events-none -z-10 transition-all duration-700 ${
-          isDark ? 'bg-[#FF7A2F]/24' : 'bg-[#FF7A2F]/14'
-        }`} />
+        <div className={`absolute top-[75%] right-1/4 translate-x-1/2 -translate-y-1/2 w-[700px] h-[420px] rounded-full blur-[160px] pointer-events-none -z-10 transition-all duration-700 ${isDark ? 'bg-[#FF7A2F]/24' : 'bg-[#FF7A2F]/14'
+          }`} />
 
         <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -441,7 +438,7 @@ export default function App() {
                 </div>
                 <h4 className={`text-base font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Hands-Free Voice Navigation</h4>
                 <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Execute commands like <em className={isDark ? 'text-slate-200 font-semibold' : 'text-slate-800 font-semibold'}>"Activate Visual Mode"</em>, <em className={isDark ? 'text-slate-200 font-semibold' : 'text-slate-800 font-semibold'}>"Read page"</em>, <em className={isDark ? 'text-slate-200 font-semibold' : 'text-slate-800 font-semibold'}>"Scroll down"</em>, or <em className={isDark ? 'text-slate-200 font-semibold' : 'text-slate-800 font-semibold'}>"Click submit"</em> without touching the keyboard or mouse.
+                  Navigate the web completely hands-free. Simply speak to your browser to scroll pages, open links, and fill out input forms without a mouse or keyboard.
                 </p>
               </div>
 
@@ -455,7 +452,7 @@ export default function App() {
                 </div>
                 <h4 className={`text-base font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Screen Magnifier & Guided Reading</h4>
                 <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Includes our signature horizontal <strong className="text-yellow-400 font-black bg-yellow-400/10 px-1 rounded font-mono text-xs">#FFFF00 Focus Ruler</strong> that isolates text line-by-line to prevent jumping, plus a customizable magnifying lens overlay.
+                  Isolate text lines as you read. Our clean, horizontal tracking ruler guides your eyes step-by-step to prevent skipping lines, optimized for dyslexia and low-vision comfort.
                 </p>
               </div>
 
@@ -469,7 +466,7 @@ export default function App() {
                 </div>
                 <h4 className={`text-base font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Image Alt-Text AI Reader</h4>
                 <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Automatically detects un-captioned images, infographics, and charts across DOM nodes and reads out clear, contextual descriptions via natural TTS voices.
+                  Hear the unwritten elements of the web. Sensa automatically uncovers descriptions for unlabeled images, graphics, and charts, reading them aloud using natural text-to-speech.
                 </p>
               </div>
 
@@ -483,7 +480,7 @@ export default function App() {
                 </div>
                 <h4 className={`text-base font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Customizable Typography & Autoscroll</h4>
                 <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Instantly convert any web article to high-contrast dark theme, toggle dyslexia-friendly fonts, and set hands-free autoscroll speed right from the floating dock.
+                  Make any webpage comfortable to read. Instantly transition sites into high-contrast dark themes, switch to custom accessible fonts, and set comfortable automatic scrolling speeds.
                 </p>
               </div>
             </div>
@@ -508,7 +505,7 @@ export default function App() {
                 </div>
                 <h4 className={`text-base font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Live Multilingual AI Captions</h4>
                 <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Showcase real-time transcription overlay (<code className="text-[#FF7A2F] font-mono font-bold text-xs">AuditoryCaptionWindow.tsx</code>) across browser audio streams with instant translation (`EN`, `ES`, `FR`, `TL`, `ZH`).
+                  Real-time captions on any browser tab. Generate instant subtitles for video lectures, webinars, and podcasts with seamless live translation across multiple languages.
                 </p>
               </div>
 
@@ -522,7 +519,7 @@ export default function App() {
                 </div>
                 <h4 className={`text-base font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Web Audio API Analyser & Visualizer</h4>
                 <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Render dynamic sound waveforms and frequency bars directly on the screen using the <strong className={isDark ? 'text-white font-semibold' : 'text-slate-900 font-semibold'}>Web Audio API AnalyserNode</strong> to visually represent sound intensity, pitch, and cadence.
+                  See the rhythm of sound. Dynamic visual waveform meters translate incoming audio into sleek frequency lines, providing clear visual cues for audio playback intensity.
                 </p>
               </div>
 
@@ -536,7 +533,7 @@ export default function App() {
                 </div>
                 <h4 className={`text-base font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Environmental Alerts & Sensory Noise Warnings</h4>
                 <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Visual flashing warnings (`border-[#FF7A2F] animate-pulse`) instantly notify deaf/hard-of-hearing users when sudden loud environmental noises, warning beeps, or chat alarms occur on hidden background tabs.
+                  Stay connected across hidden tabs. Faint, pulsing visual edge-alerts instantly notify you when background tabs play sudden audio indicators, chat alerts, or warning pings.
                 </p>
               </div>
             </div>
@@ -550,13 +547,12 @@ export default function App() {
       <section id="playground" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[76px] py-20 md:py-28 border-y transition-colors duration-500 ${isDark ? 'bg-[#121214] border-slate-800/80' : 'bg-[#F4F5F7] border-slate-200/80'
         }`}>
         {/* Dynamic Mode-Responsive Playground Background Shade (Visual vs Auditory Overlay Tint) */}
-        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[780px] h-[480px] rounded-full blur-[165px] pointer-events-none -z-10 transition-colors duration-700 ${
-          activeMode === 'visual'
+        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[780px] h-[480px] rounded-full blur-[165px] pointer-events-none -z-10 transition-colors duration-700 ${activeMode === 'visual'
             ? isDark ? 'bg-[#0A44FF]/26' : 'bg-[#0A44FF]/16'
             : activeMode === 'auditory'
-            ? isDark ? 'bg-[#FF7A2F]/26' : 'bg-[#FF7A2F]/16'
-            : isDark ? 'bg-gradient-to-r from-[#0A44FF]/18 to-[#FF7A2F]/18' : 'bg-gradient-to-r from-[#0A44FF]/12 to-[#FF7A2F]/12'
-        }`} />
+              ? isDark ? 'bg-[#FF7A2F]/26' : 'bg-[#FF7A2F]/16'
+              : isDark ? 'bg-gradient-to-r from-[#0A44FF]/18 to-[#FF7A2F]/18' : 'bg-gradient-to-r from-[#0A44FF]/12 to-[#FF7A2F]/12'
+          }`} />
 
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -944,9 +940,9 @@ export default function App() {
                   </span>
                   <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest">Unpack & Load</span>
                 </div>
-                <h4 className={`text-xl font-bold mb-3 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Install Extension Package</h4>
+                <h4 className={`text-xl font-bold mb-3 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>1. Add to Chrome</h4>
                 <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Download the Sensa release ZIP from our GitHub repository or Web Store. Open Chrome and navigate to <code className={`px-1.5 py-0.5 rounded font-mono text-xs font-semibold ${isDark ? 'bg-black/60 text-[#6AA2FF] border border-slate-800' : 'bg-slate-100 text-[#0A44FF]'}`}>chrome://extensions</code>. Enable <strong className={isDark ? 'text-white font-semibold' : 'text-slate-900 font-semibold'}>Developer Mode</strong> in the top right, then click <strong className={isDark ? 'text-white font-semibold' : 'text-slate-900 font-semibold'}>Load unpacked</strong> and select the build folder.
+                  Download Sensa from your project portal or Web Store repository. Pin the extension icon directly to your browser toolbar for instant accessibility on any site.
                 </p>
               </div>
             </div>
@@ -961,9 +957,9 @@ export default function App() {
                   </span>
                   <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest">Voice Onboarding</span>
                 </div>
-                <h4 className={`text-xl font-bold mb-3 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Hands-Free Mode Selection</h4>
+                <h4 className={`text-xl font-bold mb-3 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>2. Choose Your Mode</h4>
                 <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  When the onboarding screen appears, simply say clearly into your microphone: <em className={isDark ? 'text-slate-200 font-semibold' : 'text-slate-800 font-semibold'}>"Sensa, Visual Mode"</em> or <em className={isDark ? 'text-slate-200 font-semibold' : 'text-slate-800 font-semibold'}>"Sensa, Auditory Mode"</em>. The extension will instantly configure your sensory profile and spawn the corresponding HUD dock.
+                  Launch Sensa and choose your sensory profile. Select Visual Mode for guided tracking and voice tools, or Auditory Mode for active captioning streams.
                 </p>
               </div>
             </div>
@@ -977,9 +973,9 @@ export default function App() {
                   </span>
                   <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest">Customize Dock</span>
                 </div>
-                <h4 className={`text-xl font-bold mb-3 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Fine-Tune Sensory Tools</h4>
+                <h4 className={`text-xl font-bold mb-3 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>3. Browse Effortlessly</h4>
                 <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Use the floating dock on any webpage to toggle the #FFFF00 reading focus ruler, adjust natural TTS speaking speed (`1x to 2x`), or switch live AI subtitle translations (`English, Spanish, French, Tagalog`).
+                  Control your experience with our floating assistant dock. Adjust text-to-speech speeds, toggle tracking lines, or alter translation preferences on the fly.
                 </p>
               </div>
             </div>
