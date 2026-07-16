@@ -1,27 +1,72 @@
 import { useState, useEffect, useRef } from 'react';
+import sensaLogo from './assets/Sensa-Logo.png';
 import {
   Ear,
   Volume2,
-  Code,
-  Cpu,
-  Play,
   Mic,
   Maximize2,
-  Users,
-  Award,
-  Globe,
   Sun,
   Moon,
   CheckCircle2,
   Zap,
-  BookOpen,
   Download,
   FileText,
   Check,
-  AlertCircle,
-  Pause,
-  SkipForward
+  AlertCircle
 } from 'lucide-react';
+
+const Github = ({ size = 18, className = "" }: { size?: number; className?: string }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+    <path d="M9 18c-4.51 2-5-2-7-2" />
+  </svg>
+);
+
+const Linkedin = ({ size = 18, className = "" }: { size?: number; className?: string }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect width="4" height="12" x="2" y="9" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
+
+const MailIcon = ({ size = 18, className = "" }: { size?: number; className?: string }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <rect width="20" height="16" x="2" y="4" rx="2" />
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+  </svg>
+);
+
 
 type SensoryMode = 'standard' | 'visual' | 'auditory';
 type ThemeMode = 'dark' | 'light';
@@ -45,50 +90,6 @@ export default function App() {
   const [voiceCommandStatus, setVoiceCommandStatus] = useState<string>('Ready for voice command input...');
   const [ttsPlaying, setTtsPlaying] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>('hero');
-
-  // Interactive Video Showcase State
-  const [activeVideoChapter, setActiveVideoChapter] = useState<number>(0);
-  const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
-  const [videoPlayerMode, setVideoPlayerMode] = useState<'interactive' | 'embed'>('interactive');
-
-  const videoChapters = [
-    {
-      id: 0,
-      title: 'Full Capstone System Walkthrough',
-      duration: '05:24',
-      badge: 'Overview',
-      description: 'Comprehensive tour of Sensa’s dual-mode accessibility architecture built for WCAG 2.1 AAA compliance.',
-      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1',
-      highlights: ['System Architecture & Extension Lifecycle', 'Manifest V3 Permissions & Security', 'Live Audio Tab Stream Integration']
-    },
-    {
-      id: 1,
-      title: 'Visual Mode: Voice Navigation & Focus Ruler',
-      duration: '01:45',
-      badge: 'Visual Mode',
-      description: 'Demonstrating hands-free Web Speech API scrolling, link activation, and dyslexia-optimized horizontal tracking ruler.',
-      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1',
-      highlights: ['Web Speech API Voice Command Parsing', 'Step-by-Step Line Tracking Ruler', 'Instant AI Image Alt-Text Reader']
-    },
-    {
-      id: 2,
-      title: 'Auditory Mode: Live Captions & Smart TTS',
-      duration: '02:10',
-      badge: 'Auditory Mode',
-      description: 'Real-time tab audio capture, multi-language speech-to-text transcription, and adjustable TTS reading speeds.',
-      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1',
-      highlights: ['Chrome TabCapture & Offscreen Audio Processing', 'Dynamic Caption Dock & Contrast Filters', 'On-the-Fly TTS Voice Customization']
-    },
-    {
-      id: 3,
-      title: 'Extension Floating Dock & Settings Sync',
-      duration: '01:29',
-      badge: 'Dock & Profile',
-      description: 'Exploring the non-intrusive floating accessibility panel, theme toggles, and customizable user sensory profiles.',
-      embedUrl: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1',
-      highlights: ['Non-blocking Draggable Floating UI', 'Persistent Profile Sync via Chrome Storage', 'One-Click Accessibility Mode Switching']
-    }
-  ];
 
   const isManualScrollingRef = useRef<boolean>(false);
   const manualScrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -124,7 +125,7 @@ export default function App() {
 
   // Track active section on scroll for navbar underline highlight
   useEffect(() => {
-    const sectionIds = ['hero', 'problem-solution', 'features', 'playground', 'architecture', 'metrics', 'guide', 'video', 'team'];
+    const sectionIds = ['hero', 'problem-solution', 'features', 'video', 'playground', 'guide', 'team'];
     const observer = new IntersectionObserver(
       (entries) => {
         if (isManualScrollingRef.current) return;
@@ -158,31 +159,30 @@ export default function App() {
       '[ES] Sensa AI Translation: "Bienvenido a nuestra presentación del proyecto universitario..."',
       '[TL] Sensa AI Translation: "Maligayang pagdating sa aming BulSU Capstone presentation..."'
     ];
-    let index = 0;
+    let idx = 0;
     const interval = setInterval(() => {
-      index = (index + 1) % captions.length;
-      setSimulatedCaptionText(captions[index]);
-    }, 3200);
+      idx = (idx + 1) % captions.length;
+      setSimulatedCaptionText(captions[idx]);
+    }, 3500);
     return () => clearInterval(interval);
   }, [isSimulatingCaptions, activeMode]);
 
-  // Handle voice command simulator
   const handleVoiceSimulator = (command: string) => {
-    setVoiceCommandStatus(`🎤 Listening for phonetic input: "${command}"...`);
+    setVoiceCommandStatus(`Command detected: "${command}" -> Processing...`);
     setTimeout(() => {
       if (command.toLowerCase().includes('visual')) {
         setActiveMode('visual');
         setIsFocusRulerActive(true);
-        setVoiceCommandStatus('✅ Recognized: "Visual Mode". Activated high-contrast theme & #FFFF00 focus ruler.');
+        setVoiceCommandStatus('Recognized: "Visual Mode". Activated high-contrast theme & #FFFF00 focus ruler.');
       } else if (command.toLowerCase().includes('auditory')) {
         setActiveMode('auditory');
         setIsSimulatingCaptions(true);
-        setVoiceCommandStatus('✅ Recognized: "Auditory Mode". Launched live multilingual AI caption window.');
+        setVoiceCommandStatus('Recognized: "Auditory Mode". Launched live multilingual AI caption window.');
       } else if (command.toLowerCase().includes('read')) {
         setTtsPlaying(true);
-        setVoiceCommandStatus(`✅ Recognized: "Read Page". Sensa SpeechSynthesis TTS reading article at ${readingSpeed}x speed.`);
+        setVoiceCommandStatus(`Recognized: "Read Page". Sensa SpeechSynthesis TTS reading article at ${readingSpeed}x speed.`);
       } else {
-        setVoiceCommandStatus(`✅ Recognized command: "${command}". System executed action hands-free.`);
+        setVoiceCommandStatus(`Recognized command: "${command}". System executed action hands-free.`);
       }
     }, 1200);
   };
@@ -237,7 +237,7 @@ export default function App() {
         <div className="w-full max-w-[1800px] mx-auto flex items-center justify-between gap-8">
           <a href="#hero" onClick={(e) => handleNavClick(e, 'hero')} className="flex items-center gap-3 md:gap-3.5 no-underline group shrink-0 select-none">
             <img
-              src="/sensa-logo.png"
+              src={sensaLogo}
               alt="Sensa Logo"
               className="w-12 h-12 md:w-[52px] md:h-[52px] object-contain drop-shadow-[0_0_14px_rgba(10,68,255,0.55)] group-hover:scale-105 transition-transform duration-300 shrink-0"
             />
@@ -252,10 +252,10 @@ export default function App() {
               }`}>
               {[
                 { href: '#problem-solution', id: 'problem-solution', label: 'Why Sensa' },
-                { href: '#features', id: 'features', label: 'Dual-Mode Features' },
-                { href: '#playground', id: 'playground', label: 'Live Demo Sandbox' },
-                { href: '#architecture', id: 'architecture', label: 'Technical Architecture' },
-                { href: '#metrics', id: 'metrics', label: 'Research Metrics' },
+                { href: '#features', id: 'features', label: 'Features' },
+                { href: '#video', id: 'video', label: 'Demo Video' },
+                { href: '#playground', id: 'playground', label: 'Live Sandbox' },
+                { href: '#guide', id: 'guide', label: 'Installation' },
                 { href: '#team', id: 'team', label: 'Capstone Team' },
               ].map((item) => {
                 const isSelected = activeSection === item.id;
@@ -358,7 +358,7 @@ export default function App() {
             {/* Authentic Logo with `animate-logo-light` exact drop-shadow animation */}
             <div className="mb-6 transform-gpu">
               <img
-                src="/sensa-logo.png"
+                src={sensaLogo}
                 alt="Sensa Extension Logo"
                 className="w-[98px] h-[98px] md:w-[110px] md:h-[110px] object-contain animate-logo-light mx-auto"
               />
@@ -371,7 +371,7 @@ export default function App() {
 
             <p className={`text-base sm:text-lg md:text-xl max-w-3xl mb-10 leading-relaxed font-normal animate-pop ${isDark ? 'text-slate-400' : 'text-slate-600'
               }`}>
-              Empowering low-vision and hearing-impaired users across the web through hands-free voice navigation, intelligent live AI captions, high-contrast screen magnification, and adaptive text-to-speech.
+              Developed by BulSU IT researchers to break down digital barriers for low-vision and hearing-impaired users across the web. Engineered with hands-free voice navigation, intelligent live AI subtitles, `#FFFF00` high-contrast guided reading, and zero-latency audio capture.
             </p>
 
             <div className="flex items-center justify-center w-full mb-6 animate-pop">
@@ -626,7 +626,39 @@ export default function App() {
         </section>
 
         {/* ======================================================================
-          4. INTERACTIVE LIVE DEMO & PLAYGROUND SECTION - Alternating Value Band
+          4. CAPSTONE DEMO VIDEO SECTION
+          ====================================================================== */}
+        <section id="video" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[76px] py-20 md:py-28 border-y transition-colors duration-500 ${isDark ? 'bg-[#121214] border-slate-800/80' : 'bg-[#F4F5F7] border-slate-200/80'
+          }`}>
+          {/* Video Ambient Center Halo Layer */}
+          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[350px] rounded-full blur-[160px] pointer-events-none -z-10 ${isDark ? 'bg-purple-600/[0.06]' : 'bg-purple-600/[0.04]'}`} />
+
+          <div className="max-w-7xl mx-auto px-4 md:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <h2 className={`text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                Watch Sensa in Action
+              </h2>
+              <p className={`text-base md:text-lg leading-relaxed font-normal mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                Experience our complete dual-mode accessibility demonstration, real-time speech navigation, and high-contrast focus tools built for WCAG 2.1 AAA compliance.
+              </p>
+            </div>
+
+            {/* Main Showcase Video Player Container */}
+            <div className={`relative max-w-5xl mx-auto rounded-2xl md:rounded-3xl border overflow-hidden shadow-2xl transition-all duration-300 aspect-video bg-black flex flex-col justify-center items-center ${isDark ? 'border-slate-800 ring-1 ring-white/5' : 'border-slate-200/80 ring-1 ring-black/5'
+              }`}>
+              <iframe
+                title="Sensa Capstone Demo"
+                src="https://www.youtube-nocookie.com/embed/ScMzIvxBSi4?autoplay=1&mute=1"
+                className="w-full h-full border-0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* ======================================================================
+          5. INTERACTIVE LIVE DEMO & PLAYGROUND SECTION
           ====================================================================== */}
         <section id="playground" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[76px] py-20 md:py-28 border-y transition-colors duration-500 ${isDark ? 'bg-[#121214] border-slate-800/80' : 'bg-[#F4F5F7] border-slate-200/80'
           }`}>
@@ -787,219 +819,7 @@ export default function App() {
         </section>
 
         {/* ======================================================================
-          5. TECHNICAL ARCHITECTURE & SYSTEM WORKFLOW (Asymmetrical Bento Grid)
-          ====================================================================== */}
-        <section id="architecture" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[76px] py-20 md:py-28 border-t transition-colors duration-500 ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
-          }`}>
-          {/* Architecture Precision Engineering Grid Layer */}
-          <div className="absolute inset-0 bg-grid-pattern pointer-events-none [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_65%,transparent_100%)] -z-10" />
-
-          <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className={`text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                Technical Architecture & System Workflow
-              </h2>
-              <p className={`text-base md:text-lg leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                Demonstrating engineering depth, type-safe MV3 architecture, and strict adherence to universal web design guidelines.
-              </p>
-            </div>
-
-            {/* Asymmetrical Bento Box Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-              <article className={`border rounded-2xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-slate-700 dark:hover:border-slate-700 md:col-span-1 lg:col-span-1 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:bg-slate-50/80 shadow-sm'
-                }`}>
-                <div>
-                  <Code className="w-7 h-7 text-[#0A44FF] mb-4" />
-                  <h3 className={`text-lg font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>React 18 & TypeScript (`.tsx`)</h3>
-                  <p className={`text-sm m-0 leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Provides strict type safety and component modularity across both the Chrome extension popup (<code className={`font-mono text-xs font-semibold ${isDark ? 'text-slate-300' : 'text-slate-800'}`}>ModeSelection.tsx</code>) and this live capstone website.
-                  </p>
-                </div>
-              </article>
-
-              <article className={`border rounded-2xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-slate-700 dark:hover:border-slate-700 md:col-span-1 lg:col-span-2 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:bg-slate-50/80 shadow-sm'
-                }`}>
-                <div>
-                  <Cpu className="w-7 h-7 text-[#FF7A2F] mb-4" />
-                  <h3 className={`text-lg font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Plasmo Extension Framework</h3>
-                  <p className={`text-sm m-0 leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Automates complex multi-target bundling for Chrome MV3, hot module replacement (HMR), and clean content script injections across dynamic web DOMs.
-                  </p>
-                </div>
-              </article>
-
-              <article className={`border rounded-2xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-slate-700 dark:hover:border-slate-700 md:col-span-2 lg:col-span-2 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:bg-slate-50/80 shadow-sm'
-                }`}>
-                <div>
-                  <Zap className="w-7 h-7 text-[#0A44FF] mb-4" />
-                  <h3 className={`text-lg font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Node.js & WebSocket Engine</h3>
-                  <p className={`text-sm m-0 leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Custom, high-concurrency backend hosted on <strong className={isDark ? 'text-white font-semibold' : 'text-slate-900 font-semibold'}>Render</strong> routing live binary audio streams over WebSockets directly to <strong className={isDark ? 'text-white font-semibold' : 'text-slate-900 font-semibold'}>Deepgram</strong> (STT) and <strong className={isDark ? 'text-white font-semibold' : 'text-slate-900 font-semibold'}>DeepL</strong> (Translation) with sub-200ms latency.
-                  </p>
-                </div>
-              </article>
-
-              <article className={`border rounded-2xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-slate-700 dark:hover:border-slate-700 md:col-span-1 lg:col-span-1 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:bg-slate-50/80 shadow-sm'
-                }`}>
-                <div>
-                  <Mic className="w-7 h-7 text-[#FF7A2F] mb-4" />
-                  <h3 className={`text-lg font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Web Speech & Web Audio APIs</h3>
-                  <p className={`text-sm m-0 leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Custom voice bridges (<code className={`font-mono text-xs font-semibold ${isDark ? 'text-slate-300' : 'text-slate-800'}`}>modeSelectionVoiceBridge.ts</code>) with exponential backoff (`300ms - 3000ms`) and real-time <strong className={isDark ? 'text-white font-semibold' : 'text-slate-900 font-semibold'}>Web Audio API AnalyserNode</strong> pipelines for sound visualizers and environmental alerts.
-                  </p>
-                </div>
-              </article>
-
-              <article className={`border rounded-2xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-slate-700 dark:hover:border-slate-700 md:col-span-1 lg:col-span-1 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:bg-slate-50/80 shadow-sm'
-                }`}>
-                <div>
-                  <Globe className="w-7 h-7 text-[#0A44FF] mb-4" />
-                  <h3 className={`text-lg font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Chrome MV3 & WCAG 2.1 AAA</h3>
-                  <p className={`text-sm m-0 leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Utilizes secure `chrome.storage`, `chrome.tabs`, and `chrome.tabCapture` alongside strict ARIA accessibility attributes and `#FFFF00` focus guides.
-                  </p>
-                </div>
-              </article>
-
-              <article className={`border rounded-2xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-slate-700 dark:hover:border-slate-700 md:col-span-2 lg:col-span-2 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:bg-slate-50/80 shadow-sm'
-                }`}>
-                <div>
-                  <CheckCircle2 className="w-7 h-7 text-[#FF7A2F] mb-4" />
-                  <h3 className={`text-lg font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Stateless Cloud Processing</h3>
-                  <p className={`text-sm m-0 leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Enforces strict end-to-end encryption (`TLS 1.3 / AES-256`) across WebSocket streams. Audio packets sent to Deepgram and DeepL are processed entirely in-memory and never permanently stored or logged.
-                  </p>
-                </div>
-              </article>
-            </div>
-
-            {/* System Workflow Step Diagram */}
-            <div className={`border rounded-2xl p-6 md:p-8 backdrop-blur-xl ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset shadow-lg' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset shadow-md'
-              }`}>
-              <div className="text-center mb-10">
-                <h3 className={`text-xl md:text-2xl font-black m-0 tracking-tighter ${isDark ? 'text-white' : 'text-slate-900'}`}>Sensa Real-Time Data & Execution Workflow</h3>
-                <p className={`text-xs md:text-sm mt-1 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>How Sensa synchronizes dual-mode commands with zero browser lag across tabs</p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className={`border rounded-xl p-5 relative transition-all duration-300 ${isDark ? 'bg-black/40 border-slate-800/80 ring-1 ring-white/5 inset hover:border-slate-700' : 'bg-slate-50/80 border-slate-200/60 hover:border-slate-300'}`}>
-                  <span className="inline-block px-2.5 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-widest bg-[#0A44FF] text-white mb-3">
-                    Step 1
-                  </span>
-                  <h4 className={`text-base font-bold mb-1.5 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Content Script & DOM Capture</h4>
-                  <p className={`text-xs m-0 leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    `content.ts` injects non-blocking listeners into active tabs to monitor keyboard focus, read semantic tags (`h1-h6`, `alt`), and capture audio streams.
-                  </p>
-                </div>
-
-                <div className={`border rounded-xl p-5 relative transition-all duration-300 ${isDark ? 'bg-black/40 border-slate-800/80 ring-1 ring-white/5 inset hover:border-slate-700' : 'bg-slate-50/80 border-slate-200/60 hover:border-slate-300'}`}>
-                  <span className="inline-block px-2.5 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-widest bg-[#FF7A2F] text-white mb-3">
-                    Step 2
-                  </span>
-                  <h4 className={`text-base font-bold mb-1.5 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Service Worker Synchronization</h4>
-                  <p className={`text-xs m-0 leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Background worker (`background/index.ts`) coordinates tab communication, checks permission grants (`activeTab`, `microphone`), and manages state.
-                  </p>
-                </div>
-
-                <div className={`border rounded-xl p-5 relative transition-all duration-300 ${isDark ? 'bg-black/40 border-slate-800/80 ring-1 ring-white/5 inset hover:border-slate-700' : 'bg-slate-50/80 border-slate-200/60 hover:border-slate-300'}`}>
-                  <span className="inline-block px-2.5 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-widest bg-purple-600 text-white mb-3">
-                    Step 3
-                  </span>
-                  <h4 className={`text-base font-bold mb-1.5 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>WebSocket Engine & AI Pipeline</h4>
-                  <p className={`text-xs m-0 leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Active tab audio is streamed over high-concurrency WebSockets to our Node.js server (`Render`), where Deepgram transcribes and DeepL translates in real-time.
-                  </p>
-                </div>
-
-                <div className={`border rounded-xl p-5 relative transition-all duration-300 ${isDark ? 'bg-black/40 border-slate-800/80 ring-1 ring-white/5 inset hover:border-slate-700' : 'bg-slate-50/80 border-slate-200/60 hover:border-slate-300'}`}>
-                  <span className="inline-block px-2.5 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-widest bg-emerald-600 text-white mb-3">
-                    Step 4
-                  </span>
-                  <h4 className={`text-base font-bold mb-1.5 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Real-Time Sensory Rendering</h4>
-                  <p className={`text-xs m-0 leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Visual or Auditory Docks dynamically render `#FFFF00` focus rulers, high-contrast themes, or live multilingual captions and environmental warning alerts.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ======================================================================
-          6. CAPSTONE RESEARCH & VALIDATION METRICS - Alternating Value Band
-          ====================================================================== */}
-        <section id="metrics" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[76px] py-20 md:py-28 border-y transition-colors duration-500 ${isDark ? 'bg-[#121214] border-slate-800/80' : 'bg-[#F4F5F7] border-slate-200/80'
-          }`}>
-          {/* Metrics Ambient Halo Layer */}
-          <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[350px] rounded-full blur-[160px] pointer-events-none -z-10 ${isDark ? 'bg-amber-500/[0.05]' : 'bg-amber-500/[0.04]'}`} />
-
-          <div className="max-w-7xl mx-auto px-4 md:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className={`text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                Capstone Research & Validation Metrics
-              </h2>
-              <p className={`text-base md:text-lg leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                Rigorous performance benchmarking and usability testing conducted to verify system responsiveness across sensory profiles.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              <article className={`border rounded-2xl p-6 text-center transition-all duration-300 hover:border-slate-700 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:bg-slate-50/80 shadow-sm'
-                }`}>
-                <div className="text-4xl md:text-5xl font-black text-[#0A44FF] mb-3 tracking-tighter">&lt; 1.5s</div>
-                <h3 className={`text-base font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Voice Command Lockout Latency</h3>
-                <p className={`text-xs m-0 leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Average time from speech input (`"Activate Visual Mode"`) to full DOM theme and focus ruler injection.
-                </p>
-              </article>
-
-              <article className={`border rounded-2xl p-6 text-center transition-all duration-300 hover:border-slate-700 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:bg-slate-50/80 shadow-sm'
-                }`}>
-                <div className="text-4xl md:text-5xl font-black text-[#FF7A2F] mb-3 tracking-tighter">95%</div>
-                <h3 className={`text-base font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Hands-Free Task Completion Rate</h3>
-                <p className={`text-xs m-0 leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Achieved in usability testing with visually impaired and DHH participants navigating multi-page web applications.
-                </p>
-              </article>
-
-              <article className={`border rounded-2xl p-6 text-center transition-all duration-300 hover:border-slate-700 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:bg-slate-50/80 shadow-sm'
-                }`}>
-                <div className="text-4xl md:text-5xl font-black text-[#0A44FF] mb-3 tracking-tighter">98%</div>
-                <h3 className={`text-base font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Audio & Caption Synchronization</h3>
-                <p className={`text-xs m-0 leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  High accuracy scoring across complex YouTube, webinar, and HTML5 audio streams using Chrome `tabCapture` and Web Audio pipelines.
-                </p>
-              </article>
-
-              <article className={`border rounded-2xl p-6 text-center transition-all duration-300 hover:border-slate-700 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:bg-slate-50/80 shadow-sm'
-                }`}>
-                <div className="text-4xl md:text-5xl font-black text-emerald-500 mb-3 tracking-tighter">0</div>
-                <h3 className={`text-base font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Audio Bridge Crash Loops</h3>
-                <p className={`text-xs m-0 leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Zero audio recognition crashes or mic disconnects after implementing our custom exponential backoff recovery algorithm.
-                </p>
-              </article>
-            </div>
-
-            {/* Validation Quote / Archive Card */}
-            <div className="mt-12">
-              <article className={`p-8 rounded-3xl border transition-all duration-300 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset shadow-sm'
-                }`}>
-                <div className="flex items-center justify-between flex-wrap gap-4 mb-4">
-                  <span className="font-mono text-xs font-bold text-[#FF7A2F] uppercase tracking-widest">BulSU Capstone Verification Protocol</span>
-                  <span className={`text-xs font-mono px-3 py-1 rounded-full ${isDark ? 'bg-slate-800 text-slate-300' : 'bg-slate-100 text-slate-700'}`}>Institutional Release 2026</span>
-                </div>
-                <p className={`text-sm md:text-base leading-relaxed m-0 italic font-normal ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
-                  "Sensa proves that enterprise-grade web accessibility does not require sacrificing modern developer aesthetics or browsing speed. By offloading heavy multilingual AI audio models to a dedicated stateless cloud pipeline while keeping critical DOM interactions local, the extension delivers unprecedented dual-mode autonomy for low-vision and hearing-impaired users."
-                </p>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        {/* ======================================================================
-          7. INSTALLATION & USER GUIDE (Walkthrough)
+          6. INSTALLATION & USER GUIDE (Walkthrough)
           ====================================================================== */}
         <section id="guide" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[76px] py-20 md:py-28 border-t transition-colors duration-500 ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
           }`}>
@@ -1071,316 +891,7 @@ export default function App() {
         </section>
 
         {/* ======================================================================
-          8. CAPSTONE DEMO VIDEO SECTION - Alternating Value Band
-          ====================================================================== */}
-        <section id="video" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[76px] py-20 md:py-28 border-y transition-colors duration-500 ${isDark ? 'bg-[#121214] border-slate-800/80' : 'bg-[#F4F5F7] border-slate-200/80'
-          }`}>
-          {/* Video Ambient Center Halo Layer */}
-          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[350px] rounded-full blur-[160px] pointer-events-none -z-10 ${isDark ? 'bg-purple-600/[0.06]' : 'bg-purple-600/[0.04]'}`} />
-
-          <div className="max-w-7xl mx-auto px-4 md:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-12">
-
-              <h2 className={`text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                Watch Sensa in Action
-              </h2>
-              <p className={`text-base md:text-lg leading-relaxed font-normal mb-8 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                Experience our complete dual-mode accessibility demonstration, real-time speech navigation, and high-contrast focus tools built for WCAG 2.1 AAA compliance.
-              </p>
-
-              {/* Mode Toggle Bar for Player Type */}
-              <div className="inline-flex items-center p-1.5 rounded-xl border transition-colors duration-300 bg-slate-500/10 border-slate-500/20">
-                <button
-                  type="button"
-                  onClick={() => setVideoPlayerMode('interactive')}
-                  aria-pressed={videoPlayerMode === 'interactive'}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs md:text-sm font-bold transition-all duration-200 ${videoPlayerMode === 'interactive'
-                    ? 'bg-[#0A44FF] text-white shadow-md shadow-[#0A44FF]/25'
-                    : isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'
-                    }`}
-                >
-                  <Code size={15} />
-                  <span>Interactive Simulation</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setVideoPlayerMode('embed')}
-                  aria-pressed={videoPlayerMode === 'embed'}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs md:text-sm font-bold transition-all duration-200 ${videoPlayerMode === 'embed'
-                    ? 'bg-[#0A44FF] text-white shadow-md shadow-[#0A44FF]/25'
-                    : isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'
-                    }`}
-                >
-                  <Play size={15} />
-                  <span>Video Stream Embed</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Main Showcase Player Container */}
-            <div className={`relative max-w-5xl mx-auto rounded-2xl md:rounded-3xl border overflow-hidden shadow-2xl transition-all duration-300 mb-12 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset shadow-slate-200/60'
-              }`}>
-              {videoPlayerMode === 'interactive' ? (
-                <div className="relative">
-                  {!isVideoPlaying ? (
-                    /* Interactive Player Poster View */
-                    <div className="relative aspect-video w-full flex flex-col justify-between p-6 md:p-12 text-left overflow-hidden group">
-                      {/* Background Decorative Gradients & Grid */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#0A44FF]/15 via-[#161618]/90 to-purple-600/15 pointer-events-none" />
-                      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
-
-                      {/* Top Bar inside Video Poster */}
-                      <div className="relative z-10 flex items-center justify-between flex-wrap gap-4">
-                        <div className="flex items-center gap-2.5 bg-black/60 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/10 text-xs font-mono font-bold text-white">
-                          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                          <span>BULSU CAPSTONE THESIS 2026</span>
-                        </div>
-                        <div className="bg-black/60 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/10 text-xs font-mono text-slate-300">
-                          Duration: {videoChapters[activeVideoChapter].duration}
-                        </div>
-                      </div>
-
-                      {/* Center Animated Play Action */}
-                      <div className="relative z-10 my-auto text-center py-6">
-                        <button
-                          type="button"
-                          onClick={() => setIsVideoPlaying(true)}
-                          aria-label={`Play demonstration for ${videoChapters[activeVideoChapter].title}`}
-                          className="group/btn inline-flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#0A44FF] text-white shadow-xl shadow-[#0A44FF]/40 hover:scale-110 hover:bg-[#1A54FF] transition-all duration-300 relative focus:outline-none focus:ring-4 focus:ring-white/30"
-                        >
-                          <span className="absolute inset-0 rounded-full bg-[#0A44FF] animate-ping opacity-40" />
-                          <Play size={36} className="ml-1 relative z-10 fill-current" />
-                        </button>
-                        <h3 className="text-xl md:text-3xl font-black text-white mt-6 mb-2 tracking-tight">
-                          {videoChapters[activeVideoChapter].title}
-                        </h3>
-                        <p className="text-sm md:text-base text-slate-300 max-w-xl mx-auto">
-                          {videoChapters[activeVideoChapter].description}
-                        </p>
-                      </div>
-
-                      {/* Bottom Highlights Row */}
-                      <div className="relative z-10 pt-4 border-t border-white/10 flex items-center justify-between flex-wrap gap-4">
-                        <div className="flex flex-wrap gap-2">
-                          {videoChapters[activeVideoChapter].highlights.map((item, idx) => (
-                            <span key={idx} className="bg-white/10 backdrop-blur-sm text-white/90 text-[11px] font-medium px-2.5 py-1 rounded-md border border-white/10">
-                              ✓ {item}
-                            </span>
-                          ))}
-                        </div>
-                        <span className="text-xs font-mono font-bold text-purple-300 flex items-center gap-1.5">
-                          <CheckCircle2 size={14} className="text-emerald-400" />
-                          WCAG 2.1 AAA Validated
-                        </span>
-                      </div>
-                    </div>
-                  ) : (
-                    /* Active Simulated Video Playback Screen */
-                    <div className="relative aspect-video w-full flex flex-col justify-between bg-[#0B0B0E] p-4 md:p-8 text-white overflow-hidden">
-                      {/* Top Status Bar */}
-                      <div className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 backdrop-blur-md">
-                        <div className="flex items-center gap-3">
-                          <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
-                          <span className="font-mono text-xs font-bold text-red-400 tracking-wider">LIVE CAPTURE SIMULATION</span>
-                          <span className="text-slate-500">|</span>
-                          <span className="text-xs font-semibold text-slate-200 truncate max-w-[200px] md:max-w-md">
-                            {videoChapters[activeVideoChapter].title}
-                          </span>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => setIsVideoPlaying(false)}
-                          aria-label="Stop video simulation"
-                          className="text-xs font-mono font-bold text-slate-400 hover:text-white px-2.5 py-1 rounded bg-white/10 transition-colors"
-                        >
-                          Reset Demo
-                        </button>
-                      </div>
-
-                      {/* Simulated Stage Content */}
-                      <div className="my-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-center p-4">
-                        <div className="bg-black/60 rounded-xl border border-slate-800 p-5 space-y-4">
-                          <div className="flex items-center justify-between text-xs font-mono text-slate-400 border-b border-slate-800 pb-2">
-                            <span className="flex items-center gap-1.5 text-purple-400 font-bold">
-                              <Cpu size={14} /> Sensa Accessibility Dock
-                            </span>
-                            <span>Manifest V3 Active</span>
-                          </div>
-                          <div className="space-y-3">
-                            <div className="flex items-center justify-between p-2.5 rounded-lg bg-white/5 border border-white/5">
-                              <div className="flex items-center gap-2.5">
-                                <Mic size={16} className="text-[#0A44FF]" />
-                                <span className="text-xs font-medium">Voice Command Engine</span>
-                              </div>
-                              <span className="text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">LISTENING</span>
-                            </div>
-                            <div className="flex items-center justify-between p-2.5 rounded-lg bg-white/5 border border-white/5">
-                              <div className="flex items-center gap-2.5">
-                                <Ear size={16} className="text-[#FF7A2F]" />
-                                <span className="text-xs font-medium">Tab Audio Capture</span>
-                              </div>
-                              <span className="text-[10px] font-mono font-bold bg-[#FF7A2F]/20 text-[#FF7A2F] px-2 py-0.5 rounded">STREAMING</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="bg-gradient-to-br from-purple-900/30 to-[#0A44FF]/20 rounded-xl border border-purple-500/30 p-5 flex flex-col justify-between min-h-[180px]">
-                          <div className="text-xs font-mono text-purple-300 font-bold flex items-center justify-between">
-                            <span>LIVE CAPTION & VOICE LOG</span>
-                            <span>01:14 / {videoChapters[activeVideoChapter].duration}</span>
-                          </div>
-                          <div className="py-4 font-mono text-xs md:text-sm text-emerald-300 leading-relaxed bg-black/40 p-3 rounded-lg border border-white/5 my-2">
-                            {activeVideoChapter === 1
-                              ? '> User Speech: "Scroll down and focus on next link." -> Action executed in 84ms.'
-                              : activeVideoChapter === 2
-                                ? '> Tab Audio: "Welcome to the Bulacan State University Capstone defense..." [Captions rendered]'
-                                : '> Sensa Extension initialized successfully with high-contrast AAA color profiles.'}
-                          </div>
-                          <div className="text-[10px] text-slate-400 flex items-center justify-between">
-                            <span>Latency: 42ms</span>
-                            <span className="text-emerald-400 font-bold">● Audio-Sync Lock</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Bottom Playback Scrubber & Controls */}
-                      <div className="bg-black/80 backdrop-blur-md rounded-xl p-3 border border-white/10 space-y-2">
-                        <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                          <div className="bg-[#0A44FF] h-full w-[35%] transition-all duration-500 rounded-full" />
-                        </div>
-                        <div className="flex items-center justify-between text-xs font-mono text-slate-300 pt-1">
-                          <div className="flex items-center gap-4">
-                            <button
-                              type="button"
-                              onClick={() => setIsVideoPlaying(false)}
-                              className="hover:text-white transition-colors flex items-center gap-1"
-                              aria-label="Pause playback"
-                            >
-                              <Pause size={14} className="fill-current text-purple-400" /> Pause
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => setActiveVideoChapter((prev) => (prev + 1) % videoChapters.length)}
-                              className="hover:text-white transition-colors flex items-center gap-1"
-                              aria-label="Next chapter"
-                            >
-                              <SkipForward size={14} /> Next Chapter
-                            </button>
-                          </div>
-                          <div className="flex items-center gap-3">
-                            <span className="text-slate-400">Speed: 1.0x</span>
-                            <span className="text-emerald-400 font-bold">1080p 60FPS</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                /* Video Stream Embed Mode */
-                <div className="relative aspect-video w-full bg-black flex flex-col justify-center items-center">
-                  <iframe
-                    title={`Sensa Capstone Demo - ${videoChapters[activeVideoChapter].title}`}
-                    src={videoChapters[activeVideoChapter].embedUrl}
-                    className="w-full h-full border-0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-              )}
-            </div>
-
-            {/* Interactive Chapter Playlist Grid */}
-            <div className="mb-12">
-              <h3 className={`text-sm font-mono font-bold uppercase tracking-widest mb-6 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                Select Video Chapter
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" role="tablist" aria-label="Demo Video Chapters">
-                {videoChapters.map((chapter, idx) => {
-                  const isActive = activeVideoChapter === idx;
-                  return (
-                    <button
-                      key={chapter.id}
-                      type="button"
-                      role="tab"
-                      aria-selected={isActive}
-                      aria-controls="video"
-                      onClick={() => {
-                        setActiveVideoChapter(idx);
-                        setIsVideoPlaying(false);
-                      }}
-                      className={`text-left p-5 rounded-2xl border transition-all duration-300 flex flex-col justify-between relative group focus:outline-none focus:ring-2 focus:ring-[#0A44FF] ${isActive
-                        ? isDark
-                          ? 'bg-purple-900/20 border-[#0A44FF] ring-1 ring-[#0A44FF]'
-                          : 'bg-[#0A44FF]/5 border-[#0A44FF] ring-1 ring-[#0A44FF]'
-                        : isDark
-                          ? 'bg-[#161618] border-slate-800/80 hover:border-slate-700 hover:bg-white/[0.03]'
-                          : 'bg-white border-slate-200/80 hover:border-slate-300 hover:bg-slate-50/80 shadow-sm'
-                        }`}
-                    >
-                      <div>
-                        <div className="flex items-center justify-between mb-3">
-                          <span className={`text-xs font-mono font-bold px-2.5 py-1 rounded-md border ${isActive
-                            ? 'bg-[#0A44FF] text-white border-[#0A44FF]'
-                            : isDark ? 'bg-slate-800 text-slate-300 border-slate-700' : 'bg-slate-100 text-slate-700 border-slate-200'
-                            }`}>
-                            0{idx + 1}
-                          </span>
-                          <span className={`text-xs font-mono font-bold ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                            {chapter.duration}
-                          </span>
-                        </div>
-                        <h4 className={`text-base font-bold mb-2 leading-snug tracking-tight ${isActive ? (isDark ? 'text-white' : 'text-[#0A44FF]') : isDark ? 'text-slate-200' : 'text-slate-900'
-                          }`}>
-                          {chapter.title}
-                        </h4>
-                        <p className={`text-xs leading-relaxed line-clamp-2 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                          {chapter.description}
-                        </p>
-                      </div>
-                      <div className="mt-4 pt-3 border-t border-slate-500/10 flex items-center justify-between text-[11px] font-mono font-bold">
-                        <span className={isActive ? 'text-[#0A44FF]' : isDark ? 'text-slate-400' : 'text-slate-500'}>
-                          {chapter.badge}
-                        </span>
-                        <span className={`flex items-center gap-1 ${isActive ? 'text-[#0A44FF]' : 'text-slate-400 group-hover:translate-x-0.5 transition-transform'}`}>
-                          Play Chapter →
-                        </span>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Evaluator Resources Action Bar */}
-            <div className={`rounded-2xl p-6 md:p-8 border flex flex-col md:flex-row items-center justify-between gap-6 transition-all duration-300 ${isDark ? 'bg-gradient-to-r from-purple-900/20 to-[#0A44FF]/10 border-purple-500/30' : 'bg-gradient-to-r from-purple-500/5 to-[#0A44FF]/5 border-purple-500/20'
-              }`}>
-              <div className="flex items-center gap-4 text-left">
-                <div className="w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 shrink-0">
-                  <FileText size={24} />
-                </div>
-                <div>
-                  <h3 className={`text-lg font-bold tracking-tight mb-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                    Evaluating Sensa for BulSU Capstone Defense?
-                  </h3>
-                  <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Download our full WCAG 2.1 AAA accessibility audit checklist, architectural design tokens, and Chrome Extension manifest specifications.
-                  </p>
-                </div>
-              </div>
-              <a
-                href="#architecture"
-                className="px-6 py-3 rounded-xl bg-[#0A44FF] hover:bg-[#1A54FF] text-white font-bold text-sm transition-all duration-200 shadow-lg shadow-[#0A44FF]/25 flex items-center gap-2 shrink-0"
-              >
-                <Download size={16} />
-                <span>Review Technical Specs</span>
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* ======================================================================
-          9. ABOUT THE CAPSTONE TEAM & ACKNOWLEDGMENTS
+          7. ABOUT THE CAPSTONE RESEARCH TEAM
           ====================================================================== */}
         <section id="team" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[76px] py-20 md:py-28 border-t transition-colors duration-500 ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
           }`}>
@@ -1389,107 +900,245 @@ export default function App() {
 
           <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
             <div className="text-center max-w-3xl mx-auto mb-16">
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#0A44FF] dark:text-[#6AA2FF] mb-2 block">
+                Bulacan State University (BulSU) • CICT Capstone Project 2026
+              </span>
               <h2 className={`text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                About the Capstone Team
+                Meet the Researchers & Engineers
               </h2>
               <p className={`text-base md:text-lg leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                Department of Information Technology & Computer Science • Bulacan State University (BulSU) • Thesis Submission 2026
+                Dedicated IT researchers combining academic rigor with accessible UI engineering to eliminate sensory roadblocks across the modern web.
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-              <article className={`border rounded-2xl p-6 text-center flex flex-col items-center justify-between transition-all duration-300 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:border-slate-700 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:border-slate-300 hover:bg-slate-50/80 shadow-sm'
+              {/* Shane */}
+              <article className={`border rounded-2xl p-6 flex flex-col items-center text-center justify-between transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:border-[#0A44FF]/60 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:border-[#0A44FF]/60 hover:bg-slate-50/80'
                 }`}>
-                <div className={`w-20 h-20 rounded-full border flex flex-col items-center justify-center text-[#0A44FF] mb-4 ${isDark ? 'bg-black/40 border-slate-800 ring-1 ring-white/5 inset' : 'bg-slate-100 border-slate-200/80'
-                  }`}>
-                  <Users size={24} className="mb-1" />
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400">[ PHOTO ]</span>
-                </div>
-                <div>
-                  <h3 className={`text-lg font-bold m-0 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Shane</h3>
-                  <span className={`inline-block px-2.5 py-1 rounded-full text-[11px] font-mono font-semibold tracking-wider border my-2 ${isDark ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20'
+                <div className="flex flex-col items-center">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-[#0A44FF] to-purple-600 flex items-center justify-center text-white font-black text-xl mb-4 shadow-lg shadow-[#0A44FF]/30">
+                    ST
+                  </div>
+                  <h3 className={`text-base font-bold m-0 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Robert Shanedion M. Tantoco</h3>
+                  <span className="text-xs font-semibold text-[#0A44FF] dark:text-[#6AA2FF] mb-2 block font-mono">Shane</span>
+                  <span className={`inline-block px-3 py-1 rounded-full text-[11px] font-mono font-semibold tracking-wider border my-1 ${isDark ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20'
                     }`}>
                     UI/UX & Accessibility Designer
                   </span>
-                  <p className={`text-xs leading-relaxed m-0 mt-1 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Designed the dual-mode sensory interfaces, #FFFF00 focus rulers, and WCAG 2.1 AAA high-contrast brand tokens.
+                  <p className={`text-xs leading-relaxed m-0 mt-3 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                    Architected dual-mode sensory interfaces, #FFFF00 tracking rulers, and WCAG 2.1 AAA high-contrast brand tokens.
                   </p>
+                </div>
+                <div className={`w-full mt-6 pt-4 border-t flex items-center justify-center gap-3 ${isDark ? 'border-slate-800/80' : 'border-slate-100'}`}>
+                  <a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Robert Shanedion M. Tantoco LinkedIn"
+                    className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-white/5 hover:bg-[#0A44FF]/20 hover:text-[#6AA2FF] text-slate-400' : 'bg-slate-100 hover:bg-[#0A44FF]/10 hover:text-[#0A44FF] text-slate-600'}`}
+                  >
+                    <Linkedin size={15} />
+                  </a>
+                  <a
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Robert Shanedion M. Tantoco GitHub"
+                    className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-white/5 hover:bg-[#0A44FF]/20 hover:text-[#6AA2FF] text-slate-400' : 'bg-slate-100 hover:bg-[#0A44FF]/10 hover:text-[#0A44FF] text-slate-600'}`}
+                  >
+                    <Github size={15} />
+                  </a>
+                  <a
+                    href="mailto:robertshanedion.tantoco@bulsu.edu.ph"
+                    aria-label="Robert Shanedion M. Tantoco Email"
+                    className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-white/5 hover:bg-[#0A44FF]/20 hover:text-[#6AA2FF] text-slate-400' : 'bg-slate-100 hover:bg-[#0A44FF]/10 hover:text-[#0A44FF] text-slate-600'}`}
+                  >
+                    <MailIcon size={15} />
+                  </a>
                 </div>
               </article>
 
-              <article className={`border rounded-2xl p-6 text-center flex flex-col items-center justify-between transition-all duration-300 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:border-slate-700 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:border-slate-300 hover:bg-slate-50/80 shadow-sm'
+              {/* Christian */}
+              <article className={`border rounded-2xl p-6 flex flex-col items-center text-center justify-between transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:border-[#FF7A2F]/60 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:border-[#FF7A2F]/60 hover:bg-slate-50/80'
                 }`}>
-                <div className={`w-20 h-20 rounded-full border flex flex-col items-center justify-center text-[#FF7A2F] mb-4 ${isDark ? 'bg-black/40 border-slate-800 ring-1 ring-white/5 inset' : 'bg-slate-100 border-slate-200/80'
-                  }`}>
-                  <Users size={24} className="mb-1" />
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400">[ PHOTO ]</span>
-                </div>
-                <div>
-                  <h3 className={`text-lg font-bold m-0 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Christian</h3>
-                  <span className={`inline-block px-2.5 py-1 rounded-full text-[11px] font-mono font-semibold tracking-wider border my-2 ${isDark ? 'bg-[#FF7A2F]/15 text-[#FFC09B] border-[#FF7A2F]/30' : 'bg-[#FF7A2F]/10 text-[#FF7A2F] border-[#FF7A2F]/20'
+                <div className="flex flex-col items-center">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-[#FF7A2F] to-amber-600 flex items-center justify-center text-white font-black text-xl mb-4 shadow-lg shadow-[#FF7A2F]/30">
+                    CA
+                  </div>
+                  <h3 className={`text-base font-bold m-0 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Christian T. Adriano</h3>
+                  <span className="text-xs font-semibold text-[#FF7A2F] mb-2 block font-mono">Christian</span>
+                  <span className={`inline-block px-3 py-1 rounded-full text-[11px] font-mono font-semibold tracking-wider border my-1 ${isDark ? 'bg-[#FF7A2F]/15 text-[#FFC09B] border-[#FF7A2F]/30' : 'bg-[#FF7A2F]/10 text-[#FF7A2F] border-[#FF7A2F]/20'
                     }`}>
                     WebSocket & Backend Architect
                   </span>
-                  <p className={`text-xs leading-relaxed m-0 mt-1 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Implemented the high-concurrency Node.js server pipeline on Render routing binary audio streams to Deepgram and DeepL.
+                  <p className={`text-xs leading-relaxed m-0 mt-3 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                    Built the high-concurrency Node.js WebSocket engine on Render routing binary audio streams to Deepgram and DeepL.
                   </p>
+                </div>
+                <div className={`w-full mt-6 pt-4 border-t flex items-center justify-center gap-3 ${isDark ? 'border-slate-800/80' : 'border-slate-100'}`}>
+                  <a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Christian T. Adriano LinkedIn"
+                    className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-white/5 hover:bg-[#FF7A2F]/20 hover:text-[#FFC09B] text-slate-400' : 'bg-slate-100 hover:bg-[#FF7A2F]/10 hover:text-[#FF7A2F] text-slate-600'}`}
+                  >
+                    <Linkedin size={15} />
+                  </a>
+                  <a
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Christian T. Adriano GitHub"
+                    className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-white/5 hover:bg-[#FF7A2F]/20 hover:text-[#FFC09B] text-slate-400' : 'bg-slate-100 hover:bg-[#FF7A2F]/10 hover:text-[#FF7A2F] text-slate-600'}`}
+                  >
+                    <Github size={15} />
+                  </a>
+                  <a
+                    href="mailto:christian.adriano@bulsu.edu.ph"
+                    aria-label="Christian T. Adriano Email"
+                    className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-white/5 hover:bg-[#FF7A2F]/20 hover:text-[#FFC09B] text-slate-400' : 'bg-slate-100 hover:bg-[#FF7A2F]/10 hover:text-[#FF7A2F] text-slate-600'}`}
+                  >
+                    <MailIcon size={15} />
+                  </a>
                 </div>
               </article>
 
-              <article className={`border rounded-2xl p-6 text-center flex flex-col items-center justify-between transition-all duration-300 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:border-slate-700 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:border-slate-300 hover:bg-slate-50/80 shadow-sm'
+              {/* Leo */}
+              <article className={`border rounded-2xl p-6 flex flex-col items-center text-center justify-between transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:border-[#0A44FF]/60 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:border-[#0A44FF]/60 hover:bg-slate-50/80'
                 }`}>
-                <div className={`w-20 h-20 rounded-full border flex flex-col items-center justify-center text-[#0A44FF] mb-4 ${isDark ? 'bg-black/40 border-slate-800 ring-1 ring-white/5 inset' : 'bg-slate-100 border-slate-200/80'
-                  }`}>
-                  <Users size={24} className="mb-1" />
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400">[ PHOTO ]</span>
-                </div>
-                <div>
-                  <h3 className={`text-lg font-bold m-0 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Leo</h3>
-                  <span className={`inline-block px-2.5 py-1 rounded-full text-[11px] font-mono font-semibold tracking-wider border my-2 ${isDark ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20'
+                <div className="flex flex-col items-center">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-[#0A44FF] to-cyan-500 flex items-center justify-center text-white font-black text-xl mb-4 shadow-lg shadow-[#0A44FF]/30">
+                    LD
+                  </div>
+                  <h3 className={`text-base font-bold m-0 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Leo Lorenzo T. Dela Cruz</h3>
+                  <span className="text-xs font-semibold text-[#0A44FF] dark:text-[#6AA2FF] mb-2 block font-mono">Leo</span>
+                  <span className={`inline-block px-3 py-1 rounded-full text-[11px] font-mono font-semibold tracking-wider border my-1 ${isDark ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20'
                     }`}>
                     Chrome MV3 & DOM Specialist
                   </span>
-                  <p className={`text-xs leading-relaxed m-0 mt-1 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Developed the semantic DOM reader (`content.ts`), keyboard focus interception, and zero-latency tab communication.
+                  <p className={`text-xs leading-relaxed m-0 mt-3 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                    Engineered the semantic DOM reader (`content.ts`), keyboard focus interception, and zero-latency tab communication.
                   </p>
+                </div>
+                <div className={`w-full mt-6 pt-4 border-t flex items-center justify-center gap-3 ${isDark ? 'border-slate-800/80' : 'border-slate-100'}`}>
+                  <a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Leo Lorenzo T. Dela Cruz LinkedIn"
+                    className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-white/5 hover:bg-[#0A44FF]/20 hover:text-[#6AA2FF] text-slate-400' : 'bg-slate-100 hover:bg-[#0A44FF]/10 hover:text-[#0A44FF] text-slate-600'}`}
+                  >
+                    <Linkedin size={15} />
+                  </a>
+                  <a
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Leo Lorenzo T. Dela Cruz GitHub"
+                    className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-white/5 hover:bg-[#0A44FF]/20 hover:text-[#6AA2FF] text-slate-400' : 'bg-slate-100 hover:bg-[#0A44FF]/10 hover:text-[#0A44FF] text-slate-600'}`}
+                  >
+                    <Github size={15} />
+                  </a>
+                  <a
+                    href="mailto:leolorenzo.delacruz@bulsu.edu.ph"
+                    aria-label="Leo Lorenzo T. Dela Cruz Email"
+                    className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-white/5 hover:bg-[#0A44FF]/20 hover:text-[#6AA2FF] text-slate-400' : 'bg-slate-100 hover:bg-[#0A44FF]/10 hover:text-[#0A44FF] text-slate-600'}`}
+                  >
+                    <MailIcon size={15} />
+                  </a>
                 </div>
               </article>
 
-              <article className={`border rounded-2xl p-6 text-center flex flex-col items-center justify-between transition-all duration-300 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:border-slate-700 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:border-slate-300 hover:bg-slate-50/80 shadow-sm'
+              {/* Russell */}
+              <article className={`border rounded-2xl p-6 flex flex-col items-center text-center justify-between transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:border-[#FF7A2F]/60 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:border-[#FF7A2F]/60 hover:bg-slate-50/80'
                 }`}>
-                <div className={`w-20 h-20 rounded-full border flex flex-col items-center justify-center text-[#FF7A2F] mb-4 ${isDark ? 'bg-black/40 border-slate-800 ring-1 ring-white/5 inset' : 'bg-slate-100 border-slate-200/80'
-                  }`}>
-                  <Users size={24} className="mb-1" />
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400">[ PHOTO ]</span>
-                </div>
-                <div>
-                  <h3 className={`text-lg font-bold m-0 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Russell</h3>
-                  <span className={`inline-block px-2.5 py-1 rounded-full text-[11px] font-mono font-semibold tracking-wider border my-2 ${isDark ? 'bg-[#FF7A2F]/15 text-[#FFC09B] border-[#FF7A2F]/30' : 'bg-[#FF7A2F]/10 text-[#FF7A2F] border-[#FF7A2F]/20'
+                <div className="flex flex-col items-center">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-[#FF7A2F] to-rose-500 flex items-center justify-center text-white font-black text-xl mb-4 shadow-lg shadow-[#FF7A2F]/30">
+                    JS
+                  </div>
+                  <h3 className={`text-base font-bold m-0 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>John Russell SF. Sta.Ana</h3>
+                  <span className="text-xs font-semibold text-[#FF7A2F] mb-2 block font-mono">Russell</span>
+                  <span className={`inline-block px-3 py-1 rounded-full text-[11px] font-mono font-semibold tracking-wider border my-1 ${isDark ? 'bg-[#FF7A2F]/15 text-[#FFC09B] border-[#FF7A2F]/30' : 'bg-[#FF7A2F]/10 text-[#FF7A2F] border-[#FF7A2F]/20'
                     }`}>
                     QA & Usability Researcher
                   </span>
-                  <p className={`text-xs leading-relaxed m-0 mt-1 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Conducted sensory usability testing, performance latency benchmarks, and capstone academic documentation methodology.
+                  <p className={`text-xs leading-relaxed m-0 mt-3 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                    Spearheaded sensory usability testing, performance verification protocols, and capstone academic documentation.
                   </p>
+                </div>
+                <div className={`w-full mt-6 pt-4 border-t flex items-center justify-center gap-3 ${isDark ? 'border-slate-800/80' : 'border-slate-100'}`}>
+                  <a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="John Russell SF. Sta.Ana LinkedIn"
+                    className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-white/5 hover:bg-[#FF7A2F]/20 hover:text-[#FFC09B] text-slate-400' : 'bg-slate-100 hover:bg-[#FF7A2F]/10 hover:text-[#FF7A2F] text-slate-600'}`}
+                  >
+                    <Linkedin size={15} />
+                  </a>
+                  <a
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="John Russell SF. Sta.Ana GitHub"
+                    className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-white/5 hover:bg-[#FF7A2F]/20 hover:text-[#FFC09B] text-slate-400' : 'bg-slate-100 hover:bg-[#FF7A2F]/10 hover:text-[#FF7A2F] text-slate-600'}`}
+                  >
+                    <Github size={15} />
+                  </a>
+                  <a
+                    href="mailto:johnrussell.staana@bulsu.edu.ph"
+                    aria-label="John Russell SF. Sta.Ana Email"
+                    className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-white/5 hover:bg-[#FF7A2F]/20 hover:text-[#FFC09B] text-slate-400' : 'bg-slate-100 hover:bg-[#FF7A2F]/10 hover:text-[#FF7A2F] text-slate-600'}`}
+                  >
+                    <MailIcon size={15} />
+                  </a>
                 </div>
               </article>
 
-              <article className={`border rounded-2xl p-6 text-center flex flex-col items-center justify-between transition-all duration-300 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:border-slate-700 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:border-slate-300 hover:bg-slate-50/80 shadow-sm'
+              {/* Kian */}
+              <article className={`border rounded-2xl p-6 flex flex-col items-center text-center justify-between transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:border-[#0A44FF]/60 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:border-[#0A44FF]/60 hover:bg-slate-50/80'
                 }`}>
-                <div className={`w-20 h-20 rounded-full border flex flex-col items-center justify-center text-[#0A44FF] mb-4 ${isDark ? 'bg-black/40 border-slate-800 ring-1 ring-white/5 inset' : 'bg-slate-100 border-slate-200/80'
-                  }`}>
-                  <Users size={24} className="mb-1" />
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400">[ PHOTO ]</span>
-                </div>
-                <div>
-                  <h3 className={`text-lg font-bold m-0 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Kian</h3>
-                  <span className={`inline-block px-2.5 py-1 rounded-full text-[11px] font-mono font-semibold tracking-wider border my-2 ${isDark ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20'
+                <div className="flex flex-col items-center">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-[#0A44FF] to-emerald-500 flex items-center justify-center text-white font-black text-xl mb-4 shadow-lg shadow-[#0A44FF]/30">
+                    KA
+                  </div>
+                  <h3 className={`text-base font-bold m-0 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Kian Davey L. Antolin</h3>
+                  <span className="text-xs font-semibold text-[#0A44FF] dark:text-[#6AA2FF] mb-2 block font-mono">Kian</span>
+                  <span className={`inline-block px-3 py-1 rounded-full text-[11px] font-mono font-semibold tracking-wider border my-1 ${isDark ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20'
                     }`}>
                     Full-Stack Systems Engineer
                   </span>
-                  <p className={`text-xs leading-relaxed m-0 mt-1 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Co-architected the dual-mode sensory pipelines, real-time auditory processing, and capstone presentation interfaces.
+                  <p className={`text-xs leading-relaxed m-0 mt-3 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                    Co-architected dual-mode sensory bridges, real-time auditory processing, and responsive presentation showcases.
                   </p>
+                </div>
+                <div className={`w-full mt-6 pt-4 border-t flex items-center justify-center gap-3 ${isDark ? 'border-slate-800/80' : 'border-slate-100'}`}>
+                  <a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Kian Davey L. Antolin LinkedIn"
+                    className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-white/5 hover:bg-[#0A44FF]/20 hover:text-[#6AA2FF] text-slate-400' : 'bg-slate-100 hover:bg-[#0A44FF]/10 hover:text-[#0A44FF] text-slate-600'}`}
+                  >
+                    <Linkedin size={15} />
+                  </a>
+                  <a
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Kian Davey L. Antolin GitHub"
+                    className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-white/5 hover:bg-[#0A44FF]/20 hover:text-[#6AA2FF] text-slate-400' : 'bg-slate-100 hover:bg-[#0A44FF]/10 hover:text-[#0A44FF] text-slate-600'}`}
+                  >
+                    <Github size={15} />
+                  </a>
+                  <a
+                    href="mailto:kiandavey.antolin@bulsu.edu.ph"
+                    aria-label="Kian Davey L. Antolin Email"
+                    className={`p-2 rounded-lg transition-colors ${isDark ? 'bg-white/5 hover:bg-[#0A44FF]/20 hover:text-[#6AA2FF] text-slate-400' : 'bg-slate-100 hover:bg-[#0A44FF]/10 hover:text-[#0A44FF] text-slate-600'}`}
+                  >
+                    <MailIcon size={15} />
+                  </a>
                 </div>
               </article>
             </div>
@@ -1498,69 +1147,25 @@ export default function App() {
       </main>
 
       {/* ======================================================================
-          FOOTER SLOT: Drop your saved Footer component code right below this line - Alternating Value Band
+          FOOTER SLOT: Clean, Essential Capstone Footer
           ====================================================================== */}
       <footer className={`relative overflow-hidden w-full scroll-mt-[76px] border-t py-12 md:py-16 transition-colors duration-500 ${isDark ? 'bg-[#121214] border-slate-800' : 'bg-[#F4F5F7] border-slate-200/80'
         }`}>
-        {/* Footer Dot Matrix Background Overlay */}
-        <div className="absolute inset-0 bg-dot-pattern opacity-50 pointer-events-none -z-10" />
-
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <img src="/sensa-logo.png" alt="Sensa Logo" className="w-8 h-8 object-contain" />
-                <span className={`text-xl font-black tracking-[-0.02em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Sensa Capstone</span>
-              </div>
-              <p className={`text-sm leading-relaxed m-0 max-w-sm font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                An advanced dual-mode accessibility extension offering live AI subtitles, translation, text-to-speech reading enhancements, and sensory customization across Google Chrome.
-              </p>
-            </div>
-
-            <div>
-              <h4 className={`font-mono font-bold mb-4 text-[11px] uppercase tracking-widest ${isDark ? 'text-white' : 'text-slate-900'}`}>Technical Assets</h4>
-              <ul className="text-sm space-y-3 list-none p-0 m-0 font-normal">
-                <li><a href="#architecture" className={`flex items-center gap-2 no-underline transition-colors ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}><Code size={14} className="text-[#0A44FF] shrink-0" /> Manifest V3 Architecture</a></li>
-                <li><a href="#architecture" className={`flex items-center gap-2 no-underline transition-colors ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}><Cpu size={14} className="text-[#FF7A2F] shrink-0" /> Service Worker (`background.ts`)</a></li>
-                <li><a href="#architecture" className={`flex items-center gap-2 no-underline transition-colors ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}><FileText size={14} className="text-[#0A44FF] shrink-0" /> DOM Content Chunks (`content.ts`)</a></li>
-                <li><a href="#architecture" className={`flex items-center gap-2 no-underline transition-colors ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}><Globe size={14} className="text-[#FF7A2F] shrink-0" /> Open-Source GitHub Repository</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className={`font-mono font-bold mb-4 text-[11px] uppercase tracking-widest ${isDark ? 'text-white' : 'text-slate-900'}`}>Research & Verification</h4>
-              <ul className="text-sm space-y-3 list-none p-0 m-0 font-normal">
-                <li><a href="#metrics" className={`flex items-center gap-2 no-underline transition-colors ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}><CheckCircle2 size={14} className="text-[#FF7A2F] shrink-0" /> WCAG 2.1 AAA Audit Log</a></li>
-                <li><a href="#metrics" className={`flex items-center gap-2 no-underline transition-colors ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}><Zap size={14} className="text-[#0A44FF] shrink-0" /> Usability Latency Metrics</a></li>
-                <li><a href="#metrics" className={`flex items-center gap-2 no-underline transition-colors ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}><BookOpen size={14} className="text-[#FF7A2F] shrink-0" /> BulSU Capstone Archives</a></li>
-                <li><a href="#guide" className={`flex items-center gap-2 no-underline transition-colors ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}><Download size={14} className="text-[#0A44FF] shrink-0" /> Download Thesis Build (`.ZIP`)</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className={`font-mono font-bold mb-4 text-[11px] uppercase tracking-widest ${isDark ? 'text-white' : 'text-slate-900'}`}>Compliance & Legal</h4>
-              <ul className="text-sm space-y-3 list-none p-0 m-0 font-normal">
-                <li><a href="#architecture" className={`flex items-center gap-2 no-underline transition-colors ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}><Check size={14} className="text-[#0A44FF] shrink-0" /> Stateless Privacy Guarantee</a></li>
-                <li><a href="#architecture" className={`flex items-center gap-2 no-underline transition-colors ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}><AlertCircle size={14} className="text-[#FF7A2F] shrink-0" /> Data Safety Declarations</a></li>
-                <li><a href="#guide" className={`flex items-center gap-2 no-underline transition-colors ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}><Award size={14} className="text-[#0A44FF] shrink-0" /> Chrome Web Store Policy</a></li>
-                <li><a href="#team" className={`flex items-center gap-2 no-underline transition-colors ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}><FileText size={14} className="text-[#FF7A2F] shrink-0" /> MIT Open-Source License</a></li>
-              </ul>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-8">
+            <div className="flex items-center gap-6 flex-wrap justify-center sm:justify-start text-sm font-medium">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className={`flex items-center gap-2 no-underline transition-colors ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}><Github size={16} className="text-[#0A44FF]" /> Open-Source Repository</a>
+              <a href="#guide" onClick={(e) => handleNavClick(e, 'guide')} className={`flex items-center gap-2 no-underline transition-colors ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}><FileText size={16} className="text-[#FF7A2F]" /> Thesis Working Paper</a>
+              <a href="#hero" onClick={(e) => handleNavClick(e, 'hero')} className={`flex items-center gap-2 no-underline transition-colors ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}><CheckCircle2 size={16} className="text-emerald-500" /> Chrome MV3 & WCAG 2.1 AAA</a>
             </div>
           </div>
 
-          <div className="mb-8">
-            <div className={`text-xs leading-relaxed p-5 rounded-2xl border transition-colors duration-300 ${isDark ? 'bg-[#161618] border-slate-800/80 ring-1 ring-white/5 inset text-slate-400' : 'bg-white border-slate-200/80 text-slate-600 shadow-sm'
-              }`}>
-              🔒 <strong className={isDark ? 'text-white font-semibold' : 'text-slate-900 font-semibold'}>Stateless Cloud Processing Guarantee:</strong> Voice navigation commands (`SpeechRecognition`) operate locally inside the browser. For live multilingual audio transcription and translation, audio streams are routed through an encrypted real-time WebSocket pipeline to our Node.js server (`Render`), which interfaces transiently with <strong className={isDark ? 'text-white font-semibold' : 'text-slate-900 font-semibold'}>Deepgram</strong> (STT) and <strong className={isDark ? 'text-white font-semibold' : 'text-slate-900 font-semibold'}>DeepL</strong> (Translation). All processing is strictly stateless (`AES-256 / TLS 1.3`), in-memory only, and zero audio data or transcriptions are ever logged, stored, or retained on external cloud servers.
-            </div>
-          </div>
-
-          <div className={`pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-normal ${isDark ? 'border-slate-800 text-slate-400' : 'border-slate-200/80 text-slate-600'
+          <div className={`pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-normal ${isDark ? 'border-slate-800 text-slate-400' : 'border-slate-200/80 text-slate-600'
             }`}>
-            <p className="m-0">© 2026 Sensa Capstone Team • Bulacan State University (BulSU) • All Rights Reserved.</p>
-            <div className="flex items-center gap-6 font-mono font-semibold">
-              <span className="text-[#0A44FF]">Chrome MV3 Ready</span>
-              <span className="text-[#FF7A2F]">WCAG 2.1 AAA Compliant</span>
+            <p className="m-0">© 2026 Sensa Capstone Research Team • Bulacan State University (BulSU) • College of Information and Communications Technology.</p>
+            <div className="flex items-center gap-4 font-mono font-semibold">
+              <span className="text-[#0A44FF]">Manifest V3 Companion</span>
+              <span className="text-[#FF7A2F]">Stateless Privacy Guarantee</span>
             </div>
           </div>
         </div>
