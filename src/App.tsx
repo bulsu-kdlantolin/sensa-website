@@ -15,13 +15,15 @@ import {
   BellOff,
   MessageSquare,
   PanelLeft,
+  PanelTop,
   Target,
   Sparkles,
   MonitorPlay,
   Box,
   Download,
-  Users
+  Users,
 } from 'lucide-react';
+import PlaygroundSection from './components/PlaygroundSection';
 
 const Github = ({ size = 18, className = "" }: { size?: number; className?: string }) => (
   <svg
@@ -43,7 +45,6 @@ const Github = ({ size = 18, className = "" }: { size?: number; className?: stri
 
 
 
-type SensoryMode = 'standard' | 'visual' | 'auditory';
 type ThemeMode = 'dark' | 'light';
 
 const ChromeIcon = ({ size = 24, className = "" }: { size?: number; className?: string }) => (
@@ -118,7 +119,6 @@ function useScrollReveal(options: IntersectionObserverInit = { threshold: 0.15 }
 }
 
 export default function App() {
-  const [activeMode, setActiveMode] = useState<SensoryMode>('standard');
   const [isSidebarMode, setIsSidebarMode] = useState<boolean>(() => {
     return localStorage.getItem('sensa_sidebar') === 'true';
   });
@@ -131,15 +131,7 @@ export default function App() {
     return 'light';
   });
 
-  // Interactive Playground & Dock State
-  const [isFocusRulerActive, setIsFocusRulerActive] = useState<boolean>(false);
-  const [isSimulatingCaptions, setIsSimulatingCaptions] = useState<boolean>(false);
-  const [readingSpeed, setReadingSpeed] = useState<number>(1.2);
-  const [simulatedCaptionText, setSimulatedCaptionText] = useState<string>('[EN] Sensa AI: Transcribing active tab speech stream in real-time...');
-  const [voiceCommandStatus, setVoiceCommandStatus] = useState<string>('Ready for voice command input...');
-  const [ttsPlaying, setTtsPlaying] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>('hero');
-  const [heroMousePos, setHeroMousePos] = useState({ x: 0, y: 0 });
 
   // Force scroll to top on page reload
   useEffect(() => {
@@ -148,27 +140,6 @@ export default function App() {
     }
     window.scrollTo(0, 0);
   }, []);
-
-  const handleHeroMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    const { currentTarget: target } = e;
-    const rect = target.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    setHeroMousePos({ x, y });
-  };
-
-  const handleTitleMouseMove = (e: React.MouseEvent<HTMLHeadingElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
-    e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
-  };
-
-  const handleTitleMouseLeave = (e: React.MouseEvent<HTMLHeadingElement>) => {
-    e.currentTarget.style.setProperty('--mouse-x', `-500px`);
-    e.currentTarget.style.setProperty('--mouse-y', `-500px`);
-  };
 
   // Scroll Reveal Refs
   const [problemRef, isProblemVisible] = useScrollReveal();
@@ -236,49 +207,11 @@ export default function App() {
     return () => observer.disconnect();
   }, []);
 
-  // Simulate real-time auditory captions ticker when enabled
-  useEffect(() => {
-    if (!isSimulatingCaptions && activeMode !== 'auditory') return;
-    const captions = [
-      '[EN] Sensa AI: Transcribing active tab speech stream in real-time...',
-      '[EN] Speaker 1: "Welcome to our BulSU Capstone presentation on sensory accessibility."',
-      '[EN] Speaker 1: "Notice how Sensa synchronizes audio capture with zero browser latency."',
-      '[ES] Sensa AI Translation: "Bienvenido a nuestra presentación del proyecto universitario..."',
-      '[TL] Sensa AI Translation: "Maligayang pagdating sa aming BulSU Capstone presentation..."'
-    ];
-    let idx = 0;
-    const interval = setInterval(() => {
-      idx = (idx + 1) % captions.length;
-      setSimulatedCaptionText(captions[idx]);
-    }, 3500);
-    return () => clearInterval(interval);
-  }, [isSimulatingCaptions, activeMode]);
-
-  const handleVoiceSimulator = (command: string) => {
-    setVoiceCommandStatus(`Command detected: "${command}" -> Processing...`);
-    setTimeout(() => {
-      if (command.toLowerCase().includes('visual')) {
-        setActiveMode('visual');
-        setIsFocusRulerActive(true);
-        setVoiceCommandStatus('Recognized: "Visual Mode". Activated high-contrast theme & #FFFF00 focus ruler.');
-      } else if (command.toLowerCase().includes('auditory')) {
-        setActiveMode('auditory');
-        setIsSimulatingCaptions(true);
-        setVoiceCommandStatus('Recognized: "Auditory Mode". Launched live multilingual AI caption window.');
-      } else if (command.toLowerCase().includes('read')) {
-        setTtsPlaying(true);
-        setVoiceCommandStatus(`Recognized: "Read Page". Sensa SpeechSynthesis TTS reading article at ${readingSpeed}x speed.`);
-      } else {
-        setVoiceCommandStatus(`Recognized command: "${command}". System executed action hands-free.`);
-      }
-    }, 1200);
-  };
-
   const navItems = [
     { href: '#problem-solution', id: 'problem-solution', label: 'Mission', icon: Target },
     { href: '#features', id: 'features', label: 'Features', icon: Sparkles },
     { href: '#video', id: 'video', label: 'Demo', icon: MonitorPlay },
-    { href: '#playground', id: 'playground', label: 'Sandbox', icon: Box },
+    { href: '#playground', id: 'playground', label: 'Simulator', icon: Box },
     { href: '#guide', id: 'guide', label: 'Install', icon: Download },
     { href: '#team', id: 'team', label: 'Team', icon: Users },
   ];
@@ -313,7 +246,7 @@ export default function App() {
           }`} />
       </div>
 
-      {/* Mid-Page Distributed Document-Level Ambient Orbs (For Features, Sandbox, Architecture, Metrics) */}
+      {/* Mid-Page Distributed Document-Level Ambient Orbs (For Features, Simulator, Architecture, Metrics) */}
       <div className="absolute inset-0 pointer-events-none -z-15 overflow-hidden">
         <div className={`absolute top-[22%] -right-40 w-[600px] h-[600px] rounded-full blur-[130px] animate-float-purple bg-[#8B5CF6]  ${isDark ? 'opacity-20' : 'opacity-10'
           }`} />
@@ -399,7 +332,7 @@ export default function App() {
 
         <div className="flex flex-col items-center gap-4 w-full mt-auto">
           <button onClick={() => setIsSidebarMode(false)} className={`flex p-2 rounded-full border backdrop-blur-md transition-all duration-300 ${isDark ? 'bg-[#24262B]/80 border-slate-800 hover:bg-slate-800 text-slate-400 hover:text-white' : 'bg-slate-100/80 border-slate-200/60 hover:bg-slate-200 text-slate-500 hover:text-slate-900'}`} title="Switch to Top Navbar Layout">
-            <PanelLeft size={16} className="rotate-180" />
+            <PanelTop size={16} />
           </button>
           <button onClick={() => setTheme(isDark ? 'light' : 'dark')} role="switch" aria-checked={isDark} aria-label={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"} className={`flex items-center justify-center w-9 h-9 rounded-full border backdrop-blur-md transition-all duration-300 ${isDark ? 'bg-[#24262B]/80 border-slate-800 hover:bg-slate-800 text-[#FF7A2F]' : 'bg-slate-100/80 border-slate-200/60 hover:bg-slate-200 text-[#0A44FF]'}`} title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}>
             <div className="relative w-4 h-4 flex items-center justify-center">
@@ -417,14 +350,7 @@ export default function App() {
         {/* ======================================================================
           1. HERO SECTION (First Impression - Exact authentic welcome box feel)
           ====================================================================== */}
-        <section id="hero" onMouseMove={handleHeroMouseMove} className="group relative w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] pt-28 pb-24 md:pt-36 md:pb-32 px-4 md:px-8 overflow-hidden">
-          {/* Spotlight Mouse Hover Effect */}
-          <div
-            className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100 z-0"
-            style={{
-              background: `radial-gradient(600px circle at ${heroMousePos.x}px ${heroMousePos.y}px, ${isDark ? 'rgba(255,122,47,0.08)' : 'rgba(10,68,255,0.05)'}, transparent 40%)`
-            }}
-          />
+        <section id="hero" className="relative w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] pt-28 pb-24 md:pt-36 md:pb-32 px-4 md:px-8 overflow-hidden">
           {/* Hero Cybernetic Grid Layer */}
           <div className="absolute inset-0 bg-grid-pattern pointer-events-none [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_75%,transparent_100%)] -z-10" />
 
@@ -464,13 +390,11 @@ export default function App() {
 
 
 
-            {/* Authentic Title Gradient: `from-[#0A44FF] to-[#FF7A2F]` with bottom padding and relaxed line-height so descender 'y' is never cut off */}
+            {/* Liquid Water Flow Title Gradient */}
             <h1
-              onMouseMove={handleTitleMouseMove}
-              onMouseLeave={handleTitleMouseLeave}
-              className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter mb-6 py-2 pb-3 leading-[1.15] max-w-4xl text-transparent animate-pop cursor-default transition-all duration-300`}
+              className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter mb-6 py-2 pb-3 leading-[1.15] max-w-4xl text-transparent animate-pop cursor-default transition-all duration-700 bg-[length:200%_auto] hover:animate-water-flow hover:scale-[1.02] hover:drop-shadow-[0_10px_20px_rgba(10,68,255,0.15)]`}
               style={{
-                backgroundImage: `radial-gradient(150px circle at var(--mouse-x, -500px) var(--mouse-y, -500px), ${isDark ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.6)'}, transparent 40%), linear-gradient(to right, #0A44FF, #8A56FF, #FF7A2F)`,
+                backgroundImage: `linear-gradient(to right, #0A44FF, #8A56FF, #FF7A2F, #8A56FF, #0A44FF)`,
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
               }}
@@ -507,6 +431,9 @@ export default function App() {
           ====================================================================== */}
         <section id="problem-solution" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
           }`}>
+          {/* Cybernetic Grid Layer */}
+          <div className="absolute inset-0 bg-grid-pattern pointer-events-none [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_75%,transparent_100%)] -z-10" />
+
           {/* Ambient Mission Gradients */}
           <div className={`absolute top-1/2 left-0 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[160px] pointer-events-none -z-10 bg-red-500 animate-pulse ${isDark ? 'opacity-[0.08]' : 'opacity-[0.04]'}`} />
           <div className={`absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[160px] pointer-events-none -z-10 bg-emerald-500 animate-pulse ${isDark ? 'opacity-[0.08]' : 'opacity-[0.04]'}`} />
@@ -688,6 +615,9 @@ export default function App() {
           ====================================================================== */}
         <section id="features" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
           }`}>
+          {/* Cybernetic Grid Layer */}
+          <div className="absolute inset-0 bg-grid-pattern pointer-events-none [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_75%,transparent_100%)] -z-10" />
+
           {/* VisualWelcomeOverlay Starter Shade (#0A44FF Royal Blue Behind Visual Mode Cards) */}
           <div className={`absolute top-[28%] left-1/4 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[420px] rounded-full blur-[160px] pointer-events-none -z-10 bg-[#0A44FF] animate-float-blue ${isDark ? 'opacity-25' : 'opacity-15'
             }`} />
@@ -718,11 +648,40 @@ export default function App() {
                 {/* Voice Navigation: Spans 2 cols on LG */}
                 <article className={`lg:col-span-2 group border border-t-2 border-t-[#0A44FF]/80 rounded-3xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-[#0A44FF]/60 hover:shadow-[0_0_40px_rgba(10,68,255,0.15)] relative overflow-hidden ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset'}`}>
                   {/* Micro-Visual */}
-                  <div className={`w-full h-36 mb-6 rounded-2xl flex items-center justify-center gap-2 overflow-hidden border transition-colors ${isDark ? 'bg-black/40 border-slate-800 group-hover:border-[#0A44FF]/30' : 'bg-slate-50 border-slate-100 group-hover:border-[#0A44FF]/20'}`}>
-                    {/* Voice Waves */}
-                    {[30, 80, 50, 90, 40, 70, 40, 85, 35].map((height, i) => (
-                      <div key={i} className={`w-3 rounded-full bg-[#0A44FF] animate-wave-pulse opacity-50 shadow-[0_0_12px_rgba(10,68,255,0.6)]`} style={{ height: `${height}%`, animationDelay: `${i * 0.15}s` }} />
-                    ))}
+                  {/* Micro-Visual: Sensa VisualDock Mockup */}
+                  <div className={`w-full h-40 mb-6 rounded-2xl flex items-center justify-center relative overflow-hidden border transition-colors ${isDark ? 'bg-black/40 border-slate-800 group-hover:border-[#0A44FF]/30' : 'bg-slate-50 border-slate-100 group-hover:border-[#0A44FF]/20'}`}>
+
+                    {/* Floating VisualDock */}
+                    <div className="relative flex flex-col items-center gap-3 mt-4 group-hover:-translate-y-2 transition-transform duration-500">
+
+                      {/* Top Voice Panel */}
+                      <div className={`flex flex-col items-center p-2.5 gap-2.5 rounded-2xl border shadow-xl backdrop-blur-md transition-colors ${isDark ? 'bg-[#1C1C1E]/80 border-white/10' : 'bg-white/90 border-slate-200/80 shadow-black/5'}`}>
+
+                        {/* GodTierMicIcon (Animated Visualizer) */}
+                        <div className="w-10 h-10 rounded-xl bg-transparent flex items-center justify-center gap-1">
+                          {[12, 18, 26, 18, 12].map((h, i) => (
+                            <div
+                              key={i}
+                              className={`w-1 rounded-full bg-[#0A44FF] animate-wave-pulse transition-all duration-300 opacity-30 group-hover:opacity-100 group-hover:shadow-[0_0_8px_rgba(10,68,255,0.8)]`}
+                              style={{ height: `${h}px`, animationDelay: `${i * 0.15}s` }}
+                            />
+                          ))}
+                        </div>
+
+                        {/* Voice Command Active Button */}
+                        <div className="w-10 h-10 rounded-xl bg-[#0A44FF] shadow-[0_0_0_1px_rgba(10,68,255,0.18),0_0_24px_rgba(10,68,255,0.42)] ring-4 ring-[#0A44FF]/30 flex items-center justify-center text-white scale-95 group-hover:scale-100 transition-transform duration-300">
+                          <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0 opacity-100"><rect x="6" y="6" width="12" height="12" rx="2" /></svg>
+                        </div>
+                      </div>
+
+                      {/* Middle Panel (Play/Pause) */}
+                      <div className={`flex flex-col items-center p-2 rounded-2xl border shadow-xl backdrop-blur-md transition-all duration-500 origin-top delay-75 ${isDark ? 'bg-[#1C1C1E]/80 border-white/10' : 'bg-white/90 border-slate-200/80 shadow-black/5'} opacity-0 scale-75 -translate-y-4 group-hover:opacity-100 group-hover:scale-100 group-hover:translate-y-0`}>
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center border transition-colors ${isDark ? 'bg-white/5 border-white/10 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-600'}`}>
+                          <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 ml-0.5"><polygon points="6 4 19 12 6 20 6 4" /></svg>
+                        </div>
+                      </div>
+
+                    </div>
                   </div>
                   <div>
                     <div className="flex items-center gap-3 mb-3">
@@ -739,16 +698,26 @@ export default function App() {
 
                 {/* Magnifier: Spans 1 col */}
                 <article className={`lg:col-span-1 group border border-t-2 border-t-[#0A44FF]/80 rounded-3xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-[#0A44FF]/60 hover:shadow-[0_0_40px_rgba(10,68,255,0.15)] relative overflow-hidden ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset'}`}>
-                  {/* Micro-Visual */}
+                  {/* Micro-Visual: Sensa Screen Magnifier Mockup */}
                   <div className={`w-full h-36 mb-6 rounded-2xl flex flex-col items-center justify-center p-4 relative overflow-hidden border transition-colors ${isDark ? 'bg-black/40 border-slate-800 group-hover:border-[#0A44FF]/30' : 'bg-slate-50 border-slate-100 group-hover:border-[#0A44FF]/20'}`}>
-                    <div className="w-full space-y-2 opacity-30">
+
+                    {/* Background Text */}
+                    <div className="w-full space-y-2 opacity-30 px-2 blur-[1px]">
                       <div className="w-3/4 h-2 bg-slate-500 rounded" />
                       <div className="w-full h-2 bg-slate-500 rounded" />
                       <div className="w-5/6 h-2 bg-slate-500 rounded" />
-                      <div className="w-1/2 h-2 bg-slate-500 rounded" />
+                      <div className="w-4/5 h-2 bg-slate-500 rounded" />
                     </div>
-                    {/* Scanning Ruler */}
-                    <div className="absolute top-0 left-0 right-0 h-10 bg-yellow-400/30 border-y border-yellow-400 animate-scan-ruler shadow-[0_0_15px_rgba(250,204,21,0.5)]" />
+
+                    {/* Circular Lens Overlay */}
+                    <div className="absolute w-20 h-20 rounded-full border-[3.5px] border-[#0A44FF] shadow-[0_24px_64px_rgba(0,0,0,0.6),0_0_0_1px_rgba(255,255,255,0.2)] bg-white dark:bg-[#1C1C1E] z-10 overflow-hidden flex flex-col items-center justify-center p-2 transform group-hover:scale-110 transition-transform duration-300 pointer-events-none group-hover:translate-x-2 group-hover:-translate-y-1">
+                      {/* Scaled up text inside lens to simulate magnification */}
+                      <div className="w-[200%] space-y-3 opacity-90 scale-150 transform -translate-x-1 translate-y-1">
+                        <div className={`w-full h-2 rounded ${isDark ? 'bg-slate-300' : 'bg-slate-700'}`} />
+                        <div className={`w-5/6 h-2 rounded ${isDark ? 'bg-slate-300' : 'bg-slate-700'}`} />
+                      </div>
+                    </div>
+
                   </div>
                   <div>
                     <div className="flex items-center gap-3 mb-3">
@@ -765,12 +734,24 @@ export default function App() {
 
                 {/* Alt-Text AI Reader: Spans 1 col */}
                 <article className={`lg:col-span-1 group border border-t-2 border-t-[#0A44FF]/80 rounded-3xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-[#0A44FF]/60 hover:shadow-[0_0_40px_rgba(10,68,255,0.15)] relative overflow-hidden ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset'}`}>
-                  {/* Micro-Visual */}
+                  {/* Micro-Visual: Sensa AI Image Alt-Text Mockup */}
                   <div className={`w-full h-36 mb-6 rounded-2xl p-4 flex items-center justify-center relative overflow-hidden border transition-colors ${isDark ? 'bg-black/40 border-slate-800 group-hover:border-[#0A44FF]/30' : 'bg-slate-50 border-slate-100 group-hover:border-[#0A44FF]/20'}`}>
-                     <div className="w-16 h-16 bg-slate-500/20 rounded-xl flex items-center justify-center border-2 border-dashed border-slate-500/50 relative overflow-visible">
-                        <span className={`text-[10px] absolute -bottom-6 font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-300 whitespace-nowrap bg-black text-white px-2 py-0.5 rounded ${isDark ? 'shadow-[0_0_10px_#0A44FF]' : 'shadow-md'}`}>"A dog running"</span>
-                     </div>
-                     <div className="absolute top-1/2 left-1/2 w-0 h-[2px] bg-[#0A44FF] shadow-[0_0_15px_#0A44FF] -translate-y-1/2 -translate-x-1/2 group-hover:w-[120%] transition-all duration-[800ms] ease-out delay-100" />
+                    {/* Web Page Image Mockup */}
+                    <div className="w-24 h-24 bg-slate-300 dark:bg-slate-700 rounded-lg flex items-center justify-center relative overflow-visible transition-all duration-500 group-hover:border-4 group-hover:border-[#0A44FF] group-hover:shadow-[0_0_20px_rgba(10,68,255,0.4)]">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-8 h-8 text-slate-400 dark:text-slate-500"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></svg>
+
+                      {/* Sensa Alt-Text Tooltip */}
+                      <div className={`absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap px-2.5 py-1.5 rounded-md text-[11px] font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 delay-300 transform translate-y-2 group-hover:translate-y-0 ${isDark ? 'bg-[#1C1C1E] border border-white/10 text-white shadow-[0_4px_12px_rgba(0,0,0,0.5)]' : 'bg-white border border-slate-200 text-slate-800 shadow-lg'}`}>
+                        <div className="flex items-center gap-1.5">
+                          <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 text-[#0A44FF]"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" /></svg>
+                          "A golden retriever running in a park"
+                        </div>
+                      </div>
+
+                      {/* Corner Highlight Dots */}
+                      <div className="absolute -top-1.5 -left-1.5 w-3 h-3 bg-[#0A44FF] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100" />
+                      <div className="absolute -bottom-1.5 -right-1.5 w-3 h-3 bg-[#0A44FF] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100" />
+                    </div>
                   </div>
                   <div>
                     <div className="flex items-center gap-3 mb-3">
@@ -790,9 +771,9 @@ export default function App() {
                   {/* Micro-Visual */}
                   <div className={`w-full h-36 mb-6 rounded-2xl flex items-center justify-center p-6 border transition-colors ${isDark ? 'bg-black/40 border-slate-800 group-hover:border-[#0A44FF]/30' : 'bg-slate-50 border-slate-100 group-hover:border-[#0A44FF]/20'}`}>
                     <div className="flex items-center gap-8 md:gap-16 text-3xl md:text-5xl font-bold">
-                       <span className="font-sans opacity-20 group-hover:opacity-100 group-hover:text-[#0A44FF] transition-all duration-500 scale-90 group-hover:scale-110 drop-shadow-[0_0_12px_rgba(10,68,255,0.4)]">Aa</span>
-                       <span className="font-serif opacity-20 group-hover:opacity-100 group-hover:text-[#0A44FF] transition-all duration-500 delay-100 scale-90 group-hover:scale-110 drop-shadow-[0_0_12px_rgba(10,68,255,0.4)]">Aa</span>
-                       <span className="font-mono opacity-20 group-hover:opacity-100 group-hover:text-[#0A44FF] transition-all duration-500 delay-200 scale-90 group-hover:scale-110 drop-shadow-[0_0_12px_rgba(10,68,255,0.4)]">Aa</span>
+                      <span className="font-sans opacity-20 group-hover:opacity-100 group-hover:text-[#0A44FF] transition-all duration-500 scale-90 group-hover:scale-110 drop-shadow-[0_0_12px_rgba(10,68,255,0.4)]">Aa</span>
+                      <span className="font-serif opacity-20 group-hover:opacity-100 group-hover:text-[#0A44FF] transition-all duration-500 delay-100 scale-90 group-hover:scale-110 drop-shadow-[0_0_12px_rgba(10,68,255,0.4)]">Aa</span>
+                      <span className="font-mono opacity-20 group-hover:opacity-100 group-hover:text-[#0A44FF] transition-all duration-500 delay-200 scale-90 group-hover:scale-110 drop-shadow-[0_0_12px_rgba(10,68,255,0.4)]">Aa</span>
                     </div>
                   </div>
                   <div>
@@ -827,16 +808,31 @@ export default function App() {
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#FF7A2F]/5 z-10" />
                     {/* Mock Browser Video */}
                     <div className="absolute top-4 left-4 right-4 bottom-[-10px] rounded-xl bg-slate-900 overflow-hidden border-2 border-slate-700/50 flex flex-col justify-between pb-4 shadow-2xl">
-                       <div className="w-full h-8 bg-slate-800/80 border-b border-slate-700 flex items-center px-3 gap-1.5">
-                          <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                       </div>
-                       <div className="flex-1" />
-                       {/* Captions Box */}
-                       <div className="w-[80%] mx-auto bg-black/90 rounded-lg px-4 py-2 backdrop-blur-md z-20 shadow-[0_0_20px_rgba(0,0,0,0.8)] border border-white/20 text-center">
-                          <span className="text-white text-xs md:text-sm font-medium font-mono animate-typewriter inline-block whitespace-nowrap overflow-hidden border-r-2 border-[#FF7A2F]">Welcome to the digital accessibility revolution.</span>
-                       </div>
+                      <div className="w-full h-8 bg-slate-800/80 border-b border-slate-700 flex items-center px-3 gap-1.5">
+                        <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                      </div>
+                      {/* Captions Box (Mocking LiveCaptionBox.tsx) */}
+                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[85%] bg-[#1a1a1c]/95 rounded-xl px-4 py-3 backdrop-blur-md z-20 shadow-[0_12px_40px_rgba(0,0,0,0.8)] border border-white/10 flex flex-col gap-2 transform group-hover:scale-105 transition-transform duration-500">
+
+                        {/* langBadge */}
+                        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#FF7A2F]/15 border border-[#FF7A2F]/35 self-start -mt-6">
+                          <span className="w-2 h-2 rounded-full bg-[#FF7A2F] shadow-[0_0_8px_#FF7A2F]" />
+                          <span className="text-[10px] font-semibold text-[#FF9F0A] tracking-wider uppercase">English audio</span>
+                        </div>
+
+                        {/* Original Text (Dimmed, Italic) */}
+                        <div className="text-white/60 text-xs italic font-medium mt-1">
+                          Welcome to the digital accessibility revolution.
+                        </div>
+
+                        {/* Translated Text (Bright, Bold, Typewriter effect) */}
+                        <div className="text-white text-sm font-bold tracking-tight">
+                          <span className="animate-typewriter inline-block whitespace-nowrap overflow-hidden border-r-2 border-[#FF7A2F] pr-1">Bienvenido a la revolución de la accesibilidad...</span>
+                        </div>
+
+                      </div>
                     </div>
                   </div>
                   <div>
@@ -879,11 +875,11 @@ export default function App() {
                   <div className={`w-full h-36 mb-6 rounded-2xl p-4 flex items-center justify-center relative overflow-hidden border transition-colors ${isDark ? 'bg-black/40 border-slate-800 group-hover:border-[#FF7A2F]/30' : 'bg-slate-50 border-slate-100 group-hover:border-[#FF7A2F]/20'}`}>
                     {/* Simulated Screen with Edge Flash */}
                     <div className="relative w-32 h-20 bg-slate-900 rounded-lg border border-slate-700 overflow-hidden group-hover:border-[#FF7A2F]/70 transition-colors duration-500 shadow-xl">
-                       <div className="absolute inset-0 bg-transparent group-hover:bg-[#FF7A2F]/10 transition-colors duration-500" />
-                       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-[inset_0_0_24px_#FF7A2F]" />
-                       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                          <CheckCircle2 size={24} className="text-slate-500 group-hover:text-[#FF7A2F] transition-colors duration-300 drop-shadow-[0_0_8px_rgba(255,122,47,0.8)]" />
-                       </div>
+                      <div className="absolute inset-0 bg-transparent group-hover:bg-[#FF7A2F]/10 transition-colors duration-500" />
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-[inset_0_0_24px_#FF7A2F]" />
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                        <CheckCircle2 size={24} className="text-slate-500 group-hover:text-[#FF7A2F] transition-colors duration-300 drop-shadow-[0_0_8px_rgba(255,122,47,0.8)]" />
+                      </div>
                     </div>
                   </div>
                   <div>
@@ -906,8 +902,11 @@ export default function App() {
         {/* ======================================================================
           4. CAPSTONE DEMO VIDEO SECTION
           ====================================================================== */}
-        <section id="video" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-y ${isDark ? 'bg-[#121214] border-slate-800/80' : 'bg-[#F4F5F7] border-slate-200/80'
+        <section id="video" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-y ${isDark ? 'border-slate-800/80' : 'border-slate-200/80'
           }`}>
+          {/* Cybernetic Grid Layer */}
+          <div className="absolute inset-0 bg-grid-pattern pointer-events-none [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_75%,transparent_100%)] -z-10" />
+
           {/* Cinematic Stage Spotlight */}
           <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[500px] blur-[120px] pointer-events-none -z-10 bg-gradient-to-b from-[#8B5CF6]/40 to-transparent ${isDark ? 'opacity-40' : 'opacity-20'}`} />
           {/* Video Ambient Center Halo Layer */}
@@ -940,173 +939,15 @@ export default function App() {
         {/* ======================================================================
           5. INTERACTIVE LIVE DEMO & PLAYGROUND SECTION
           ====================================================================== */}
-        <section id="playground" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-y ${isDark ? 'bg-[#121214] border-slate-800/80' : 'bg-[#F4F5F7] border-slate-200/80'
-          }`}>
-          {/* Subtle Dot Matrix Background */}
-          <div className={`absolute inset-0 bg-dot-pattern pointer-events-none -z-10 ${isDark ? 'opacity-30' : 'opacity-60'}`} />
-          {/* Dynamic Mode-Responsive Playground Background Shade (Visual vs Auditory Overlay Tint) */}
-          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[780px] h-[480px] rounded-full blur-[165px] pointer-events-none -z-10  ${activeMode === 'visual'
-            ? 'bg-[#0A44FF]'
-            : activeMode === 'auditory'
-              ? 'bg-[#FF7A2F]'
-              : 'bg-gradient-to-r from-[#0A44FF] to-[#FF7A2F]'
-            } ${isDark ? 'opacity-25' : 'opacity-15'}`} />
-
-          <div className="max-w-7xl mx-auto px-4 md:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className={`text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                Interactive Live Demo / Playground
-              </h2>
-              <p className={`text-base md:text-lg leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                Try Sensa's tools right here on this page — no Chrome extension installation required!
-              </p>
-            </div>
-
-            <div className={`border rounded-2xl p-6 md:p-8 backdrop-blur-xl ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset shadow-lg' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-md'
-              }`}>
-              {/* Toolbar */}
-              <div className={`flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b mb-6 ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
-                }`}>
-                <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
-                  <span className={`text-xs font-mono font-bold tracking-widest uppercase mr-1 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Sandbox Controls:</span>
-
-                  <button
-                    onClick={() => setIsFocusRulerActive(!isFocusRulerActive)}
-                    aria-pressed={isFocusRulerActive}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 active:scale-95 flex items-center gap-1.5 ${isFocusRulerActive
-                      ? 'bg-yellow-400 text-black shadow-md shadow-yellow-400/30 font-black'
-                      : isDark ? 'bg-black/40 border border-slate-800 text-slate-300 hover:border-yellow-400/60' : 'bg-slate-100 border border-slate-200/80 text-slate-700 hover:border-yellow-500'
-                      }`}
-                  >
-                    📏 {isFocusRulerActive ? 'Disable' : 'Launch'} #FFFF00 Focus Ruler
-                  </button>
-
-                  <button
-                    onClick={() => setIsSimulatingCaptions(!isSimulatingCaptions)}
-                    aria-pressed={isSimulatingCaptions}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 active:scale-95 flex items-center gap-1.5 ${isSimulatingCaptions
-                      ? 'bg-[#FF7A2F] text-white shadow-md shadow-[#FF7A2F]/35 font-black'
-                      : isDark ? 'bg-black/40 border border-slate-800 text-slate-300 hover:border-[#FF7A2F]/60' : 'bg-slate-100 border border-slate-200/80 text-slate-700 hover:border-[#FF7A2F]'
-                      }`}
-                  >
-                    💬 {isSimulatingCaptions ? 'Stop' : 'Simulate'} Live AI Subtitle Box
-                  </button>
-
-                  <div className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-100 border-slate-200/80'
-                    }`}>
-                    <span className={`font-medium ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>TTS Speed:</span>
-                    <select
-                      value={readingSpeed}
-                      onChange={(e) => setReadingSpeed(parseFloat(e.target.value))}
-                      aria-label="Adjust Text-to-Speech reading speed"
-                      className={`bg-transparent font-bold border-none outline-none cursor-pointer pr-1 ${isDark ? 'text-white' : 'text-slate-900'}`}
-                    >
-                      <option value={1.0} className={isDark ? 'bg-[#1C1C1E] text-white' : 'bg-white text-slate-900'}>1.0x (Normal)</option>
-                      <option value={1.2} className={isDark ? 'bg-[#1C1C1E] text-white' : 'bg-white text-slate-900'}>1.2x (Recommended)</option>
-                      <option value={1.5} className={isDark ? 'bg-[#1C1C1E] text-white' : 'bg-white text-slate-900'}>1.5x (Fast Reading)</option>
-                      <option value={2.0} className={isDark ? 'bg-[#1C1C1E] text-white' : 'bg-white text-slate-900'}>2.0x (Skimming)</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2 self-end md:self-center">
-                  <span className="text-[10px] md:text-[11px] font-mono font-bold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/30">
-                    ● Live Sandbox Ready
-                  </span>
-                </div>
-              </div>
-
-              {/* Voice Command Simulator Box inside Playground */}
-              <div className={`p-5 rounded-xl border flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 mb-8 ${isDark ? 'bg-black/40 border-slate-800/80 ring-1 ring-white/5 ring-inset' : 'bg-slate-50 border-slate-200/60'
-                }`}>
-                <div className="flex items-center gap-3.5">
-                  <div className="w-11 h-11 rounded-xl bg-[#0A44FF] flex items-center justify-center text-white shadow-md shadow-[#0A44FF]/30 animate-pulse shrink-0">
-                    <Mic size={20} />
-                  </div>
-                  <div>
-                    <h3 className={`text-sm font-bold m-0 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Voice Command Simulator</h3>
-                    <p aria-live="polite" aria-atomic="true" className={`text-xs m-0 mt-0.5 font-mono font-medium ${isDark ? 'text-[#6AA2FF]' : 'text-[#0A44FF]'}`}>{voiceCommandStatus}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2 flex-wrap w-full lg:w-auto">
-                  <span className={`text-xs font-mono font-bold uppercase tracking-wider mr-1 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Try testing command:</span>
-                  <button
-                    onClick={() => handleVoiceSimulator('Activate Visual Mode')}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 active:scale-95 border ${isDark ? 'bg-[#24262B]/80 hover:bg-[#0A44FF] text-slate-300 hover:text-white border-slate-800' : 'bg-white hover:bg-[#0A44FF] text-slate-700 hover:text-white border-slate-200/80'
-                      }`}
-                  >
-                    "Activate Visual Mode"
-                  </button>
-                  <button
-                    onClick={() => handleVoiceSimulator('Activate Auditory Mode')}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 active:scale-95 border ${isDark ? 'bg-[#24262B]/80 hover:bg-[#FF7A2F] text-slate-300 hover:text-white border-slate-800' : 'bg-white hover:bg-[#FF7A2F] text-slate-700 hover:text-white border-slate-200/80'
-                      }`}
-                  >
-                    "Activate Auditory Mode"
-                  </button>
-                  <button
-                    onClick={() => handleVoiceSimulator('Read Page Content')}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 active:scale-95 border ${isDark ? 'bg-[#24262B]/80 hover:bg-emerald-600 text-slate-300 hover:text-white border-slate-800' : 'bg-white hover:bg-emerald-600 text-slate-700 hover:text-white border-slate-200/80'
-                      }`}
-                  >
-                    "Read Page Content"
-                  </button>
-                </div>
-              </div>
-
-              {/* Mock Sample Article Sandbox */}
-              <article aria-label="Sample Web Article Sandbox" className={`relative rounded-xl p-6 md:p-10 border overflow-hidden min-h-[340px] ${isDark ? 'bg-black/40 border-slate-800/80 ring-1 ring-white/5 ring-inset' : 'bg-slate-50 border-slate-200/60'
-                }`}>
-                {/* Active Focus Ruler Overlay */}
-                {isFocusRulerActive && (
-                  <div className="absolute top-1/2 left-0 right-0 h-16 bg-yellow-400/25 border-y-2 border-yellow-400 pointer-events-none z-10 -translate-y-1/2 shadow-[0_0_25px_rgba(250,204,21,0.35)]" />
-                )}
-
-                <div className="max-w-3xl mx-auto py-2 relative z-0">
-                  <span className={`text-[10px] md:text-[11px] font-mono font-bold uppercase tracking-widest ${isDark ? 'text-[#6AA2FF]' : 'text-[#0A44FF]'}`}>
-                    Sample Web Article • Capstone Accessibility Test
-                  </span>
-                  <h3 className={`text-2xl md:text-3xl font-black mt-2 mb-4 tracking-[-0.02em] leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                    How Dual-Mode Extensions Revolutionize Web Accessibility in 2026
-                  </h3>
-                  <p className={`text-sm md:text-base leading-relaxed mb-4 font-normal ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
-                    In the past, accessibility tools were separate and hard to use. Screen readers were made only for complete blindness, and video captions were a totally different tool. This made browsing the web frustrating for users with low vision or neurodivergent needs.
-                  </p>
-                  <p className={`text-sm md:text-base leading-relaxed mb-6 font-normal ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
-                    Using modern Chrome extension features, <strong className={isDark ? 'text-white font-semibold' : 'text-slate-900 font-semibold'}>Sensa</strong> brings voice controls and real-time audio captions together into one easy-to-use tool.
-                  </p>
-                  <div className={`p-4 rounded-xl border text-sm italic ${isDark ? 'bg-black/40 border-slate-800 text-slate-400' : 'bg-white border-slate-200/60 text-slate-600'
-                    }`}>
-                    💡 <strong className={isDark ? 'text-slate-300 not-italic' : 'text-slate-800 not-italic'}>Panelist Tip:</strong> Try clicking <strong className="text-yellow-400 font-bold bg-yellow-400/10 px-1 rounded not-italic">"Launch #FFFF00 Focus Ruler"</strong> above to see how our reading guide helps people with low vision or dyslexia follow along!
-                  </div>
-                </div>
-              </article>
-
-              {/* Simulated Auditory Subtitle Window */}
-              {(isSimulatingCaptions || activeMode === 'auditory') && (
-                <div className={`mt-6 border rounded-xl p-4 flex items-center justify-between gap-4 animate-pop ${isDark ? 'bg-black/60 border-[#FF7A2F]/40 ring-1 ring-white/5 ring-inset' : 'bg-white border-[#FF7A2F]/60 shadow-sm'
-                  }`}>
-                  <div className="flex items-center gap-3 overflow-hidden">
-                    <div className="w-3 h-3 rounded-full bg-[#FF7A2F] animate-ping shrink-0" />
-                    <p className={`m-0 truncate font-mono text-sm font-bold ${isDark ? 'text-[#6AA2FF]' : 'text-[#0A44FF]'}`}>{simulatedCaptionText}</p>
-                  </div>
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#FFC09B] px-2.5 py-1 rounded bg-[#FF7A2F]/20 border border-[#FF7A2F]/40 shrink-0">
-                    Live AI Audio Bridge
-                  </span>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
+        <PlaygroundSection isDark={isDark} />
 
         {/* ======================================================================
           6. INSTALLATION & USER GUIDE (Walkthrough)
           ====================================================================== */}
         <section id="guide" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
           }`}>
-          {/* Guide Dot Pattern Background Overlay */}
-          <div className="absolute inset-0 bg-dot-pattern opacity-60 pointer-events-none -z-10" />
+          {/* Cybernetic Grid Layer */}
+          <div className="absolute inset-0 bg-grid-pattern pointer-events-none [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_75%,transparent_100%)] -z-10" />
 
           <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
             <div className="text-center max-w-3xl mx-auto mb-16">
@@ -1118,56 +959,103 @@ export default function App() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <article className={`border rounded-2xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:border-slate-700 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset hover:border-slate-300 hover:bg-slate-50/80 shadow-sm'
-                }`}>
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className={`w-10 h-10 rounded-xl font-mono font-bold text-base flex items-center justify-center border ${isDark ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20'
-                      }`}>
-                      1
-                    </span>
-                    <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest">Unpack & Load</span>
-                  </div>
-                  <h3 className={`text-xl font-bold mb-3 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>1. Add to Chrome</h3>
-                  <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Download Sensa and pin the extension icon to your browser toolbar so you can easily access it on any website.
-                  </p>
-                </div>
-              </article>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
 
-              <article className={`border rounded-2xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:border-slate-700 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset hover:border-slate-300 hover:bg-slate-50/80 shadow-sm'
-                }`}>
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className={`w-10 h-10 rounded-xl font-mono font-bold text-base flex items-center justify-center border ${isDark ? 'bg-[#FF7A2F]/15 text-[#FFC09B] border-[#FF7A2F]/30' : 'bg-[#FF7A2F]/10 text-[#FF7A2F] border-[#FF7A2F]/20'
-                      }`}>
-                      2
-                    </span>
-                    <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest">Voice Onboarding</span>
+              {/* Column 1: Quick Installation */}
+              <div className="flex flex-col gap-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className={`p-2 rounded-lg ${isDark ? 'bg-purple-500/20 text-purple-400' : 'bg-purple-100 text-purple-600'}`}>
+                    <Download size={24} />
                   </div>
-                  <h3 className={`text-xl font-bold mb-3 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>2. Choose Your Mode</h3>
-                  <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Open Sensa and pick the mode that works best for you. Choose Visual Mode for reading guides and voice controls, or Auditory Mode for live captions.
-                  </p>
+                  <h3 className={`text-2xl font-bold tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                    Part 1: Quick Installation
+                  </h3>
                 </div>
-              </article>
 
-              <article className={`border rounded-2xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:border-slate-700 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset hover:border-slate-300 hover:bg-slate-50/80 shadow-sm'
-                }`}>
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="w-10 h-10 rounded-xl bg-purple-500/15 text-purple-400 font-mono font-bold text-base flex items-center justify-center border border-purple-500/30">
-                      3
-                    </span>
-                    <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest">Customize Dock</span>
+                {/* Step 1 */}
+                <article className={`border rounded-2xl p-6 transition-all duration-300 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-sm'}`}>
+                  <div className="flex items-center gap-4 mb-4">
+                    <span className="w-8 h-8 rounded-full bg-purple-500/15 text-purple-500 font-bold flex items-center justify-center border border-purple-500/30 shrink-0">1</span>
+                    <h4 className={`text-lg font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>Add to Chrome</h4>
                   </div>
-                  <h3 className={`text-xl font-bold mb-3 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>3. Browse Effortlessly</h3>
                   <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Control everything from the floating assistant menu. Adjust reading speeds, turn on reading lines, or change translation settings instantly.
+                    Navigate to the Chrome Web Store and click <strong>Add to Chrome</strong>. Sensa installs in seconds and is completely free.
                   </p>
+                </article>
+
+                {/* Step 2 */}
+                <article className={`border rounded-2xl p-6 transition-all duration-300 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-sm'}`}>
+                  <div className="flex items-center gap-4 mb-4">
+                    <span className="w-8 h-8 rounded-full bg-purple-500/15 text-purple-500 font-bold flex items-center justify-center border border-purple-500/30 shrink-0">2</span>
+                    <h4 className={`text-lg font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>Pin the Extension</h4>
+                  </div>
+                  <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                    Click the puzzle icon in your Chrome toolbar and pin Sensa so it's always accessible when you need it on any webpage.
+                  </p>
+                </article>
+
+                {/* Step 3 */}
+                <article className={`border rounded-2xl p-6 transition-all duration-300 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-sm'}`}>
+                  <div className="flex items-center gap-4 mb-4">
+                    <span className="w-8 h-8 rounded-full bg-purple-500/15 text-purple-500 font-bold flex items-center justify-center border border-purple-500/30 shrink-0">3</span>
+                    <h4 className={`text-lg font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>Allow Permissions</h4>
+                  </div>
+                  <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                    Sensa requires microphone permissions for Voice Commands and tab audio capture for Live Captions. Grant access when prompted.
+                  </p>
+                </article>
+              </div>
+
+              {/* Column 2: User Walkthrough */}
+              <div className="flex flex-col gap-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className={`p-2 rounded-lg ${isDark ? 'bg-[#0A44FF]/20 text-[#6AA2FF]' : 'bg-[#0A44FF]/10 text-[#0A44FF]'}`}>
+                    <MonitorPlay size={24} />
+                  </div>
+                  <h3 className={`text-2xl font-bold tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                    Part 2: User Walkthrough
+                  </h3>
                 </div>
-              </article>
+
+                {/* Step 1 */}
+                <article className={`border rounded-2xl p-6 transition-all duration-300 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-sm'}`}>
+                  <div className="flex items-center gap-4 mb-4">
+                    <span className={`w-8 h-8 rounded-full font-bold flex items-center justify-center border shrink-0 ${isDark ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20'}`}>1</span>
+                    <h4 className={`text-lg font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>Voice Onboarding</h4>
+                  </div>
+                  <p className={`text-sm mb-4 leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                    Click the Sensa icon in your toolbar to open the Welcome popup. You will be prompted to grant Microphone permissions for voice commands and AI Captions. Speak <strong>"Activate Visual Mode"</strong> or <strong>"Activate Auditory Mode"</strong> to proceed.
+                  </p>
+                  <div className={`w-full h-24 rounded-xl flex items-center justify-center border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200/80'}`}>
+                    <div className="flex flex-col items-center gap-2">
+                      <Mic size={24} className={isDark ? 'text-[#6AA2FF]' : 'text-[#0A44FF]'} />
+                      <span className={`text-xs font-mono ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>Listening for mode selection...</span>
+                    </div>
+                  </div>
+                </article>
+
+                {/* Step 2 */}
+                <article className={`border rounded-2xl p-6 transition-all duration-300 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-sm'}`}>
+                  <div className="flex items-center gap-4 mb-4">
+                    <span className={`w-8 h-8 rounded-full font-bold flex items-center justify-center border shrink-0 ${isDark ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20'}`}>2</span>
+                    <h4 className={`text-lg font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>Interact with the Docks</h4>
+                  </div>
+                  <p className={`text-sm leading-relaxed mb-4 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                    Depending on your mode, Sensa will inject a floating glassmorphic dock into your web pages.
+                  </p>
+                  <ul className={`text-sm space-y-3 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1 shrink-0 text-[#0A44FF]">👁️</span>
+                      <span><strong>Visual Mode:</strong> Use the dock to adjust TTS reading speeds, activate the screen magnifier, or toggle the high-contrast Focus Ruler.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1 shrink-0 text-[#FF7A2F]">🦻</span>
+                      <span><strong>Auditory Mode:</strong> Sensa automatically starts capturing tab audio. The dock will display the Live Caption box and allow you to select your target translation language.</span>
+                    </li>
+                  </ul>
+                </article>
+
+              </div>
             </div>
           </div>
         </section>
@@ -1177,10 +1065,11 @@ export default function App() {
           ====================================================================== */}
         <section id="team" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
           }`}>
+          {/* Cybernetic Grid Layer */}
+          <div className="absolute inset-0 bg-grid-pattern pointer-events-none [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_75%,transparent_100%)] -z-10" />
+
           {/* Stage Spotlight Glow */}
           <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[600px] blur-[120px] pointer-events-none -z-10 bg-gradient-to-b from-[#0A44FF]/30 to-transparent ${isDark ? 'opacity-40' : 'opacity-10'}`} />
-          {/* Team Section Grid Texture Layer */}
-          <div className={`absolute inset-0 bg-grid-pattern pointer-events-none -z-10 ${isDark ? 'opacity-40' : 'opacity-60'}`} />
 
           <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
             <div className="text-center max-w-3xl mx-auto mb-16">
@@ -1372,84 +1261,6 @@ export default function App() {
       {/* ======================================================================
           END FOOTER SLOT
           ====================================================================== */}
-
-      {/* ======================================================================
-          FLOATING EXTENSION DOCKS (`VisualDock` & `AuditoryDock` exact replicas)
-          ====================================================================== */}
-      {activeMode === 'visual' && (
-        <div className="fixed bottom-4 left-4 md:left-8 z-50 animate-pop transition-all duration-300">
-          <div className={`border rounded-2xl p-2.5 backdrop-blur-xl transition-all duration-300 flex flex-col gap-3 items-center ${isDark ? 'bg-[#161618]/95 border-slate-800 ring-1 ring-white/10 ring-inset shadow-2xl' : 'bg-white/95 border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-xl'
-            }`}>
-            <div className={`text-center pb-1 border-b w-full ${isDark ? 'border-slate-800' : 'border-slate-200/80'}`}>
-              <span className="text-[10px] font-mono font-black text-[#0A44FF] tracking-widest uppercase">Visual</span>
-            </div>
-
-            <button
-              onClick={() => handleVoiceSimulator('Activate Visual Mode')}
-              className="w-11 h-11 rounded-xl bg-[#0A44FF] hover:bg-[#0035D9] text-white flex items-center justify-center shadow-md shadow-[#0A44FF]/30 active:scale-95 transition-all duration-200 focus:ring-2 focus:ring-[#0A44FF] focus:outline-none cursor-pointer"
-              title="Voice Navigation Active"
-            >
-              <Mic size={20} />
-            </button>
-
-            <button
-              onClick={() => handleVoiceSimulator('Read Page Content')}
-              className={`w-11 h-11 rounded-xl flex items-center justify-center active:scale-95 transition-all duration-200 focus:ring-2 focus:ring-[#0A44FF] focus:outline-none cursor-pointer ${ttsPlaying
-                ? 'bg-yellow-400 text-black shadow-md shadow-yellow-400/35 font-extrabold'
-                : isDark ? 'bg-black/40 hover:bg-slate-800 text-slate-300 border border-slate-800' : 'bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/80'
-                }`}
-              title="TTS Article Reader"
-            >
-              <Volume2 size={20} />
-            </button>
-
-            <button
-              onClick={() => setIsFocusRulerActive(!isFocusRulerActive)}
-              className={`w-11 h-11 rounded-xl flex items-center justify-center active:scale-95 transition-all duration-200 focus:ring-2 focus:ring-[#0A44FF] focus:outline-none cursor-pointer ${isFocusRulerActive
-                ? 'bg-yellow-400 text-black shadow-md shadow-yellow-400/35 font-extrabold'
-                : isDark ? 'bg-black/40 hover:bg-slate-800 text-slate-300 border border-slate-800' : 'bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/80'
-                }`}
-              title="Toggle Reading Focus Ruler (#FFFF00)"
-            >
-              <Maximize2 size={20} />
-            </button>
-          </div>
-        </div>
-      )}
-
-      {activeMode === 'auditory' && (
-        <div className="fixed bottom-4 right-4 md:right-8 z-50 max-w-[calc(100vw-2rem)] sm:max-w-sm w-full animate-pop transition-all duration-300">
-          <div className={`border rounded-2xl p-4 backdrop-blur-xl transition-all duration-300 ${isDark ? 'bg-[#161618]/95 border-slate-800 ring-1 ring-white/10 ring-inset shadow-2xl' : 'bg-white/95 border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-xl'
-            }`}>
-            <div className="flex items-center justify-between border-b border-slate-800/80 pb-2.5 mb-3">
-              <div className="flex items-center gap-2">
-                <Ear size={18} className="text-[#FF7A2F] shrink-0" />
-                <span className={`text-xs font-mono font-bold uppercase tracking-wider truncate ${isDark ? 'text-white' : 'text-slate-900'}`}>Auditory Mode • Live Captions</span>
-              </div>
-              <div className="flex items-center gap-1.5 shrink-0">
-                <span className="px-2 py-0.5 rounded bg-[#FF7A2F] text-black text-[10px] font-mono font-black uppercase tracking-widest animate-pulse">LIVE</span>
-                <button
-                  onClick={() => setActiveMode('standard')}
-                  className={`text-xs px-1 active:scale-95 transition-all focus:ring-2 focus:ring-[#FF7A2F] focus:outline-none cursor-pointer rounded ${isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-slate-900'}`}
-                  title="Close Caption Box"
-                >
-                  ✕
-                </button>
-              </div>
-            </div>
-
-            <div className="bg-black/80 p-3.5 rounded-xl border border-slate-800/80 font-mono text-sm text-[#6AA2FF] leading-relaxed min-h-[68px] flex items-center mb-2.5 font-medium">
-              {simulatedCaptionText}
-            </div>
-
-            <div className="flex items-center justify-between text-[11px] font-mono font-medium text-slate-400">
-              <span className="truncate mr-2">Web Audio Analyser: 48kHz Active</span>
-              <span className="text-[#FFC09B] font-bold shrink-0">EN | ES | FR | TL</span>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
-
