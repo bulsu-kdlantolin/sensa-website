@@ -6,7 +6,8 @@ html {
   scroll-behavior: smooth;
 }
 
-:root, [data-theme="light"] {
+:root,
+[data-theme="light"] {
   color-scheme: light;
 }
 
@@ -138,6 +139,43 @@ html {
   }
 }
 
+@keyframes ripple-wave {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  animation: ripple-wave 8s cubic-bezier(0.15, 0.45, 0.35, 1) infinite;
+  will-change: transform, opacity;
+}
+
+.animate-ripple-delayed-1 {
+  animation: ripple-wave 8s cubic-bezier(0.15, 0.45, 0.35, 1) infinite 2.6s;
+  will-change: transform, opacity;
+}
+
+.animate-ripple-delayed-2 {
+  animation: ripple-wave 8s cubic-bezier(0.15, 0.45, 0.35, 1) infinite 5.3s;
+  will-change: transform, opacity;
+}
+
+@keyframes text-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-text-gradient {
+  background-size: 200% auto;
+  animation: text-gradient 6s ease infinite;
+}
+
 .animate-float-blue {
   animation: float-blue 9s ease-in-out infinite;
 }
@@ -166,7 +204,7 @@ html {
 .bg-grid-pattern {
   background-size: 32px 32px;
   background-image: linear-gradient(to right, rgba(128, 128, 128, 0.08) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(128, 128, 128, 0.08) 1px, transparent 1px);
+    linear-gradient(to bottom, rgba(128, 128, 128, 0.08) 1px, transparent 1px);
 }
 
 .bg-dot-pattern {
@@ -177,10 +215,65 @@ html {
 [data-theme="dark"] .bg-grid-pattern,
 .dark .bg-grid-pattern {
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
 }
 
 [data-theme="dark"] .bg-dot-pattern,
 .dark .bg-dot-pattern {
   background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+}
+
+/* ==========================================================================
+   Sensa Custom Cursors (Theme Aware)
+   ========================================================================== */
+@media (pointer: fine) {
+  /* LIGHT MODE (Default) - Dark Stroke for Contrast */
+  body, html {
+    cursor: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 4L24 13L15 16L12 25L7 4Z' fill='url(%23sensa-grad)' stroke='%230F172A' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cdefs%3E%3ClinearGradient id='sensa-grad' x1='7' y1='4' x2='24' y2='25' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%230A44FF'/%3E%3Cstop offset='1' stop-color='%238A56FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E") 7 4, auto;
+  }
+
+  a, button, [role="button"], .cursor-pointer {
+    cursor: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 5L25 14L17 16L18 24L14 25L12 17L6 21L10 5Z' fill='url(%23sensa-grad-pointer)' stroke='%230F172A' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cdefs%3E%3ClinearGradient id='sensa-grad-pointer' x1='6' y1='5' x2='25' y2='25' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23FF7A2F'/%3E%3Cstop offset='1' stop-color='%238A56FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E") 10 5, pointer !important;
+  }
+
+  /* DARK MODE - White Stroke and Deep Orange Fill for Default */
+  html.dark, html.dark body, [data-theme="dark"], [data-theme="dark"] body {
+    cursor: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 4L24 13L15 16L12 25L7 4Z' fill='%23FF7A2F' stroke='white' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 7 4, auto;
+  }
+
+  /* DARK MODE - Pointer Cursor uses Blue-Purple Gradient to contrast with Default Orange */
+  html.dark a, html.dark button, html.dark [role="button"], html.dark .cursor-pointer,
+  body.dark a, body.dark button, body.dark [role="button"], body.dark .cursor-pointer,
+  [data-theme="dark"] a, [data-theme="dark"] button, [data-theme="dark"] [role="button"], [data-theme="dark"] .cursor-pointer {
+    cursor: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 5L25 14L17 16L18 24L14 25L12 17L6 21L10 5Z' fill='url(%23sensa-grad-pointer-dark)' stroke='white' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cdefs%3E%3ClinearGradient id='sensa-grad-pointer-dark' x1='6' y1='5' x2='25' y2='25' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%230A44FF'/%3E%3Cstop offset='1' stop-color='%238A56FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E") 10 5, pointer !important;
+  }
+}
+
+@keyframes scan-ruler {
+  0%, 100% { transform: translateY(-5px); }
+  50% { transform: translateY(45px); }
+}
+
+@keyframes wave-pulse {
+  0%, 100% { transform: scaleY(0.3); opacity: 0.5; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.animate-scan-ruler {
+  animation: scan-ruler 3s ease-in-out infinite;
+}
+
+.animate-wave-pulse {
+  animation: wave-pulse 1s ease-in-out infinite;
+}
+
+.animate-typewriter {
+  animation: typewriter 2s steps(40, end) infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
 }

@@ -10,8 +10,17 @@ import {
   CheckCircle2,
   Zap,
   FileText,
-  Check,
-  AlertCircle
+  MousePointerClick,
+  VolumeX,
+  BellOff,
+  MessageSquare,
+  PanelLeft,
+  Target,
+  Sparkles,
+  MonitorPlay,
+  Box,
+  Download,
+  Users
 } from 'lucide-react';
 
 const Github = ({ size = 18, className = "" }: { size?: number; className?: string }) => (
@@ -41,24 +50,24 @@ const ChromeIcon = ({ size = 24, className = "" }: { size?: number; className?: 
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" height={size} width={size} className={className}>
     <defs>
       <linearGradient id="chrome-a" x1="3.2173" y1="15" x2="44.7812" y2="15" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stopColor="#d93025"/>
-        <stop offset="1" stopColor="#ea4335"/>
+        <stop offset="0" stopColor="#d93025" />
+        <stop offset="1" stopColor="#ea4335" />
       </linearGradient>
       <linearGradient id="chrome-b" x1="20.7219" y1="47.6791" x2="41.5039" y2="11.6837" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stopColor="#fcc934"/>
-        <stop offset="1" stopColor="#fbbc04"/>
+        <stop offset="0" stopColor="#fcc934" />
+        <stop offset="1" stopColor="#fbbc04" />
       </linearGradient>
       <linearGradient id="chrome-c" x1="26.5981" y1="46.5015" x2="5.8161" y2="10.506" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stopColor="#1e8e3e"/>
-        <stop offset="1" stopColor="#34a853"/>
+        <stop offset="0" stopColor="#1e8e3e" />
+        <stop offset="1" stopColor="#34a853" />
       </linearGradient>
     </defs>
-    <circle cx="24" cy="23.9947" r="12" fill="#fff"/>
-    <path d="M3.2154,36A24,24,0,1,0,12,3.2154,24,24,0,0,0,3.2154,36ZM34.3923,18A12,12,0,1,1,18,13.6077,12,12,0,0,1,34.3923,18Z" fill="none"/>
-    <path d="M24,12H44.7812a23.9939,23.9939,0,0,0-41.5639.0029L13.6079,30l.0093-.0024A11.9852,11.9852,0,0,1,24,12Z" fill="url(#chrome-a)"/>
-    <circle cx="24" cy="24" r="9.5" fill="#1a73e8"/>
-    <path d="M34.3913,30.0029,24.0007,48A23.994,23.994,0,0,0,44.78,12.0031H23.9989l-.0025.0093A11.985,11.985,0,0,1,34.3913,30.0029Z" fill="url(#chrome-b)"/>
-    <path d="M13.6086,30.0031,3.218,12.006A23.994,23.994,0,0,0,24.0025,48L34.3931,30.0029l-.0067-.0068a11.9852,11.9852,0,0,1-20.7778.007Z" fill="url(#chrome-c)"/>
+    <circle cx="24" cy="23.9947" r="12" fill="#fff" />
+    <path d="M3.2154,36A24,24,0,1,0,12,3.2154,24,24,0,0,0,3.2154,36ZM34.3923,18A12,12,0,1,1,18,13.6077,12,12,0,0,1,34.3923,18Z" fill="none" />
+    <path d="M24,12H44.7812a23.9939,23.9939,0,0,0-41.5639.0029L13.6079,30l.0093-.0024A11.9852,11.9852,0,0,1,24,12Z" fill="url(#chrome-a)" />
+    <circle cx="24" cy="24" r="9.5" fill="#1a73e8" />
+    <path d="M34.3913,30.0029,24.0007,48A23.994,23.994,0,0,0,44.78,12.0031H23.9989l-.0025.0093A11.985,11.985,0,0,1,34.3913,30.0029Z" fill="url(#chrome-b)" />
+    <path d="M13.6086,30.0031,3.218,12.006A23.994,23.994,0,0,0,24.0025,48L34.3931,30.0029l-.0067-.0068a11.9852,11.9852,0,0,1-20.7778.007Z" fill="url(#chrome-c)" />
   </svg>
 );
 
@@ -83,9 +92,36 @@ const GmailIcon = () => (
     <path fill="#c5221f" d="M52 51v8l20 15V48l-5.6-4.2c-5.94-4.45-14.4-.22-14.4 7.2" />
   </svg>
 );
+// Custom Hook for Scroll Reveal Animation
+function useScrollReveal(options: IntersectionObserverInit = { threshold: 0.15 }) {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const currentRef = ref.current;
+    if (!currentRef) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true);
+        observer.unobserve(entry.target);
+      }
+    }, options);
+
+    observer.observe(currentRef);
+    return () => {
+      if (currentRef) observer.unobserve(currentRef);
+    };
+  }, [options.threshold]);
+
+  return [ref, isVisible] as const;
+}
 
 export default function App() {
   const [activeMode, setActiveMode] = useState<SensoryMode>('standard');
+  const [isSidebarMode, setIsSidebarMode] = useState<boolean>(() => {
+    return localStorage.getItem('sensa_sidebar') === 'true';
+  });
   // Initialize theme from localStorage (`sensa_theme`), defaulting to 'light' mode
   const [theme, setTheme] = useState<ThemeMode>(() => {
     const savedTheme = localStorage.getItem('sensa_theme');
@@ -103,6 +139,39 @@ export default function App() {
   const [voiceCommandStatus, setVoiceCommandStatus] = useState<string>('Ready for voice command input...');
   const [ttsPlaying, setTtsPlaying] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>('hero');
+  const [heroMousePos, setHeroMousePos] = useState({ x: 0, y: 0 });
+
+  // Force scroll to top on page reload
+  useEffect(() => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleHeroMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const { currentTarget: target } = e;
+    const rect = target.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    setHeroMousePos({ x, y });
+  };
+
+  const handleTitleMouseMove = (e: React.MouseEvent<HTMLHeadingElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+  };
+
+  const handleTitleMouseLeave = (e: React.MouseEvent<HTMLHeadingElement>) => {
+    e.currentTarget.style.setProperty('--mouse-x', `-500px`);
+    e.currentTarget.style.setProperty('--mouse-y', `-500px`);
+  };
+
+  // Scroll Reveal Refs
+  const [problemRef, isProblemVisible] = useScrollReveal();
 
   const isManualScrollingRef = useRef<boolean>(false);
   const manualScrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -135,6 +204,11 @@ export default function App() {
     document.documentElement.classList.toggle('dark', theme === 'dark');
     localStorage.setItem('sensa_theme', theme);
   }, [theme]);
+
+  // Persist sidebar state
+  useEffect(() => {
+    localStorage.setItem('sensa_sidebar', String(isSidebarMode));
+  }, [isSidebarMode]);
 
   // Track active section on scroll for navbar underline highlight
   useEffect(() => {
@@ -200,6 +274,15 @@ export default function App() {
     }, 1200);
   };
 
+  const navItems = [
+    { href: '#problem-solution', id: 'problem-solution', label: 'Mission', icon: Target },
+    { href: '#features', id: 'features', label: 'Features', icon: Sparkles },
+    { href: '#video', id: 'video', label: 'Demo', icon: MonitorPlay },
+    { href: '#playground', id: 'playground', label: 'Sandbox', icon: Box },
+    { href: '#guide', id: 'guide', label: 'Install', icon: Download },
+    { href: '#team', id: 'team', label: 'Team', icon: Users },
+  ];
+
   return (
     <div className={`min-h-screen font-sans relative overflow-x-hidden selection:bg-[#0A44FF] selection:text-white ${isDark ? 'bg-[#09090B] text-slate-200' : 'bg-[#FDFDFD] text-slate-900'
       }`}>
@@ -241,63 +324,28 @@ export default function App() {
       </div>
 
       {/* ======================================================================
-          NAVBAR SLOT: Drop your saved Navbar component code right below this line
+          TOP NAVBAR (Horizontal)
           ====================================================================== */}
-      <header className={`fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-xl border-b py-4 ${isDark
-        ? 'bg-[#09090B]/80 border-slate-800 ring-1 ring-white/5 inset'
-        : 'bg-[#FDFDFD]/80 border-slate-200/60 ring-1 ring-black/5 inset'
+      <header className={`fixed top-3 left-3 right-3 md:top-6 md:left-1/2 z-50 w-[calc(100%-24px)] md:w-full md:max-w-5xl backdrop-blur-xl border py-2.5 md:py-3.5 px-4 md:px-6 rounded-3xl md:rounded-full shadow-lg transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${isSidebarMode ? 'lg:-translate-y-[150%] lg:opacity-0 lg:pointer-events-none md:-translate-x-1/2' : 'translate-y-0 opacity-100 md:-translate-x-1/2'
+        } ${isDark ? 'bg-[#1C1C1E]/70 border-white/10 ring-1 ring-white/5 ring-inset shadow-black/50' : 'bg-white/70 border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-slate-200/50'
         }`}>
-        <div className="w-full max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between gap-4 md:gap-8">
+        <div className="w-full flex items-center justify-between gap-4 md:gap-8">
           <a href="#hero" onClick={(e) => handleNavClick(e, 'hero')} className="flex items-center gap-3 md:gap-3.5 no-underline group shrink-0 select-none">
-            <img
-              src={sensaLogo}
-              alt="Sensa Logo"
-              className="w-9 h-9 md:w-[38px] md:h-[38px] object-contain drop-shadow-[0_0_14px_rgba(10,68,255,0.55)] group-hover:scale-105 transition-transform duration-300 shrink-0"
-            />
-            <span className={`text-xl md:text-[28px] font-black tracking-[-0.03em] leading-none translate-y-[-1px] transition-colors duration-200 ${isDark ? 'text-white group-hover:text-[#FF7A2F]' : 'text-slate-900 group-hover:text-[#0A44FF]'
-              }`}>
+            <img src={sensaLogo} alt="Sensa Logo" className="w-9 h-9 md:w-[38px] md:h-[38px] object-contain drop-shadow-[0_0_14px_rgba(10,68,255,0.55)] group-hover:scale-105 transition-transform duration-300 shrink-0" />
+            <span className={`text-xl md:text-[28px] font-black tracking-[-0.03em] leading-none translate-y-[-1px] transition-colors duration-200 ${isDark ? 'text-white group-hover:text-[#FF7A2F]' : 'text-slate-900 group-hover:text-[#0A44FF]'}`}>
               Sensa
             </span>
           </a>
 
           <nav aria-label="Main Navigation" className="hidden lg:flex items-center justify-center flex-1 mx-4 lg:mx-8">
-            <ul className={`flex items-center justify-center gap-4 lg:gap-8 xl:gap-10 w-full list-none m-0 p-0 text-xs font-mono font-bold uppercase tracking-widest ${isDark ? 'text-slate-400' : 'text-slate-600'
-              }`}>
-              {[
-                { href: '#problem-solution', id: 'problem-solution', label: 'Why Sensa' },
-                { href: '#features', id: 'features', label: 'Features' },
-                { href: '#video', id: 'video', label: 'Demo Video' },
-                { href: '#playground', id: 'playground', label: 'Live Sandbox' },
-                { href: '#guide', id: 'guide', label: 'Installation' },
-                { href: '#team', id: 'team', label: 'Capstone Team' },
-              ].map((item) => {
+            <ul className={`flex items-center justify-center gap-4 lg:gap-8 xl:gap-10 w-full list-none m-0 p-0 text-xs font-mono font-bold uppercase tracking-widest ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+              {navItems.map((item) => {
                 const isSelected = activeSection === item.id;
                 return (
                   <li key={item.id} className="relative py-1">
-                    <a
-                      href={item.href}
-                      onClick={(e) => handleNavClick(e, item.id)}
-                      aria-current={isSelected ? 'page' : undefined}
-                      className={`relative py-1.5 px-2 transition-colors duration-200 group no-underline block ${isSelected
-                        ? isDark
-                          ? 'text-[#FF7A2F] font-extrabold'
-                          : 'text-[#0A44FF] font-extrabold'
-                        : isDark
-                          ? 'hover:text-[#FF7A2F]'
-                          : 'hover:text-[#0A44FF]'
-                        }`}
-                    >
+                    <a href={item.href} onClick={(e) => handleNavClick(e, item.id)} aria-current={isSelected ? 'page' : undefined} className={`relative py-1.5 px-3 transition-colors duration-200 group no-underline block whitespace-nowrap ${isSelected ? (isDark ? 'text-[#FF7A2F] font-extrabold' : 'text-[#0A44FF] font-extrabold') : (isDark ? 'hover:text-[#FF7A2F]' : 'hover:text-[#0A44FF]')}`}>
                       {item.label}
-                      <span
-                        className={`absolute left-0 bottom-0 h-[2px] w-full rounded-full transition-all duration-300 ease-out ${isSelected
-                          ? isDark
-                            ? 'bg-[#FF7A2F] scale-x-100 opacity-100 shadow-[0_0_8px_rgba(255,122,47,0.8)]'
-                            : 'bg-[#0A44FF] scale-x-100 opacity-100 shadow-[0_0_8px_rgba(10,68,255,0.6)]'
-                          : isDark
-                            ? 'bg-[#FF7A2F] scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100'
-                            : 'bg-[#0A44FF] scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100'
-                          }`}
-                      />
+                      <span className={`absolute left-0 bottom-0 h-[2px] w-full rounded-full transition-all duration-300 ease-out ${isSelected ? (isDark ? 'bg-[#FF7A2F] scale-x-100 opacity-100 shadow-[0_0_8px_rgba(255,122,47,0.8)]' : 'bg-[#0A44FF] scale-x-100 opacity-100 shadow-[0_0_8px_rgba(10,68,255,0.6)]') : (isDark ? 'bg-[#FF7A2F] scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100' : 'bg-[#0A44FF] scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100')}`} />
                     </a>
                   </li>
                 );
@@ -306,41 +354,59 @@ export default function App() {
           </nav>
 
           <div className="flex items-center shrink-0">
-            {/* Icon-Only Smooth-Sliding Segmented Theme Toggle */}
-            <div className={`relative flex items-center p-1 rounded-full border backdrop-blur-md transition-colors duration-300 select-none ${isDark ? 'bg-[#24262B]/80 border-slate-800 ring-1 ring-white/5 inset' : 'bg-slate-100/80 border-slate-200/60 ring-1 ring-black/5 inset'}`}>
-              {/* Animated Sliding Background Thumb */}
-              <div
-                className={`absolute left-1 top-1 bottom-1 w-[calc(50%-4px)] rounded-full transition-all duration-300 ease-out shadow-sm pointer-events-none ${isDark
-                  ? 'translate-x-full bg-[#1C1C1E] border border-slate-700'
-                  : 'translate-x-0 bg-white border border-slate-200 shadow-slate-200/50'
-                  }`}
-              />
-
-              {/* Light Mode Button */}
-              <button
-                onClick={() => setTheme('light')}
-                role="switch"
-                aria-checked={!isDark}
-                aria-label="Switch to Light Mode"
-                className={`relative z-10 flex items-center justify-center w-[28px] h-[28px] rounded-full transition-colors duration-300 cursor-pointer focus:outline-none ${!isDark ? 'text-[#0A44FF]' : 'text-slate-400 hover:text-slate-200'}`}
-                title="Switch to Light Mode"
-              >
-                <Sun size={15} className={`transition-transform duration-500 ${!isDark ? 'rotate-0 scale-100' : '-rotate-45 scale-90'}`} />
-              </button>
-
-              {/* Dark Mode Button */}
-              <button
-                onClick={() => setTheme('dark')}
-                role="switch"
-                aria-checked={isDark}
-                aria-label="Switch to Dark Mode"
-                className={`relative z-10 flex items-center justify-center w-[28px] h-[28px] rounded-full transition-colors duration-300 cursor-pointer focus:outline-none ${isDark ? 'text-[#FF7A2F]' : 'text-slate-600 hover:text-slate-900'}`}
-                title="Switch to Dark Mode"
-              >
-                <Moon size={15} className={`transition-transform duration-500 ${isDark ? 'rotate-0 scale-100' : 'rotate-45 scale-90'}`} />
-              </button>
-            </div>
+            <button onClick={() => setIsSidebarMode(true)} className={`hidden lg:flex mr-4 p-2 rounded-full border backdrop-blur-md transition-all duration-300 ${isDark ? 'bg-[#24262B]/80 border-slate-800 hover:bg-slate-800 text-slate-400 hover:text-white' : 'bg-slate-100/80 border-slate-200/60 hover:bg-slate-200 text-slate-500 hover:text-slate-900'}`} title="Switch to Sidebar Layout">
+              <PanelLeft size={16} />
+            </button>
+            <button onClick={() => setTheme(isDark ? 'light' : 'dark')} role="switch" aria-checked={isDark} aria-label={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"} className={`flex items-center justify-center w-9 h-9 rounded-full border backdrop-blur-md transition-all duration-300 ${isDark ? 'bg-[#24262B]/80 border-slate-800 hover:bg-slate-800 text-[#FF7A2F]' : 'bg-slate-100/80 border-slate-200/60 hover:bg-slate-200 text-[#0A44FF]'}`} title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}>
+              <div className="relative w-4 h-4 flex items-center justify-center">
+                <Sun size={16} className={`absolute transition-all duration-500 ${isDark ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'}`} />
+                <Moon size={16} className={`absolute transition-all duration-500 ${!isDark ? '-rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'}`} />
+              </div>
+            </button>
           </div>
+        </div>
+      </header>
+
+      {/* ======================================================================
+          LEFT SIDEBAR (Vertical) - Desktop Only
+          ====================================================================== */}
+      <header className={`fixed hidden lg:flex flex-col items-center justify-between z-50 backdrop-blur-xl border shadow-lg transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] top-6 left-6 bottom-6 w-[80px] rounded-[2rem] py-8 px-4 ${isSidebarMode ? 'translate-x-0 opacity-100' : '-translate-x-[150%] opacity-0 pointer-events-none'
+        } ${isDark ? 'bg-[#1C1C1E]/70 border-white/10 ring-1 ring-white/5 ring-inset shadow-black/50' : 'bg-white/70 border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-slate-200/50'
+        }`}>
+        <a href="#hero" onClick={(e) => handleNavClick(e, 'hero')} className="flex items-center justify-center no-underline group shrink-0 select-none w-full">
+          <img src={sensaLogo} alt="Sensa Logo" className="w-[38px] h-[38px] object-contain drop-shadow-[0_0_14px_rgba(10,68,255,0.55)] group-hover:scale-105 transition-transform duration-300 shrink-0" />
+        </a>
+
+        <nav aria-label="Main Navigation" className="flex flex-col items-center w-full flex-1 mt-10">
+          <ul className={`flex flex-col items-center gap-4 w-full list-none m-0 p-0 text-xs font-mono font-bold uppercase tracking-widest ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isSelected = activeSection === item.id;
+              return (
+                <li key={item.id} className="relative py-1 w-full flex justify-center group/item">
+                  <a href={item.href} onClick={(e) => handleNavClick(e, item.id)} aria-current={isSelected ? 'page' : undefined} className={`relative flex items-center justify-center transition-colors duration-200 group no-underline whitespace-nowrap w-12 h-12 rounded-xl ${isSelected ? (isDark ? 'text-[#FF7A2F] bg-[#FF7A2F]/10 font-extrabold' : 'text-[#0A44FF] bg-[#0A44FF]/10 font-extrabold') : (isDark ? 'hover:text-[#FF7A2F]' : 'hover:text-[#0A44FF]')}`}>
+                    <Icon size={20} />
+                    {/* Hover Label Tooltip */}
+                    <span className={`absolute left-full ml-4 px-3 py-1.5 rounded-lg text-xs font-bold opacity-0 -translate-x-4 pointer-events-none transition-all duration-300 group-hover/item:opacity-100 group-hover/item:translate-x-0 whitespace-nowrap shadow-xl ${isDark ? 'bg-[#1C1C1E] border border-slate-800 text-white' : 'bg-white border border-slate-200 text-slate-900'}`}>
+                      {item.label}
+                    </span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+
+        <div className="flex flex-col items-center gap-4 w-full mt-auto">
+          <button onClick={() => setIsSidebarMode(false)} className={`flex p-2 rounded-full border backdrop-blur-md transition-all duration-300 ${isDark ? 'bg-[#24262B]/80 border-slate-800 hover:bg-slate-800 text-slate-400 hover:text-white' : 'bg-slate-100/80 border-slate-200/60 hover:bg-slate-200 text-slate-500 hover:text-slate-900'}`} title="Switch to Top Navbar Layout">
+            <PanelLeft size={16} className="rotate-180" />
+          </button>
+          <button onClick={() => setTheme(isDark ? 'light' : 'dark')} role="switch" aria-checked={isDark} aria-label={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"} className={`flex items-center justify-center w-9 h-9 rounded-full border backdrop-blur-md transition-all duration-300 ${isDark ? 'bg-[#24262B]/80 border-slate-800 hover:bg-slate-800 text-[#FF7A2F]' : 'bg-slate-100/80 border-slate-200/60 hover:bg-slate-200 text-[#0A44FF]'}`} title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}>
+            <div className="relative w-4 h-4 flex items-center justify-center">
+              <Sun size={16} className={`absolute transition-all duration-500 ${isDark ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'}`} />
+              <Moon size={16} className={`absolute transition-all duration-500 ${!isDark ? '-rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'}`} />
+            </div>
+          </button>
         </div>
       </header>
       <main id="main-content" role="main" className="w-full">
@@ -351,37 +417,82 @@ export default function App() {
         {/* ======================================================================
           1. HERO SECTION (First Impression - Exact authentic welcome box feel)
           ====================================================================== */}
-        <section id="hero" className="relative w-full min-h-screen flex flex-col justify-center scroll-mt-[76px] pt-28 pb-24 md:pt-36 md:pb-32 px-4 md:px-8 overflow-hidden">
+        <section id="hero" onMouseMove={handleHeroMouseMove} className="group relative w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] pt-28 pb-24 md:pt-36 md:pb-32 px-4 md:px-8 overflow-hidden">
+          {/* Spotlight Mouse Hover Effect */}
+          <div
+            className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100 z-0"
+            style={{
+              background: `radial-gradient(600px circle at ${heroMousePos.x}px ${heroMousePos.y}px, ${isDark ? 'rgba(255,122,47,0.08)' : 'rgba(10,68,255,0.05)'}, transparent 40%)`
+            }}
+          />
           {/* Hero Cybernetic Grid Layer */}
           <div className="absolute inset-0 bg-grid-pattern pointer-events-none [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_75%,transparent_100%)] -z-10" />
 
-          {/* ModeSelection Starter Popup Background Shade (Dual-Mode Fusion Aurora) */}
-          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[520px] rounded-full blur-[165px] pointer-events-none -z-10 bg-gradient-to-tr from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F]  ${isDark
-            ? 'opacity-25'
-            : 'opacity-15'
-            }`} />
+          {/* AI Neural Mesh Background */}
+          <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center opacity-60">
+            <svg className={`absolute w-[120%] h-[120%] max-w-none ${isDark ? 'animate-float-orange' : 'animate-float-blue'}`} viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <g stroke={isDark ? "rgba(255,122,47,0.15)" : "rgba(10, 68, 255, 0.2)"} strokeWidth="1.5" fill="none">
+                <path d="M100,100 L250,150 L400,100 L550,200 L700,150" />
+                <path d="M150,300 L250,150 L350,350 L550,200 L650,400" />
+                <path d="M100,500 L150,300 L300,450 L350,350 L500,500 L650,400 L750,550" />
+                <path d="M400,100 L350,350 L500,500" />
+                <path d="M700,150 L650,400" />
+                {/* Cross connections */}
+                <path d="M250,150 L300,450" className="animate-pulse" style={{ animationDuration: '3s' }} />
+                <path d="M550,200 L500,500" className="animate-pulse" style={{ animationDuration: '4s' }} />
+              </g>
+              <g fill={isDark ? "rgba(255,122,47,0.5)" : "rgba(10, 68, 255, 0.6)"}>
+                <circle cx="100" cy="100" r="3" className="animate-ping" style={{ animationDuration: '3s' }} />
+                <circle cx="250" cy="150" r="4" />
+                <circle cx="400" cy="100" r="3" />
+                <circle cx="550" cy="200" r="5" className="animate-pulse" />
+                <circle cx="700" cy="150" r="3" />
+                <circle cx="150" cy="300" r="4" />
+                <circle cx="350" cy="350" r="5" className="animate-ping" style={{ animationDuration: '4s', animationDelay: '1s' }} />
+                <circle cx="650" cy="400" r="4" />
+                <circle cx="100" cy="500" r="3" />
+                <circle cx="300" cy="450" r="4" />
+                <circle cx="500" cy="500" r="3" className="animate-pulse" />
+                <circle cx="750" cy="550" r="3" />
+              </g>
+            </svg>
+            {/* Ambient Background Glow behind the nodes */}
+            <div className={`absolute w-[600px] h-[400px] rounded-full blur-[120px] bg-gradient-to-tr from-[#0A44FF] to-[#8A56FF] ${isDark ? 'opacity-10' : 'opacity-5'}`} />
+          </div>
 
-          <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
+          <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
 
 
 
             {/* Authentic Title Gradient: `from-[#0A44FF] to-[#FF7A2F]` with bottom padding and relaxed line-height so descender 'y' is never cut off */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter mb-6 py-2 pb-3 leading-[1.15] max-w-4xl bg-gradient-to-r from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F] bg-clip-text text-transparent animate-pop">
+            <h1
+              onMouseMove={handleTitleMouseMove}
+              onMouseLeave={handleTitleMouseLeave}
+              className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter mb-6 py-2 pb-3 leading-[1.15] max-w-4xl text-transparent animate-pop cursor-default transition-all duration-300`}
+              style={{
+                backgroundImage: `radial-gradient(150px circle at var(--mouse-x, -500px) var(--mouse-y, -500px), ${isDark ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.6)'}, transparent 40%), linear-gradient(to right, #0A44FF, #8A56FF, #FF7A2F)`,
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+              }}
+            >
               Sensa: AI-Powered Dual-Mode Accessibility & Sensory Assistant
             </h1>
 
             <p className={`text-base sm:text-lg md:text-xl max-w-3xl mb-10 leading-relaxed font-normal animate-pop ${isDark ? 'text-slate-400' : 'text-slate-600'
               }`}>
-              Created by BulSU IT students to make the internet accessible for people with low vision or hearing impairments. It features hands-free voice controls, live AI subtitles, a high-contrast reading guide, and real-time audio capture.
+              Created by IT students from Bulacan State University to make the internet accessible for people with low vision or hearing impairments. It features hands-free voice controls, live AI subtitles, a high-contrast reading guide, and real-time audio capture.
             </p>
 
-            <div className="flex items-center justify-center w-full mb-6 animate-pop">
+            <div className="relative flex items-center justify-center w-full mb-6 animate-pop group">
+              {/* Button Ambient Backglow */}
+              <div className={`absolute w-[160px] h-[50px] blur-2xl rounded-full bg-gradient-to-r from-[#0A44FF] to-[#FF7A2F] transition-all duration-500 ease-out ${isDark ? 'opacity-40 group-hover:opacity-75 group-hover:scale-110' : 'opacity-30 group-hover:opacity-60 group-hover:scale-110'}`} />
+
               <a
                 href="#guide"
                 onClick={(e) => handleNavClick(e, 'guide')}
-                className={`group inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-full font-semibold text-base transition-all duration-300 ease-out active:scale-[0.98] focus:ring-2 focus:ring-offset-2 focus:outline-none no-underline shadow-sm hover:-translate-y-0.5 hover:shadow-lg ${isDark
-                  ? 'bg-[#FF7A2F] hover:bg-[#ff8a45] text-white focus:ring-[#FF7A2F] focus:ring-offset-[#09090B] hover:shadow-[#FF7A2F]/25'
-                  : 'bg-[#0A44FF] hover:bg-[#2357ff] text-white focus:ring-[#0A44FF] focus:ring-offset-[#FDFDFD] hover:shadow-[#0A44FF]/25'
+                className={`relative z-10 inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-full font-bold text-base transition-all duration-300 ease-out active:scale-[0.98] focus:ring-2 focus:ring-offset-2 focus:outline-none no-underline shadow-sm hover:-translate-y-0.5 hover:shadow-xl border ${isDark
+                  ? 'bg-[#1C1C1E] hover:bg-[#2C2C2E] border-slate-700/50 text-white focus:ring-[#FF7A2F] focus:ring-offset-[#09090B] hover:border-slate-600'
+                  : 'bg-white hover:bg-[#FDFDFD] border-slate-200/80 text-slate-800 focus:ring-[#0A44FF] focus:ring-offset-[#FDFDFD] hover:border-slate-300'
                   }`}
               >
                 <ChromeIcon size={22} className="shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-105" />
@@ -392,84 +503,182 @@ export default function App() {
         </section>
 
         {/* ======================================================================
-          2. THE PROBLEM & SOLUTION (Why Capstone Exists) - Alternating Value Band
+          2. THE MISSION (Interactive Infographic)
           ====================================================================== */}
-        <section id="problem-solution" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[76px] py-20 md:py-28 border-y ${isDark ? 'bg-[#121214] border-slate-800/80' : 'bg-[#F4F5F7] border-slate-200/80'
+        <section id="problem-solution" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
           }`}>
-          {/* Ambient Problem & Solution Background Glows */}
-          <div className={`absolute top-1/2 left-[-100px] -translate-y-1/2 w-[600px] h-[500px] rounded-full blur-[150px] pointer-events-none -z-10 bg-red-500  ${isDark ? 'opacity-15' : 'opacity-10'}`} />
-          <div className={`absolute top-1/2 right-[-100px] -translate-y-1/2 w-[600px] h-[500px] rounded-full blur-[150px] pointer-events-none -z-10 bg-emerald-500  ${isDark ? 'opacity-15' : 'opacity-10'}`} />
+          {/* Ambient Mission Gradients */}
+          <div className={`absolute top-1/2 left-0 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[160px] pointer-events-none -z-10 bg-red-500 animate-pulse ${isDark ? 'opacity-[0.08]' : 'opacity-[0.04]'}`} />
+          <div className={`absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[160px] pointer-events-none -z-10 bg-emerald-500 animate-pulse ${isDark ? 'opacity-[0.08]' : 'opacity-[0.04]'}`} />
 
-          <div className="max-w-7xl mx-auto px-4 md:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className={`text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                The Problem & The Sensa Solution
+          <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
+            <div className="text-center max-w-3xl mx-auto mb-20 lg:mb-28">
+              <h2 className={`text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-6 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                The Mission
               </h2>
-              <p className={`text-base md:text-lg leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                Many people face difficulties navigating standard websites because they don't have built-in screen readers, live captions, or voice controls.
+              <p className={`text-base md:text-xl leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                The modern web was built for the sighted and hearing. Sensa exists to decode the digital divide and tear down accessibility barriers instantly.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-              {/* The Problem Card */}
-              <article className={`border border-l-2 border-l-red-500/80 rounded-2xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-red-500/40 ${isDark
-                ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:bg-white/[0.03]'
-                : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:bg-slate-50/80 shadow-sm'
-                }`}>
-                <div>
-                  <h3 className="flex items-center gap-3 text-red-500 font-bold text-base md:text-lg mb-4 tracking-[-0.01em] m-0">
-                    <AlertCircle size={22} className="shrink-0" />
-                    <span>The Problem: Sensory Overload & Barriers</span>
-                  </h3>
-                  <p className={`text-sm leading-relaxed mb-6 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Most websites assume all users have perfect vision and hearing. Because of this, visually impaired and deaf or hard-of-hearing users often run into major roadblocks:
-                  </p>
-                </div>
-                <ul className={`space-y-4 text-sm list-none p-0 m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  <li className="flex items-start gap-3">
-                    <span className="text-red-500 font-bold text-base leading-none mt-0.5">•</span>
-                    <span><strong className={isDark ? 'text-white font-semibold' : 'text-slate-900 font-semibold'}>Lack of Native Screen Readers:</strong> Third-party screen readers can be hard to use, struggle with modern web designs, or lack natural voice controls.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-red-500 font-bold text-base leading-none mt-0.5">•</span>
-                    <span><strong className={isDark ? 'text-white font-semibold' : 'text-slate-900 font-semibold'}>Missing Live Captions on Audio Streams:</strong> Many educational videos, podcasts, and live streams across the web don't provide closed captions.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-red-500 font-bold text-base leading-none mt-0.5">•</span>
-                    <span><strong className={isDark ? 'text-white font-semibold' : 'text-slate-900 font-semibold'}>Complex Keyboard & Mouse Navigation:</strong> Users with poor vision or motor difficulties struggle to click small buttons or use complicated drop-down menus.</span>
-                  </li>
-                </ul>
-              </article>
+            {/* Infographic Transformation Pipeline */}
+            <div ref={problemRef as React.RefObject<HTMLDivElement>} className={`relative w-full flex flex-col lg:flex-row items-stretch justify-between gap-12 lg:gap-0 transition-all duration-[1000ms] transform ${isProblemVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}>
 
-              {/* The Sensa Solution Card */}
-              <article className={`border border-l-2 border-l-emerald-500/80 rounded-2xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-emerald-500/40 ${isDark
-                ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:bg-white/[0.03]'
-                : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:bg-slate-50/80 shadow-sm'
-                }`}>
-                <div>
-                  <h3 className="flex items-center gap-3 text-emerald-500 font-bold text-base md:text-lg mb-4 tracking-[-0.01em] m-0">
-                    <CheckCircle2 size={22} className="shrink-0" />
-                    <span>The Sensa Approach: Unified MV3 Companion</span>
-                  </h3>
-                  <p className={`text-sm leading-relaxed mb-6 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Sensa fixes these problems directly in the browser, meaning website owners don't have to change their code at all. Our extension provides:
-                  </p>
+              <style>{`
+                .flow-line-red {
+                  stroke-dasharray: 8 8;
+                  animation: flow-red 1s linear infinite;
+                }
+                @keyframes flow-red {
+                  from { stroke-dashoffset: 16; }
+                  to { stroke-dashoffset: 0; }
+                }
+                .flow-line-green {
+                  stroke-dasharray: 8 8;
+                  animation: flow-green 1s linear infinite;
+                }
+                @keyframes flow-green {
+                  from { stroke-dashoffset: 16; }
+                  to { stroke-dashoffset: 0; }
+                }
+              `}</style>
+
+              {/* Column 1: The Roadblocks */}
+              <div className="w-full lg:w-[380px] flex flex-col gap-4 z-10">
+                <h3 className={`text-xs font-black uppercase tracking-widest text-center mb-1 ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>Problem</h3>
+
+                {/* Visual Problem 1 */}
+                <div className={`p-5 md:p-6 rounded-[2rem] border backdrop-blur-md flex items-center gap-4 transition-all duration-300 hover:-translate-y-1 ${isDark ? 'bg-[#1C1C1E] border-slate-800 hover:bg-red-500/5 hover:border-red-500/30 hover:shadow-[0_0_20px_rgba(239,68,68,0.08)]' : 'bg-white border-slate-200 shadow-sm hover:bg-red-50/50 hover:border-red-200 hover:shadow-[0_8px_30px_rgba(239,68,68,0.08)]'}`}>
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${isDark ? 'bg-slate-800 text-slate-400' : 'bg-slate-100 text-slate-500'}`}>
+                    <MousePointerClick size={24} />
+                  </div>
+                  <div>
+                    <h4 className={`text-base font-bold mb-0.5 ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>Hard to Click</h4>
+                    <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-500' : 'text-slate-500'}`}>Small buttons are hard to see and click.</p>
+                  </div>
                 </div>
-                <ul className={`space-y-4 text-sm list-none p-0 m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  <li className="flex items-start gap-3">
-                    <Check size={18} className="text-emerald-500 shrink-0 mt-0.5" />
-                    <span><strong className={isDark ? 'text-white font-semibold' : 'text-slate-900 font-semibold'}>Fast Hands-Free Voice Commands:</strong> Speak into your microphone to navigate the web instantly. Our system recognizes what you say in under 1.5 seconds.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Check size={18} className="text-emerald-500 shrink-0 mt-0.5" />
-                    <span><strong className={isDark ? 'text-white font-semibold' : 'text-slate-900 font-semibold'}>Universal Audio Capture:</strong> We capture the audio directly from your browser tab to provide real-time captions for any video or audio stream.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Check size={18} className="text-emerald-500 shrink-0 mt-0.5" />
-                    <span><strong className={isDark ? 'text-white font-semibold' : 'text-slate-900 font-semibold'}>High-Contrast Focus Ruler:</strong> A bright yellow reading guide and customizable fonts to help users with dyslexia read more easily.</span>
-                  </li>
-                </ul>
-              </article>
+
+                {/* Visual Problem 2 */}
+                <div className={`p-5 md:p-6 rounded-[2rem] border backdrop-blur-md flex items-center gap-4 transition-all duration-300 hover:-translate-y-1 ${isDark ? 'bg-[#1C1C1E] border-slate-800 hover:bg-red-500/5 hover:border-red-500/30 hover:shadow-[0_0_20px_rgba(239,68,68,0.08)]' : 'bg-white border-slate-200 shadow-sm hover:bg-red-50/50 hover:border-red-200 hover:shadow-[0_8px_30px_rgba(239,68,68,0.08)]'}`}>
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${isDark ? 'bg-slate-800 text-slate-400' : 'bg-slate-100 text-slate-500'}`}>
+                    <FileText size={24} />
+                  </div>
+                  <div>
+                    <h4 className={`text-base font-bold mb-0.5 ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>Screen Clutter</h4>
+                    <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-500' : 'text-slate-500'}`}>Too much text confuses screen readers.</p>
+                  </div>
+                </div>
+
+                {/* Auditory Problem 1 */}
+                <div className={`p-5 md:p-6 rounded-[2rem] border backdrop-blur-md flex items-center gap-4 transition-all duration-300 hover:-translate-y-1 ${isDark ? 'bg-[#1C1C1E] border-slate-800 hover:bg-red-500/5 hover:border-red-500/30 hover:shadow-[0_0_20px_rgba(239,68,68,0.08)]' : 'bg-white border-slate-200 shadow-sm hover:bg-red-50/50 hover:border-red-200 hover:shadow-[0_8px_30px_rgba(239,68,68,0.08)]'}`}>
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${isDark ? 'bg-slate-800 text-slate-400' : 'bg-slate-100 text-slate-500'}`}>
+                    <VolumeX size={24} />
+                  </div>
+                  <div>
+                    <h4 className={`text-base font-bold mb-0.5 ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>No Subtitles</h4>
+                    <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-500' : 'text-slate-500'}`}>Many videos don't have captions.</p>
+                  </div>
+                </div>
+
+                {/* Auditory Problem 2 */}
+                <div className={`p-5 md:p-6 rounded-[2rem] border backdrop-blur-md flex items-center gap-4 transition-all duration-300 hover:-translate-y-1 ${isDark ? 'bg-[#1C1C1E] border-slate-800 hover:bg-red-500/5 hover:border-red-500/30 hover:shadow-[0_0_20px_rgba(239,68,68,0.08)]' : 'bg-white border-slate-200 shadow-sm hover:bg-red-50/50 hover:border-red-200 hover:shadow-[0_8px_30px_rgba(239,68,68,0.08)]'}`}>
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${isDark ? 'bg-slate-800 text-slate-400' : 'bg-slate-100 text-slate-500'}`}>
+                    <BellOff size={24} />
+                  </div>
+                  <div>
+                    <h4 className={`text-base font-bold mb-0.5 ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>Missed Sounds</h4>
+                    <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-500' : 'text-slate-500'}`}>Hard to hear important notifications.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Left Gap SVG Connections */}
+              <div className="hidden lg:block flex-1 relative -mx-2 -z-20">
+                <svg className="absolute inset-0 w-full h-full overflow-visible opacity-50" preserveAspectRatio="none" viewBox="0 0 100 100">
+                  <path d="M 0 15 C 50 15 50 50 100 50" fill="none" stroke="rgba(239, 68, 68, 0.6)" strokeWidth="2" vectorEffect="non-scaling-stroke" className="flow-line-red" />
+                  <path d="M 0 40 C 50 40 50 50 100 50" fill="none" stroke="rgba(239, 68, 68, 0.6)" strokeWidth="2" vectorEffect="non-scaling-stroke" className="flow-line-red" />
+                  <path d="M 0 65 C 50 65 50 50 100 50" fill="none" stroke="rgba(239, 68, 68, 0.6)" strokeWidth="2" vectorEffect="non-scaling-stroke" className="flow-line-red" />
+                  <path d="M 0 90 C 50 90 50 50 100 50" fill="none" stroke="rgba(239, 68, 68, 0.6)" strokeWidth="2" vectorEffect="non-scaling-stroke" className="flow-line-red" />
+                </svg>
+              </div>
+
+              {/* Column 2: The Sensa Protocol (Center Engine) */}
+              <div className="relative shrink-0 flex flex-col items-center justify-center z-10 py-10 lg:py-0 w-48">
+                {/* Core Node Container for perfect alignment */}
+                <div className="relative w-36 h-36 flex items-center justify-center">
+
+                  {/* Soft Ambient Static Glow */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140px] h-[140px] rounded-full bg-gradient-to-tr from-[#0A44FF]/20 via-[#8A56FF]/20 to-[#FF7A2F]/20 blur-xl pointer-events-none" />
+
+                  {/* Core Node Bubble */}
+                  <div className="relative z-10 w-full h-full rounded-full p-[2px] bg-gradient-to-br from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F] shadow-[0_0_20px_rgba(138,86,255,0.2)]">
+                    <div className={`w-full h-full rounded-full flex items-center justify-center ${isDark ? 'bg-[#09090B]' : 'bg-white'}`}>
+                      <img src={sensaLogo} alt="Sensa" className="w-16 h-16 object-contain drop-shadow-[0_0_12px_rgba(10,68,255,0.3)]" />
+                    </div>
+                  </div>
+                  {/* Title positioned absolutely so it doesn't break flex alignment */}
+                  <h3 className={`absolute -bottom-8 text-xl md:text-2xl font-black uppercase tracking-[0.2em] bg-clip-text text-transparent bg-gradient-to-r from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F]`}>Sensa</h3>
+                </div>
+              </div>
+
+              {/* Right Gap SVG Connections */}
+              <div className="hidden lg:block flex-1 relative -mx-2 -z-20">
+                <svg className="absolute inset-0 w-full h-full overflow-visible opacity-50" preserveAspectRatio="none" viewBox="0 0 100 100">
+                  <path d="M 0 50 C 50 50 50 15 100 15" fill="none" stroke="rgba(16, 185, 129, 0.6)" strokeWidth="2" vectorEffect="non-scaling-stroke" className="flow-line-green" />
+                  <path d="M 0 50 C 50 50 50 40 100 40" fill="none" stroke="rgba(16, 185, 129, 0.6)" strokeWidth="2" vectorEffect="non-scaling-stroke" className="flow-line-green" />
+                  <path d="M 0 50 C 50 50 50 65 100 65" fill="none" stroke="rgba(16, 185, 129, 0.6)" strokeWidth="2" vectorEffect="non-scaling-stroke" className="flow-line-green" />
+                  <path d="M 0 50 C 50 50 50 90 100 90" fill="none" stroke="rgba(16, 185, 129, 0.6)" strokeWidth="2" vectorEffect="non-scaling-stroke" className="flow-line-green" />
+                </svg>
+              </div>
+
+              {/* Column 3: The Breakthrough */}
+              <div className="w-full lg:w-[380px] flex flex-col gap-4 z-10">
+                <h3 className={`text-xs font-black uppercase tracking-widest text-center mb-1 ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>Solution</h3>
+
+                {/* Visual Solution 1 */}
+                <div className={`p-5 md:p-6 rounded-[2rem] border backdrop-blur-md flex items-center gap-4 transition-transform hover:-translate-y-1 ${isDark ? 'bg-[#1C1C1E] border-slate-800 hover:border-emerald-500/40 hover:bg-emerald-500/5 hover:shadow-[0_0_20px_rgba(16,185,129,0.08)]' : 'bg-white border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/50 shadow-sm hover:shadow-[0_8px_30px_rgba(16,185,129,0.08)]'}`}>
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 bg-emerald-500/10 text-emerald-500">
+                    <Mic size={24} />
+                  </div>
+                  <div>
+                    <h4 className={`text-base font-bold mb-0.5 ${isDark ? 'text-white' : 'text-slate-900'}`}>Voice Control</h4>
+                    <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Control the browser with your voice.</p>
+                  </div>
+                </div>
+
+                {/* Visual Solution 2 */}
+                <div className={`p-5 md:p-6 rounded-[2rem] border backdrop-blur-md flex items-center gap-4 transition-transform hover:-translate-y-1 ${isDark ? 'bg-[#1C1C1E] border-slate-800 hover:border-emerald-500/40 hover:bg-emerald-500/5 hover:shadow-[0_0_20px_rgba(16,185,129,0.08)]' : 'bg-white border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/50 shadow-sm hover:shadow-[0_8px_30px_rgba(16,185,129,0.08)]'}`}>
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 bg-emerald-500/10 text-emerald-500">
+                    <Volume2 size={24} />
+                  </div>
+                  <div>
+                    <h4 className={`text-base font-bold mb-0.5 ${isDark ? 'text-white' : 'text-slate-900'}`}>Smart Reader</h4>
+                    <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Reads only the important text out loud.</p>
+                  </div>
+                </div>
+
+                {/* Auditory Solution 1 */}
+                <div className={`p-5 md:p-6 rounded-[2rem] border backdrop-blur-md flex items-center gap-4 transition-transform hover:-translate-y-1 ${isDark ? 'bg-[#1C1C1E] border-slate-800 hover:border-emerald-500/40 hover:bg-emerald-500/5 hover:shadow-[0_0_20px_rgba(16,185,129,0.08)]' : 'bg-white border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/50 shadow-sm hover:shadow-[0_8px_30px_rgba(16,185,129,0.08)]'}`}>
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 bg-emerald-500/10 text-emerald-500">
+                    <MessageSquare size={24} />
+                  </div>
+                  <div>
+                    <h4 className={`text-base font-bold mb-0.5 ${isDark ? 'text-white' : 'text-slate-900'}`}>Live Multilingual Captions</h4>
+                    <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Live subtitles for any playing audio.</p>
+                  </div>
+                </div>
+
+                {/* Auditory Solution 2 */}
+                <div className={`p-5 md:p-6 rounded-[2rem] border backdrop-blur-md flex items-center gap-4 transition-transform hover:-translate-y-1 ${isDark ? 'bg-[#1C1C1E] border-slate-800 hover:border-emerald-500/40 hover:bg-emerald-500/5 hover:shadow-[0_0_20px_rgba(16,185,129,0.08)]' : 'bg-white border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/50 shadow-sm hover:shadow-[0_8px_30px_rgba(16,185,129,0.08)]'}`}>
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 bg-emerald-500/10 text-emerald-500">
+                    <Zap size={24} />
+                  </div>
+                  <div>
+                    <h4 className={`text-base font-bold mb-0.5 ${isDark ? 'text-white' : 'text-slate-900'}`}>Visual Radar</h4>
+                    <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>See color flashes for sounds.</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -477,14 +686,14 @@ export default function App() {
         {/* ======================================================================
           3. CORE FEATURES SHOWCASE (Dual-Mode Architecture)
           ====================================================================== */}
-        <section id="features" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[76px] py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
+        <section id="features" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
           }`}>
           {/* VisualWelcomeOverlay Starter Shade (#0A44FF Royal Blue Behind Visual Mode Cards) */}
-          <div className={`absolute top-[28%] left-1/4 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[420px] rounded-full blur-[160px] pointer-events-none -z-10 bg-[#0A44FF]  ${isDark ? 'opacity-25' : 'opacity-15'
+          <div className={`absolute top-[28%] left-1/4 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[420px] rounded-full blur-[160px] pointer-events-none -z-10 bg-[#0A44FF] animate-float-blue ${isDark ? 'opacity-25' : 'opacity-15'
             }`} />
 
           {/* AuditoryWelcomeOverlay Starter Shade (#FF7A2F Sunset Orange Behind Auditory Mode Cards) */}
-          <div className={`absolute top-[75%] right-1/4 translate-x-1/2 -translate-y-1/2 w-[700px] h-[420px] rounded-full blur-[160px] pointer-events-none -z-10 bg-[#FF7A2F]  ${isDark ? 'opacity-25' : 'opacity-15'
+          <div className={`absolute top-[75%] right-1/4 translate-x-1/2 -translate-y-1/2 w-[700px] h-[420px] rounded-full blur-[160px] pointer-events-none -z-10 bg-[#FF7A2F] animate-float-orange ${isDark ? 'opacity-25' : 'opacity-15'
             }`} />
 
           <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
@@ -505,61 +714,98 @@ export default function App() {
                 </h3>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <article className={`border border-t-2 border-t-[#0A44FF]/80 rounded-2xl p-6 transition-all duration-300 hover:border-[#0A44FF]/40 ${isDark
-                  ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:bg-white/[0.03]'
-                  : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:bg-slate-50/80 shadow-sm'
-                  }`}>
-                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 border ${isDark ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20'
-                    }`}>
-                    <Mic size={20} />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-min">
+                {/* Voice Navigation: Spans 2 cols on LG */}
+                <article className={`lg:col-span-2 group border border-t-2 border-t-[#0A44FF]/80 rounded-3xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-[#0A44FF]/60 hover:shadow-[0_0_40px_rgba(10,68,255,0.15)] relative overflow-hidden ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset'}`}>
+                  {/* Micro-Visual */}
+                  <div className={`w-full h-36 mb-6 rounded-2xl flex items-center justify-center gap-2 overflow-hidden border transition-colors ${isDark ? 'bg-black/40 border-slate-800 group-hover:border-[#0A44FF]/30' : 'bg-slate-50 border-slate-100 group-hover:border-[#0A44FF]/20'}`}>
+                    {/* Voice Waves */}
+                    {[30, 80, 50, 90, 40, 70, 40, 85, 35].map((height, i) => (
+                      <div key={i} className={`w-3 rounded-full bg-[#0A44FF] animate-wave-pulse opacity-50 shadow-[0_0_12px_rgba(10,68,255,0.6)]`} style={{ height: `${height}%`, animationDelay: `${i * 0.15}s` }} />
+                    ))}
                   </div>
-                  <h3 className={`text-base font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Hands-Free Voice Navigation</h3>
-                  <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Navigate the web completely hands-free. Simply speak to your browser to scroll pages, open links, and fill out input forms without a mouse or keyboard.
-                  </p>
+                  <div>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className={`w-11 h-11 shrink-0 rounded-xl flex items-center justify-center border ${isDark ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20'}`}>
+                        <Mic size={20} />
+                      </div>
+                      <h3 className={`text-xl md:text-2xl font-bold tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Hands-Free Voice Navigation</h3>
+                    </div>
+                    <p className={`text-sm md:text-base leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                      Navigate the web completely hands-free. Simply speak to your browser to scroll pages, open links, and fill out input forms without a mouse or keyboard.
+                    </p>
+                  </div>
                 </article>
 
-                <article className={`border border-t-2 border-t-[#0A44FF]/80 rounded-2xl p-6 transition-all duration-300 hover:border-[#0A44FF]/40 ${isDark
-                  ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:bg-white/[0.03]'
-                  : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:bg-slate-50/80 shadow-sm'
-                  }`}>
-                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 border ${isDark ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20'
-                    }`}>
-                    <Maximize2 size={20} />
+                {/* Magnifier: Spans 1 col */}
+                <article className={`lg:col-span-1 group border border-t-2 border-t-[#0A44FF]/80 rounded-3xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-[#0A44FF]/60 hover:shadow-[0_0_40px_rgba(10,68,255,0.15)] relative overflow-hidden ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset'}`}>
+                  {/* Micro-Visual */}
+                  <div className={`w-full h-36 mb-6 rounded-2xl flex flex-col items-center justify-center p-4 relative overflow-hidden border transition-colors ${isDark ? 'bg-black/40 border-slate-800 group-hover:border-[#0A44FF]/30' : 'bg-slate-50 border-slate-100 group-hover:border-[#0A44FF]/20'}`}>
+                    <div className="w-full space-y-2 opacity-30">
+                      <div className="w-3/4 h-2 bg-slate-500 rounded" />
+                      <div className="w-full h-2 bg-slate-500 rounded" />
+                      <div className="w-5/6 h-2 bg-slate-500 rounded" />
+                      <div className="w-1/2 h-2 bg-slate-500 rounded" />
+                    </div>
+                    {/* Scanning Ruler */}
+                    <div className="absolute top-0 left-0 right-0 h-10 bg-yellow-400/30 border-y border-yellow-400 animate-scan-ruler shadow-[0_0_15px_rgba(250,204,21,0.5)]" />
                   </div>
-                  <h3 className={`text-base font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Screen Magnifier & Guided Reading</h3>
-                  <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Focus on one line at a time as you read. Our bright reading ruler guides your eyes so you don't lose your place, which is especially helpful for low-vision and dyslexic users.
-                  </p>
+                  <div>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className={`w-11 h-11 shrink-0 rounded-xl flex items-center justify-center border ${isDark ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20'}`}>
+                        <Maximize2 size={20} />
+                      </div>
+                      <h3 className={`text-xl font-bold tracking-[-0.01em] leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>Screen Magnifier & Ruler</h3>
+                    </div>
+                    <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                      Focus on one line at a time. Our bright reading ruler guides your eyes so you don't lose your place.
+                    </p>
+                  </div>
                 </article>
 
-                <article className={`border border-t-2 border-t-[#0A44FF]/80 rounded-2xl p-6 transition-all duration-300 hover:border-[#0A44FF]/40 ${isDark
-                  ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:bg-white/[0.03]'
-                  : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:bg-slate-50/80 shadow-sm'
-                  }`}>
-                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 border ${isDark ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20'
-                    }`}>
-                    <Volume2 size={20} />
+                {/* Alt-Text AI Reader: Spans 1 col */}
+                <article className={`lg:col-span-1 group border border-t-2 border-t-[#0A44FF]/80 rounded-3xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-[#0A44FF]/60 hover:shadow-[0_0_40px_rgba(10,68,255,0.15)] relative overflow-hidden ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset'}`}>
+                  {/* Micro-Visual */}
+                  <div className={`w-full h-36 mb-6 rounded-2xl p-4 flex items-center justify-center relative overflow-hidden border transition-colors ${isDark ? 'bg-black/40 border-slate-800 group-hover:border-[#0A44FF]/30' : 'bg-slate-50 border-slate-100 group-hover:border-[#0A44FF]/20'}`}>
+                     <div className="w-16 h-16 bg-slate-500/20 rounded-xl flex items-center justify-center border-2 border-dashed border-slate-500/50 relative overflow-visible">
+                        <span className={`text-[10px] absolute -bottom-6 font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-300 whitespace-nowrap bg-black text-white px-2 py-0.5 rounded ${isDark ? 'shadow-[0_0_10px_#0A44FF]' : 'shadow-md'}`}>"A dog running"</span>
+                     </div>
+                     <div className="absolute top-1/2 left-1/2 w-0 h-[2px] bg-[#0A44FF] shadow-[0_0_15px_#0A44FF] -translate-y-1/2 -translate-x-1/2 group-hover:w-[120%] transition-all duration-[800ms] ease-out delay-100" />
                   </div>
-                  <h3 className={`text-base font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Image Alt-Text AI Reader</h3>
-                  <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Hear what's on the screen. Sensa automatically finds descriptions for unlabeled images and reads them out loud using natural-sounding voices.
-                  </p>
+                  <div>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className={`w-11 h-11 shrink-0 rounded-xl flex items-center justify-center border ${isDark ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20'}`}>
+                        <Volume2 size={20} />
+                      </div>
+                      <h3 className={`text-xl font-bold tracking-[-0.01em] leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>Image Alt-Text AI Reader</h3>
+                    </div>
+                    <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                      Hear what's on screen. Sensa reads unlabelled images automatically.
+                    </p>
+                  </div>
                 </article>
 
-                <article className={`border border-t-2 border-t-[#0A44FF]/80 rounded-2xl p-6 transition-all duration-300 hover:border-[#0A44FF]/40 ${isDark
-                  ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:bg-white/[0.03]'
-                  : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:bg-slate-50/80 shadow-sm'
-                  }`}>
-                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 border ${isDark ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20'
-                    }`}>
-                    <FileText size={20} />
+                {/* Typography: Spans 2 cols */}
+                <article className={`lg:col-span-2 group border border-t-2 border-t-[#0A44FF]/80 rounded-3xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-[#0A44FF]/60 hover:shadow-[0_0_40px_rgba(10,68,255,0.15)] relative overflow-hidden ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset'}`}>
+                  {/* Micro-Visual */}
+                  <div className={`w-full h-36 mb-6 rounded-2xl flex items-center justify-center p-6 border transition-colors ${isDark ? 'bg-black/40 border-slate-800 group-hover:border-[#0A44FF]/30' : 'bg-slate-50 border-slate-100 group-hover:border-[#0A44FF]/20'}`}>
+                    <div className="flex items-center gap-8 md:gap-16 text-3xl md:text-5xl font-bold">
+                       <span className="font-sans opacity-20 group-hover:opacity-100 group-hover:text-[#0A44FF] transition-all duration-500 scale-90 group-hover:scale-110 drop-shadow-[0_0_12px_rgba(10,68,255,0.4)]">Aa</span>
+                       <span className="font-serif opacity-20 group-hover:opacity-100 group-hover:text-[#0A44FF] transition-all duration-500 delay-100 scale-90 group-hover:scale-110 drop-shadow-[0_0_12px_rgba(10,68,255,0.4)]">Aa</span>
+                       <span className="font-mono opacity-20 group-hover:opacity-100 group-hover:text-[#0A44FF] transition-all duration-500 delay-200 scale-90 group-hover:scale-110 drop-shadow-[0_0_12px_rgba(10,68,255,0.4)]">Aa</span>
+                    </div>
                   </div>
-                  <h3 className={`text-base font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Customizable Typography & Autoscroll</h3>
-                  <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Make any webpage comfortable to read. Instantly transition sites into high-contrast dark themes, switch to custom accessible fonts, and set comfortable automatic scrolling speeds.
-                  </p>
+                  <div>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className={`w-11 h-11 shrink-0 rounded-xl flex items-center justify-center border ${isDark ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20'}`}>
+                        <FileText size={20} />
+                      </div>
+                      <h3 className={`text-xl md:text-2xl font-bold tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Customizable Typography & Autoscroll</h3>
+                    </div>
+                    <p className={`text-sm md:text-base leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                      Make any webpage comfortable to read. Instantly transition sites into high-contrast themes, switch to accessible fonts, and set automatic scrolling.
+                    </p>
+                  </div>
                 </article>
               </div>
             </div>
@@ -572,47 +818,85 @@ export default function App() {
                 </h3>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <article className={`border border-t-2 border-t-[#FF7A2F]/80 rounded-2xl p-6 transition-all duration-300 hover:border-[#FF7A2F]/40 ${isDark
-                  ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:bg-white/[0.03]'
-                  : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:bg-slate-50/80 shadow-sm'
-                  }`}>
-                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 border ${isDark ? 'bg-[#FF7A2F]/15 text-[#FFC09B] border-[#FF7A2F]/30' : 'bg-[#FF7A2F]/10 text-[#FF7A2F] border-[#FF7A2F]/20'
-                    }`}>
-                    <Ear size={20} />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 auto-rows-min">
+                {/* Live Captions: Spans 2 cols */}
+                <article className={`md:col-span-2 group border border-t-2 border-t-[#FF7A2F]/80 rounded-3xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-[#FF7A2F]/60 hover:shadow-[0_0_40px_rgba(255,122,47,0.15)] relative overflow-hidden ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset'}`}>
+                  {/* Micro-Visual */}
+                  <div className={`w-full h-40 mb-6 rounded-2xl flex items-end justify-center p-4 relative overflow-hidden border transition-colors ${isDark ? 'bg-black/40 border-slate-800 group-hover:border-[#FF7A2F]/30' : 'bg-slate-50 border-slate-100 group-hover:border-[#FF7A2F]/20'}`}>
+                    {/* Background Stage */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#FF7A2F]/5 z-10" />
+                    {/* Mock Browser Video */}
+                    <div className="absolute top-4 left-4 right-4 bottom-[-10px] rounded-xl bg-slate-900 overflow-hidden border-2 border-slate-700/50 flex flex-col justify-between pb-4 shadow-2xl">
+                       <div className="w-full h-8 bg-slate-800/80 border-b border-slate-700 flex items-center px-3 gap-1.5">
+                          <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                       </div>
+                       <div className="flex-1" />
+                       {/* Captions Box */}
+                       <div className="w-[80%] mx-auto bg-black/90 rounded-lg px-4 py-2 backdrop-blur-md z-20 shadow-[0_0_20px_rgba(0,0,0,0.8)] border border-white/20 text-center">
+                          <span className="text-white text-xs md:text-sm font-medium font-mono animate-typewriter inline-block whitespace-nowrap overflow-hidden border-r-2 border-[#FF7A2F]">Welcome to the digital accessibility revolution.</span>
+                       </div>
+                    </div>
                   </div>
-                  <h3 className={`text-base font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Live Multilingual AI Captions</h3>
-                  <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Real-time captions on any browser tab. Generate instant subtitles for video lectures, webinars, and podcasts with seamless live translation across multiple languages.
-                  </p>
+                  <div>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className={`w-11 h-11 shrink-0 rounded-xl flex items-center justify-center border ${isDark ? 'bg-[#FF7A2F]/15 text-[#FFC09B] border-[#FF7A2F]/30' : 'bg-[#FF7A2F]/10 text-[#FF7A2F] border-[#FF7A2F]/20'}`}>
+                        <Ear size={20} />
+                      </div>
+                      <h3 className={`text-xl md:text-2xl font-bold tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Live Multilingual AI Captions</h3>
+                    </div>
+                    <p className={`text-sm md:text-base leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                      Real-time captions on any browser tab. Generate instant subtitles for video lectures, webinars, and podcasts with seamless live translation across multiple languages.
+                    </p>
+                  </div>
                 </article>
 
-                <article className={`border border-t-2 border-t-[#FF7A2F]/80 rounded-2xl p-6 transition-all duration-300 hover:border-[#FF7A2F]/40 ${isDark
-                  ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:bg-white/[0.03]'
-                  : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:bg-slate-50/80 shadow-sm'
-                  }`}>
-                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 border ${isDark ? 'bg-[#FF7A2F]/15 text-[#FFC09B] border-[#FF7A2F]/30' : 'bg-[#FF7A2F]/10 text-[#FF7A2F] border-[#FF7A2F]/20'
-                    }`}>
-                    <Zap size={20} />
+                {/* Web Audio API Analyser: Spans 1 col */}
+                <article className={`md:col-span-1 group border border-t-2 border-t-[#FF7A2F]/80 rounded-3xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-[#FF7A2F]/60 hover:shadow-[0_0_40px_rgba(255,122,47,0.15)] relative overflow-hidden ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset'}`}>
+                  {/* Micro-Visual */}
+                  <div className={`w-full h-36 mb-6 rounded-2xl flex items-center justify-center gap-2 md:gap-3 p-4 relative overflow-hidden border transition-colors ${isDark ? 'bg-black/40 border-slate-800 group-hover:border-[#FF7A2F]/30' : 'bg-slate-50 border-slate-100 group-hover:border-[#FF7A2F]/20'}`}>
+                    {[40, 85, 50, 90, 60, 45].map((height, i) => (
+                      <div key={i} className={`w-4 md:w-5 rounded-full bg-gradient-to-t from-[#FF7A2F] to-[#FFA066] animate-wave-pulse shadow-[0_0_12px_rgba(255,122,47,0.6)] opacity-30 group-hover:opacity-100 transition-opacity duration-300`} style={{ height: `${height}%`, animationDelay: `${i * 0.12}s` }} />
+                    ))}
                   </div>
-                  <h3 className={`text-base font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Web Audio API Analyser & Visualizer</h3>
-                  <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    See sound as it happens. Our visual audio meters turn sounds into moving bars, giving you clear visual cues for when audio is playing.
-                  </p>
+                  <div>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className={`w-11 h-11 shrink-0 rounded-xl flex items-center justify-center border ${isDark ? 'bg-[#FF7A2F]/15 text-[#FFC09B] border-[#FF7A2F]/30' : 'bg-[#FF7A2F]/10 text-[#FF7A2F] border-[#FF7A2F]/20'}`}>
+                        <Zap size={20} />
+                      </div>
+                      <h3 className={`text-xl font-bold tracking-[-0.01em] leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>Web Audio Visualizer</h3>
+                    </div>
+                    <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                      See sound as it happens. Our visual audio meters turn sounds into moving bars.
+                    </p>
+                  </div>
                 </article>
 
-                <article className={`border border-t-2 border-t-[#FF7A2F]/80 rounded-2xl p-6 transition-all duration-300 hover:border-[#FF7A2F]/40 ${isDark
-                  ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:bg-white/[0.03]'
-                  : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:bg-slate-50/80 shadow-sm'
-                  }`}>
-                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 border ${isDark ? 'bg-[#FF7A2F]/15 text-[#FFC09B] border-[#FF7A2F]/30' : 'bg-[#FF7A2F]/10 text-[#FF7A2F] border-[#FF7A2F]/20'
-                    }`}>
-                    <CheckCircle2 size={20} />
+                {/* Alerts: Spans 1 col */}
+                <article className={`md:col-span-1 group border border-t-2 border-t-[#FF7A2F]/80 rounded-3xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:border-[#FF7A2F]/60 hover:shadow-[0_0_40px_rgba(255,122,47,0.15)] relative overflow-hidden ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset'}`}>
+                  {/* Micro-Visual */}
+                  <div className={`w-full h-36 mb-6 rounded-2xl p-4 flex items-center justify-center relative overflow-hidden border transition-colors ${isDark ? 'bg-black/40 border-slate-800 group-hover:border-[#FF7A2F]/30' : 'bg-slate-50 border-slate-100 group-hover:border-[#FF7A2F]/20'}`}>
+                    {/* Simulated Screen with Edge Flash */}
+                    <div className="relative w-32 h-20 bg-slate-900 rounded-lg border border-slate-700 overflow-hidden group-hover:border-[#FF7A2F]/70 transition-colors duration-500 shadow-xl">
+                       <div className="absolute inset-0 bg-transparent group-hover:bg-[#FF7A2F]/10 transition-colors duration-500" />
+                       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-[inset_0_0_24px_#FF7A2F]" />
+                       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                          <CheckCircle2 size={24} className="text-slate-500 group-hover:text-[#FF7A2F] transition-colors duration-300 drop-shadow-[0_0_8px_rgba(255,122,47,0.8)]" />
+                       </div>
+                    </div>
                   </div>
-                  <h3 className={`text-base font-bold mb-2 tracking-[-0.01em] ${isDark ? 'text-white' : 'text-slate-900'}`}>Environmental Alerts & Sensory Noise Warnings</h3>
-                  <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Never miss a notification. Subtle visual alerts on the edges of your screen let you know when background tabs play an unexpected sound or chat notification.
-                  </p>
+                  <div>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className={`w-11 h-11 shrink-0 rounded-xl flex items-center justify-center border ${isDark ? 'bg-[#FF7A2F]/15 text-[#FFC09B] border-[#FF7A2F]/30' : 'bg-[#FF7A2F]/10 text-[#FF7A2F] border-[#FF7A2F]/20'}`}>
+                        <CheckCircle2 size={20} />
+                      </div>
+                      <h3 className={`text-xl font-bold tracking-[-0.01em] leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>Sensory Noise Warnings</h3>
+                    </div>
+                    <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                      Subtle visual alerts on the edges of your screen for sudden audio notifications.
+                    </p>
+                  </div>
                 </article>
               </div>
             </div>
@@ -622,10 +906,12 @@ export default function App() {
         {/* ======================================================================
           4. CAPSTONE DEMO VIDEO SECTION
           ====================================================================== */}
-        <section id="video" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[76px] py-20 md:py-28 border-y ${isDark ? 'bg-[#121214] border-slate-800/80' : 'bg-[#F4F5F7] border-slate-200/80'
+        <section id="video" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-y ${isDark ? 'bg-[#121214] border-slate-800/80' : 'bg-[#F4F5F7] border-slate-200/80'
           }`}>
+          {/* Cinematic Stage Spotlight */}
+          <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[500px] blur-[120px] pointer-events-none -z-10 bg-gradient-to-b from-[#8B5CF6]/40 to-transparent ${isDark ? 'opacity-40' : 'opacity-20'}`} />
           {/* Video Ambient Center Halo Layer */}
-          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[350px] rounded-full blur-[160px] pointer-events-none -z-10 bg-purple-600  ${isDark ? 'opacity-10' : 'opacity-[0.04]'}`} />
+          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[350px] rounded-full blur-[160px] pointer-events-none -z-10 bg-[#0A44FF] animate-pulse ${isDark ? 'opacity-15' : 'opacity-[0.06]'}`} />
 
           <div className="max-w-7xl mx-auto px-4 md:px-8">
             <div className="text-center max-w-3xl mx-auto mb-12">
@@ -654,8 +940,10 @@ export default function App() {
         {/* ======================================================================
           5. INTERACTIVE LIVE DEMO & PLAYGROUND SECTION
           ====================================================================== */}
-        <section id="playground" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[76px] py-20 md:py-28 border-y ${isDark ? 'bg-[#121214] border-slate-800/80' : 'bg-[#F4F5F7] border-slate-200/80'
+        <section id="playground" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-y ${isDark ? 'bg-[#121214] border-slate-800/80' : 'bg-[#F4F5F7] border-slate-200/80'
           }`}>
+          {/* Subtle Dot Matrix Background */}
+          <div className={`absolute inset-0 bg-dot-pattern pointer-events-none -z-10 ${isDark ? 'opacity-30' : 'opacity-60'}`} />
           {/* Dynamic Mode-Responsive Playground Background Shade (Visual vs Auditory Overlay Tint) */}
           <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[780px] h-[480px] rounded-full blur-[165px] pointer-events-none -z-10  ${activeMode === 'visual'
             ? 'bg-[#0A44FF]'
@@ -674,7 +962,7 @@ export default function App() {
               </p>
             </div>
 
-            <div className={`border rounded-2xl p-6 md:p-8 backdrop-blur-xl ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset shadow-lg' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset shadow-md'
+            <div className={`border rounded-2xl p-6 md:p-8 backdrop-blur-xl ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset shadow-lg' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-md'
               }`}>
               {/* Toolbar */}
               <div className={`flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b mb-6 ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
@@ -729,7 +1017,7 @@ export default function App() {
               </div>
 
               {/* Voice Command Simulator Box inside Playground */}
-              <div className={`p-5 rounded-xl border flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 mb-8 ${isDark ? 'bg-black/40 border-slate-800/80 ring-1 ring-white/5 inset' : 'bg-slate-50 border-slate-200/60'
+              <div className={`p-5 rounded-xl border flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 mb-8 ${isDark ? 'bg-black/40 border-slate-800/80 ring-1 ring-white/5 ring-inset' : 'bg-slate-50 border-slate-200/60'
                 }`}>
                 <div className="flex items-center gap-3.5">
                   <div className="w-11 h-11 rounded-xl bg-[#0A44FF] flex items-center justify-center text-white shadow-md shadow-[#0A44FF]/30 animate-pulse shrink-0">
@@ -768,7 +1056,7 @@ export default function App() {
               </div>
 
               {/* Mock Sample Article Sandbox */}
-              <article aria-label="Sample Web Article Sandbox" className={`relative rounded-xl p-6 md:p-10 border overflow-hidden min-h-[340px] ${isDark ? 'bg-black/40 border-slate-800/80 ring-1 ring-white/5 inset' : 'bg-slate-50 border-slate-200/60'
+              <article aria-label="Sample Web Article Sandbox" className={`relative rounded-xl p-6 md:p-10 border overflow-hidden min-h-[340px] ${isDark ? 'bg-black/40 border-slate-800/80 ring-1 ring-white/5 ring-inset' : 'bg-slate-50 border-slate-200/60'
                 }`}>
                 {/* Active Focus Ruler Overlay */}
                 {isFocusRulerActive && (
@@ -797,7 +1085,7 @@ export default function App() {
 
               {/* Simulated Auditory Subtitle Window */}
               {(isSimulatingCaptions || activeMode === 'auditory') && (
-                <div className={`mt-6 border rounded-xl p-4 flex items-center justify-between gap-4 animate-pop ${isDark ? 'bg-black/60 border-[#FF7A2F]/40 ring-1 ring-white/5 inset' : 'bg-white border-[#FF7A2F]/60 shadow-sm'
+                <div className={`mt-6 border rounded-xl p-4 flex items-center justify-between gap-4 animate-pop ${isDark ? 'bg-black/60 border-[#FF7A2F]/40 ring-1 ring-white/5 ring-inset' : 'bg-white border-[#FF7A2F]/60 shadow-sm'
                   }`}>
                   <div className="flex items-center gap-3 overflow-hidden">
                     <div className="w-3 h-3 rounded-full bg-[#FF7A2F] animate-ping shrink-0" />
@@ -815,7 +1103,7 @@ export default function App() {
         {/* ======================================================================
           6. INSTALLATION & USER GUIDE (Walkthrough)
           ====================================================================== */}
-        <section id="guide" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[76px] py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
+        <section id="guide" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
           }`}>
           {/* Guide Dot Pattern Background Overlay */}
           <div className="absolute inset-0 bg-dot-pattern opacity-60 pointer-events-none -z-10" />
@@ -831,7 +1119,7 @@ export default function App() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <article className={`border rounded-2xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:border-slate-700 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:border-slate-300 hover:bg-slate-50/80 shadow-sm'
+              <article className={`border rounded-2xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:border-slate-700 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset hover:border-slate-300 hover:bg-slate-50/80 shadow-sm'
                 }`}>
                 <div>
                   <div className="flex items-center justify-between mb-6">
@@ -848,7 +1136,7 @@ export default function App() {
                 </div>
               </article>
 
-              <article className={`border rounded-2xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:border-slate-700 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:border-slate-300 hover:bg-slate-50/80 shadow-sm'
+              <article className={`border rounded-2xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:border-slate-700 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset hover:border-slate-300 hover:bg-slate-50/80 shadow-sm'
                 }`}>
                 <div>
                   <div className="flex items-center justify-between mb-6">
@@ -865,7 +1153,7 @@ export default function App() {
                 </div>
               </article>
 
-              <article className={`border rounded-2xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:border-slate-700 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:border-slate-300 hover:bg-slate-50/80 shadow-sm'
+              <article className={`border rounded-2xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:border-slate-700 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset hover:border-slate-300 hover:bg-slate-50/80 shadow-sm'
                 }`}>
                 <div>
                   <div className="flex items-center justify-between mb-6">
@@ -887,10 +1175,12 @@ export default function App() {
         {/* ======================================================================
           7. ABOUT THE CAPSTONE RESEARCH TEAM
           ====================================================================== */}
-        <section id="team" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[76px] py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
+        <section id="team" className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
           }`}>
+          {/* Stage Spotlight Glow */}
+          <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[600px] blur-[120px] pointer-events-none -z-10 bg-gradient-to-b from-[#0A44FF]/30 to-transparent ${isDark ? 'opacity-40' : 'opacity-10'}`} />
           {/* Team Section Grid Texture Layer */}
-          <div className="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none -z-10" />
+          <div className={`absolute inset-0 bg-grid-pattern pointer-events-none -z-10 ${isDark ? 'opacity-40' : 'opacity-60'}`} />
 
           <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
             <div className="text-center max-w-3xl mx-auto mb-16">
@@ -907,7 +1197,7 @@ export default function App() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
               {/* Shane */}
-              <article className={`border rounded-2xl p-6 flex flex-col items-center text-center justify-between transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:border-[#0A44FF]/60 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:border-[#0A44FF]/60 hover:bg-slate-50/80'
+              <article className={`border rounded-2xl p-6 flex flex-col items-center text-center justify-between transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:border-[#0A44FF]/60 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset hover:border-[#0A44FF]/60 hover:bg-slate-50/80'
                 }`}>
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-[#0A44FF] to-purple-600 flex items-center justify-center text-white font-black text-xl mb-4 shadow-lg shadow-[#0A44FF]/30">
@@ -936,7 +1226,7 @@ export default function App() {
               </article>
 
               {/* Christian */}
-              <article className={`border rounded-2xl p-6 flex flex-col items-center text-center justify-between transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:border-[#FF7A2F]/60 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:border-[#FF7A2F]/60 hover:bg-slate-50/80'
+              <article className={`border rounded-2xl p-6 flex flex-col items-center text-center justify-between transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:border-[#FF7A2F]/60 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset hover:border-[#FF7A2F]/60 hover:bg-slate-50/80'
                 }`}>
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-[#FF7A2F] to-amber-600 flex items-center justify-center text-white font-black text-xl mb-4 shadow-lg shadow-[#FF7A2F]/30">
@@ -965,7 +1255,7 @@ export default function App() {
               </article>
 
               {/* Leo */}
-              <article className={`border rounded-2xl p-6 flex flex-col items-center text-center justify-between transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:border-[#0A44FF]/60 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:border-[#0A44FF]/60 hover:bg-slate-50/80'
+              <article className={`border rounded-2xl p-6 flex flex-col items-center text-center justify-between transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:border-[#0A44FF]/60 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset hover:border-[#0A44FF]/60 hover:bg-slate-50/80'
                 }`}>
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-[#0A44FF] to-cyan-500 flex items-center justify-center text-white font-black text-xl mb-4 shadow-lg shadow-[#0A44FF]/30">
@@ -994,7 +1284,7 @@ export default function App() {
               </article>
 
               {/* Russell */}
-              <article className={`border rounded-2xl p-6 flex flex-col items-center text-center justify-between transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:border-[#FF7A2F]/60 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:border-[#FF7A2F]/60 hover:bg-slate-50/80'
+              <article className={`border rounded-2xl p-6 flex flex-col items-center text-center justify-between transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:border-[#FF7A2F]/60 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset hover:border-[#FF7A2F]/60 hover:bg-slate-50/80'
                 }`}>
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-[#FF7A2F] to-rose-500 flex items-center justify-center text-white font-black text-xl mb-4 shadow-lg shadow-[#FF7A2F]/30">
@@ -1023,7 +1313,7 @@ export default function App() {
               </article>
 
               {/* Kian */}
-              <article className={`border rounded-2xl p-6 flex flex-col items-center text-center justify-between transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 inset hover:border-[#0A44FF]/60 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 inset hover:border-[#0A44FF]/60 hover:bg-slate-50/80'
+              <article className={`border rounded-2xl p-6 flex flex-col items-center text-center justify-between transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md ${isDark ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:border-[#0A44FF]/60 hover:bg-white/[0.03]' : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset hover:border-[#0A44FF]/60 hover:bg-slate-50/80'
                 }`}>
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-[#0A44FF] to-emerald-500 flex items-center justify-center text-white font-black text-xl mb-4 shadow-lg shadow-[#0A44FF]/30">
@@ -1035,7 +1325,7 @@ export default function App() {
                     Developer
                   </span>
                   <p className={`text-xs leading-relaxed m-0 mt-3 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Built the main Chrome extension, developed the Node.js backend server, and handled the real-time audio features.
+                    Built the main Chrome extension, developed the Node.js backend server, and website.
                   </p>
                 </div>
                 <div className={`w-full mt-6 pt-4 border-t flex items-center justify-center gap-5 ${isDark ? 'border-slate-800/80' : 'border-slate-100'}`}>
@@ -1058,7 +1348,7 @@ export default function App() {
       {/* ======================================================================
           FOOTER SLOT: Clean, Essential Capstone Footer
           ====================================================================== */}
-      <footer className={`relative overflow-hidden w-full scroll-mt-[76px] border-t py-12 md:py-16 ${isDark ? 'bg-[#121214] border-slate-800' : 'bg-[#F4F5F7] border-slate-200/80'
+      <footer className={`relative overflow-hidden w-full scroll-mt-[69px] md:scroll-mt-[71px] border-t py-12 md:py-16 ${isDark ? 'bg-[#121214] border-slate-800' : 'bg-[#F4F5F7] border-slate-200/80'
         }`}>
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-8">
@@ -1088,7 +1378,7 @@ export default function App() {
           ====================================================================== */}
       {activeMode === 'visual' && (
         <div className="fixed bottom-4 left-4 md:left-8 z-50 animate-pop transition-all duration-300">
-          <div className={`border rounded-2xl p-2.5 backdrop-blur-xl transition-all duration-300 flex flex-col gap-3 items-center ${isDark ? 'bg-[#161618]/95 border-slate-800 ring-1 ring-white/10 inset shadow-2xl' : 'bg-white/95 border-slate-200/80 ring-1 ring-black/5 inset shadow-xl'
+          <div className={`border rounded-2xl p-2.5 backdrop-blur-xl transition-all duration-300 flex flex-col gap-3 items-center ${isDark ? 'bg-[#161618]/95 border-slate-800 ring-1 ring-white/10 ring-inset shadow-2xl' : 'bg-white/95 border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-xl'
             }`}>
             <div className={`text-center pb-1 border-b w-full ${isDark ? 'border-slate-800' : 'border-slate-200/80'}`}>
               <span className="text-[10px] font-mono font-black text-[#0A44FF] tracking-widest uppercase">Visual</span>
@@ -1129,7 +1419,7 @@ export default function App() {
 
       {activeMode === 'auditory' && (
         <div className="fixed bottom-4 right-4 md:right-8 z-50 max-w-[calc(100vw-2rem)] sm:max-w-sm w-full animate-pop transition-all duration-300">
-          <div className={`border rounded-2xl p-4 backdrop-blur-xl transition-all duration-300 ${isDark ? 'bg-[#161618]/95 border-slate-800 ring-1 ring-white/10 inset shadow-2xl' : 'bg-white/95 border-slate-200/80 ring-1 ring-black/5 inset shadow-xl'
+          <div className={`border rounded-2xl p-4 backdrop-blur-xl transition-all duration-300 ${isDark ? 'bg-[#161618]/95 border-slate-800 ring-1 ring-white/10 ring-inset shadow-2xl' : 'bg-white/95 border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-xl'
             }`}>
             <div className="flex items-center justify-between border-b border-slate-800/80 pb-2.5 mb-3">
               <div className="flex items-center gap-2">
