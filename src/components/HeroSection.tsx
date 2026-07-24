@@ -89,7 +89,7 @@ export default function HeroSection({ isDark, handleNavClick }: HeroSectionProps
       <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
         {/* Liquid Water Flow Title Gradient */}
         <h1
-          className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter mb-6 py-2 pb-3 leading-[1.15] max-w-4xl text-transparent animate-pop cursor-default transition-all duration-700 bg-[length:200%_auto] hover:animate-water-flow hover:scale-[1.02] hover:drop-shadow-[0_10px_20px_rgba(10,68,255,0.15)]`}
+          className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter mb-6 py-2 pb-3 leading-[1.15] max-w-4xl text-transparent animate-pop cursor-pointer transition-all duration-700 bg-[length:200%_auto] hover:animate-water-flow hover:scale-[1.02] hover:drop-shadow-[0_10px_20px_rgba(10,68,255,0.15)]`}
           style={{
             backgroundImage: `linear-gradient(to right, #0A44FF, #8A56FF, #FF7A2F, #8A56FF, #0A44FF)`,
             WebkitBackgroundClip: 'text',

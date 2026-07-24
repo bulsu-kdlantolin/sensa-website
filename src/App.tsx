@@ -7,7 +7,7 @@ import MissionSection from './components/MissionSection';
 import FeaturesSection from './components/FeaturesSection';
 import DemoSection from './components/DemoSection';
 import ScopeSection from './components/ScopeSection';
-import TechStackSection from './components/TechStackSection';
+import ArchitectureSection from './components/ArchitectureSection';
 import GuideSection from './components/GuideSection';
 import TeamSection from './components/TeamSection';
 import Footer from './components/Footer';
@@ -185,7 +185,7 @@ export default function App() {
         <FeaturesSection isDark={isDark} />
         <DemoSection isDark={isDark} />
         <ScopeSection isDark={isDark} />
-        <TechStackSection isDark={isDark} />
+        <ArchitectureSection isDark={isDark} />
         <GuideSection isDark={isDark} />
         <TeamSection isDark={isDark} />
       </main>
