@@ -1,4 +1,29 @@
-import { Download, MonitorPlay, Mic } from 'lucide-react';
+import { Download, MonitorPlay, Mic, ArrowUpRight } from 'lucide-react';
+
+const ChromeIcon = ({ size = 18, className = "" }: { size?: number; className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" height={size} width={size} className={className}>
+    <defs>
+      <linearGradient id="chrome-a-guide" x1="3.2173" y1="15" x2="44.7812" y2="15" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stopColor="#d93025" />
+        <stop offset="1" stopColor="#ea4335" />
+      </linearGradient>
+      <linearGradient id="chrome-b-guide" x1="20.7219" y1="47.6791" x2="41.5039" y2="11.6837" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stopColor="#fcc934" />
+        <stop offset="1" stopColor="#fbbc04" />
+      </linearGradient>
+      <linearGradient id="chrome-c-guide" x1="26.5981" y1="46.5015" x2="5.8161" y2="10.506" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stopColor="#1e8e3e" />
+        <stop offset="1" stopColor="#34a853" />
+      </linearGradient>
+    </defs>
+    <circle cx="24" cy="23.9947" r="12" fill="#fff" />
+    <path d="M3.2154,36A24,24,0,1,0,12,3.2154,24,24,0,0,0,3.2154,36ZM34.3923,18A12,12,0,1,1,18,13.6077,12,12,0,0,1,34.3923,18Z" fill="none" />
+    <path d="M24,12H44.7812a23.9939,23.9939,0,0,0-41.5639.0029L13.6079,30l.0093-.0024A11.9852,11.9852,0,0,1,24,12Z" fill="url(#chrome-a-guide)" />
+    <circle cx="24" cy="24" r="9.5" fill="#1a73e8" />
+    <path d="M34.3913,30.0029,24.0007,48A23.994,23.994,0,0,0,44.78,12.0031H23.9989l-.0025.0093A11.985,11.985,0,0,1,34.3913,30.0029Z" fill="url(#chrome-b-guide)" />
+    <path d="M13.6086,30.0031,3.218,12.006A23.994,23.994,0,0,0,24.0025,48L34.3931,30.0029l-.0067-.0068a11.9852,11.9852,0,0,1-20.7778.007Z" fill="url(#chrome-c-guide)" />
+  </svg>
+);
 
 interface GuideSectionProps {
   isDark: boolean;
@@ -57,17 +82,34 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                   : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-sm'
               }`}
             >
-              <div className="flex items-center gap-4 mb-4">
-                <span className="w-8 h-8 rounded-full bg-purple-500/15 text-purple-500 font-bold flex items-center justify-center border border-purple-500/30 shrink-0">
-                  1
+              <div className="flex items-center justify-between gap-4 mb-4">
+                <div className="flex items-center gap-4">
+                  <span className="w-8 h-8 rounded-full bg-purple-500/15 text-purple-500 font-bold flex items-center justify-center border border-purple-500/30 shrink-0">
+                    1
+                  </span>
+                  <h4 className={`text-lg font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                    Add to Chrome
+                  </h4>
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded border bg-emerald-500/10 text-emerald-500 border-emerald-500/20 font-bold">
+                  Free Extension
                 </span>
-                <h4 className={`text-lg font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                  Add to Chrome
-                </h4>
               </div>
-              <p className={`text-sm leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+              <p className={`text-sm leading-relaxed mb-5 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                 Navigate to the Chrome Web Store and click <strong>Add to Chrome</strong>. Sensa installs in seconds and is completely free.
               </p>
+              
+              {/* Direct Chrome Store Download CTA Button */}
+              <a
+                href="https://chromewebstore.google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl bg-[#0A44FF] hover:bg-[#0038E0] text-white text-xs font-mono font-bold no-underline transition-all duration-300 hover:scale-[1.02] shadow-md shadow-[#0A44FF]/25"
+              >
+                <ChromeIcon size={18} />
+                <span>Get Sensa Extension</span>
+                <ArrowUpRight size={14} />
+              </a>
             </article>
 
             {/* Step 2 */}

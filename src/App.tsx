@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Target, Sparkles, MonitorPlay, Download, ShieldAlert, Users } from 'lucide-react';
+import { Target, Sparkles, MonitorPlay, Download, ShieldAlert, Users, Cpu } from 'lucide-react';
 
 import Navbar, { type NavItem } from './components/Navbar';
 import HeroSection from './components/HeroSection';
@@ -7,6 +7,7 @@ import MissionSection from './components/MissionSection';
 import FeaturesSection from './components/FeaturesSection';
 import DemoSection from './components/DemoSection';
 import ScopeSection from './components/ScopeSection';
+import TechStackSection from './components/TechStackSection';
 import GuideSection from './components/GuideSection';
 import TeamSection from './components/TeamSection';
 import Footer from './components/Footer';
@@ -101,7 +102,7 @@ export default function App() {
 
   // Track active section on scroll for navbar underline highlight
   useEffect(() => {
-    const sectionIds = ['hero', 'problem-solution', 'features', 'video', 'scope', 'guide', 'team'];
+    const sectionIds = ['hero', 'problem-solution', 'features', 'video', 'scope', 'tech-stack', 'guide', 'team'];
     const observer = new IntersectionObserver(
       (entries) => {
         if (isManualScrollingRef.current) return;
@@ -130,8 +131,9 @@ export default function App() {
     { href: '#features', id: 'features', label: 'Features', icon: Sparkles },
     { href: '#video', id: 'video', label: 'Demo', icon: MonitorPlay },
     { href: '#scope', id: 'scope', label: 'Scope', icon: ShieldAlert },
-    { href: '#guide', id: 'guide', label: 'Install', icon: Download },
-    { href: '#team', id: 'team', label: 'Team', icon: Users },
+    { href: '#tech-stack', id: 'tech-stack', label: 'Architecture', icon: Cpu },
+    { href: '#guide', id: 'guide', label: 'Installation', icon: Download },
+    { href: '#team', id: 'team', label: 'Researchers', icon: Users },
   ];
 
   return (
@@ -183,6 +185,7 @@ export default function App() {
         <FeaturesSection isDark={isDark} />
         <DemoSection isDark={isDark} />
         <ScopeSection isDark={isDark} />
+        <TechStackSection isDark={isDark} />
         <GuideSection isDark={isDark} />
         <TeamSection isDark={isDark} />
       </main>

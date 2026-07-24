@@ -31,7 +31,7 @@ export default function Navbar({
     <>
       {/* TOP NAVBAR (Horizontal) */}
       <header
-        className={`fixed top-3 left-3 right-3 md:top-6 md:left-1/2 z-50 w-[calc(100%-24px)] md:w-full md:max-w-5xl backdrop-blur-xl border py-2.5 md:py-3.5 px-4 md:px-6 rounded-3xl md:rounded-full shadow-lg transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+        className={`fixed top-3 left-3 right-3 md:top-6 md:left-1/2 z-50 w-[calc(100%-24px)] md:w-[calc(100%-64px)] md:max-w-7xl backdrop-blur-xl border py-2.5 md:py-3.5 px-4 md:px-8 rounded-3xl md:rounded-full shadow-lg transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
           isSidebarMode
             ? 'lg:-translate-y-[150%] lg:opacity-0 lg:pointer-events-none md:-translate-x-1/2'
             : 'translate-y-0 opacity-100 md:-translate-x-1/2'

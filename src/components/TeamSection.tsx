@@ -35,67 +35,67 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
     {
       name: 'Robert Shanedion Tantoco',
       role: 'Graphics Designer & Video Editor',
-      description: 'Created the project\'s visual design, edited demonstration videos, and crafted high-contrast graphics.',
+      description: 'Crafted Sensa\'s visual design branding and produced capstone video demonstrations.',
       image: robertImg,
       imageClass: 'brightness-[1.18] contrast-[1.08] saturate-[1.05]',
       email: 'robertshanedion.tantoco@bulsu.edu.ph',
       linkedin: 'https://linkedin.com',
       github: 'https://github.com',
-      accentGradient: 'from-[#0A44FF] via-[#8A56FF] to-purple-600',
-      badgeColor: isDark ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20',
-      hoverBorder: 'hover:border-[#0A44FF]/60',
+      accentGradient: 'from-[#8A56FF] via-[#A855F7] to-purple-600',
+      roleColor: isDark ? 'text-purple-400' : 'text-purple-600',
+      hoverBorder: 'hover:border-purple-500/60',
     },
     {
       name: 'Christian Adriano',
-      role: 'Documentation & Research Paper',
-      description: 'Authored the primary research study, led technical documentation, and synthesized academic literature.',
+      role: 'Research & Documentation',
+      description: 'Authored the capstone research paper, led technical documentation, and compiled academic literature.',
       image: christianImg,
       imageClass: 'brightness-[1.18] contrast-[1.08] saturate-[1.05]',
       email: 'christian.adriano@bulsu.edu.ph',
       linkedin: 'https://linkedin.com',
       github: 'https://github.com',
-      accentGradient: 'from-[#FF7A2F] via-[#FFA066] to-amber-600',
-      badgeColor: isDark ? 'bg-[#FF7A2F]/15 text-[#FFC09B] border-[#FF7A2F]/30' : 'bg-[#FF7A2F]/10 text-[#FF7A2F] border-[#FF7A2F]/20',
+      accentGradient: 'from-[#FF7A2F] via-[#FFA066] to-orange-500',
+      roleColor: isDark ? 'text-[#FFC09B]' : 'text-[#E65C00]',
       hoverBorder: 'hover:border-[#FF7A2F]/60',
-    },
-    {
-      name: 'Leo Lorenzo Dela Cruz',
-      role: 'QA & Usability Tester',
-      description: 'Evaluated system accessibility compliance, conducted rigorous QA testing, and managed bug tracking.',
-      image: leoImg,
-      imageClass: 'brightness-[1.20] contrast-[1.10] saturate-[1.08]',
-      email: 'leolorenzo.delacruz@bulsu.edu.ph',
-      linkedin: 'https://linkedin.com',
-      github: 'https://github.com',
-      accentGradient: 'from-[#0A44FF] via-[#38BDF8] to-cyan-500',
-      badgeColor: isDark ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20',
-      hoverBorder: 'hover:border-[#0A44FF]/60',
     },
     {
       name: 'John Russell Sta.Ana',
       role: 'Project Manager',
-      description: 'Directed project milestones, synchronized team workflows, and ensured all capstone deliverables succeeded on schedule.',
+      description: 'Managed project milestones, synchronized team workflows, and ensured capstone deliverables succeeded on schedule.',
       image: russellImg,
       imageClass: 'brightness-[1.18] contrast-[1.08] saturate-[1.05]',
       email: 'johnrussell.staana@bulsu.edu.ph',
       linkedin: 'https://linkedin.com',
       github: 'https://github.com',
-      accentGradient: 'from-[#FF7A2F] via-[#F43F5E] to-rose-500',
-      badgeColor: isDark ? 'bg-[#FF7A2F]/15 text-[#FFC09B] border-[#FF7A2F]/30' : 'bg-[#FF7A2F]/10 text-[#FF7A2F] border-[#FF7A2F]/20',
-      hoverBorder: 'hover:border-[#FF7A2F]/60',
+      accentGradient: 'from-[#F59E0B] via-[#FBBF24] to-amber-500',
+      roleColor: isDark ? 'text-amber-400' : 'text-amber-600',
+      hoverBorder: 'hover:border-amber-500/60',
     },
     {
       name: 'Kian Davey Antolin',
-      role: 'Lead Full-Stack Developer',
-      description: 'Engineered the Chrome extension architecture, built the real-time Node.js WebSocket backend, and developed the web platform.',
+      role: 'Developer',
+      description: 'Developed the browser extension codebase, cloud backend services, and web platform.',
       image: kianImg,
       imageClass: '',
       email: 'kiandavey.antolin@bulsu.edu.ph',
       linkedin: 'https://linkedin.com',
       github: 'https://github.com',
-      accentGradient: 'from-[#0A44FF] via-[#10B981] to-emerald-500',
-      badgeColor: isDark ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20',
+      accentGradient: 'from-[#0A44FF] via-[#3B82F6] to-blue-600',
+      roleColor: isDark ? 'text-[#6AA2FF]' : 'text-[#0A44FF]',
       hoverBorder: 'hover:border-[#0A44FF]/60',
+    },
+    {
+      name: 'Leo Lorenzo Dela Cruz',
+      role: 'QA & Usability Tester',
+      description: 'Evaluated accessibility compliance, conducted usability testing, and managed system QA bug tracking.',
+      image: leoImg,
+      imageClass: 'brightness-[1.20] contrast-[1.10] saturate-[1.08]',
+      email: 'leolorenzo.delacruz@bulsu.edu.ph',
+      linkedin: 'https://linkedin.com',
+      github: 'https://github.com',
+      accentGradient: 'from-[#06B6D4] via-[#38BDF8] to-cyan-500',
+      roleColor: isDark ? 'text-cyan-400' : 'text-cyan-600',
+      hoverBorder: 'hover:border-cyan-500/60',
     },
   ];
 
@@ -126,7 +126,7 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
             className={`text-base md:text-xl leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'
               }`}
           >
-            Bulacan State University (BulSU) • CICT Capstone Research Team 2026.
+            Bulacan State University (BulSU) • CICT Capstone Research Team S.Y. 2026–2027.
           </p>
         </div>
 
@@ -136,8 +136,8 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
             <article
               key={idx}
               className={`group border rounded-3xl p-6 flex flex-col items-center text-center justify-between transition-all duration-500 hover:-translate-y-2 shadow-sm hover:shadow-xl ${member.hoverBorder} ${isDark
-                  ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:bg-white/[0.04]'
-                  : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset hover:bg-slate-50/80'
+                ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:bg-white/[0.04]'
+                : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset hover:bg-slate-50/80'
                 }`}
             >
               <div className="flex flex-col items-center w-full">
@@ -155,11 +155,10 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
                   {member.name}
                 </h3>
 
-                <span
-                  className={`inline-block px-3 py-1 rounded-full text-[11px] font-mono font-bold tracking-wider border my-2 ${member.badgeColor}`}
-                >
+                {/* Clean Typography Sub-Heading Role (No tag box) */}
+                <p className={`text-xs md:text-sm font-semibold tracking-wide my-1.5 ${member.roleColor}`}>
                   {member.role}
-                </span>
+                </p>
 
                 <p className={`text-xs leading-relaxed m-0 mt-2 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                   {member.description}

@@ -53,7 +53,7 @@ export default function Footer({ isDark, handleNavClick }: FooterProps) {
             </p>
             <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono font-bold border ${isDark ? 'bg-[#0A44FF]/20 text-[#6AA2FF] border-[#0A44FF]/30' : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20'}`}>
               <HeartHandshake size={12} />
-              <span>BulSU CICT Capstone Project 2026</span>
+              <span>BulSU CICT Capstone Project S.Y. 2026–2027</span>
             </div>
           </div>
 
@@ -67,9 +67,10 @@ export default function Footer({ isDark, handleNavClick }: FooterProps) {
                 { name: 'The Mission', id: 'problem-solution' },
                 { name: 'Core Features', id: 'features' },
                 { name: 'Video Demonstration', id: 'video' },
-                { name: 'Scope & Limitations', id: 'scope' },
-                { name: 'Installation Guide', id: 'guide' },
-                { name: 'Meet the Team', id: 'team' },
+                { name: 'Scope', id: 'scope' },
+                { name: 'Architecture', id: 'tech-stack' },
+                { name: 'Installation', id: 'guide' },
+                { name: 'Researchers', id: 'team' },
               ].map((item) => (
                 <li key={item.id}>
                   <a
@@ -102,7 +103,7 @@ export default function Footer({ isDark, handleNavClick }: FooterProps) {
               </li>
               <li className={`flex items-center gap-2 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                 <Code2 size={14} className="text-purple-400" />
-                <span>DeepL Neural Translation</span>
+                <span>Azure Translator API</span>
               </li>
               <li className={`flex items-center gap-2 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                 <ShieldCheck size={14} className="text-emerald-500" />
@@ -145,7 +146,7 @@ export default function Footer({ isDark, handleNavClick }: FooterProps) {
           }`}
         >
           <p className="m-0 text-center sm:text-left">
-            © 2026 Sensa Capstone Research Team • Bulacan State University (BulSU) • College of Information and Communications Technology.
+            © 2026–2027 Sensa Capstone Research Team • Bulacan State University (BulSU) • College of Information and Communications Technology.
           </p>
 
           <div className="flex items-center gap-4 font-mono font-bold text-[11px] shrink-0">
