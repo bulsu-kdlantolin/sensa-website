@@ -1,4 +1,4 @@
-import { Server, ShieldCheck, HeartHandshake, CheckCircle2, Sparkles, Volume2, Smartphone, KeyRound, MicOff, Laptop, AlertTriangle } from 'lucide-react';
+import { Server, ShieldCheck, CheckCircle2, Sparkles, Volume2, Smartphone, KeyRound, MicOff, Laptop, AlertTriangle } from 'lucide-react';
 
 interface ScopeSectionProps {
   isDark: boolean;
@@ -54,16 +54,18 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
   return (
     <section
       id="scope"
-      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-y ${isDark ? 'border-slate-800/80' : 'border-slate-200/80'
-        }`}
+      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-y ${
+        isDark ? 'border-slate-800/80' : 'border-slate-200/80'
+      }`}
     >
       {/* Cybernetic Grid Layer */}
       <div className="absolute inset-0 bg-grid-pattern pointer-events-none [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_75%,transparent_100%)] -z-10" />
 
       {/* Ambient Glow */}
       <div
-        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full blur-[160px] pointer-events-none -z-10 bg-[#0A44FF] gpu-accelerate ${isDark ? 'opacity-20' : 'opacity-10'
-          }`}
+        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full blur-[160px] pointer-events-none -z-10 bg-[#0A44FF] gpu-accelerate ${
+          isDark ? 'opacity-20' : 'opacity-10'
+        }`}
       />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
@@ -78,13 +80,14 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
         </div>
 
         {/* 2-Column Comparative Layout: Equal Height Cards (items-stretch) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
           {/* Column 1: Project Scope (4 Items) */}
           <div
-            className={`border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between h-full ${isDark
+            className={`border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between h-full ${
+              isDark
                 ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5'
                 : 'bg-white border-slate-200/80 ring-1 ring-black/5 shadow-sm'
-              }`}
+            }`}
           >
             <div>
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-emerald-500/30">
@@ -107,10 +110,11 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
                   return (
                     <div key={idx} className="flex gap-4 items-start">
                       <div
-                        className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border ${isDark
+                        className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border ${
+                          isDark
                             ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
                             : 'bg-emerald-50 text-emerald-600 border-emerald-200'
-                          }`}
+                        }`}
                       >
                         <Icon size={20} />
                       </div>
@@ -131,10 +135,11 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
 
           {/* Column 2: Technical Limitations (4 Items) */}
           <div
-            className={`border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between h-full ${isDark
+            className={`border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between h-full ${
+              isDark
                 ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5'
                 : 'bg-white border-slate-200/80 ring-1 ring-black/5 shadow-sm'
-              }`}
+            }`}
           >
             <div>
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-rose-500/30">
@@ -157,10 +162,11 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
                   return (
                     <div key={idx} className="flex gap-4 items-start">
                       <div
-                        className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border ${isDark
+                        className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border ${
+                          isDark
                             ? 'bg-rose-500/10 text-rose-400 border-rose-500/20'
                             : 'bg-rose-50 text-rose-600 border-rose-200'
-                          }`}
+                        }`}
                       >
                         <Icon size={20} />
                       </div>
@@ -178,22 +184,6 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Bottom Banner */}
-        <div
-          className={`border rounded-2xl p-6 text-center max-w-4xl mx-auto ${isDark
-              ? 'bg-white/[0.02] border-slate-800 text-slate-400'
-              : 'bg-slate-50 border-slate-200 text-slate-600'
-            }`}
-        >
-          <div className={`flex items-center justify-center gap-2 mb-2 font-mono text-xs uppercase tracking-wider font-bold ${isDark ? 'text-[#6AA2FF]' : 'text-[#0A44FF]'}`}>
-            <HeartHandshake size={16} />
-            <span>BulSU CICT Capstone Research Commitment</span>
-          </div>
-          <p className="text-xs md:text-sm leading-relaxed m-0 font-normal">
-            An open capstone research prototype developed by BulSU CICT students to establish a foundation that future researchers and developers can build upon and improve.
-          </p>
         </div>
       </div>
     </section>

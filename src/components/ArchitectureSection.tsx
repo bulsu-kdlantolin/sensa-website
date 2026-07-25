@@ -1,4 +1,4 @@
-import { Cpu, Server, Radio, Code2, Sparkles } from 'lucide-react';
+import { Cpu, Server, Mic, Volume2, Headphones, Eye, Network, Radio, Code2, Cloud, Globe } from 'lucide-react';
 
 interface ArchitectureSectionProps {
   isDark: boolean;
@@ -15,7 +15,6 @@ const ReactLogo = ({ size = 18 }: { size?: number }) => (
     </g>
   </svg>
 );
-
 
 const TailwindLogo = ({ size = 18 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -44,17 +43,14 @@ const NodeLogo = ({ size = 18 }: { size?: number }) => (
 
 const AzureLogo = ({ size = 18 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-    {/* Darker Left Leg / Pillar */}
     <path
       d="M37.2 6.8 C33.8 6.8 30.8 8.8 29.3 11.9 L4.8 66.8 C2.8 71.2 6.1 76.2 11 76.2 H41.6 L36.2 92 C35.2 95 38 97.8 41 97 L91.2 53.6 C93.6 51.5 93.6 47.7 91.2 45.6 L64 8.2 C62.5 6.8 60 6.8 58 6.8 H37.2 Z"
       fill="url(#az-fluent-1)"
     />
-    {/* Light Blue Front Sweeping Ribbon */}
     <path
       d="M37.2 6.8 H58 C62 6.8 65.6 9.3 67.2 13 L93.6 69.5 C95.8 74.2 92.4 79.5 87.2 79.5 H64.2 C61.8 79.5 59.6 78 58.6 75.8 L37.2 6.8 Z"
       fill="url(#az-fluent-2)"
     />
-    {/* Middle Blue Triangle Crossbar */}
     <path
       d="M29.5 62.5 L60 90.8 C61.8 92.5 64.8 91.2 64.8 88.8 V62.5 H29.5 Z"
       fill="url(#az-fluent-3)"
@@ -93,62 +89,166 @@ const PlasmoLogo = ({ size = 18 }: { size?: number }) => (
   </svg>
 );
 
+const RenderCloudLogo = ({ size = 18 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="24" height="24" rx="5" fill="#000000" />
+    <path
+      d="M7 17V7h5.5c2.2 0 3.8 1.4 3.8 3.3 0 1.4-.8 2.5-2.1 3l2.6 3.7H14.4l-2.3-3.3H9.2V17H7zm2.2-5.3h3.1c.9 0 1.6-.6 1.6-1.4 0-.8-.7-1.4-1.6-1.4H9.2v2.8z"
+      fill="#46E3B7"
+    />
+  </svg>
+);
+
 export default function ArchitectureSection({ isDark }: ArchitectureSectionProps) {
-  const stackCategories = [
+  // Part 1: Frontend vs Backend Core Infrastructure
+  const coreInfrastructure = [
     {
-      title: 'Extension Architecture',
-      tag: 'Frontend Engine',
+      title: 'Frontend Architecture',
+      tag: 'Chrome Extension Client',
+      icon: Cpu,
+      color: 'text-[#0A44FF] dark:text-[#6AA2FF]',
+      borderHover: 'hover:border-[#0A44FF]/60 hover:shadow-[0_0_35px_rgba(10,68,255,0.2)]',
+      accentLine: 'bg-[#0A44FF]',
+      items: [
+        { name: 'Plasmo Framework', detail: 'Next-gen modular Manifest V3 extension architecture', Logo: PlasmoLogo },
+        { name: 'React 18 & TypeScript', detail: 'Strongly-typed component UI state & reactive hooks', Logo: ReactLogo },
+        { name: 'Tailwind CSS & Lucide', detail: 'High-contrast accessible theme styling system', Logo: TailwindLogo },
+        { name: 'DOM Lens & Levenshtein Engine', detail: 'Live element magnifier lens tracking & fuzzy voice matcher', Logo: Code2 },
+      ],
+    },
+    {
+      title: 'Backend Architecture',
+      tag: 'Cloud Server Infrastructure',
+      icon: Server,
+      color: 'text-[#FF7A2F] dark:text-[#FFC09B]',
+      borderHover: 'hover:border-[#FF7A2F]/60 hover:shadow-[0_0_35px_rgba(255,122,47,0.2)]',
+      accentLine: 'bg-[#FF7A2F]',
+      items: [
+        { name: 'Render Cloud Hosting', detail: 'Scalable cloud server host for Sensa real-time proxy service', Logo: RenderCloudLogo },
+        { name: 'Node.js & WebSocket Proxy', detail: 'Low-latency streaming gateway between Chrome Extension & Cloud AI', Logo: NodeLogo },
+        { name: 'Stateless Streaming Pipeline', detail: 'Zero data retention — streams processed live in memory', Logo: Code2 },
+        { name: 'Privacy-First Architecture', detail: 'No user audio or transcripts stored on backend servers', Logo: Globe },
+      ],
+    },
+  ];
+
+  // Part 2: 14 Integrated APIs Specification across 3 Architectural Layers
+  const architecturalLayers = [
+    {
+      layerNumber: 'Layer 1',
+      title: 'External Cloud AI APIs',
+      icon: Cloud,
+      color: 'text-[#FF7A2F] dark:text-[#FFC09B]',
+      borderHover: 'hover:border-[#FF7A2F]/60 hover:shadow-[0_0_30px_rgba(255,122,47,0.18)]',
+      accentLine: 'bg-[#FF7A2F]',
+      gridCols: 'grid-cols-1 md:grid-cols-2',
+      apis: [
+        {
+          name: 'Azure Translator Text API',
+          spec: 'v3.0 REST API',
+          purpose: 'Real-time neural translation of live subtitles into 135+ target languages.',
+          Logo: AzureLogo,
+        },
+        {
+          name: 'Deepgram Speech-to-Text WebSocket API',
+          spec: 'Nova-3 Model',
+          purpose: 'High-speed, real-time audio transcription with word-level timestamps across 47+ spoken languages.',
+          Logo: DeepgramLogo,
+        },
+      ],
+    },
+    {
+      layerNumber: 'Layer 2',
+      title: 'Browser & Web Platform Native APIs',
+      icon: Globe,
+      color: 'text-[#8A56FF] dark:text-[#A855F7]',
+      borderHover: 'hover:border-[#8A56FF]/60 hover:shadow-[0_0_30px_rgba(138,86,255,0.18)]',
+      accentLine: 'bg-[#8A56FF]',
+      gridCols: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
+      apis: [
+        {
+          name: 'Web Audio API',
+          spec: 'AudioContext, AnalyserNode, ScriptProcessorNode',
+          purpose: 'Tab audio capture processing, real-time volume RMS visualization, and sudden sound warning alerts (>85dB).',
+          Logo: Radio,
+        },
+        {
+          name: 'Web Speech API — SpeechRecognition',
+          spec: 'webkitSpeechRecognition',
+          purpose: 'Hands-free voice command recognition ("read", "stop", "faster", "slower", "magnifier").',
+          Logo: Mic,
+        },
+        {
+          name: 'Web Speech API — SpeechSynthesis',
+          spec: 'window.speechSynthesis, SpeechSynthesisUtterance',
+          purpose: 'Screen reader text-to-speech narration, hover mouse reader, and UI voice guide audio feedback.',
+          Logo: Volume2,
+        },
+        {
+          name: 'MediaStreams API & Sink Audio Bridge',
+          spec: 'MediaStream, HTMLAudioElement.setSinkId',
+          purpose: 'Routes captured tab audio back to user speakers/headphones while generating subtitles to prevent audio muting.',
+          Logo: Headphones,
+        },
+        {
+          name: 'MutationObserver API',
+          spec: 'DOM Mutation Observer',
+          purpose: 'Live DOM change tracking for screen magnifier lens pop-in and real-time paragraph element highlighting.',
+          Logo: Eye,
+        },
+        {
+          name: 'WebSocket API',
+          spec: 'new WebSocket',
+          purpose: 'Low-latency, bi-directional streaming connection between the Chrome Extension and Node.js backend.',
+          Logo: Network,
+        },
+      ],
+    },
+    {
+      layerNumber: 'Layer 3',
+      title: 'Chrome Extension Manifest V3 APIs',
       icon: Cpu,
       color: 'text-[#0A44FF] dark:text-[#6AA2FF]',
       borderHover: 'hover:border-[#0A44FF]/60 hover:shadow-[0_0_30px_rgba(10,68,255,0.18)]',
       accentLine: 'bg-[#0A44FF]',
-      techs: [
-        { name: 'Plasmo Framework', detail: 'Next-gen modular Chrome extension architecture', Logo: PlasmoLogo },
-        { name: 'Chrome Manifest V3', detail: 'Service worker background scripts & secure API rules', Logo: ChromeTechLogo },
-        { name: 'React 18 & TypeScript', detail: 'Strongly-typed component UI logic', Logo: ReactLogo },
-        { name: 'Tailwind CSS & Lucide', detail: 'High-contrast accessible theme styling', Logo: TailwindLogo },
-      ],
-    },
-    {
-      title: 'AI & Cloud Infrastructure',
-      tag: 'Backend Services',
-      icon: Server,
-      color: 'text-[#FF7A2F] dark:text-[#FFC09B]',
-      borderHover: 'hover:border-[#FF7A2F]/60 hover:shadow-[0_0_30px_rgba(255,122,47,0.18)]',
-      accentLine: 'bg-[#FF7A2F]',
-      techs: [
-        { name: 'Deepgram Nova-3 AI', detail: 'Low-latency real-time speech-to-text WebSocket engine', Logo: DeepgramLogo },
-        { name: 'Azure Translator API', detail: 'Neural machine translation supporting 135+ languages', Logo: AzureLogo },
-        { name: 'Node.js & WebSockets', detail: 'Real-time proxy server hosted on Render Cloud', Logo: NodeLogo },
-        { name: 'Stateless Pipeline', detail: 'Zero data retention — streams processed live in memory', Logo: Sparkles },
-      ],
-    },
-    {
-      title: 'Audio Capture Pipeline',
-      tag: 'Web Audio Engine',
-      icon: Radio,
-      color: 'text-[#8A56FF] dark:text-[#A855F7]',
-      borderHover: 'hover:border-[#8A56FF]/60 hover:shadow-[0_0_30px_rgba(138,86,255,0.18)]',
-      accentLine: 'bg-[#8A56FF]',
-      techs: [
-        { name: 'Chrome tabCapture API', detail: 'Raw audio stream interception from active browser tabs', Logo: ChromeTechLogo },
-        { name: 'Chrome offscreen API', detail: 'Background Web Audio API processing sandbox', Logo: ChromeTechLogo },
-        { name: 'Web Audio RMS Analyzer', detail: 'Real-time decibel analysis for >85dB sound warnings', Logo: Radio },
-        { name: 'Canvas Audio Meter', detail: 'Visual frequency spectrum bar rendering', Logo: Sparkles },
-      ],
-    },
-    {
-      title: 'Speech & DOM Engine',
-      tag: 'Browser APIs',
-      icon: Code2,
-      color: 'text-emerald-500 dark:text-emerald-400',
-      borderHover: 'hover:border-emerald-500/60 hover:shadow-[0_0_30px_rgba(16,185,129,0.18)]',
-      accentLine: 'bg-emerald-500',
-      techs: [
-        { name: 'Web Speech API', detail: 'Hands-free voice recognition with fuzzy matching', Logo: ChromeTechLogo },
-        { name: 'DOM Tracking Engine', detail: 'Live element bounding box magnifier lens tracking', Logo: Code2 },
-        { name: 'SpeechSynthesis Utterance', detail: 'Multilingual Text-to-Speech webpage narrator', Logo: Sparkles },
-        { name: 'Levenshtein Matcher', detail: 'Correction algorithm for imperfect voice inputs', Logo: Code2 },
+      gridCols: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
+      apis: [
+        {
+          name: 'chrome.tabCapture API',
+          spec: 'Manifest V3 Tab Capture',
+          purpose: 'Captures raw playing audio streams from active browser tabs (YouTube, lectures, calls).',
+          Logo: ChromeTechLogo,
+        },
+        {
+          name: 'chrome.offscreen API',
+          spec: 'Offscreen Document Sandbox',
+          purpose: 'Manages background offscreen documents (audioproxy.html) to process audio streams continuously without being terminated by MV3 service worker timeouts.',
+          Logo: ChromeTechLogo,
+        },
+        {
+          name: 'chrome.storage.local API',
+          spec: 'Persistent Extension Storage',
+          purpose: 'Persistent local storage for user preferences, sensory settings, font choices, custom colors, and transcript logs.',
+          Logo: ChromeTechLogo,
+        },
+        {
+          name: 'chrome.scripting API',
+          spec: 'Dynamic Script Injection',
+          purpose: 'Dynamically injects content scripts and accessibility overlays across active web tabs.',
+          Logo: ChromeTechLogo,
+        },
+        {
+          name: 'chrome.runtime API',
+          spec: 'Extension Messaging Bus',
+          purpose: 'Inter-component messaging between Popup, Content Scripts, Service Worker, and Offscreen Document.',
+          Logo: ChromeTechLogo,
+        },
+        {
+          name: 'chrome.tabs API',
+          spec: 'Tab Management Engine',
+          purpose: 'Tab management, tab audio stream identification, and cross-tab UI state broadcasting.',
+          Logo: ChromeTechLogo,
+        },
       ],
     },
   ];
@@ -177,66 +277,155 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
             System Architecture
           </h2>
           <p className={`text-base md:text-xl leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-            Built on modern web standards, cloud AI APIs, and browser extension APIs for low-latency accessibility.
+            Sensa's Frontend Chrome Extension and Render-hosted Backend, coupled with 14 native & cloud APIs across 3 architectural layers.
           </p>
         </div>
 
-        {/* 4 Tech Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-          {stackCategories.map((category, idx) => {
-            const Icon = category.icon;
-            return (
-              <article
-                key={idx}
-                className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.01] relative overflow-hidden ${category.borderHover} ${
-                  isDark
-                    ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 shadow-sm'
-                    : 'bg-white border-slate-200/80 ring-1 ring-black/5 shadow-sm'
-                }`}
-              >
-                <div className={`absolute top-0 left-8 right-8 h-1 rounded-b-full ${category.accentLine} opacity-40 group-hover:opacity-100 transition-opacity duration-300`} />
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center gap-3">
-                      <Icon size={26} className={category.color} />
-                      <h3 className={`text-xl font-bold tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                        {category.title}
-                      </h3>
+        {/* Part 1: Frontend vs Backend Core Infrastructure */}
+        <div className="mb-20">
+          <div className="flex items-center gap-3 mb-8">
+            <Cpu size={22} className="text-[#0A44FF] dark:text-[#6AA2FF]" />
+            <h3 className={`text-xl md:text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
+              Frontend & Backend Core Infrastructure
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            {coreInfrastructure.map((side, idx) => {
+              const MainIcon = side.icon;
+              return (
+                <article
+                  key={idx}
+                  className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.005] relative overflow-hidden ${side.borderHover} ${
+                    isDark
+                      ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 shadow-md'
+                      : 'bg-white border-slate-200/80 ring-1 ring-black/5 shadow-md'
+                  }`}
+                >
+                  <div className={`absolute top-0 left-8 right-8 h-1 rounded-b-full ${side.accentLine} opacity-50`} />
+
+                  <div>
+                    <div className="flex items-center gap-3.5 mb-6 pb-6 border-b border-slate-200/60 dark:border-slate-800/80">
+                      <div className={`p-3.5 rounded-2xl ${isDark ? 'bg-white/5' : 'bg-slate-100'} shrink-0`}>
+                        <MainIcon size={28} className={side.color} />
+                      </div>
+                      <div>
+                        <h4 className={`text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                          {side.title}
+                        </h4>
+                        <p className={`text-xs font-semibold ${side.color}`}>
+                          {side.tag}
+                        </p>
+                      </div>
                     </div>
-                    <span className={`px-2.5 py-1 rounded-md text-[10px] font-mono font-bold border ${
-                      isDark ? 'bg-white/5 border-slate-700 text-slate-300' : 'bg-slate-100 border-slate-200 text-slate-700'
-                    }`}>
-                      {category.tag}
-                    </span>
+
+                    <div className="space-y-3">
+                      {side.items.map((item, iIdx) => {
+                        const ItemLogo = item.Logo;
+                        return (
+                          <div
+                            key={iIdx}
+                            className={`p-3.5 rounded-2xl border flex flex-col gap-0.5 transition-colors ${
+                              isDark ? 'bg-black/40 border-slate-800/80 hover:border-slate-700' : 'bg-slate-50/80 border-slate-200/60 hover:border-slate-300'
+                            }`}
+                          >
+                            <span className={`text-sm font-bold flex items-center gap-2.5 ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>
+                              <span className="shrink-0 flex items-center justify-center">
+                                <ItemLogo size={18} className={side.color} />
+                              </span>
+                              {item.name}
+                            </span>
+                            <p className={`text-xs leading-relaxed m-0 pl-7 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                              {item.detail}
+                            </p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Part 2: 14 Integrated APIs Specification across 3 Architectural Layers */}
+        <div>
+          <div className="flex items-center gap-3 mb-8">
+            <Globe size={22} className="text-[#8A56FF] dark:text-[#A855F7]" />
+            <h3 className={`text-xl md:text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
+              14 Integrated APIs Across 3 Architectural Layers
+            </h3>
+          </div>
+
+          <div className="space-y-12">
+            {architecturalLayers.map((layer, lIdx) => {
+              const LayerIcon = layer.icon;
+              return (
+                <div
+                  key={lIdx}
+                  className={`border rounded-[2.5rem] p-6 md:p-8 transition-all duration-500 relative overflow-hidden ${layer.borderHover} ${
+                    isDark
+                      ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 shadow-md'
+                      : 'bg-white border-slate-200/80 ring-1 ring-black/5 shadow-md'
+                  }`}
+                >
+                  <div className={`absolute top-0 left-8 right-8 h-1 rounded-b-full ${layer.accentLine} opacity-50`} />
+
+                  {/* Layer Header */}
+                  <div className="flex items-center gap-3.5 mb-8 pb-6 border-b border-slate-200/60 dark:border-slate-800/80">
+                    <div className={`p-3 rounded-2xl ${isDark ? 'bg-white/5' : 'bg-slate-100'} shrink-0`}>
+                      <LayerIcon size={26} className={layer.color} />
+                    </div>
+                    <div>
+                      <span className={`text-xs font-mono font-bold uppercase tracking-wider ${layer.color}`}>
+                        {layer.layerNumber}
+                      </span>
+                      <h4 className={`text-xl md:text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                        {layer.title}
+                      </h4>
+                    </div>
                   </div>
 
-                  <div className="space-y-3">
-                    {category.techs.map((tech, tIdx) => {
-                      const TechLogoComponent = tech.Logo;
+                  {/* API Cards Grid */}
+                  <div className={`grid ${layer.gridCols} gap-4 items-stretch`}>
+                    {layer.apis.map((api, aIdx) => {
+                      const ApiLogoComponent = api.Logo;
                       return (
                         <div
-                          key={tIdx}
-                          className={`p-3.5 rounded-2xl border flex flex-col gap-0.5 transition-colors ${
-                            isDark ? 'bg-black/30 border-slate-800/80 group-hover:border-slate-700/80' : 'bg-slate-50/80 border-slate-200/60 group-hover:border-slate-300'
+                          key={aIdx}
+                          className={`p-4 rounded-2xl border flex flex-col justify-between transition-all duration-300 ${
+                            isDark
+                              ? 'bg-black/40 border-slate-800/80 hover:border-slate-700'
+                              : 'bg-slate-50/90 border-slate-200/70 hover:border-slate-300'
                           }`}
                         >
-                          <span className={`text-sm font-bold flex items-center gap-2.5 ${isDark ? 'text-slate-200' : 'text-slate-800'}`}>
-                            <span className="shrink-0 flex items-center justify-center">
-                              <TechLogoComponent size={18} />
+                          <div>
+                            <div className="flex items-start justify-between gap-2 mb-2">
+                              <span className={`text-sm font-bold flex items-center gap-2.5 ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>
+                                <span className="shrink-0 flex items-center justify-center">
+                                  <ApiLogoComponent size={18} className={layer.color} />
+                                </span>
+                                {api.name}
+                              </span>
+                            </div>
+                            <span className={`inline-block text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md mb-2.5 border ${
+                              isDark ? 'bg-white/5 border-slate-800 text-slate-400' : 'bg-white border-slate-200 text-slate-500'
+                            }`}>
+                              {api.spec}
                             </span>
-                            {tech.name}
-                          </span>
-                          <span className={`text-xs leading-relaxed pl-7 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                            {tech.detail}
-                          </span>
+                            <p className={`text-xs leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                              {api.purpose}
+                            </p>
+                          </div>
                         </div>
                       );
                     })}
                   </div>
                 </div>
-              </article>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
