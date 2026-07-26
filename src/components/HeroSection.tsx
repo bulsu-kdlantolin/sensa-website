@@ -32,7 +32,7 @@ export default function HeroSection({ isDark, handleNavClick }: HeroSectionProps
   return (
     <section
       id="hero"
-      className="relative w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] pt-28 pb-24 md:pt-36 md:pb-32 px-4 md:px-8 overflow-hidden"
+      className="relative w-full min-h-screen flex flex-col justify-center scroll-mt-[70px] md:scroll-mt-[92px] pt-28 pb-24 md:pt-36 md:pb-32 px-4 md:px-8 overflow-hidden"
     >
       {/* Hero Cybernetic Grid Layer */}
       <div className="absolute inset-0 bg-grid-pattern pointer-events-none [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_75%,transparent_100%)] -z-10" />

@@ -33,7 +33,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
   return (
     <section
       id="guide"
-      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-t ${
+      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[70px] md:scroll-mt-[92px] py-20 md:py-28 border-t ${
         isDark ? 'border-slate-800/80' : 'border-slate-200/60'
       }`}
     >
@@ -238,7 +238,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                 <li className="flex items-start gap-2">
                   <span className="mt-1 shrink-0 text-[#0A44FF]">👁️</span>
                   <span>
-                    <strong>Visual Mode:</strong> Use the floating bar to adjust read-out-loud speech speed, turn on the screen magnifier, or activate the reading ruler.
+                    <strong>Visual Mode:</strong> Use the floating bar to adjust read-out-loud speech speed, turn on the screen magnifier, or use hands-free voice commands.
                   </span>
                 </li>
                 <li className="flex items-start gap-2">

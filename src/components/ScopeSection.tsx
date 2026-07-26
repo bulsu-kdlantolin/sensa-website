@@ -54,7 +54,7 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
   return (
     <section
       id="scope"
-      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-y ${
+      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[70px] md:scroll-mt-[92px] py-20 md:py-28 border-y ${
         isDark ? 'border-slate-800/80' : 'border-slate-200/80'
       }`}
     >

@@ -1,4 +1,5 @@
-import { Cpu, Server, Mic, Volume2, Headphones, Eye, Network, Radio, Code2, Cloud, Globe } from 'lucide-react';
+import { Cpu, Server, Cloud, Globe, Mic, Volume2, Headphones, Eye, Network, Radio, ExternalLink } from 'lucide-react';
+import azureLogo from '../assets/azure-logo.png';
 
 interface ArchitectureSectionProps {
   isDark: boolean;
@@ -42,44 +43,27 @@ const NodeLogo = ({ size = 18 }: { size?: number }) => (
 );
 
 const AzureLogo = ({ size = 18 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path
-      d="M37.2 6.8 C33.8 6.8 30.8 8.8 29.3 11.9 L4.8 66.8 C2.8 71.2 6.1 76.2 11 76.2 H41.6 L36.2 92 C35.2 95 38 97.8 41 97 L91.2 53.6 C93.6 51.5 93.6 47.7 91.2 45.6 L64 8.2 C62.5 6.8 60 6.8 58 6.8 H37.2 Z"
-      fill="url(#az-fluent-1)"
-    />
-    <path
-      d="M37.2 6.8 H58 C62 6.8 65.6 9.3 67.2 13 L93.6 69.5 C95.8 74.2 92.4 79.5 87.2 79.5 H64.2 C61.8 79.5 59.6 78 58.6 75.8 L37.2 6.8 Z"
-      fill="url(#az-fluent-2)"
-    />
-    <path
-      d="M29.5 62.5 L60 90.8 C61.8 92.5 64.8 91.2 64.8 88.8 V62.5 H29.5 Z"
-      fill="url(#az-fluent-3)"
-    />
-    <defs>
-      <linearGradient id="az-fluent-1" x1="4.8" y1="6.8" x2="64" y2="97" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#0B55B3" />
-        <stop offset="1" stopColor="#0078D4" />
-      </linearGradient>
-      <linearGradient id="az-fluent-2" x1="37.2" y1="6.8" x2="93.6" y2="79.5" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#50E6FF" />
-        <stop offset="0.5" stopColor="#38BDF8" />
-        <stop offset="1" stopColor="#0078D4" />
-      </linearGradient>
-      <linearGradient id="az-fluent-3" x1="29.5" y1="62.5" x2="64.8" y2="90.8" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#004578" />
-        <stop offset="1" stopColor="#0078D4" />
-      </linearGradient>
-    </defs>
-  </svg>
+  <img src={azureLogo} width={size} height={size} alt="Azure Logo" className="object-contain" />
 );
 
 const DeepgramLogo = ({ size = 18 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="24" height="24" rx="5" fill="#000000" />
-    <path
-      d="M5.5 5.5A1 1 0 0 1 6.5 4.5h5A7.5 7.5 0 0 1 19 12v0a7.5 7.5 0 0 1-7.5 7.5h-5a1 1 0 0 1-1-1v-13zM9 8v8h2.5A3.5 3.5 0 0 0 15 12v0A3.5 3.5 0 0 0 11.5 8H9z"
-      fill="#FFFFFF"
-    />
+    <rect width="24" height="24" rx="4" fill="#000000" />
+    <g transform="translate(3.5, 3.5) scale(0.70)">
+      <path
+        d="M11.203 24H1.517a.364.364 0 0 1-.258-.62l6.239-6.275a.366.366 0 0 1 .259-.108h3.52c2.723 0 5.025-2.127 5.107-4.845a5.004 5.004 0 0 0-4.999-5.148H7.613v4.646c0 .2-.164.364-.365.364H.968a.365.365 0 0 1-.363-.364V.364C.605.164.768 0 .969 0h10.416c6.684 0 12.111 5.485 12.01 12.187C23.293 18.77 17.794 24 11.202 24z"
+        fill="#FFFFFF"
+      />
+    </g>
+  </svg>
+);
+
+const GoogleLogo = ({ size = 18 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
   </svg>
 );
 
@@ -90,12 +74,8 @@ const PlasmoLogo = ({ size = 18 }: { size?: number }) => (
 );
 
 const RenderCloudLogo = ({ size = 18 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="24" height="24" rx="5" fill="#000000" />
-    <path
-      d="M7 17V7h5.5c2.2 0 3.8 1.4 3.8 3.3 0 1.4-.8 2.5-2.1 3l2.6 3.7H14.4l-2.3-3.3H9.2V17H7zm2.2-5.3h3.1c.9 0 1.6-.6 1.6-1.4 0-.8-.7-1.4-1.6-1.4H9.2v2.8z"
-      fill="#46E3B7"
-    />
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18.263.007c-3.121-.147-5.744 2.109-6.192 5.082-.018.138-.045.272-.067.405-.696 3.703-3.936 6.507-7.827 6.507-1.388 0-2.691-.356-3.825-.979a.2024.2024 0 0 0-.302.178V24H12v-8.999c0-1.656 1.338-3 2.987-3h2.988c3.382 0 6.103-2.817 5.97-6.244-.12-3.084-2.61-5.603-5.682-5.75"/>
   </svg>
 );
 
@@ -110,10 +90,9 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
       borderHover: 'hover:border-[#0A44FF]/60 hover:shadow-[0_0_35px_rgba(10,68,255,0.2)]',
       accentLine: 'bg-[#0A44FF]',
       items: [
-        { name: 'Plasmo Framework', detail: 'Next-gen modular Manifest V3 extension architecture', Logo: PlasmoLogo },
-        { name: 'React 18 & TypeScript', detail: 'Strongly-typed component UI state & reactive hooks', Logo: ReactLogo },
-        { name: 'Tailwind CSS & Lucide', detail: 'High-contrast accessible theme styling system', Logo: TailwindLogo },
-        { name: 'DOM Lens & Levenshtein Engine', detail: 'Live element magnifier lens tracking & fuzzy voice matcher', Logo: Code2 },
+        { name: 'Plasmo Framework', detail: 'Next-gen modular Manifest V3 extension architecture', Logo: PlasmoLogo, url: 'https://docs.plasmo.com/' },
+        { name: 'React 18 & TypeScript', detail: 'Strongly-typed component UI state & reactive hooks', Logo: ReactLogo, url: 'https://react.dev/' },
+        { name: 'Tailwind CSS & Lucide', detail: 'High-contrast accessible theme styling system', Logo: TailwindLogo, url: 'https://tailwindcss.com/' },
       ],
     },
     {
@@ -124,36 +103,43 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
       borderHover: 'hover:border-[#FF7A2F]/60 hover:shadow-[0_0_35px_rgba(255,122,47,0.2)]',
       accentLine: 'bg-[#FF7A2F]',
       items: [
-        { name: 'Render Cloud Hosting', detail: 'Scalable cloud server host for Sensa real-time proxy service', Logo: RenderCloudLogo },
-        { name: 'Node.js & WebSocket Proxy', detail: 'Low-latency streaming gateway between Chrome Extension & Cloud AI', Logo: NodeLogo },
-        { name: 'Stateless Streaming Pipeline', detail: 'Zero data retention — streams processed live in memory', Logo: Code2 },
-        { name: 'Privacy-First Architecture', detail: 'No user audio or transcripts stored on backend servers', Logo: Globe },
+        { name: 'Render Cloud Hosting', detail: 'Scalable cloud server host for Sensa real-time proxy service', Logo: RenderCloudLogo, url: 'https://render.com/' },
+        { name: 'Node.js & WebSocket Proxy', detail: 'Low-latency streaming gateway between Chrome Extension & Cloud AI', Logo: NodeLogo, url: 'https://nodejs.org/' },
       ],
     },
   ];
 
-  // Part 2: 14 Integrated APIs Specification across 3 Architectural Layers
+  // Part 2: 15 Integrated APIs Specification across 3 Architectural Layers
   const architecturalLayers = [
     {
       layerNumber: 'Layer 1',
-      title: 'External Cloud AI APIs',
+      title: 'External Cloud APIs',
       icon: Cloud,
       color: 'text-[#FF7A2F] dark:text-[#FFC09B]',
       borderHover: 'hover:border-[#FF7A2F]/60 hover:shadow-[0_0_30px_rgba(255,122,47,0.18)]',
       accentLine: 'bg-[#FF7A2F]',
-      gridCols: 'grid-cols-1 md:grid-cols-2',
+      gridCols: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
       apis: [
         {
           name: 'Azure Translator Text API',
           spec: 'v3.0 REST API',
           purpose: 'Real-time neural translation of live subtitles into 135+ target languages.',
           Logo: AzureLogo,
+          url: 'https://learn.microsoft.com/en-us/azure/ai-services/translator/',
         },
         {
           name: 'Deepgram Speech-to-Text WebSocket API',
           spec: 'Nova-3 Model',
           purpose: 'High-speed, real-time audio transcription with word-level timestamps across 47+ spoken languages.',
           Logo: DeepgramLogo,
+          url: 'https://developers.deepgram.com/docs/speech-to-text',
+        },
+        {
+          name: 'Google Fonts Developer API',
+          spec: 'Google Web Fonts v1',
+          purpose: 'Dynamically fetches the top 100 typography choices to allow custom dyslexia-friendly and high-contrast font selection.',
+          Logo: GoogleLogo,
+          url: 'https://developers.google.com/fonts/docs/developer_api',
         },
       ],
     },
@@ -171,36 +157,42 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
           spec: 'AudioContext, AnalyserNode, ScriptProcessorNode',
           purpose: 'Tab audio capture processing, real-time volume RMS visualization, and sudden sound warning alerts (>85dB).',
           Logo: Radio,
+          url: 'https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API',
         },
         {
           name: 'Web Speech API — SpeechRecognition',
           spec: 'webkitSpeechRecognition',
           purpose: 'Hands-free voice command recognition ("read", "stop", "faster", "slower", "magnifier").',
           Logo: Mic,
+          url: 'https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition',
         },
         {
           name: 'Web Speech API — SpeechSynthesis',
           spec: 'window.speechSynthesis, SpeechSynthesisUtterance',
           purpose: 'Screen reader text-to-speech narration, hover mouse reader, and UI voice guide audio feedback.',
           Logo: Volume2,
+          url: 'https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis',
         },
         {
           name: 'MediaStreams API & Sink Audio Bridge',
           spec: 'MediaStream, HTMLAudioElement.setSinkId',
           purpose: 'Routes captured tab audio back to user speakers/headphones while generating subtitles to prevent audio muting.',
           Logo: Headphones,
+          url: 'https://developer.mozilla.org/en-US/docs/Web/API/Media_Streams_API',
         },
         {
           name: 'MutationObserver API',
           spec: 'DOM Mutation Observer',
           purpose: 'Live DOM change tracking for screen magnifier lens pop-in and real-time paragraph element highlighting.',
           Logo: Eye,
+          url: 'https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver',
         },
         {
           name: 'WebSocket API',
           spec: 'new WebSocket',
           purpose: 'Low-latency, bi-directional streaming connection between the Chrome Extension and Node.js backend.',
           Logo: Network,
+          url: 'https://developer.mozilla.org/en-US/docs/Web/API/WebSocket',
         },
       ],
     },
@@ -209,7 +201,7 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
       title: 'Chrome Extension Manifest V3 APIs',
       icon: Cpu,
       color: 'text-[#0A44FF] dark:text-[#6AA2FF]',
-      borderHover: 'hover:border-[#0A44FF]/60 hover:shadow-[0_0_30px_rgba(10,68,255,0.18)]',
+      borderHover: 'hover:border-[#0A44FF]/60 hover:shadow-[0_0_35px_rgba(10,68,255,0.18)]',
       accentLine: 'bg-[#0A44FF]',
       gridCols: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
       apis: [
@@ -218,36 +210,42 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
           spec: 'Manifest V3 Tab Capture',
           purpose: 'Captures raw playing audio streams from active browser tabs (YouTube, lectures, calls).',
           Logo: ChromeTechLogo,
+          url: 'https://developer.chrome.com/docs/extensions/reference/api/tabCapture',
         },
         {
           name: 'chrome.offscreen API',
           spec: 'Offscreen Document Sandbox',
           purpose: 'Manages background offscreen documents (audioproxy.html) to process audio streams continuously without being terminated by MV3 service worker timeouts.',
           Logo: ChromeTechLogo,
+          url: 'https://developer.chrome.com/docs/extensions/reference/api/offscreen',
         },
         {
           name: 'chrome.storage.local API',
           spec: 'Persistent Extension Storage',
           purpose: 'Persistent local storage for user preferences, sensory settings, font choices, custom colors, and transcript logs.',
           Logo: ChromeTechLogo,
+          url: 'https://developer.chrome.com/docs/extensions/reference/api/storage',
         },
         {
           name: 'chrome.scripting API',
           spec: 'Dynamic Script Injection',
           purpose: 'Dynamically injects content scripts and accessibility overlays across active web tabs.',
           Logo: ChromeTechLogo,
+          url: 'https://developer.chrome.com/docs/extensions/reference/api/scripting',
         },
         {
           name: 'chrome.runtime API',
           spec: 'Extension Messaging Bus',
           purpose: 'Inter-component messaging between Popup, Content Scripts, Service Worker, and Offscreen Document.',
           Logo: ChromeTechLogo,
+          url: 'https://developer.chrome.com/docs/extensions/reference/api/runtime',
         },
         {
           name: 'chrome.tabs API',
           spec: 'Tab Management Engine',
           purpose: 'Tab management, tab audio stream identification, and cross-tab UI state broadcasting.',
           Logo: ChromeTechLogo,
+          url: 'https://developer.chrome.com/docs/extensions/reference/api/tabs',
         },
       ],
     },
@@ -256,7 +254,7 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
   return (
     <section
       id="tech-stack"
-      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-t ${
+      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[70px] md:scroll-mt-[92px] py-20 md:py-28 border-t ${
         isDark ? 'border-slate-800/80' : 'border-slate-200/60'
       }`}
     >
@@ -277,7 +275,7 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
             System Architecture
           </h2>
           <p className={`text-base md:text-xl leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-            Sensa's Frontend Chrome Extension and Render-hosted Backend, coupled with 14 native & cloud APIs across 3 architectural layers.
+            Sensa's Frontend Chrome Extension and Render-hosted Backend, coupled with 15 native & cloud APIs across 3 architectural layers.
           </p>
         </div>
 
@@ -323,22 +321,30 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
                       {side.items.map((item, iIdx) => {
                         const ItemLogo = item.Logo;
                         return (
-                          <div
+                          <a
                             key={iIdx}
-                            className={`p-3.5 rounded-2xl border flex flex-col gap-0.5 transition-colors ${
-                              isDark ? 'bg-black/40 border-slate-800/80 hover:border-slate-700' : 'bg-slate-50/80 border-slate-200/60 hover:border-slate-300'
+                            href={item.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`p-3.5 rounded-2xl border flex flex-col gap-0.5 transition-all group ${
+                              isDark
+                                ? 'bg-black/40 border-slate-800/80 hover:border-slate-600 hover:bg-black/60'
+                                : 'bg-slate-50/80 border-slate-200/60 hover:border-slate-300 hover:bg-slate-100'
                             }`}
                           >
-                            <span className={`text-sm font-bold flex items-center gap-2.5 ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>
-                              <span className="shrink-0 flex items-center justify-center">
-                                <ItemLogo size={18} className={side.color} />
+                            <span className={`text-sm font-bold flex items-center justify-between gap-2.5 ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>
+                              <span className="flex items-center gap-2.5">
+                                <span className={`shrink-0 flex items-center justify-center ${side.color}`}>
+                                  <ItemLogo size={18} />
+                                </span>
+                                {item.name}
                               </span>
-                              {item.name}
+                              <ExternalLink size={13} className={`shrink-0 opacity-40 group-hover:opacity-100 transition-opacity ${side.color}`} />
                             </span>
                             <p className={`text-xs leading-relaxed m-0 pl-7 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                               {item.detail}
                             </p>
-                          </div>
+                          </a>
                         );
                       })}
                     </div>
@@ -349,12 +355,12 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
           </div>
         </div>
 
-        {/* Part 2: 14 Integrated APIs Specification across 3 Architectural Layers */}
+        {/* Part 2: 15 Integrated APIs Specification across 3 Architectural Layers */}
         <div>
           <div className="flex items-center gap-3 mb-8">
             <Globe size={22} className="text-[#8A56FF] dark:text-[#A855F7]" />
             <h3 className={`text-xl md:text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-              14 Integrated APIs Across 3 Architectural Layers
+              15 Integrated APIs Across 3 Architectural Layers
             </h3>
           </div>
 
@@ -392,22 +398,26 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
                     {layer.apis.map((api, aIdx) => {
                       const ApiLogoComponent = api.Logo;
                       return (
-                        <div
+                        <a
                           key={aIdx}
-                          className={`p-4 rounded-2xl border flex flex-col justify-between transition-all duration-300 ${
+                          href={api.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`p-4 rounded-2xl border flex flex-col justify-between transition-all duration-300 group hover:scale-[1.02] ${
                             isDark
-                              ? 'bg-black/40 border-slate-800/80 hover:border-slate-700'
-                              : 'bg-slate-50/90 border-slate-200/70 hover:border-slate-300'
+                              ? 'bg-black/40 border-slate-800/80 hover:border-slate-600 hover:bg-black/60'
+                              : 'bg-slate-50/90 border-slate-200/70 hover:border-slate-300 hover:bg-slate-100'
                           }`}
                         >
                           <div>
                             <div className="flex items-start justify-between gap-2 mb-2">
                               <span className={`text-sm font-bold flex items-center gap-2.5 ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>
-                                <span className="shrink-0 flex items-center justify-center">
-                                  <ApiLogoComponent size={18} className={layer.color} />
+                                <span className={`shrink-0 flex items-center justify-center ${layer.color}`}>
+                                  <ApiLogoComponent size={18} />
                                 </span>
                                 {api.name}
                               </span>
+                              <ExternalLink size={13} className={`shrink-0 opacity-40 group-hover:opacity-100 transition-opacity ${layer.color}`} />
                             </div>
                             <span className={`inline-block text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md mb-2.5 border ${
                               isDark ? 'bg-white/5 border-slate-800 text-slate-400' : 'bg-white border-slate-200 text-slate-500'
@@ -418,7 +428,7 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
                               {api.purpose}
                             </p>
                           </div>
-                        </div>
+                        </a>
                       );
                     })}
                   </div>

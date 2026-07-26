@@ -77,7 +77,24 @@ export default function App() {
 
     const targetEl = document.getElementById(targetId);
     if (targetEl) {
-      targetEl.scrollIntoView({ behavior: 'smooth' });
+      const isDesktop = window.innerWidth >= 768;
+      const isLg = window.innerWidth >= 1024;
+
+      // Exact pixel offset for floating navbar (24px top + 68px navbar height = 92px on desktop; 12px top + 58px navbar height = 70px on mobile)
+      let offset = 0;
+      if (isSidebarMode && isLg) {
+        offset = 24;
+      } else {
+        offset = isDesktop ? 92 : 70;
+      }
+
+      const elementPosition = targetEl.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
     }
 
     manualScrollTimeoutRef.current = setTimeout(() => {

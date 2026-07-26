@@ -26,7 +26,7 @@ interface FooterProps {
 export default function Footer({ isDark, handleNavClick }: FooterProps) {
   return (
     <footer
-      className={`relative overflow-hidden w-full scroll-mt-[69px] md:scroll-mt-[71px] border-t py-16 md:py-20 ${
+      className={`relative overflow-hidden w-full scroll-mt-[70px] md:scroll-mt-[92px] border-t py-16 md:py-20 ${
         isDark ? 'bg-[#0E0E10] border-slate-800/80' : 'bg-[#F4F5F8] border-slate-200/80'
       }`}
     >
@@ -123,7 +123,7 @@ export default function Footer({ isDark, handleNavClick }: FooterProps) {
               City of Malolos, Bulacan, Philippines
             </p>
             <a
-              href="https://github.com"
+              href="https://github.com/bulsu-kdlantolin"
               target="_blank"
               rel="noopener noreferrer"
               className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-bold no-underline transition-transform hover:scale-105 shadow-md ${

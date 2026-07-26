@@ -102,7 +102,7 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
   return (
     <section
       id="team"
-      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
+      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[70px] md:scroll-mt-[92px] py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
         }`}
     >
       {/* Cybernetic Grid Layer */}

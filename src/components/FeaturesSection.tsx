@@ -1,4 +1,4 @@
-import { Mic, Maximize2, Volume2, Ear, BellRing, Sparkles, Download, Eye, Languages, ShieldAlert, MousePointer } from 'lucide-react';
+import { Mic, Maximize2, Volume2, Ear, BellRing, Sparkles, Download, Eye, Languages, ShieldAlert, MousePointer, Activity } from 'lucide-react';
 
 interface FeaturesSectionProps {
   isDark: boolean;
@@ -8,7 +8,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
   return (
     <section
       id="features"
-      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
+      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[70px] md:scroll-mt-[92px] py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
         }`}
     >
       {/* Cybernetic Grid Layer */}
@@ -208,7 +208,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                   <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Mouse Reader</span>
                 </div>
                 <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Hover-to-read functionality for instant text narration wherever your mouse pointer moves.
+                  Hover-to-read functionality for instant narration of the specific text element currently under your mouse pointer.
                 </p>
               </div>
 
@@ -219,7 +219,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                   <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Image Reader</span>
                 </div>
                 <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Extracts and speaks image alt text, title attributes, and accessibility descriptions out loud.
+                  Extracts and speaks existing image alt text, title attributes, and ARIA accessibility descriptions out loud.
                 </p>
               </div>
             </div>
@@ -305,7 +305,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                 <div className="space-y-3 text-xs">
                   <div className={`p-3 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
                     <span className="font-bold text-[#FF7A2F] dark:text-[#FFC09B] block mb-1">Custom Styling:</span>
-                    <p className={`m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Adjust text size, opacity, font family (OpenDyslexic, Inter, Roboto), & colors.</p>
+                    <p className={`m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Adjust text size, opacity, font family (100+ Google Fonts catalog), & colors.</p>
                   </div>
                   <div className={`p-3 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
                     <span className="font-bold text-[#FF7A2F] dark:text-[#FFC09B] block mb-1">Focus Mode:</span>
@@ -372,7 +372,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                 Auditory Micro-Accommodations (Extra Features)
               </h5>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {/* Micro 1: Sudden Sound Warning */}
               <div className={`p-5 rounded-xl border flex flex-col md:flex-row items-start md:items-center justify-between gap-4 ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
                 <div className="flex items-center gap-3">
@@ -391,6 +391,23 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                 <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold border bg-rose-500/10 text-rose-500 border-rose-500/20 uppercase tracking-wider shrink-0">
                   &gt;85dB Web Audio RMS
                 </span>
+              </div>
+
+              {/* Micro 2: Real-time Audio Visualizer */}
+              <div className={`p-5 rounded-xl border flex flex-col md:flex-row items-start md:items-center justify-between gap-4 ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-[#FF7A2F]/10 text-[#FF7A2F] flex items-center justify-center shrink-0">
+                    <Activity size={20} />
+                  </div>
+                  <div>
+                    <h6 className={`text-sm font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                      Real-time Audio Visualizer
+                    </h6>
+                    <p className={`text-xs leading-relaxed m-0 mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                      Smooth, framerate-independent FFT audio visualizer bars that provide immediate visual feedback of tab audio activity.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

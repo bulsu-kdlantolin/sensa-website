@@ -81,7 +81,7 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
   return (
     <section
       id="problem-solution"
-      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[69px] md:scroll-mt-[71px] py-20 md:py-28 border-t ${
+      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[70px] md:scroll-mt-[92px] py-20 md:py-28 border-t ${
         isDark ? 'border-slate-800/80' : 'border-slate-200/60'
       }`}
     >
@@ -212,17 +212,17 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
                   className={`relative z-20 p-5 md:p-6 rounded-[2rem] border flex items-center gap-4 transition-all duration-300 cursor-pointer transform-gpu ${
                     isSpecificHover
                       ? isDark
-                        ? 'bg-[#161618] border-red-500/80 bg-red-500/10 shadow-lg shadow-red-500/10 scale-[1.02] ring-1 ring-red-500/40'
-                        : 'bg-white border-red-300 bg-red-50/80 shadow-lg shadow-red-500/10 scale-[1.02] ring-1 ring-red-200'
+                        ? 'bg-[#291717] border-red-500/80 shadow-lg shadow-red-500/10 scale-[1.02] ring-1 ring-red-500/40'
+                        : 'bg-[#fff5f5] border-red-300 shadow-lg shadow-red-500/10 scale-[1.02] ring-1 ring-red-200'
                       : isCoreHovered
                       ? isDark
-                        ? 'bg-[#161618] border-red-500/40 bg-red-500/5'
-                        : 'bg-white border-red-200 bg-red-50/40'
+                        ? 'bg-[#1f1717] border-red-500/40'
+                        : 'bg-[#fffafa] border-red-200'
                       : isOtherHovered
                       ? 'opacity-40 scale-[0.98]'
                       : isDark
-                      ? 'bg-[#161618] border-slate-800 hover:bg-red-500/5 hover:border-red-500/30'
-                      : 'bg-white border-slate-200 shadow-sm hover:bg-red-50/50 hover:border-red-200'
+                      ? 'bg-[#161618] border-slate-800 hover:bg-[#1f1717] hover:border-red-500/30'
+                      : 'bg-white border-slate-200 shadow-sm hover:bg-[#fffafa] hover:border-red-200'
                   }`}
                 >
                   <div
@@ -398,17 +398,17 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
                   className={`relative z-20 p-5 md:p-6 rounded-[2rem] border flex items-center gap-4 transition-all duration-300 cursor-pointer transform-gpu ${
                     isSpecificHover
                       ? isDark
-                        ? 'bg-[#161618] border-emerald-500/80 bg-emerald-500/10 shadow-lg shadow-emerald-500/10 scale-[1.02] ring-1 ring-emerald-500/40'
-                        : 'bg-white border-emerald-800 bg-emerald-50/90 shadow-lg shadow-emerald-500/10 scale-[1.02] ring-1 ring-emerald-600'
+                        ? 'bg-[#13231a] border-emerald-500/80 shadow-lg shadow-emerald-500/10 scale-[1.02] ring-1 ring-emerald-500/40'
+                        : 'bg-[#f0fdf4] border-emerald-800 shadow-lg shadow-emerald-500/10 scale-[1.02] ring-1 ring-emerald-600'
                       : isCoreHovered
                       ? isDark
-                        ? 'bg-[#161618] border-emerald-500/40 bg-emerald-500/5'
-                        : 'bg-white border-emerald-500 bg-emerald-50/60'
+                        ? 'bg-[#151c18] border-emerald-500/40'
+                        : 'bg-[#f8faf9] border-emerald-500'
                       : isOtherHovered
                       ? 'opacity-40 scale-[0.98]'
                       : isDark
-                      ? 'bg-[#161618] border-slate-800 hover:border-emerald-500/40 hover:bg-emerald-500/5'
-                      : 'bg-white border-slate-200 shadow-sm hover:border-emerald-500 hover:bg-emerald-50/50'
+                      ? 'bg-[#161618] border-slate-800 hover:border-emerald-500/40 hover:bg-[#151c18]'
+                      : 'bg-white border-slate-200 shadow-sm hover:border-emerald-500 hover:bg-[#f8faf9]'
                   }`}
                 >
                   <div
