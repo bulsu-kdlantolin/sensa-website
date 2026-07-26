@@ -129,7 +129,7 @@ sensa-website/
 
 ## 👥 The Capstone Team
 
-Built with ❤️ by 3rd-Year Computer Science Students at **Bulacan State University (BulSU)**:
+Built with ❤️ by 4th Year IT Students at **Bulacan State University (BulSU)**:
 
 | Name | Role | Profile Links |
 | :--- | :--- | :--- |
