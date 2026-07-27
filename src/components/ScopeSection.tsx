@@ -1,4 +1,5 @@
 import { Server, ShieldCheck, CheckCircle2, Sparkles, Volume2, Smartphone, KeyRound, MicOff, Laptop, AlertTriangle } from 'lucide-react';
+import ScrollReveal from './ScrollReveal';
 
 interface ScopeSectionProps {
   isDark: boolean;
@@ -68,6 +69,7 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
         {/* Header */}
+        <ScrollReveal>
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className={`text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}>
             Scope & Limitations
@@ -76,10 +78,12 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
             Discover Sensa's core capabilities and current technical limitations.
           </p>
         </div>
+        </ScrollReveal>
 
         {/* 2-Column Comparative Layout: Equal Height Cards (items-stretch) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
           {/* Column 1: Project Scope (4 Items) */}
+          <ScrollReveal delay={150} className="h-full">
           <div
             className={`border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between h-full ${isDark
                 ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5'
@@ -128,8 +132,10 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
               </div>
             </div>
           </div>
+          </ScrollReveal>
 
           {/* Column 2: Technical Limitations (4 Items) */}
+          <ScrollReveal delay={300} className="h-full">
           <div
             className={`border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between h-full ${isDark
                 ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5'
@@ -178,6 +184,7 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
               </div>
             </div>
           </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

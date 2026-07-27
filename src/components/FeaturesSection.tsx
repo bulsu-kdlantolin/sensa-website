@@ -1,4 +1,5 @@
 import { Mic, Maximize2, Volume2, Ear, BellRing, Sparkles, Download, Eye, Languages, ShieldAlert, MousePointer, Activity } from 'lucide-react';
+import ScrollReveal from './ScrollReveal';
 
 interface FeaturesSectionProps {
   isDark: boolean;
@@ -28,6 +29,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
         {/* Section Main Header */}
+        <ScrollReveal>
         <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
           <h2
             className={`text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4 ${isDark ? 'text-white' : 'text-slate-900'
@@ -42,19 +44,23 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             A comprehensive suite of visual and auditory accessibility tools engineered to tear down web barriers.
           </p>
         </div>
+        </ScrollReveal>
 
         {/* ==========================================================================
            VISUAL ACCOMMODATION MODE (#0A44FF Royal Blue Theme)
            ========================================================================== */}
         <div className="mb-24">
+          <ScrollReveal delay={100}>
           <div className="flex items-center gap-3 mb-10 pb-4 border-b border-[#0A44FF]/30">
             <h3 className={`text-2xl md:text-3xl lg:text-4xl font-black m-0 tracking-tight flex items-center gap-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
               <span>👁️</span>
               <span>Visual Mode</span>
             </h3>
           </div>
+          </ScrollReveal>
 
           {/* 3 Main Visual Feature Cards */}
+          <ScrollReveal delay={200}>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch mb-10">
             {/* Card 1: Voice Command Navigation */}
             <article
@@ -175,8 +181,10 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               </div>
             </article>
           </div>
+          </ScrollReveal>
 
           {/* Visual Micro-Accommodations Banner (Extra Features) */}
+          <ScrollReveal delay={300}>
           <div
             className={`border rounded-2xl p-6 ${isDark
                 ? 'bg-[#0A44FF]/10 border-[#0A44FF]/30'
@@ -224,20 +232,24 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               </div>
             </div>
           </div>
+          </ScrollReveal>
         </div>
 
         {/* ==========================================================================
            AUDITORY ACCOMMODATION MODE (#FF7A2F Sunset Orange Theme)
            ========================================================================== */}
         <div>
+          <ScrollReveal delay={100}>
           <div className="flex items-center gap-3 mb-10 pb-4 border-b border-[#FF7A2F]/30">
             <h3 className={`text-2xl md:text-3xl lg:text-4xl font-black m-0 tracking-tight flex items-center gap-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
               <span>👂</span>
               <span>Auditory Mode</span>
             </h3>
           </div>
+          </ScrollReveal>
 
           {/* Main Auditory Feature Section: Multilingual Live Subtitles */}
+          <ScrollReveal delay={200}>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch mb-10">
             {/* Card 1: Multilingual Language Engine */}
             <article
@@ -358,8 +370,10 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               </div>
             </article>
           </div>
+          </ScrollReveal>
 
           {/* Auditory Micro-Accommodations Banner (Extra Features) */}
+          <ScrollReveal delay={300}>
           <div
             className={`border rounded-2xl p-6 ${isDark
                 ? 'bg-[#FF7A2F]/10 border-[#FF7A2F]/30'
@@ -411,6 +425,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               </div>
             </div>
           </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

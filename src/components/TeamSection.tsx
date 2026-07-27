@@ -3,6 +3,7 @@ import christianImg from '../assets/christian.png';
 import leoImg from '../assets/leo.png';
 import russellImg from '../assets/russell.png';
 import kianImg from '../assets/kian.jpg';
+import ScrollReveal from './ScrollReveal';
 
 const LinkedInIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
@@ -73,8 +74,8 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
     },
     {
       name: 'Kian Davey Antolin',
-      role: 'Developer',
-      description: 'Developed the browser extension codebase, cloud backend services, and web platform.',
+      role: 'Lead Full-Stack Developer',
+      description: 'Engineered the browser extension codebase, cloud backend API services, and web platform.',
       image: kianImg,
       imageClass: '',
       email: 'kiandaveyantolin@gmail.com',
@@ -115,6 +116,7 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
       />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
+        <ScrollReveal>
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2
             className={`text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4 ${isDark ? 'text-white' : 'text-slate-900'
@@ -129,13 +131,14 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
             Bulacan State University (BulSU) • CICT Capstone Research Team S.Y. 2026–2027.
           </p>
         </div>
+        </ScrollReveal>
 
         {/* 5-Column Responsive Team Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 items-stretch">
           {teamMembers.map((member, idx) => (
+            <ScrollReveal delay={idx * 100} key={idx} className="h-full">
             <article
-              key={idx}
-              className={`group border rounded-3xl p-6 flex flex-col items-center text-center justify-between transition-all duration-500 hover:-translate-y-2 shadow-sm hover:shadow-xl ${member.hoverBorder} ${isDark
+              className={`group border rounded-3xl p-6 flex flex-col items-center text-center justify-between transition-all duration-500 hover:-translate-y-2 shadow-sm hover:shadow-xl w-full h-full ${member.hoverBorder} ${isDark
                 ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:bg-white/[0.04]'
                 : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset hover:bg-slate-50/80'
                 }`}
@@ -199,6 +202,7 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
                 </a>
               </div>
             </article>
+            </ScrollReveal>
           ))}
         </div>
       </div>

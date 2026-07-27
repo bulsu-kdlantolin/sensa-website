@@ -2,6 +2,7 @@ import { Cpu, Server, Cloud, Globe, Mic, Volume2, Headphones, Eye, Network, Radi
 import azureLogo from '../assets/azure-logo.png';
 import plasmoLogo from '../assets/plasmo-logo.png';
 import renderLogo from '../assets/render-logo.png';
+import ScrollReveal from './ScrollReveal';
 
 interface ArchitectureSectionProps {
   isDark: boolean;
@@ -266,6 +267,7 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
         {/* Section Header */}
+        <ScrollReveal>
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className={`text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}>
             How Sensa Works
@@ -274,8 +276,10 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
             A look behind the scenes at the powerful technologies that make Sensa run smoothly and securely.
           </p>
         </div>
+        </ScrollReveal>
 
         {/* Part 1: Frontend vs Backend Core Infrastructure */}
+        <ScrollReveal delay={100}>
         <div className="mb-20">
           <div className="flex items-center gap-3 mb-8">
             <Cpu size={22} className="text-[#0A44FF] dark:text-[#6AA2FF]" aria-hidden="true" />
@@ -348,22 +352,25 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
             })}
           </div>
         </div>
+        </ScrollReveal>
 
         {/* Part 2: 15 Integrated APIs Specification across 3 Architectural Layers */}
         <div>
+          <ScrollReveal delay={150}>
           <div className="flex items-center gap-3 mb-8">
             <Globe size={22} className="text-[#8A56FF] dark:text-[#A855F7]" aria-hidden="true" />
             <h3 className={`text-2xl md:text-3xl lg:text-4xl font-black m-0 tracking-tight flex items-center gap-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
               The 3 Core Layers of Sensa
             </h3>
           </div>
+          </ScrollReveal>
 
           <div className="space-y-12">
             {architecturalLayers.map((layer, lIdx) => {
               const LayerIcon = layer.icon;
               return (
+                <ScrollReveal delay={150 + (lIdx * 100)} key={lIdx}>
                 <div
-                  key={lIdx}
                   className={`border rounded-[2.5rem] p-6 md:p-8 transition-all duration-500 relative overflow-hidden ${layer.borderHover} ${isDark
                       ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 shadow-md'
                       : 'bg-white border-slate-200/80 ring-1 ring-black/5 shadow-md'
@@ -424,6 +431,7 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
                     })}
                   </div>
                 </div>
+                </ScrollReveal>
               );
             })}
           </div>

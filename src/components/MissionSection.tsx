@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { MousePointerClick, FileText, VolumeX, BellOff, Mic, Volume2, MessageSquare, Zap } from 'lucide-react';
 import sensaLogo from '../assets/Sensa-Logo.png';
+import ScrollReveal from './ScrollReveal';
 
 interface MissionSectionProps {
   isDark: boolean;
@@ -111,6 +112,7 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
         {/* Main Title & Intro Subtitle */}
+        <ScrollReveal>
         <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
           <h2
             className={`text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-6 ${isDark ? 'text-white' : 'text-slate-900'
@@ -125,8 +127,10 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
             Most websites are not designed for people with disabilities. Sensa helps low-vision, blind, and hearing-impaired users browse the web easily.
           </p>
         </div>
+        </ScrollReveal>
 
         {/* Section Column Headers Row (Problem & Solution) - Desktop Only */}
+        <ScrollReveal delay={150}>
         <div className="hidden lg:flex w-full items-center justify-between mb-6 px-2">
           <div className="w-full lg:w-[380px] text-center">
             <h3
@@ -150,8 +154,10 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
             </h3>
           </div>
         </div>
+        </ScrollReveal>
 
         {/* Infographic Transformation Pipeline Grid */}
+        <ScrollReveal delay={250}>
         <div
           ref={problemRef}
           className={`relative w-full flex flex-col lg:flex-row items-stretch justify-between gap-12 lg:gap-0 transition-all duration-700 transform-gpu ${isProblemVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
@@ -431,6 +437,7 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
             })}
           </div>
         </div>
+        </ScrollReveal>
       </div>
     </section>
   );

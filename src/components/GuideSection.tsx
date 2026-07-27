@@ -1,29 +1,7 @@
 import { Download, MonitorPlay, Mic, ArrowUpRight } from 'lucide-react';
 
-const ChromeIcon = ({ size = 18, className = "" }: { size?: number; className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" height={size} width={size} className={className}>
-    <defs>
-      <linearGradient id="chrome-a-guide" x1="3.2173" y1="15" x2="44.7812" y2="15" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stopColor="#d93025" />
-        <stop offset="1" stopColor="#ea4335" />
-      </linearGradient>
-      <linearGradient id="chrome-b-guide" x1="20.7219" y1="47.6791" x2="41.5039" y2="11.6837" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stopColor="#fcc934" />
-        <stop offset="1" stopColor="#fbbc04" />
-      </linearGradient>
-      <linearGradient id="chrome-c-guide" x1="26.5981" y1="46.5015" x2="5.8161" y2="10.506" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stopColor="#1e8e3e" />
-        <stop offset="1" stopColor="#34a853" />
-      </linearGradient>
-    </defs>
-    <circle cx="24" cy="23.9947" r="12" fill="#fff" />
-    <path d="M3.2154,36A24,24,0,1,0,12,3.2154,24,24,0,0,0,3.2154,36ZM34.3923,18A12,12,0,1,1,18,13.6077,12,12,0,0,1,34.3923,18Z" fill="none" />
-    <path d="M24,12H44.7812a23.9939,23.9939,0,0,0-41.5639.0029L13.6079,30l.0093-.0024A11.9852,11.9852,0,0,1,24,12Z" fill="url(#chrome-a-guide)" />
-    <circle cx="24" cy="24" r="9.5" fill="#1a73e8" />
-    <path d="M34.3913,30.0029,24.0007,48A23.994,23.994,0,0,0,44.78,12.0031H23.9989l-.0025.0093A11.985,11.985,0,0,1,34.3913,30.0029Z" fill="url(#chrome-b-guide)" />
-    <path d="M13.6086,30.0031,3.218,12.006A23.994,23.994,0,0,0,24.0025,48L34.3931,30.0029l-.0067-.0068a11.9852,11.9852,0,0,1-20.7778.007Z" fill="url(#chrome-c-guide)" />
-  </svg>
-);
+import chromeWebStoreLogo from '../assets/chrome-webstore.svg';
+import ScrollReveal from './ScrollReveal';
 
 interface GuideSectionProps {
   isDark: boolean;
@@ -40,6 +18,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
       <div className="absolute inset-0 bg-grid-pattern pointer-events-none [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_75%,transparent_100%)] -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
+        <ScrollReveal>
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2
             className={`text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter mb-4 ${isDark ? 'text-white' : 'text-slate-900'
@@ -54,10 +33,11 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
             Start using Sensa on any Google Chrome browser in 3 simple steps.
           </p>
         </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {/* Column 1: Quick Installation */}
-          <div className="flex flex-col gap-6">
+          <ScrollReveal delay={100} className="flex flex-col gap-6">
             <div className="flex items-center gap-3 mb-2">
               <div
                 className={`p-2 rounded-lg ${isDark ? 'bg-purple-500/20 text-purple-400' : 'bg-purple-100 text-purple-600'
@@ -101,11 +81,11 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                 rel="noopener noreferrer"
                 className={`inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-xs font-mono font-bold no-underline transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                   isDark
-                    ? 'bg-white text-slate-900 hover:bg-slate-100 focus-visible:ring-white focus-visible:ring-offset-[#161618]'
-                    : 'bg-slate-900 text-white hover:bg-slate-800 focus-visible:ring-slate-900 focus-visible:ring-offset-white'
+                    ? 'bg-[#FF7A2F] text-white hover:bg-[#E65C00] focus-visible:ring-[#FF7A2F] focus-visible:ring-offset-[#161618]'
+                    : 'bg-[#0A44FF] text-white hover:bg-[#0038E0] focus-visible:ring-[#0A44FF] focus-visible:ring-offset-white'
                 }`}
               >
-                <ChromeIcon size={18} />
+                <img src={chromeWebStoreLogo} alt="Chrome Web Store" className="w-[18px] h-[18px] shrink-0" />
                 <span>Get Sensa Extension</span>
                 <ArrowUpRight size={14} aria-hidden="true" />
               </a>
@@ -150,10 +130,10 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                 Sensa requires microphone permissions for Voice Commands and tab audio capture for Live Captions. Grant access when prompted.
               </p>
             </article>
-          </div>
+          </ScrollReveal>
 
-          {/* Column 2: User Walkthrough */}
-          <div className="flex flex-col gap-6">
+          {/* Column 2: Browser Setup & Usage */}
+          <ScrollReveal delay={200} className="flex flex-col gap-6">
             <div className="flex items-center gap-3 mb-2">
               <div
                 className={`p-2 rounded-lg ${isDark ? 'bg-[#0A44FF]/20 text-[#6AA2FF]' : 'bg-[#0A44FF]/10 text-[#0A44FF]'
@@ -240,7 +220,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                 </li>
               </ul>
             </article>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>
