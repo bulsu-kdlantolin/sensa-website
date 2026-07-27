@@ -96,10 +96,14 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
 
               {/* Direct Chrome Store Download CTA Button */}
               <a
-                href="https://chromewebstore.google.com"
+                href="https://chromewebstore.google.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl bg-[#0A44FF] hover:bg-[#0038E0] text-white text-xs font-mono font-bold no-underline transition-all duration-300 hover:scale-[1.02] shadow-md shadow-[#0A44FF]/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF]"
+                className={`inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-xs font-mono font-bold no-underline transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5 shadow-md hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+                  isDark
+                    ? 'bg-white text-slate-900 hover:bg-slate-100 focus-visible:ring-white focus-visible:ring-offset-[#161618]'
+                    : 'bg-slate-900 text-white hover:bg-slate-800 focus-visible:ring-slate-900 focus-visible:ring-offset-white'
+                }`}
               >
                 <ChromeIcon size={18} />
                 <span>Get Sensa Extension</span>
