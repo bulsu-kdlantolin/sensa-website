@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Target, Sparkles, MonitorPlay, Download, ShieldAlert, Users, Cpu } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 
 import Navbar, { type NavItem } from './components/Navbar';
 import HeroSection from './components/HeroSection';
@@ -202,6 +203,7 @@ export default function App() {
 
       {/* Footer */}
       <Footer isDark={isDark} />
+      <Analytics />
     </div>
   );
 }
