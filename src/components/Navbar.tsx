@@ -1,4 +1,5 @@
-import { Sun, Moon, PanelLeft, PanelTop } from 'lucide-react';
+import { useState } from 'react';
+import { Sun, Moon, PanelLeft, PanelTop, Menu, X } from 'lucide-react';
 import sensaLogo from '../assets/Sensa-Logo.png';
 
 export interface NavItem {
@@ -27,6 +28,13 @@ export default function Navbar({
   activeSection,
   handleNavClick,
 }: NavbarProps) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleMobileNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    setIsMobileMenuOpen(false);
+    handleNavClick(e, targetId);
+  };
+
   return (
     <>
       {/* TOP NAVBAR (Horizontal) */}
@@ -41,11 +49,11 @@ export default function Navbar({
             : 'bg-white/70 border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-slate-200/50'
         }`}
       >
-        <div className="w-full flex items-center justify-between gap-4 md:gap-8">
+        <div className="w-full flex items-center justify-between gap-2 md:gap-8">
           <a
             href="#hero"
             onClick={(e) => handleNavClick(e, 'hero')}
-            className="flex items-center gap-3 md:gap-3.5 no-underline group shrink-0 select-none"
+            className="flex items-center gap-2 md:gap-3.5 no-underline group shrink-0 select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] rounded-lg"
           >
             <img
               src={sensaLogo}
@@ -61,9 +69,9 @@ export default function Navbar({
             </span>
           </a>
 
-          <nav aria-label="Main Navigation" className="hidden lg:flex items-center justify-center flex-1 mx-4 lg:mx-8">
+          <nav aria-label="Main Navigation" className="hidden xl:flex items-center justify-center flex-1 mx-2 xl:mx-4 2xl:mx-8">
             <ul
-              className={`flex items-center justify-center gap-4 lg:gap-8 xl:gap-10 w-full list-none m-0 p-0 text-xs font-mono font-bold uppercase tracking-widest ${
+              className={`flex items-center justify-center gap-2 lg:gap-3 xl:gap-5 2xl:gap-10 w-full list-none m-0 p-0 text-xs font-mono font-bold uppercase tracking-widest ${
                 isDark ? 'text-slate-400' : 'text-slate-600'
               }`}
             >
@@ -75,7 +83,7 @@ export default function Navbar({
                       href={item.href}
                       onClick={(e) => handleNavClick(e, item.id)}
                       aria-current={isSelected ? 'page' : undefined}
-                      className={`relative py-1.5 px-3 transition-colors duration-200 group no-underline block whitespace-nowrap ${
+                      className={`relative py-1.5 px-3 transition-colors duration-200 group no-underline block whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] rounded-md ${
                         isSelected
                           ? isDark
                             ? 'text-[#FF7A2F] font-extrabold'
@@ -104,24 +112,37 @@ export default function Navbar({
             </ul>
           </nav>
 
-          <div className="flex items-center shrink-0">
+          <div className="flex items-center gap-2 shrink-0">
+            {/* Mobile Menu Toggle Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className={`flex xl:hidden p-2 rounded-full border backdrop-blur-md transition-all duration-300 ${
+                isDark
+                  ? 'bg-[#24262B]/80 border-slate-800 hover:bg-slate-800 text-slate-400 hover:text-white'
+                  : 'bg-slate-100/80 border-slate-200/60 hover:bg-slate-200 text-slate-500 hover:text-slate-900'
+              }`}
+              aria-label={isMobileMenuOpen ? "Close Menu" : "Open Menu"}
+            >
+              {isMobileMenuOpen ? <X size={16} aria-hidden="true" /> : <Menu size={16} aria-hidden="true" />}
+            </button>
             <button
               onClick={() => setIsSidebarMode(true)}
-              className={`hidden lg:flex mr-4 p-2 rounded-full border backdrop-blur-md transition-all duration-300 ${
+              className={`hidden xl:flex mr-4 p-2 rounded-full border backdrop-blur-md transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] ${
                 isDark
                   ? 'bg-[#24262B]/80 border-slate-800 hover:bg-slate-800 text-slate-400 hover:text-white'
                   : 'bg-slate-100/80 border-slate-200/60 hover:bg-slate-200 text-slate-500 hover:text-slate-900'
               }`}
               title="Switch to Sidebar Layout"
+              aria-label="Switch to Sidebar Layout"
             >
-              <PanelLeft size={16} />
+              <PanelLeft size={16} aria-hidden="true" />
             </button>
             <button
               onClick={() => setTheme(isDark ? 'light' : 'dark')}
               role="switch"
               aria-checked={isDark}
               aria-label={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-              className={`flex items-center justify-center w-9 h-9 rounded-full border backdrop-blur-md transition-all duration-300 ${
+              className={`flex items-center justify-center w-9 h-9 rounded-full border backdrop-blur-md transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] ${
                 isDark
                   ? 'bg-[#24262B]/80 border-slate-800 hover:bg-slate-800 text-[#FF7A2F]'
                   : 'bg-slate-100/80 border-slate-200/60 hover:bg-slate-200 text-[#0A44FF]'
@@ -131,12 +152,14 @@ export default function Navbar({
               <div className="relative w-4 h-4 flex items-center justify-center">
                 <Sun
                   size={16}
+                  aria-hidden="true"
                   className={`absolute transition-all duration-500 ${
                     isDark ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'
                   }`}
                 />
                 <Moon
                   size={16}
+                  aria-hidden="true"
                   className={`absolute transition-all duration-500 ${
                     !isDark ? '-rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'
                   }`}
@@ -147,9 +170,50 @@ export default function Navbar({
         </div>
       </header>
 
+      {/* MOBILE MENU OVERLAY (Dropdown) */}
+      <div
+        className={`fixed inset-x-3 top-[76px] z-40 xl:hidden flex flex-col backdrop-blur-xl border py-4 px-4 rounded-3xl shadow-2xl transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-top ${
+          isMobileMenuOpen ? 'scale-y-100 opacity-100 pointer-events-auto' : 'scale-y-95 opacity-0 pointer-events-none'
+        } ${
+          isDark
+            ? 'bg-[#1C1C1E]/90 border-white/10 ring-1 ring-white/5 ring-inset shadow-black/60'
+            : 'bg-white/95 border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-slate-200/60'
+        }`}
+      >
+        <nav aria-label="Mobile Navigation" className="flex flex-col">
+          <ul className="flex flex-col gap-1.5 list-none p-0 m-0 w-full">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isSelected = activeSection === item.id;
+              return (
+                <li key={item.id} className="w-full">
+                  <a
+                    href={item.href}
+                    onClick={(e) => handleMobileNavClick(e, item.id)}
+                    className={`flex items-center gap-4 py-3.5 px-4 rounded-2xl font-bold uppercase tracking-widest text-xs transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0A44FF] ${
+                      isSelected
+                        ? isDark
+                          ? 'text-[#FF7A2F] bg-[#FF7A2F]/10'
+                          : 'text-[#0A44FF] bg-[#0A44FF]/10'
+                        : isDark
+                        ? 'text-slate-300 hover:bg-white/5'
+                        : 'text-slate-600 hover:bg-black/5'
+                    }`}
+                  >
+                    <Icon size={16} aria-hidden="true" />
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      </div>
+
+
       {/* LEFT SIDEBAR (Vertical) - Desktop Only */}
       <header
-        className={`fixed hidden lg:flex flex-col items-center justify-between z-50 backdrop-blur-xl border shadow-lg transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] top-6 left-6 bottom-6 w-[80px] rounded-[2rem] py-8 px-4 ${
+        className={`fixed hidden xl:flex flex-col items-center justify-between z-50 backdrop-blur-xl border shadow-lg transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] top-6 left-6 bottom-6 w-[80px] rounded-[2rem] py-8 px-4 ${
           isSidebarMode ? 'translate-x-0 opacity-100' : '-translate-x-[150%] opacity-0 pointer-events-none'
         } ${
           isDark
@@ -160,7 +224,7 @@ export default function Navbar({
         <a
           href="#hero"
           onClick={(e) => handleNavClick(e, 'hero')}
-          className="flex items-center justify-center no-underline group shrink-0 select-none w-full"
+          className="flex items-center justify-center no-underline group shrink-0 select-none w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] rounded-xl"
         >
           <img
             src={sensaLogo}
@@ -184,7 +248,8 @@ export default function Navbar({
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.id)}
                     aria-current={isSelected ? 'page' : undefined}
-                    className={`relative flex items-center justify-center transition-colors duration-200 group no-underline whitespace-nowrap w-12 h-12 rounded-xl ${
+                    aria-label={item.label}
+                    className={`relative flex items-center justify-center transition-colors duration-200 group no-underline whitespace-nowrap w-12 h-12 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0A44FF] ${
                       isSelected
                         ? isDark
                           ? 'text-[#FF7A2F] bg-[#FF7A2F]/10 font-extrabold'
@@ -194,7 +259,7 @@ export default function Navbar({
                         : 'hover:text-[#0A44FF]'
                     }`}
                   >
-                    <Icon size={20} />
+                    <Icon size={20} aria-hidden="true" />
                     <span
                       className={`absolute left-full ml-4 px-3 py-1.5 rounded-lg text-xs font-bold opacity-0 -translate-x-4 pointer-events-none transition-all duration-300 group-hover/item:opacity-100 group-hover/item:translate-x-0 whitespace-nowrap shadow-xl ${
                         isDark
@@ -214,21 +279,22 @@ export default function Navbar({
         <div className="flex flex-col items-center gap-4 w-full mt-auto">
           <button
             onClick={() => setIsSidebarMode(false)}
-            className={`flex p-2 rounded-full border backdrop-blur-md transition-all duration-300 ${
+            className={`flex p-2 rounded-full border backdrop-blur-md transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0A44FF] ${
               isDark
                 ? 'bg-[#24262B]/80 border-slate-800 hover:bg-slate-800 text-slate-400 hover:text-white'
                 : 'bg-slate-100/80 border-slate-200/60 hover:bg-slate-200 text-slate-500 hover:text-slate-900'
             }`}
             title="Switch to Top Navbar Layout"
+            aria-label="Switch to Top Navbar Layout"
           >
-            <PanelTop size={16} />
+            <PanelTop size={16} aria-hidden="true" />
           </button>
           <button
             onClick={() => setTheme(isDark ? 'light' : 'dark')}
             role="switch"
             aria-checked={isDark}
             aria-label={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-            className={`flex items-center justify-center w-9 h-9 rounded-full border backdrop-blur-md transition-all duration-300 ${
+            className={`flex items-center justify-center w-9 h-9 rounded-full border backdrop-blur-md transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0A44FF] ${
               isDark
                 ? 'bg-[#24262B]/80 border-slate-800 hover:bg-slate-800 text-[#FF7A2F]'
                 : 'bg-slate-100/80 border-slate-200/60 hover:bg-slate-200 text-[#0A44FF]'
@@ -241,13 +307,13 @@ export default function Navbar({
                 className={`absolute transition-all duration-500 ${
                   isDark ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'
                 }`}
-              />
+               aria-hidden="true"/>
               <Moon
                 size={16}
                 className={`absolute transition-all duration-500 ${
                   !isDark ? '-rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'
                 }`}
-              />
+               aria-hidden="true"/>
             </div>
           </button>
         </div>

@@ -33,9 +33,8 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
   return (
     <section
       id="guide"
-      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[70px] md:scroll-mt-[92px] py-20 md:py-28 border-t ${
-        isDark ? 'border-slate-800/80' : 'border-slate-200/60'
-      }`}
+      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
+        }`}
     >
       {/* Cybernetic Grid Layer */}
       <div className="absolute inset-0 bg-grid-pattern pointer-events-none [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_75%,transparent_100%)] -z-10" />
@@ -43,16 +42,14 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
       <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2
-            className={`text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter mb-4 ${
-              isDark ? 'text-white' : 'text-slate-900'
-            }`}
+            className={`text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter mb-4 ${isDark ? 'text-white' : 'text-slate-900'
+              }`}
           >
             Installation & User Walkthrough
           </h2>
           <p
-            className={`text-base md:text-lg leading-relaxed font-normal ${
-              isDark ? 'text-slate-400' : 'text-slate-600'
-            }`}
+            className={`text-base md:text-lg leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'
+              }`}
           >
             Start using Sensa on any Google Chrome browser in 3 simple steps.
           </p>
@@ -63,11 +60,10 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-3 mb-2">
               <div
-                className={`p-2 rounded-lg ${
-                  isDark ? 'bg-purple-500/20 text-purple-400' : 'bg-purple-100 text-purple-600'
-                }`}
+                className={`p-2 rounded-lg ${isDark ? 'bg-purple-500/20 text-purple-400' : 'bg-purple-100 text-purple-600'
+                  }`}
               >
-                <Download size={24} />
+                <Download size={24} aria-hidden="true" />
               </div>
               <h3 className={`text-2xl font-bold tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
                 Part 1: Quick Installation
@@ -76,11 +72,10 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
 
             {/* Step 1 */}
             <article
-              className={`border rounded-2xl p-6 transition-all duration-300 ${
-                isDark
+              className={`border rounded-2xl p-6 transition-all duration-300 ${isDark
                   ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset'
                   : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-sm'
-              }`}
+                }`}
             >
               <div className="flex items-center justify-between gap-4 mb-4">
                 <div className="flex items-center gap-4">
@@ -98,27 +93,26 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
               <p className={`text-sm leading-relaxed mb-5 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                 Navigate to the Chrome Web Store and click <strong>Add to Chrome</strong>. Sensa installs in seconds and is completely free.
               </p>
-              
+
               {/* Direct Chrome Store Download CTA Button */}
               <a
                 href="https://chromewebstore.google.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl bg-[#0A44FF] hover:bg-[#0038E0] text-white text-xs font-mono font-bold no-underline transition-all duration-300 hover:scale-[1.02] shadow-md shadow-[#0A44FF]/25"
+                className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl bg-[#0A44FF] hover:bg-[#0038E0] text-white text-xs font-mono font-bold no-underline transition-all duration-300 hover:scale-[1.02] shadow-md shadow-[#0A44FF]/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF]"
               >
                 <ChromeIcon size={18} />
                 <span>Get Sensa Extension</span>
-                <ArrowUpRight size={14} />
+                <ArrowUpRight size={14} aria-hidden="true" />
               </a>
             </article>
 
             {/* Step 2 */}
             <article
-              className={`border rounded-2xl p-6 transition-all duration-300 ${
-                isDark
+              className={`border rounded-2xl p-6 transition-all duration-300 ${isDark
                   ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset'
                   : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-sm'
-              }`}
+                }`}
             >
               <div className="flex items-center gap-4 mb-4">
                 <span className="w-8 h-8 rounded-full bg-purple-500/15 text-purple-500 font-bold flex items-center justify-center border border-purple-500/30 shrink-0">
@@ -135,11 +129,10 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
 
             {/* Step 3 */}
             <article
-              className={`border rounded-2xl p-6 transition-all duration-300 ${
-                isDark
+              className={`border rounded-2xl p-6 transition-all duration-300 ${isDark
                   ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset'
                   : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-sm'
-              }`}
+                }`}
             >
               <div className="flex items-center gap-4 mb-4">
                 <span className="w-8 h-8 rounded-full bg-purple-500/15 text-purple-500 font-bold flex items-center justify-center border border-purple-500/30 shrink-0">
@@ -159,11 +152,10 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-3 mb-2">
               <div
-                className={`p-2 rounded-lg ${
-                  isDark ? 'bg-[#0A44FF]/20 text-[#6AA2FF]' : 'bg-[#0A44FF]/10 text-[#0A44FF]'
-                }`}
+                className={`p-2 rounded-lg ${isDark ? 'bg-[#0A44FF]/20 text-[#6AA2FF]' : 'bg-[#0A44FF]/10 text-[#0A44FF]'
+                  }`}
               >
-                <MonitorPlay size={24} />
+                <MonitorPlay size={24} aria-hidden="true" />
               </div>
               <h3 className={`text-2xl font-bold tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
                 Part 2: User Walkthrough
@@ -172,19 +164,17 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
 
             {/* Step 1 */}
             <article
-              className={`border rounded-2xl p-6 transition-all duration-300 ${
-                isDark
+              className={`border rounded-2xl p-6 transition-all duration-300 ${isDark
                   ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset'
                   : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-sm'
-              }`}
+                }`}
             >
               <div className="flex items-center gap-4 mb-4">
                 <span
-                  className={`w-8 h-8 rounded-full font-bold flex items-center justify-center border shrink-0 ${
-                    isDark
+                  className={`w-8 h-8 rounded-full font-bold flex items-center justify-center border shrink-0 ${isDark
                       ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30'
                       : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20'
-                  }`}
+                    }`}
                 >
                   1
                 </span>
@@ -196,12 +186,11 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                 Click the Sensa icon in your toolbar to open the Welcome popup. You will be prompted to grant Microphone permissions for voice commands and AI Captions. Speak <strong>"Activate Visual Mode"</strong> or <strong>"Activate Auditory Mode"</strong> to proceed.
               </p>
               <div
-                className={`w-full h-24 rounded-xl flex items-center justify-center border ${
-                  isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200/80'
-                }`}
+                className={`w-full h-24 rounded-xl flex items-center justify-center border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200/80'
+                  }`}
               >
                 <div className="flex flex-col items-center gap-2">
-                  <Mic size={24} className={isDark ? 'text-[#6AA2FF]' : 'text-[#0A44FF]'} />
+                  <Mic size={24} className={isDark ? 'text-[#6AA2FF]' : 'text-[#0A44FF]'} aria-hidden="true" />
                   <span className={`text-xs font-mono ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
                     Listening for mode selection...
                   </span>
@@ -211,19 +200,17 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
 
             {/* Step 2 */}
             <article
-              className={`border rounded-2xl p-6 transition-all duration-300 ${
-                isDark
+              className={`border rounded-2xl p-6 transition-all duration-300 ${isDark
                   ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset'
                   : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-sm'
-              }`}
+                }`}
             >
               <div className="flex items-center gap-4 mb-4">
                 <span
-                  className={`w-8 h-8 rounded-full font-bold flex items-center justify-center border shrink-0 ${
-                    isDark
+                  className={`w-8 h-8 rounded-full font-bold flex items-center justify-center border shrink-0 ${isDark
                       ? 'bg-[#0A44FF]/15 text-[#6AA2FF] border-[#0A44FF]/30'
                       : 'bg-[#0A44FF]/10 text-[#0A44FF] border-[#0A44FF]/20'
-                  }`}
+                    }`}
                 >
                   2
                 </span>

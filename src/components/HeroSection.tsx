@@ -1,6 +1,6 @@
 interface HeroSectionProps {
   isDark: boolean;
-  handleNavClick: (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => void;
+  handleNavClick?: (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => void;
 }
 
 const ChromeIcon = ({ size = 22, className = '' }: { size?: number; className?: string }) => (
@@ -28,11 +28,11 @@ const ChromeIcon = ({ size = 22, className = '' }: { size?: number; className?: 
   </svg>
 );
 
-export default function HeroSection({ isDark, handleNavClick }: HeroSectionProps) {
+export default function HeroSection({ isDark }: HeroSectionProps) {
   return (
     <section
       id="hero"
-      className="relative w-full min-h-screen flex flex-col justify-center scroll-mt-[70px] md:scroll-mt-[92px] pt-28 pb-24 md:pt-36 md:pb-32 px-4 md:px-8 overflow-hidden"
+      className="relative w-full min-h-screen flex flex-col justify-center pt-28 pb-24 md:pt-36 md:pb-32 px-4 md:px-8 overflow-hidden"
     >
       {/* Hero Cybernetic Grid Layer */}
       <div className="absolute inset-0 bg-grid-pattern pointer-events-none [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_75%,transparent_100%)] -z-10" />
@@ -80,7 +80,7 @@ export default function HeroSection({ isDark, handleNavClick }: HeroSectionProps
         </svg>
         {/* Ambient Background Glow behind the nodes */}
         <div
-          className={`absolute w-[600px] h-[400px] rounded-full blur-[120px] bg-gradient-to-tr from-[#0A44FF] to-[#8A56FF] ${
+          className={`hidden md:block absolute w-[600px] h-[400px] rounded-full blur-[120px] bg-gradient-to-tr from-[#0A44FF] to-[#8A56FF] ${
             isDark ? 'opacity-10' : 'opacity-5'
           }`}
         />
@@ -116,8 +116,9 @@ export default function HeroSection({ isDark, handleNavClick }: HeroSectionProps
           />
 
           <a
-            href="#guide"
-            onClick={(e) => handleNavClick(e, 'guide')}
+            href="https://chromewebstore.google.com/"
+            target="_blank"
+            rel="noopener noreferrer"
             className={`relative z-10 inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-full font-bold text-base transition-all duration-300 ease-out active:scale-[0.98] focus:ring-2 focus:ring-offset-2 focus:outline-none no-underline shadow-sm hover:-translate-y-0.5 hover:shadow-xl border ${
               isDark
                 ? 'bg-[#1C1C1E] hover:bg-[#2C2C2E] border-slate-700/50 text-white focus:ring-[#FF7A2F] focus:ring-offset-[#09090B] hover:border-slate-600'

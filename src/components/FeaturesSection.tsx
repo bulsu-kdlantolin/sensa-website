@@ -8,7 +8,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
   return (
     <section
       id="features"
-      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[70px] md:scroll-mt-[92px] py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
+      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
         }`}
     >
       {/* Cybernetic Grid Layer */}
@@ -67,7 +67,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] flex items-center justify-center shrink-0">
-                    <Mic size={24} />
+                    <Mic size={24}  aria-hidden="true"/>
                   </div>
                   <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold border bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] border-[#0A44FF]/20 uppercase tracking-wider">
                     Voice Recognition
@@ -77,7 +77,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                   Voice Command Navigation
                 </h4>
                 <p className={`text-sm leading-relaxed mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Hands-free voice recognition powered by intelligent fuzzy string matching to understand user speech seamlessly.
+                  Control the website using just your voice. Our smart system understands what you say, even if you don't say the command perfectly.
                 </p>
 
                 <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
@@ -106,7 +106,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] flex items-center justify-center shrink-0">
-                    <Volume2 size={24} />
+                    <Volume2 size={24}  aria-hidden="true"/>
                   </div>
                   <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold border bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] border-[#0A44FF]/20 uppercase tracking-wider">
                     Text-to-Speech
@@ -116,7 +116,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                   Screen Reader (TTS Engine)
                 </h4>
                 <p className={`text-sm leading-relaxed mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Intelligent paragraph-by-paragraph webpage narrator with full DOM tracking and highlight synchronization.
+                  A smart reader that reads the webpage out loud to you. It highlights each paragraph as it reads so you never lose your place.
                 </p>
 
                 <div className="space-y-3 text-xs">
@@ -143,32 +143,32 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] flex items-center justify-center shrink-0">
-                    <Maximize2 size={24} />
+                    <Maximize2 size={24}  aria-hidden="true"/>
                   </div>
                   <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold border bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] border-[#0A44FF]/20 uppercase tracking-wider">
-                    DOM Tracking Lens
+                    Magnifying Glass
                   </span>
                 </div>
                 <h4 className={`text-xl font-bold tracking-tight mb-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                  Screen Magnifier Lens
+                  Screen Magnifier
                 </h4>
                 <p className={`text-sm leading-relaxed mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Dynamic floating circular magnifier lens for instantaneous element inspection and low-vision reading clarity.
+                  A floating magnifying glass that helps you read small text easily.
                 </p>
 
                 <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
                   <ul className="space-y-2 text-xs m-0 p-0 list-none">
                     <li className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#0A44FF]" />
-                      <span className={isDark ? 'text-slate-300' : 'text-slate-700'}><strong>0ms Instant Pop-In:</strong> Zero delay lens overlay</span>
+                      <span className={isDark ? 'text-slate-300' : 'text-slate-700'}><strong>Instant Display:</strong> Appears the second you need it.</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#0A44FF]" />
-                      <span className={isDark ? 'text-slate-300' : 'text-slate-700'}><strong>Live DOM Tracking:</strong> Locks onto active DOM elements</span>
+                      <span className={isDark ? 'text-slate-300' : 'text-slate-700'}><strong>Smart Tracking:</strong> Follows the text you are currently reading.</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#0A44FF]" />
-                      <span className={isDark ? 'text-slate-300' : 'text-slate-700'}><strong>Adjustable Zoom:</strong> Multi-level zoom scaling</span>
+                      <span className={isDark ? 'text-slate-300' : 'text-slate-700'}><strong>Adjustable Zoom:</strong> Make text as big as you need.</span>
                     </li>
                   </ul>
                 </div>
@@ -184,42 +184,42 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               }`}
           >
             <div className="flex items-center gap-2 mb-4">
-              <Sparkles size={18} className="text-[#0A44FF] dark:text-[#6AA2FF]" />
+              <Sparkles size={18} className="text-[#0A44FF] dark:text-[#6AA2FF]"  aria-hidden="true"/>
               <h5 className={`text-sm font-mono font-bold uppercase tracking-wider ${isDark ? 'text-[#6AA2FF]' : 'text-[#0A44FF]'}`}>
-                Visual Micro-Accommodations (Extra Features)
+                Helpful Visual Extras
               </h5>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Micro 1: Voice Guide */}
               <div className={`p-4 rounded-xl border ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
                 <div className="flex items-center gap-2 mb-1.5">
-                  <Mic size={16} className="text-[#0A44FF] dark:text-[#6AA2FF]" />
+                  <Mic size={16} className="text-[#0A44FF] dark:text-[#6AA2FF]"  aria-hidden="true"/>
                   <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Voice Guide</span>
                 </div>
                 <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Audio hover feedback (<code className="text-[10px] font-mono">useUIHoverAudio</code>) that speaks button and UI element names when hovered.
+                  Hear the names of buttons when you rest your mouse over them.
                 </p>
               </div>
 
-              {/* Micro 2: Mouse Reader */}
+              {/* Micro 2: Highlight Reader */}
               <div className={`p-4 rounded-xl border ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
                 <div className="flex items-center gap-2 mb-1.5">
-                  <MousePointer size={16} className="text-[#0A44FF] dark:text-[#6AA2FF]" />
-                  <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Mouse Reader</span>
+                  <MousePointer size={16} className="text-[#0A44FF] dark:text-[#6AA2FF]"  aria-hidden="true"/>
+                  <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Highlight Reader</span>
                 </div>
                 <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Hover-to-read functionality for instant narration of the specific text element currently under your mouse pointer.
+                  Highlight any text with your mouse to instantly hear it read out loud.
                 </p>
               </div>
 
               {/* Micro 3: Image Reader */}
               <div className={`p-4 rounded-xl border ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
                 <div className="flex items-center gap-2 mb-1.5">
-                  <Eye size={16} className="text-[#0A44FF] dark:text-[#6AA2FF]" />
+                  <Eye size={16} className="text-[#0A44FF] dark:text-[#6AA2FF]"  aria-hidden="true"/>
                   <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Image Reader</span>
                 </div>
                 <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Extracts and speaks existing image alt text, title attributes, and ARIA accessibility descriptions out loud.
+                  Reads hidden text descriptions of images out loud so you know what the picture is.
                 </p>
               </div>
             </div>
@@ -250,7 +250,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] flex items-center justify-center shrink-0">
-                    <Languages size={24} />
+                    <Languages size={24}  aria-hidden="true"/>
                   </div>
                   <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold border bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] border-[#FF7A2F]/20 uppercase tracking-wider">
                     Language Matrix
@@ -260,7 +260,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                   Multilingual AI Subtitles
                 </h4>
                 <p className={`text-sm leading-relaxed mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Real-time speech transcription powered by Deepgram Nova-3 and instant neural translation via Azure Translator.
+                  Instantly turns any spoken audio into subtitles and translates it into your preferred language.
                 </p>
 
                 <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
@@ -289,7 +289,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] flex items-center justify-center shrink-0">
-                    <Ear size={24} />
+                    <Ear size={24}  aria-hidden="true"/>
                   </div>
                   <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold border bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] border-[#FF7A2F]/20 uppercase tracking-wider">
                     Custom Subtitle Studio
@@ -299,7 +299,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                   Caption Styling & Focus Mode
                 </h4>
                 <p className={`text-sm leading-relaxed mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Fully customizable subtitle overlay with page dimming Focus Mode for maximum readability.
+                  Make subtitles look exactly how you want, and dim the rest of the page to help you focus.
                 </p>
 
                 <div className="space-y-3 text-xs">
@@ -326,7 +326,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] flex items-center justify-center shrink-0">
-                    <Download size={24} />
+                    <Download size={24}  aria-hidden="true"/>
                   </div>
                   <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold border bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] border-[#FF7A2F]/20 uppercase tracking-wider">
                     Transcript History
@@ -336,7 +336,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                   Transcript Logging Drawer
                 </h4>
                 <p className={`text-sm leading-relaxed mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Complete transcript drawer recording spoken audio and translated subtitles with 1-click export.
+                  Saves everything that was spoken so you can read it later or download it to your computer.
                 </p>
 
                 <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
@@ -367,9 +367,9 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               }`}
           >
             <div className="flex items-center gap-2 mb-4">
-              <BellRing size={18} className="text-[#FF7A2F] dark:text-[#FFC09B]" />
+              <BellRing size={18} className="text-[#FF7A2F] dark:text-[#FFC09B]"  aria-hidden="true"/>
               <h5 className={`text-sm font-mono font-bold uppercase tracking-wider ${isDark ? 'text-[#FFC09B]' : 'text-[#FF7A2F]'}`}>
-                Auditory Micro-Accommodations (Extra Features)
+                Helpful Auditory Extras
               </h5>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -377,19 +377,19 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               <div className={`p-5 rounded-xl border flex flex-col md:flex-row items-start md:items-center justify-between gap-4 ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center shrink-0">
-                    <ShieldAlert size={20} />
+                    <ShieldAlert size={20}  aria-hidden="true"/>
                   </div>
                   <div>
                     <h6 className={`text-sm font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
                       Sudden Sound Warning (Loud Noise Alert)
                     </h6>
                     <p className={`text-xs leading-relaxed m-0 mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                      Real-time Web Audio API RMS analyzer that monitors live tab decibels and flashes a visual warning pop-up whenever sudden loud noises (&gt;85dB) occur for deaf and hard-of-hearing users.
+                      Flashes a visual warning on your screen if a sudden loud noise plays, protecting your ears.
                     </p>
                   </div>
                 </div>
                 <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold border bg-rose-500/10 text-rose-500 border-rose-500/20 uppercase tracking-wider shrink-0">
-                  &gt;85dB Web Audio RMS
+                  Visual Alert
                 </span>
               </div>
 
@@ -397,14 +397,14 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               <div className={`p-5 rounded-xl border flex flex-col md:flex-row items-start md:items-center justify-between gap-4 ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-[#FF7A2F]/10 text-[#FF7A2F] flex items-center justify-center shrink-0">
-                    <Activity size={20} />
+                    <Activity size={20}  aria-hidden="true"/>
                   </div>
                   <div>
                     <h6 className={`text-sm font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
                       Real-time Audio Visualizer
                     </h6>
                     <p className={`text-xs leading-relaxed m-0 mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                      Smooth, framerate-independent FFT audio visualizer bars that provide immediate visual feedback of tab audio activity.
+                      Shows visual audio bars so you know when sound is currently playing on the page.
                     </p>
                   </div>
                 </div>

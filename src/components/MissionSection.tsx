@@ -29,14 +29,14 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
     },
     {
       id: 3,
-      title: 'No Subtitles',
-      description: 'Many videos don\'t have captions.',
+      title: 'Language & Caption Barriers',
+      description: 'Videos lack captions or are in foreign languages.',
       icon: VolumeX,
     },
     {
       id: 4,
-      title: 'Missed Sounds',
-      description: 'Hard to hear important notifications.',
+      title: 'Sudden Loud Sounds',
+      description: 'Hard to hear or anticipate sudden loud noises.',
       icon: BellOff,
     },
   ];
@@ -56,14 +56,14 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
     },
     {
       id: 3,
-      title: 'Live Multilingual Captions',
-      description: 'Live subtitles for any playing audio.',
+      title: 'Multilingual AI Subtitles',
+      description: 'Live captions & translation into 135+ languages.',
       icon: MessageSquare,
     },
     {
       id: 4,
-      title: 'Visual Radar',
-      description: 'See color flashes for sounds.',
+      title: 'Sudden Noise Warning',
+      description: 'Flashes visual alerts when loud sounds play.',
       icon: Zap,
     },
   ];
@@ -81,65 +81,59 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
   return (
     <section
       id="problem-solution"
-      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[70px] md:scroll-mt-[92px] py-20 md:py-28 border-t ${
-        isDark ? 'border-slate-800/80' : 'border-slate-200/60'
-      }`}
+      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
+        }`}
     >
       {/* Cybernetic Grid Layer */}
       <div className="absolute inset-0 bg-grid-pattern pointer-events-none [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_75%,transparent_100%)] -z-10" />
 
       {/* Dynamic Ambient Mission Gradients */}
       <div
-        className={`absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none -z-10 bg-red-500 transition-opacity duration-300 transform-gpu ${
-          isAnyActive
+        className={`hidden md:block absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none -z-10 bg-red-500 transition-opacity duration-300 transform-gpu ${isAnyActive
             ? isDark
               ? 'opacity-[0.16]'
               : 'opacity-[0.08]'
             : isDark
-            ? 'opacity-[0.06]'
-            : 'opacity-[0.03]'
-        }`}
+              ? 'opacity-[0.06]'
+              : 'opacity-[0.03]'
+          }`}
       />
       <div
-        className={`absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none -z-10 bg-emerald-500 transition-opacity duration-300 transform-gpu ${
-          isAnyActive
+        className={`hidden md:block absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none -z-10 bg-emerald-500 transition-opacity duration-300 transform-gpu ${isAnyActive
             ? isDark
               ? 'opacity-[0.16]'
               : 'opacity-[0.08]'
             : isDark
-            ? 'opacity-[0.06]'
-            : 'opacity-[0.03]'
-        }`}
+              ? 'opacity-[0.06]'
+              : 'opacity-[0.03]'
+          }`}
       />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
         {/* Main Title & Intro Subtitle */}
         <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
           <h2
-            className={`text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-6 ${
-              isDark ? 'text-white' : 'text-slate-900'
-            }`}
+            className={`text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-6 ${isDark ? 'text-white' : 'text-slate-900'
+              }`}
           >
             The Mission
           </h2>
           <p
-            className={`text-base md:text-xl leading-relaxed font-normal ${
-              isDark ? 'text-slate-400' : 'text-slate-500'
-            }`}
+            className={`text-base md:text-xl leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-500'
+              }`}
           >
             Most websites are not designed for people with disabilities. Sensa helps low-vision, blind, and hearing-impaired users browse the web easily.
           </p>
         </div>
 
-        {/* Section Column Headers Row (Problem & Solution) */}
-        <div className="w-full flex items-center justify-between mb-6 px-2">
+        {/* Section Column Headers Row (Problem & Solution) - Desktop Only */}
+        <div className="hidden lg:flex w-full items-center justify-between mb-6 px-2">
           <div className="w-full lg:w-[380px] text-center">
             <h3
-              className={`text-sm md:text-base font-black uppercase tracking-widest transition-all duration-300 ${
-                isAnyActive
+              className={`text-sm md:text-base font-black uppercase tracking-widest transition-all duration-300 ${isAnyActive
                   ? 'text-red-500 dark:text-red-400 opacity-100'
                   : 'text-red-500/70 dark:text-red-400/70 opacity-70'
-              }`}
+                }`}
             >
               Problem
             </h3>
@@ -147,11 +141,10 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
           <div className="hidden lg:block w-48"></div>
           <div className="w-full lg:w-[380px] text-center">
             <h3
-              className={`text-sm md:text-base font-black uppercase tracking-widest transition-all duration-300 ${
-                isAnyActive
+              className={`text-sm md:text-base font-black uppercase tracking-widest transition-all duration-300 ${isAnyActive
                   ? 'text-emerald-950 dark:text-emerald-400 opacity-100'
                   : 'text-emerald-950/90 dark:text-emerald-400/70 opacity-90'
-              }`}
+                }`}
             >
               Solution
             </h3>
@@ -161,9 +154,8 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
         {/* Infographic Transformation Pipeline Grid */}
         <div
           ref={problemRef}
-          className={`relative w-full flex flex-col lg:flex-row items-stretch justify-between gap-12 lg:gap-0 transition-all duration-700 transform-gpu ${
-            isProblemVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-          }`}
+          className={`relative w-full flex flex-col lg:flex-row items-stretch justify-between gap-12 lg:gap-0 transition-all duration-700 transform-gpu ${isProblemVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
         >
           <style>{`
             .flow-line-red {
@@ -198,6 +190,10 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
 
           {/* Column 1: The Roadblocks (Problem Cards ONLY - Explicit z-20) */}
           <div className="relative z-20 w-full lg:w-[380px] flex flex-col gap-4">
+            {/* Mobile-only Problem Header */}
+            <h3 className="lg:hidden text-center text-sm md:text-base font-black uppercase tracking-widest text-red-500 dark:text-red-400 mb-2 mt-4 lg:mt-0">
+              Problem
+            </h3>
             {problemCards.map((card) => {
               const Icon = card.icon;
               const isHovered = hoveredId === card.id || isCoreHovered;
@@ -209,40 +205,37 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
                   key={card.id}
                   onMouseEnter={() => setHoveredId(card.id)}
                   onMouseLeave={() => setHoveredId(null)}
-                  className={`relative z-20 p-5 md:p-6 rounded-[2rem] border flex items-center gap-4 transition-all duration-300 cursor-pointer transform-gpu ${
-                    isSpecificHover
+                  className={`relative z-20 p-5 md:p-6 rounded-[2rem] border flex items-center gap-4 transition-all duration-300 cursor-pointer transform-gpu ${isSpecificHover
                       ? isDark
                         ? 'bg-[#291717] border-red-500/80 shadow-lg shadow-red-500/10 scale-[1.02] ring-1 ring-red-500/40'
                         : 'bg-[#fff5f5] border-red-300 shadow-lg shadow-red-500/10 scale-[1.02] ring-1 ring-red-200'
                       : isCoreHovered
-                      ? isDark
-                        ? 'bg-[#1f1717] border-red-500/40'
-                        : 'bg-[#fffafa] border-red-200'
-                      : isOtherHovered
-                      ? 'opacity-40 scale-[0.98]'
-                      : isDark
-                      ? 'bg-[#161618] border-slate-800 hover:bg-[#1f1717] hover:border-red-500/30'
-                      : 'bg-white border-slate-200 shadow-sm hover:bg-[#fffafa] hover:border-red-200'
-                  }`}
+                        ? isDark
+                          ? 'bg-[#1f1717] border-red-500/40'
+                          : 'bg-[#fffafa] border-red-200'
+                        : isOtherHovered
+                          ? 'opacity-40 scale-[0.98]'
+                          : isDark
+                            ? 'bg-[#161618] border-slate-800 hover:bg-[#1f1717] hover:border-red-500/30'
+                            : 'bg-white border-slate-200 shadow-sm hover:bg-[#fffafa] hover:border-red-200'
+                    }`}
                 >
                   <div
-                    className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-300 ${
-                      isHovered
+                    className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-300 ${isHovered
                         ? 'bg-red-500 text-white shadow-md shadow-red-500/30 scale-105'
                         : 'bg-red-500/10 text-red-500 dark:bg-red-500/15 dark:text-red-400'
-                    }`}
+                      }`}
                   >
                     <Icon size={24} />
                   </div>
                   <div>
                     <h4
-                      className={`text-base font-bold mb-0.5 transition-colors ${
-                        isHovered
+                      className={`text-base font-bold mb-0.5 transition-colors ${isHovered
                           ? 'text-red-500 dark:text-red-400 font-extrabold'
                           : isDark
-                          ? 'text-slate-300'
-                          : 'text-slate-700'
-                      }`}
+                            ? 'text-slate-300'
+                            : 'text-slate-700'
+                        }`}
                     >
                       {card.title}
                     </h4>
@@ -276,8 +269,8 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
                       isHovered
                         ? 'rgba(239, 68, 68, 1)'
                         : isOtherHovered
-                        ? 'rgba(239, 68, 68, 0.15)'
-                        : 'rgba(239, 68, 68, 0.4)'
+                          ? 'rgba(239, 68, 68, 0.15)'
+                          : 'rgba(239, 68, 68, 0.4)'
                     }
                     strokeWidth={isHovered ? (isCoreHovered ? '3.5' : '4') : '2'}
                     vectorEffect="non-scaling-stroke"
@@ -293,7 +286,7 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
           </div>
 
           {/* Column 2: The Sensa Protocol (Interactive Center Engine Node - Explicit z-20) */}
-          <div className="relative z-20 shrink-0 flex flex-col items-center justify-center py-10 lg:py-0 w-48">
+          <div className="hidden lg:flex relative z-20 shrink-0 flex-col items-center justify-center py-10 lg:py-0 w-48 self-center">
             <div
               className="relative w-36 h-36 flex items-center justify-center cursor-pointer group"
               onMouseEnter={() => setIsCoreHovered(true)}
@@ -301,39 +294,35 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
             >
               {/* Interactive Sensa Core Multi-color Glow on Hover */}
               <div
-                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-lg transition-all duration-300 pointer-events-none transform-gpu ${
-                  isCoreHovered
+                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-lg transition-all duration-300 pointer-events-none transform-gpu ${isCoreHovered
                     ? 'w-[160px] h-[160px] bg-gradient-to-tr from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F] opacity-80 scale-110'
                     : hoveredId !== null
-                    ? 'w-[140px] h-[140px] bg-gradient-to-tr from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F] opacity-40'
-                    : 'w-[125px] h-[125px] bg-gradient-to-tr from-[#0A44FF]/20 via-[#8A56FF]/20 to-[#FF7A2F]/20 opacity-20'
-                }`}
+                      ? 'w-[140px] h-[140px] bg-gradient-to-tr from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F] opacity-40'
+                      : 'w-[125px] h-[125px] bg-gradient-to-tr from-[#0A44FF]/20 via-[#8A56FF]/20 to-[#FF7A2F]/20 opacity-20'
+                  }`}
               />
 
               <div
-                className={`relative z-10 w-full h-full rounded-full p-[2px] bg-gradient-to-br from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F] transition-all duration-300 transform-gpu ${
-                  isCoreHovered
+                className={`relative z-10 w-full h-full rounded-full p-[2px] bg-gradient-to-br from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F] transition-all duration-300 transform-gpu ${isCoreHovered
                     ? 'scale-110 shadow-xl shadow-[#8A56FF]/30 ring-2 ring-[#8A56FF]/40'
                     : hoveredId !== null
-                    ? 'scale-105 shadow-md shadow-[#8A56FF]/20'
-                    : 'shadow-sm shadow-[#8A56FF]/10'
-                }`}
+                      ? 'scale-105 shadow-md shadow-[#8A56FF]/20'
+                      : 'shadow-sm shadow-[#8A56FF]/10'
+                  }`}
               >
                 <div
-                  className={`w-full h-full rounded-full flex items-center justify-center transition-transform duration-300 ${
-                    isDark ? 'bg-[#09090B]' : 'bg-white'
-                  }`}
+                  className={`w-full h-full rounded-full flex items-center justify-center transition-transform duration-300 ${isDark ? 'bg-[#09090B]' : 'bg-white'
+                    }`}
                 >
                   <img
                     src={sensaLogo}
                     alt="Sensa"
-                    className={`w-16 h-16 object-contain transition-all duration-300 transform-gpu ${
-                      isCoreHovered
+                    className={`w-16 h-16 object-contain transition-all duration-300 transform-gpu ${isCoreHovered
                         ? 'scale-110 rotate-3'
                         : hoveredId !== null
-                        ? 'scale-105'
-                        : 'scale-100'
-                    }`}
+                          ? 'scale-105'
+                          : 'scale-100'
+                      }`}
                   />
                 </div>
               </div>
@@ -366,8 +355,8 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
                       isHovered
                         ? 'rgba(16, 185, 129, 1)'
                         : isOtherHovered
-                        ? 'rgba(16, 185, 129, 0.15)'
-                        : 'rgba(16, 185, 129, 0.4)'
+                          ? 'rgba(16, 185, 129, 0.15)'
+                          : 'rgba(16, 185, 129, 0.4)'
                     }
                     strokeWidth={isHovered ? (isCoreHovered ? '3.5' : '4') : '2'}
                     vectorEffect="non-scaling-stroke"
@@ -384,6 +373,10 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
 
           {/* Column 3: The Breakthrough (Solution Cards ONLY - Explicit z-20) */}
           <div className="relative z-20 w-full lg:w-[380px] flex flex-col gap-4">
+            {/* Mobile-only Solution Header */}
+            <h3 className="lg:hidden text-center text-sm md:text-base font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-2 mt-8 lg:mt-0">
+              Solution
+            </h3>
             {solutionCards.map((card) => {
               const Icon = card.icon;
               const isHovered = hoveredId === card.id || isCoreHovered;
@@ -395,40 +388,37 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
                   key={card.id}
                   onMouseEnter={() => setHoveredId(card.id)}
                   onMouseLeave={() => setHoveredId(null)}
-                  className={`relative z-20 p-5 md:p-6 rounded-[2rem] border flex items-center gap-4 transition-all duration-300 cursor-pointer transform-gpu ${
-                    isSpecificHover
+                  className={`relative z-20 p-5 md:p-6 rounded-[2rem] border flex items-center gap-4 transition-all duration-300 cursor-pointer transform-gpu ${isSpecificHover
                       ? isDark
                         ? 'bg-[#13231a] border-emerald-500/80 shadow-lg shadow-emerald-500/10 scale-[1.02] ring-1 ring-emerald-500/40'
                         : 'bg-[#f0fdf4] border-emerald-800 shadow-lg shadow-emerald-500/10 scale-[1.02] ring-1 ring-emerald-600'
                       : isCoreHovered
-                      ? isDark
-                        ? 'bg-[#151c18] border-emerald-500/40'
-                        : 'bg-[#f8faf9] border-emerald-500'
-                      : isOtherHovered
-                      ? 'opacity-40 scale-[0.98]'
-                      : isDark
-                      ? 'bg-[#161618] border-slate-800 hover:border-emerald-500/40 hover:bg-[#151c18]'
-                      : 'bg-white border-slate-200 shadow-sm hover:border-emerald-500 hover:bg-[#f8faf9]'
-                  }`}
+                        ? isDark
+                          ? 'bg-[#151c18] border-emerald-500/40'
+                          : 'bg-[#f8faf9] border-emerald-500'
+                        : isOtherHovered
+                          ? 'opacity-40 scale-[0.98]'
+                          : isDark
+                            ? 'bg-[#161618] border-slate-800 hover:border-emerald-500/40 hover:bg-[#151c18]'
+                            : 'bg-white border-slate-200 shadow-sm hover:border-emerald-500 hover:bg-[#f8faf9]'
+                    }`}
                 >
                   <div
-                    className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-300 ${
-                      isHovered
+                    className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-300 ${isHovered
                         ? 'bg-emerald-900 text-white shadow-md shadow-emerald-900/30 scale-105 dark:bg-emerald-500'
                         : 'bg-emerald-950/15 text-emerald-950 dark:bg-emerald-500/15 dark:text-emerald-400'
-                    }`}
+                      }`}
                   >
                     <Icon size={24} />
                   </div>
                   <div>
                     <h4
-                      className={`text-base font-bold mb-0.5 transition-colors ${
-                        isHovered
+                      className={`text-base font-bold mb-0.5 transition-colors ${isHovered
                           ? 'text-emerald-950 dark:text-emerald-400 font-black'
                           : isDark
-                          ? 'text-white'
-                          : 'text-slate-900'
-                      }`}
+                            ? 'text-white'
+                            : 'text-slate-900'
+                        }`}
                     >
                       {card.title}
                     </h4>

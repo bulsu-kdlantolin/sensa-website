@@ -1,5 +1,7 @@
 import { Cpu, Server, Cloud, Globe, Mic, Volume2, Headphones, Eye, Network, Radio, ExternalLink } from 'lucide-react';
 import azureLogo from '../assets/azure-logo.png';
+import plasmoLogo from '../assets/plasmo-logo.png';
+import renderLogo from '../assets/render-logo.png';
 
 interface ArchitectureSectionProps {
   isDark: boolean;
@@ -60,23 +62,19 @@ const DeepgramLogo = ({ size = 18 }: { size?: number }) => (
 
 const GoogleLogo = ({ size = 18 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
+    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
+    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
+    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
   </svg>
 );
 
 const PlasmoLogo = ({ size = 18 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#8A56FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
+  <img src={plasmoLogo} width={size} height={size} alt="Plasmo Framework Logo" className="object-contain rounded-sm" />
 );
 
 const RenderCloudLogo = ({ size = 18 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path d="M18.263.007c-3.121-.147-5.744 2.109-6.192 5.082-.018.138-.045.272-.067.405-.696 3.703-3.936 6.507-7.827 6.507-1.388 0-2.691-.356-3.825-.979a.2024.2024 0 0 0-.302.178V24H12v-8.999c0-1.656 1.338-3 2.987-3h2.988c3.382 0 6.103-2.817 5.97-6.244-.12-3.084-2.61-5.603-5.682-5.75"/>
-  </svg>
+  <img src={renderLogo} width={size} height={size} alt="Render Cloud Logo" className="object-contain rounded-sm" />
 );
 
 export default function ArchitectureSection({ isDark }: ArchitectureSectionProps) {
@@ -90,9 +88,9 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
       borderHover: 'hover:border-[#0A44FF]/60 hover:shadow-[0_0_35px_rgba(10,68,255,0.2)]',
       accentLine: 'bg-[#0A44FF]',
       items: [
-        { name: 'Plasmo Framework', detail: 'Next-gen modular Manifest V3 extension architecture', Logo: PlasmoLogo, url: 'https://docs.plasmo.com/' },
-        { name: 'React 18 & TypeScript', detail: 'Strongly-typed component UI state & reactive hooks', Logo: ReactLogo, url: 'https://react.dev/' },
-        { name: 'Tailwind CSS & Lucide', detail: 'High-contrast accessible theme styling system', Logo: TailwindLogo, url: 'https://tailwindcss.com/' },
+        { name: 'Plasmo Framework', detail: 'Built on the newest, safest browser technologies', Logo: PlasmoLogo, url: 'https://docs.plasmo.com/' },
+        { name: 'React 18 & TypeScript', detail: 'Creates a smooth, fast, and reliable experience', Logo: ReactLogo, url: 'https://react.dev/' },
+        { name: 'Tailwind CSS & Lucide', detail: 'Ensures high-contrast colors and easy-to-read text', Logo: TailwindLogo, url: 'https://tailwindcss.com/' },
       ],
     },
     {
@@ -103,8 +101,8 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
       borderHover: 'hover:border-[#FF7A2F]/60 hover:shadow-[0_0_35px_rgba(255,122,47,0.2)]',
       accentLine: 'bg-[#FF7A2F]',
       items: [
-        { name: 'Render Cloud Hosting', detail: 'Scalable cloud server host for Sensa real-time proxy service', Logo: RenderCloudLogo, url: 'https://render.com/' },
-        { name: 'Node.js & WebSocket Proxy', detail: 'Low-latency streaming gateway between Chrome Extension & Cloud AI', Logo: NodeLogo, url: 'https://nodejs.org/' },
+        { name: 'Render Cloud Hosting', detail: 'Runs our fast servers 24/7 so Sensa is always ready', Logo: RenderCloudLogo, url: 'https://render.com/' },
+        { name: 'Node.js & WebSocket Proxy', detail: 'Connects your browser to our smart speech AI instantly', Logo: NodeLogo, url: 'https://nodejs.org/' },
       ],
     },
   ];
@@ -123,21 +121,21 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
         {
           name: 'Azure Translator Text API',
           spec: 'v3.0 REST API',
-          purpose: 'Real-time neural translation of live subtitles into 135+ target languages.',
+          purpose: 'Instantly translates speech into 135+ languages.',
           Logo: AzureLogo,
           url: 'https://learn.microsoft.com/en-us/azure/ai-services/translator/',
         },
         {
           name: 'Deepgram Speech-to-Text WebSocket API',
           spec: 'Nova-3 Model',
-          purpose: 'High-speed, real-time audio transcription with word-level timestamps across 47+ spoken languages.',
+          purpose: 'Turns spoken words into text instantly with high accuracy.',
           Logo: DeepgramLogo,
           url: 'https://developers.deepgram.com/docs/speech-to-text',
         },
         {
           name: 'Google Fonts Developer API',
           spec: 'Google Web Fonts v1',
-          purpose: 'Dynamically fetches the top 100 typography choices to allow custom dyslexia-friendly and high-contrast font selection.',
+          purpose: 'Provides easy-to-read, dyslexia-friendly text options.',
           Logo: GoogleLogo,
           url: 'https://developers.google.com/fonts/docs/developer_api',
         },
@@ -155,42 +153,42 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
         {
           name: 'Web Audio API',
           spec: 'AudioContext, AnalyserNode, ScriptProcessorNode',
-          purpose: 'Tab audio capture processing, real-time volume RMS visualization, and sudden sound warning alerts (>85dB).',
+          purpose: 'Listens for sudden loud noises to protect your ears with visual warnings.',
           Logo: Radio,
           url: 'https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API',
         },
         {
           name: 'Web Speech API — SpeechRecognition',
           spec: 'webkitSpeechRecognition',
-          purpose: 'Hands-free voice command recognition ("read", "stop", "faster", "slower", "magnifier").',
+          purpose: 'Allows you to easily control the website using just your voice.',
           Logo: Mic,
           url: 'https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition',
         },
         {
           name: 'Web Speech API — SpeechSynthesis',
           spec: 'window.speechSynthesis, SpeechSynthesisUtterance',
-          purpose: 'Screen reader text-to-speech narration, hover mouse reader, and UI voice guide audio feedback.',
+          purpose: 'Reads the webpage out loud to you so you do not have to strain your eyes.',
           Logo: Volume2,
           url: 'https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis',
         },
         {
           name: 'MediaStreams API & Sink Audio Bridge',
           spec: 'MediaStream, HTMLAudioElement.setSinkId',
-          purpose: 'Routes captured tab audio back to user speakers/headphones while generating subtitles to prevent audio muting.',
+          purpose: 'Ensures you can still hear the video normally while subtitles are generated.',
           Logo: Headphones,
           url: 'https://developer.mozilla.org/en-US/docs/Web/API/Media_Streams_API',
         },
         {
           name: 'MutationObserver API',
           spec: 'DOM Mutation Observer',
-          purpose: 'Live DOM change tracking for screen magnifier lens pop-in and real-time paragraph element highlighting.',
+          purpose: 'Follows the text on the screen so you never lose your place while reading.',
           Logo: Eye,
           url: 'https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver',
         },
         {
           name: 'WebSocket API',
           spec: 'new WebSocket',
-          purpose: 'Low-latency, bi-directional streaming connection between the Chrome Extension and Node.js backend.',
+          purpose: 'Keeps everything synced instantly between your browser and our servers.',
           Logo: Network,
           url: 'https://developer.mozilla.org/en-US/docs/Web/API/WebSocket',
         },
@@ -208,42 +206,42 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
         {
           name: 'chrome.tabCapture API',
           spec: 'Manifest V3 Tab Capture',
-          purpose: 'Captures raw playing audio streams from active browser tabs (YouTube, lectures, calls).',
+          purpose: 'Listens safely to the audio playing in your active tab to create subtitles.',
           Logo: ChromeTechLogo,
           url: 'https://developer.chrome.com/docs/extensions/reference/api/tabCapture',
         },
         {
           name: 'chrome.offscreen API',
           spec: 'Offscreen Document Sandbox',
-          purpose: 'Manages background offscreen documents (audioproxy.html) to process audio streams continuously without being terminated by MV3 service worker timeouts.',
+          purpose: 'Keeps Sensa running smoothly in the background without interruptions.',
           Logo: ChromeTechLogo,
           url: 'https://developer.chrome.com/docs/extensions/reference/api/offscreen',
         },
         {
           name: 'chrome.storage.local API',
           spec: 'Persistent Extension Storage',
-          purpose: 'Persistent local storage for user preferences, sensory settings, font choices, custom colors, and transcript logs.',
+          purpose: 'Saves your custom preferences securely on your own device, not the internet.',
           Logo: ChromeTechLogo,
           url: 'https://developer.chrome.com/docs/extensions/reference/api/storage',
         },
         {
           name: 'chrome.scripting API',
           spec: 'Dynamic Script Injection',
-          purpose: 'Dynamically injects content scripts and accessibility overlays across active web tabs.',
+          purpose: 'Gently applies the accessibility features and magnifiers to the websites you visit.',
           Logo: ChromeTechLogo,
           url: 'https://developer.chrome.com/docs/extensions/reference/api/scripting',
         },
         {
           name: 'chrome.runtime API',
           spec: 'Extension Messaging Bus',
-          purpose: 'Inter-component messaging between Popup, Content Scripts, Service Worker, and Offscreen Document.',
+          purpose: 'Makes sure all parts of Sensa talk to each other quickly and accurately.',
           Logo: ChromeTechLogo,
           url: 'https://developer.chrome.com/docs/extensions/reference/api/runtime',
         },
         {
           name: 'chrome.tabs API',
           spec: 'Tab Management Engine',
-          purpose: 'Tab management, tab audio stream identification, and cross-tab UI state broadcasting.',
+          purpose: 'Knows exactly which tab you are on to give you the right subtitles and tools.',
           Logo: ChromeTechLogo,
           url: 'https://developer.chrome.com/docs/extensions/reference/api/tabs',
         },
@@ -254,35 +252,33 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
   return (
     <section
       id="tech-stack"
-      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center scroll-mt-[70px] md:scroll-mt-[92px] py-20 md:py-28 border-t ${
-        isDark ? 'border-slate-800/80' : 'border-slate-200/60'
-      }`}
+      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
+        }`}
     >
       {/* Cybernetic Grid Layer */}
       <div className="absolute inset-0 bg-grid-pattern pointer-events-none [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_75%,transparent_100%)] -z-10" />
 
       {/* Ambient Glow */}
       <div
-        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full blur-[160px] pointer-events-none -z-10 bg-[#0A44FF] transform-gpu ${
-          isDark ? 'opacity-20' : 'opacity-10'
-        }`}
+        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full blur-[160px] pointer-events-none -z-10 bg-[#0A44FF] transform-gpu ${isDark ? 'opacity-20' : 'opacity-10'
+          }`}
       />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className={`text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-            System Architecture
+            How Sensa Works
           </h2>
           <p className={`text-base md:text-xl leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-            Sensa's Frontend Chrome Extension and Render-hosted Backend, coupled with 15 native & cloud APIs across 3 architectural layers.
+            A look behind the scenes at the powerful technologies that make Sensa run smoothly and securely.
           </p>
         </div>
 
         {/* Part 1: Frontend vs Backend Core Infrastructure */}
         <div className="mb-20">
           <div className="flex items-center gap-3 mb-8">
-            <Cpu size={22} className="text-[#0A44FF] dark:text-[#6AA2FF]" />
+            <Cpu size={22} className="text-[#0A44FF] dark:text-[#6AA2FF]" aria-hidden="true" />
             <h3 className={`text-xl md:text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
               Frontend & Backend Core Infrastructure
             </h3>
@@ -294,11 +290,10 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
               return (
                 <article
                   key={idx}
-                  className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.005] relative overflow-hidden ${side.borderHover} ${
-                    isDark
+                  className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.005] relative overflow-hidden ${side.borderHover} ${isDark
                       ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 shadow-md'
                       : 'bg-white border-slate-200/80 ring-1 ring-black/5 shadow-md'
-                  }`}
+                    }`}
                 >
                   <div className={`absolute top-0 left-8 right-8 h-1 rounded-b-full ${side.accentLine} opacity-50`} />
 
@@ -326,11 +321,10 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
                             href={item.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className={`p-3.5 rounded-2xl border flex flex-col gap-0.5 transition-all group ${
-                              isDark
+                            className={`p-3.5 rounded-2xl border flex flex-col gap-0.5 transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] ${isDark
                                 ? 'bg-black/40 border-slate-800/80 hover:border-slate-600 hover:bg-black/60'
                                 : 'bg-slate-50/80 border-slate-200/60 hover:border-slate-300 hover:bg-slate-100'
-                            }`}
+                              }`}
                           >
                             <span className={`text-sm font-bold flex items-center justify-between gap-2.5 ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>
                               <span className="flex items-center gap-2.5">
@@ -339,7 +333,7 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
                                 </span>
                                 {item.name}
                               </span>
-                              <ExternalLink size={13} className={`shrink-0 opacity-40 group-hover:opacity-100 transition-opacity ${side.color}`} />
+                              <ExternalLink size={13} className={`shrink-0 opacity-40 group-hover:opacity-100 transition-opacity ${side.color}`} aria-hidden="true" />
                             </span>
                             <p className={`text-xs leading-relaxed m-0 pl-7 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                               {item.detail}
@@ -358,9 +352,9 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
         {/* Part 2: 15 Integrated APIs Specification across 3 Architectural Layers */}
         <div>
           <div className="flex items-center gap-3 mb-8">
-            <Globe size={22} className="text-[#8A56FF] dark:text-[#A855F7]" />
-            <h3 className={`text-xl md:text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-              15 Integrated APIs Across 3 Architectural Layers
+            <Globe size={22} className="text-[#8A56FF] dark:text-[#A855F7]" aria-hidden="true" />
+            <h3 className={`text-2xl md:text-3xl lg:text-4xl font-black m-0 tracking-tight flex items-center gap-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+              The 3 Core Layers of Sensa
             </h3>
           </div>
 
@@ -370,11 +364,10 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
               return (
                 <div
                   key={lIdx}
-                  className={`border rounded-[2.5rem] p-6 md:p-8 transition-all duration-500 relative overflow-hidden ${layer.borderHover} ${
-                    isDark
+                  className={`border rounded-[2.5rem] p-6 md:p-8 transition-all duration-500 relative overflow-hidden ${layer.borderHover} ${isDark
                       ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 shadow-md'
                       : 'bg-white border-slate-200/80 ring-1 ring-black/5 shadow-md'
-                  }`}
+                    }`}
                 >
                   <div className={`absolute top-0 left-8 right-8 h-1 rounded-b-full ${layer.accentLine} opacity-50`} />
 
@@ -403,11 +396,10 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
                           href={api.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={`p-4 rounded-2xl border flex flex-col justify-between transition-all duration-300 group hover:scale-[1.02] ${
-                            isDark
+                          className={`p-4 rounded-2xl border flex flex-col justify-between transition-all duration-300 group hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] ${isDark
                               ? 'bg-black/40 border-slate-800/80 hover:border-slate-600 hover:bg-black/60'
                               : 'bg-slate-50/90 border-slate-200/70 hover:border-slate-300 hover:bg-slate-100'
-                          }`}
+                            }`}
                         >
                           <div>
                             <div className="flex items-start justify-between gap-2 mb-2">
@@ -417,11 +409,10 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
                                 </span>
                                 {api.name}
                               </span>
-                              <ExternalLink size={13} className={`shrink-0 opacity-40 group-hover:opacity-100 transition-opacity ${layer.color}`} />
+                              <ExternalLink size={13} className={`shrink-0 opacity-40 group-hover:opacity-100 transition-opacity ${layer.color}`} aria-hidden="true" />
                             </div>
-                            <span className={`inline-block text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md mb-2.5 border ${
-                              isDark ? 'bg-white/5 border-slate-800 text-slate-400' : 'bg-white border-slate-200 text-slate-500'
-                            }`}>
+                            <span className={`inline-block text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md mb-2.5 border ${isDark ? 'bg-white/5 border-slate-800 text-slate-400' : 'bg-white border-slate-200 text-slate-500'
+                              }`}>
                               {api.spec}
                             </span>
                             <p className={`text-xs leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>

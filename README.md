@@ -17,13 +17,13 @@ Most modern websites are not inherently designed to support individuals with aud
 ### 👁️ Visual Accommodation Mode
 Tailored for low-vision and blind users to navigate and consume web content effortlessly.
 
-- **🎤 Voice Command Navigation:** Hands-free browser control powered by fuzzy string matching speech recognition (supports `"read"`, `"stop"`, `"next"`, `"previous"`, `"faster"`, `"slower"`, `"magnifier"`).
+- **🎤 Voice Command Navigation:** Hands-free browser control powered by fuzzy string matching speech recognition (supports `"read"`, `"stop"`, `"next"`, `"previous"`, `"faster"`, `"slower"`).
 - **🔊 Screen Reader (TTS Engine):** Paragraph-by-paragraph webpage narrator with full DOM tracking and highlight synchronization.
 - **🔍 Screen Magnifier Lens:** Dynamic floating circular magnifier lens for instantaneous element inspection with 0ms pop-in and live DOM element tracking.
 - **✨ Visual Micro-Accommodations:**
   - **Voice Guide:** Audio hover feedback (`useUIHoverAudio`) that speaks button and UI element labels on hover.
-  - **Mouse Reader:** Instant narration of text directly under the mouse pointer.
-  - **Image Reader:** Extracts and speaks image `alt` text, `title` attributes, and ARIA descriptions.
+  - **Highlight Reader:** Instant narration of the specific text you highlight with your mouse pointer.
+  - **Image Reader:** Extracts and speaks image `alt` text descriptions out loud.
 
 ---
 

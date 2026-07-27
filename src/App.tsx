@@ -77,16 +77,9 @@ export default function App() {
 
     const targetEl = document.getElementById(targetId);
     if (targetEl) {
-      const isDesktop = window.innerWidth >= 768;
-      const isLg = window.innerWidth >= 1024;
-
-      // Exact pixel offset for floating navbar (24px top + 68px navbar height = 92px on desktop; 12px top + 58px navbar height = 70px on mobile)
-      let offset = 0;
-      if (isSidebarMode && isLg) {
-        offset = 24;
-      } else {
-        offset = isDesktop ? 92 : 70;
-      }
+      // Use the section line separator as the absolute basis, stopping exactly at the top of the screen.
+      // Ignoring the floating navbar offset as per user preference.
+      const offset = 0;
 
       const elementPosition = targetEl.getBoundingClientRect().top + window.scrollY;
       const offsetPosition = elementPosition - offset;
@@ -171,15 +164,15 @@ export default function App() {
         <div className="absolute inset-0 bg-grid-pattern opacity-60 [mask-image:radial-gradient(ellipse_80%_80%_at_50%_20%,#000_50%,transparent_100%)]" />
         <div className="absolute inset-0 bg-dot-pattern opacity-80" />
         <div
-          className={`absolute top-0 left-1/2 -translate-x-1/2 w-[900px] md:w-[1200px] h-[500px] rounded-full blur-[140px] bg-gradient-to-b from-[#0A44FF] via-[#8B5CF6] to-transparent gpu-accelerate ${isDark ? 'opacity-25' : 'opacity-15'
+          className={`hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-[900px] md:w-[1200px] h-[500px] rounded-full blur-[140px] bg-gradient-to-b from-[#0A44FF] via-[#8B5CF6] to-transparent gpu-accelerate ${isDark ? 'opacity-25' : 'opacity-15'
             }`}
         />
         <div
-          className={`absolute -top-32 -left-32 w-[550px] h-[550px] rounded-full blur-[110px] bg-[#0A44FF] gpu-accelerate ${isDark ? 'opacity-25' : 'opacity-15'
+          className={`hidden md:block absolute -top-32 -left-32 w-[550px] h-[550px] rounded-full blur-[110px] bg-[#0A44FF] gpu-accelerate ${isDark ? 'opacity-25' : 'opacity-15'
             }`}
         />
         <div
-          className={`absolute -bottom-32 -right-32 w-[550px] h-[550px] rounded-full blur-[110px] bg-[#FF7A2F] gpu-accelerate ${isDark ? 'opacity-25' : 'opacity-15'
+          className={`hidden md:block absolute -bottom-32 -right-32 w-[550px] h-[550px] rounded-full blur-[110px] bg-[#FF7A2F] gpu-accelerate ${isDark ? 'opacity-25' : 'opacity-15'
             }`}
         />
       </div>
@@ -208,7 +201,7 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <Footer isDark={isDark} handleNavClick={handleNavClick} />
+      <Footer isDark={isDark} />
     </div>
   );
 }
