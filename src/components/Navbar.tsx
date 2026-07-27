@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Sun, Moon, PanelLeft, PanelTop, Menu, X } from 'lucide-react';
-import sensaLogo from '../assets/Sensa-Logo.png';
+import sensaLogo from '../assets/sensa-logo.png';
 
 export interface NavItem {
   href: string;

@@ -1,5 +1,5 @@
 import { ArrowUpRight, FileText, ShieldCheck, Activity, GitBranch, BookOpen } from 'lucide-react';
-import sensaLogo from '../assets/Sensa-Logo.png';
+import sensaLogo from '../assets/sensa-logo.png';
 
 const GithubIcon = ({ size = 16, className = '' }: { size?: number; className?: string }) => (
   <svg
