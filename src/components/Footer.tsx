@@ -95,12 +95,6 @@ export default function Footer({ isDark }: FooterProps) {
                   <ArrowUpRight size={12} className="opacity-60" aria-hidden="true" />
                 </a>
               </li>
-              <li>
-                <span className={`inline-flex items-center gap-2 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  <ShieldCheck size={14} className="text-emerald-500" aria-hidden="true" />
-                  <span>100% In-Memory Privacy Policy</span>
-                </span>
-              </li>
             </ul>
           </div>
 
@@ -140,6 +134,10 @@ export default function Footer({ isDark }: FooterProps) {
               <li className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#FF7A2F]" />
                 <span className="text-[#FF7A2F]">Open-Source</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                <span className="text-emerald-500">100% In-Memory Privacy Policy</span>
               </li>
             </ul>
           </div>

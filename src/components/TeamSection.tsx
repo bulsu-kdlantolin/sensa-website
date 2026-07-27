@@ -74,8 +74,8 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
     },
     {
       name: 'Kian Davey Antolin',
-      role: 'Lead Full-Stack Developer',
-      description: 'Engineered the browser extension codebase, cloud backend API services, and web platform.',
+      role: 'Developer',
+      description: 'Developed the browser extension codebase, cloud backend API services, and web platform.',
       image: kianImg,
       imageClass: '',
       email: 'kiandaveyantolin@gmail.com',
@@ -117,91 +117,91 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
         <ScrollReveal>
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2
-            className={`text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4 ${isDark ? 'text-white' : 'text-slate-900'
-              }`}
-          >
-            Meet the Researchers
-          </h2>
-          <p
-            className={`text-base md:text-xl leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'
-              }`}
-          >
-            Bulacan State University (BulSU) • CICT Capstone Research Team S.Y. 2026–2027.
-          </p>
-        </div>
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2
+              className={`text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4 ${isDark ? 'text-white' : 'text-slate-900'
+                }`}
+            >
+              Meet the Researchers
+            </h2>
+            <p
+              className={`text-base md:text-xl leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'
+                }`}
+            >
+              Bulacan State University (BulSU) • CICT Capstone Research Team S.Y. 2026–2027.
+            </p>
+          </div>
         </ScrollReveal>
 
         {/* 5-Column Responsive Team Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 items-stretch">
           {teamMembers.map((member, idx) => (
             <ScrollReveal delay={idx * 100} key={idx} className="h-full">
-            <article
-              className={`group border rounded-3xl p-6 flex flex-col items-center text-center justify-between transition-all duration-500 hover:-translate-y-2 shadow-sm hover:shadow-xl w-full h-full ${member.hoverBorder} ${isDark
-                ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:bg-white/[0.04]'
-                : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset hover:bg-slate-50/80'
-                }`}
-            >
-              <div className="flex flex-col items-center w-full">
-                {/* Photo Avatar Frame with Gradient Ring */}
-                <div className={`relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-[3px] bg-gradient-to-tr ${member.accentGradient} mb-5 shadow-xl shadow-black/25 shrink-0 overflow-hidden group-hover:scale-105 transition-transform duration-500`}>
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    loading="lazy"
-                    className={`w-full h-full object-cover object-top rounded-full transform-gpu ${member.imageClass}`}
-                  />
-                </div>
-
-                <h3 className={`text-base md:text-lg font-bold m-0 tracking-tight leading-snug ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                  {member.name}
-                </h3>
-
-                {/* Clean Typography Sub-Heading Role (No tag box) */}
-                <p className={`text-xs md:text-sm font-semibold tracking-wide my-1.5 ${member.roleColor}`}>
-                  {member.role}
-                </p>
-
-                <p className={`text-xs leading-relaxed m-0 mt-2 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  {member.description}
-                </p>
-              </div>
-
-              {/* Social Contacts Bar */}
-              <div
-                className={`w-full mt-6 pt-4 border-t flex items-center justify-center gap-5 ${isDark ? 'border-slate-800/80' : 'border-slate-100'
+              <article
+                className={`group border rounded-3xl p-6 flex flex-col items-center text-center justify-between transition-all duration-500 hover:-translate-y-2 shadow-sm hover:shadow-xl w-full h-full ${member.hoverBorder} ${isDark
+                  ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:bg-white/[0.04]'
+                  : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset hover:bg-slate-50/80'
                   }`}
               >
-                <a
-                  href={member.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${member.name} LinkedIn`}
-                  className="p-1 transition-transform duration-300 hover:-translate-y-1 hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] rounded"
+                <div className="flex flex-col items-center w-full">
+                  {/* Photo Avatar Frame with Gradient Ring */}
+                  <div className={`relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-[3px] bg-gradient-to-tr ${member.accentGradient} mb-5 shadow-xl shadow-black/25 shrink-0 overflow-hidden group-hover:scale-105 transition-transform duration-500`}>
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      loading="lazy"
+                      className={`w-full h-full object-cover object-top rounded-full transform-gpu ${member.imageClass}`}
+                    />
+                  </div>
+
+                  <h3 className={`text-base md:text-lg font-bold m-0 tracking-tight leading-snug ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                    {member.name}
+                  </h3>
+
+                  {/* Clean Typography Sub-Heading Role (No tag box) */}
+                  <p className={`text-xs md:text-sm font-semibold tracking-wide my-1.5 ${member.roleColor}`}>
+                    {member.role}
+                  </p>
+
+                  <p className={`text-xs leading-relaxed m-0 mt-2 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                    {member.description}
+                  </p>
+                </div>
+
+                {/* Social Contacts Bar */}
+                <div
+                  className={`w-full mt-6 pt-4 border-t flex items-center justify-center gap-5 ${isDark ? 'border-slate-800/80' : 'border-slate-100'
+                    }`}
                 >
-                  <LinkedInIcon />
-                </a>
-                <a
-                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(member.email)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Send Gmail to ${member.name}`}
-                  className="p-1 transition-transform duration-300 hover:-translate-y-1 hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] rounded"
-                >
-                  <GmailIcon />
-                </a>
-                <a
-                  href={member.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${member.name} GitHub`}
-                  className="p-1 transition-transform duration-300 hover:-translate-y-1 hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] rounded"
-                >
-                  <GitHubIcon isDark={isDark} />
-                </a>
-              </div>
-            </article>
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${member.name} LinkedIn`}
+                    className="p-1 transition-transform duration-300 hover:-translate-y-1 hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] rounded"
+                  >
+                    <LinkedInIcon />
+                  </a>
+                  <a
+                    href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(member.email)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Send Gmail to ${member.name}`}
+                    className="p-1 transition-transform duration-300 hover:-translate-y-1 hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] rounded"
+                  >
+                    <GmailIcon />
+                  </a>
+                  <a
+                    href={member.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${member.name} GitHub`}
+                    className="p-1 transition-transform duration-300 hover:-translate-y-1 hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] rounded"
+                  >
+                    <GitHubIcon isDark={isDark} />
+                  </a>
+                </div>
+              </article>
             </ScrollReveal>
           ))}
         </div>
