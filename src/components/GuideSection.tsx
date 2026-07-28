@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Download, MonitorPlay, Mic, ArrowUpRight, ShieldCheck, Pin, Sparkles, Volume2, Eye, Headphones, Layers, Command } from 'lucide-react';
+import { Download, MonitorPlay, Mic, ArrowUpRight, ShieldCheck, Pin, Volume2, Eye, Headphones, Layers } from 'lucide-react';
 
 import chromeWebStoreLogo from '../assets/chrome-webstore.svg';
 import ScrollReveal from './ScrollReveal';
@@ -422,43 +422,6 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
             </article>
           </ScrollReveal>
         </div>
-
-        {/* Quick Keyboard Shortcuts & Features Ribbon */}
-        <ScrollReveal delay={300}>
-          <div
-            className={`mt-12 p-6 rounded-3xl border flex flex-col md:flex-row items-center justify-between gap-6 ${
-              isDark
-                ? 'bg-gradient-to-r from-[#0A44FF]/10 via-purple-500/10 to-[#FF7A2F]/10 border-slate-800'
-                : 'bg-gradient-to-r from-[#0A44FF]/5 via-purple-500/5 to-[#FF7A2F]/5 border-slate-200'
-            }`}
-          >
-            <div className="flex items-center gap-4">
-              <div className="p-3 rounded-2xl bg-gradient-to-tr from-[#0A44FF] to-[#8A56FF] text-white shadow-lg shrink-0">
-                <Command size={20} aria-hidden="true" />
-              </div>
-              <div>
-                <h4 className={`text-base font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                  Quick Shortcut Reference
-                </h4>
-                <p className={`text-xs leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Use simple voice triggers or Chrome toolbar shortcuts to switch modes anytime.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-3 text-xs font-mono font-bold">
-              <span className={`px-3 py-1.5 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800 text-slate-300' : 'bg-white border-slate-200 text-slate-700'}`}>
-                🗣️ "Activate Visual"
-              </span>
-              <span className={`px-3 py-1.5 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800 text-slate-300' : 'bg-white border-slate-200 text-slate-700'}`}>
-                🎧 "Activate Auditory"
-              </span>
-              <span className={`px-3 py-1.5 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800 text-slate-300' : 'bg-white border-slate-200 text-slate-700'}`}>
-                🔒 100% In-Memory
-              </span>
-            </div>
-          </div>
-        </ScrollReveal>
       </div>
     </section>
   );
