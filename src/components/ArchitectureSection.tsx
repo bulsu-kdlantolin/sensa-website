@@ -418,8 +418,7 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
                               </span>
                               <ExternalLink size={13} className={`shrink-0 opacity-40 group-hover:opacity-100 transition-opacity ${layer.color}`} aria-hidden="true" />
                             </div>
-                            <span className={`inline-block text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md mb-2.5 border ${isDark ? 'bg-white/5 border-slate-800 text-slate-400' : 'bg-white border-slate-200 text-slate-500'
-                              }`}>
+                            <span className={`block text-xs font-mono font-semibold mb-2 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
                               {api.spec}
                             </span>
                             <p className={`text-xs leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>

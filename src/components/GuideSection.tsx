@@ -45,10 +45,6 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
         {/* Section Header */}
         <ScrollReveal>
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-mono font-bold uppercase tracking-wider mb-4 shadow-sm bg-purple-500/10 border-purple-500/30 text-purple-400">
-              <Sparkles size={14} aria-hidden="true" />
-              <span>Setup & Interactive Walkthrough</span>
-            </div>
             <h2
               className={`text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4 ${
                 isDark ? 'text-white' : 'text-slate-900'
@@ -88,9 +84,6 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                   </p>
                 </div>
               </div>
-              <span className="text-[11px] font-mono font-bold px-2.5 py-1 rounded-full border bg-purple-500/10 text-purple-400 border-purple-500/20">
-                Manifest V3
-              </span>
             </div>
 
             {/* Step 1: Add to Chrome */}
@@ -110,9 +103,6 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                     Add to Google Chrome
                   </h4>
                 </div>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border bg-emerald-500/10 text-emerald-400 border-emerald-500/20 font-bold">
-                  Free Extension
-                </span>
               </div>
               <p className={`text-xs md:text-sm leading-relaxed mb-5 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                 Open the Chrome Web Store and click <strong>Add to Chrome</strong>. Sensa compiles safely in seconds with zero configuration required.
@@ -242,9 +232,6 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                   </p>
                 </div>
               </div>
-              <span className="text-[11px] font-mono font-bold px-2.5 py-1 rounded-full border bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] border-[#0A44FF]/20">
-                Dual Docks
-              </span>
             </div>
 
             {/* Interactive Voice Onboarding Simulator */}
@@ -264,9 +251,6 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                     Interactive Voice Onboarding
                   </h4>
                 </div>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border bg-blue-500/10 text-blue-400 border-blue-500/20 font-bold">
-                  Voice First
-                </span>
               </div>
               <p className={`text-xs md:text-sm leading-relaxed mb-4 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                 Upon first click, Sensa speaks a welcome prompt and listens for your spoken mode selection. Test the voice triggers below:
