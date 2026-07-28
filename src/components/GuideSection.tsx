@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Download, MonitorPlay, Mic, ArrowUpRight, CheckCircle2, ShieldCheck, Pin, Sparkles, Volume2, Eye, Headphones, Layers, Command } from 'lucide-react';
+import { Download, MonitorPlay, Mic, ArrowUpRight, ShieldCheck, Pin, Sparkles, Volume2, Eye, Headphones, Layers, Command } from 'lucide-react';
 
 import chromeWebStoreLogo from '../assets/chrome-webstore.svg';
 import ScrollReveal from './ScrollReveal';
