@@ -137,7 +137,7 @@ export default function Footer({ isDark }: FooterProps) {
               </li>
               <li className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                <span className="text-emerald-500">100% In-Memory Privacy Policy</span>
+                <span className="text-emerald-500">Privacy Policy</span>
               </li>
             </ul>
           </div>
