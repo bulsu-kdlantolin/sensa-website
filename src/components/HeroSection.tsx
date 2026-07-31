@@ -104,7 +104,7 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
             isDark ? 'text-slate-400' : 'text-slate-600'
           }`}
         >
-          Created by IT students from Bulacan State University to make the internet accessible for people with low vision or hearing impairments. It features hands-free voice controls, live AI subtitles, a high-contrast reading guide, and real-time audio capture.
+          Created by 4th-Year Information Technology students from Bulacan State University to make the internet accessible for people with low vision or hearing impairments. It features hands-free voice controls, live AI subtitles, a high-contrast reading guide, and real-time audio capture.
         </p>
 
         <div className="relative flex items-center justify-center w-full mb-6 animate-pop group">

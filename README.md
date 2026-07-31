@@ -17,7 +17,7 @@
 
 ## 📌 Project Overview
 
-**Sensa** is an advanced Chrome Extension and Web Platform created as an official Capstone Research Project at **Bulacan State University (BulSU) — College of Information and Communications Technology (CICT)** (S.Y. 2026–2027).
+**Sensa** is an advanced Chrome Extension and Web Platform created by **4th-Year Information Technology students** as an official Capstone Research Project at **Bulacan State University (BulSU) — College of Information and Communications Technology (CICT)** (S.Y. 2026–2027).
 
 Most modern websites are not inherently designed to support individuals with visual or auditory impairments. Sensa solves this by bridging the gap between web content and user accessibility through real-time AI speech recognition, neural translation, intelligent text-to-speech, live decibel monitoring, and interactive screen magnification.
 
