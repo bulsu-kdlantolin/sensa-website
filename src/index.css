@@ -1,6 +1,38 @@
 @import "tailwindcss";
 
 /* 
+ * Safeguard: Extension UI Protection
+ * Prevents sensa-website global styles, dark mode overrides, and Tailwind resets
+ * from bleeding into injected Sensa extension DOM elements.
+ */
+#sensa-shadow-root,
+#sensa-extension-root,
+[id^="sensa-"] {
+  display: block;
+  isolation: isolate;
+}
+
+#sensa-shadow-root *,
+#sensa-extension-root *,
+[id^="sensa-"] * {
+  box-sizing: border-box;
+}
+
+#sensa-shadow-root button,
+#sensa-extension-root button,
+[id^="sensa-"] button {
+  color: initial;
+  background-color: initial;
+}
+
+#sensa-shadow-root svg,
+#sensa-extension-root svg,
+[id^="sensa-"] svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* 
  * Sensa Capstone Website - Global Styles & Animations
  */
 
