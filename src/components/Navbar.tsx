@@ -116,7 +116,7 @@ export default function Navbar({
             {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`flex xl:hidden p-2 rounded-full border backdrop-blur-md transition-all duration-300 ${
+              className={`flex xl:hidden p-2 rounded-full border backdrop-blur-md transition-all duration-300 cursor-pointer ${
                 isDark
                   ? 'bg-[#24262B]/80 border-slate-800 hover:bg-slate-800 text-slate-400 hover:text-white'
                   : 'bg-slate-100/80 border-slate-200/60 hover:bg-slate-200 text-slate-500 hover:text-slate-900'
@@ -127,7 +127,7 @@ export default function Navbar({
             </button>
             <button
               onClick={() => setIsSidebarMode(true)}
-              className={`hidden xl:flex mr-4 p-2 rounded-full border backdrop-blur-md transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] ${
+              className={`hidden xl:flex mr-4 p-2 rounded-full border backdrop-blur-md transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] ${
                 isDark
                   ? 'bg-[#24262B]/80 border-slate-800 hover:bg-slate-800 text-slate-400 hover:text-white'
                   : 'bg-slate-100/80 border-slate-200/60 hover:bg-slate-200 text-slate-500 hover:text-slate-900'
@@ -142,7 +142,7 @@ export default function Navbar({
               role="switch"
               aria-checked={isDark}
               aria-label={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-              className={`flex items-center justify-center w-9 h-9 rounded-full border backdrop-blur-md transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] ${
+              className={`flex items-center justify-center w-9 h-9 rounded-full border backdrop-blur-md transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] ${
                 isDark
                   ? 'bg-[#24262B]/80 border-slate-800 hover:bg-slate-800 text-[#FF7A2F]'
                   : 'bg-slate-100/80 border-slate-200/60 hover:bg-slate-200 text-[#0A44FF]'
@@ -279,7 +279,7 @@ export default function Navbar({
         <div className="flex flex-col items-center gap-4 w-full mt-auto">
           <button
             onClick={() => setIsSidebarMode(false)}
-            className={`flex p-2 rounded-full border backdrop-blur-md transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0A44FF] ${
+            className={`flex p-2 rounded-full border backdrop-blur-md transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0A44FF] ${
               isDark
                 ? 'bg-[#24262B]/80 border-slate-800 hover:bg-slate-800 text-slate-400 hover:text-white'
                 : 'bg-slate-100/80 border-slate-200/60 hover:bg-slate-200 text-slate-500 hover:text-slate-900'
@@ -294,7 +294,7 @@ export default function Navbar({
             role="switch"
             aria-checked={isDark}
             aria-label={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-            className={`flex items-center justify-center w-9 h-9 rounded-full border backdrop-blur-md transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0A44FF] ${
+            className={`flex items-center justify-center w-9 h-9 rounded-full border backdrop-blur-md transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0A44FF] ${
               isDark
                 ? 'bg-[#24262B]/80 border-slate-800 hover:bg-slate-800 text-[#FF7A2F]'
                 : 'bg-slate-100/80 border-slate-200/60 hover:bg-slate-200 text-[#0A44FF]'

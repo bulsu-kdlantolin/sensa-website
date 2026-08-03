@@ -25,7 +25,7 @@ interface FooterProps {
 export default function Footer({ isDark }: FooterProps) {
   return (
     <footer
-      className={`relative overflow-hidden w-full border-t py-10 md:py-12 ${isDark ? 'bg-[#0E0E10] border-slate-800/80' : 'bg-[#F4F5F8] border-slate-200/80'
+      className={`relative overflow-hidden w-full border-t py-6 md:py-8 ${isDark ? 'bg-[#0E0E10] border-slate-800/80' : 'bg-[#F4F5F8] border-slate-200/80'
         }`}
     >
       {/* Subtle Ambient Glow */}
@@ -36,7 +36,7 @@ export default function Footer({ isDark }: FooterProps) {
 
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         {/* Top Footer 4-Column Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 mb-8 md:mb-10 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 mb-4 md:mb-6 items-start">
           {/* Column 1: Brand & Academic Mission */}
           <div className="space-y-3">
             <div className="flex items-center gap-3">
@@ -145,7 +145,7 @@ export default function Footer({ isDark }: FooterProps) {
 
         {/* Bottom Copyright Bar */}
         <div
-          className={`pt-6 border-t flex justify-center text-center text-xs font-normal ${isDark ? 'border-slate-800/80 text-slate-400' : 'border-slate-200/80 text-slate-600'
+          className={`pt-4 border-t flex justify-center text-center text-xs font-normal ${isDark ? 'border-slate-800/80 text-slate-400' : 'border-slate-200/80 text-slate-600'
             }`}
         >
           <p className="m-0 text-center max-w-3xl mx-auto leading-relaxed">
