@@ -3,6 +3,8 @@ interface HeroSectionProps {
   handleNavClick?: (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => void;
 }
 
+import NeuralCanvas from './NeuralCanvas';
+
 const ChromeIcon = ({ size = 22, className = '' }: { size?: number; className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" height={size} width={size} className={className}>
     <defs>
@@ -38,49 +40,11 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
       <div className="absolute inset-0 bg-grid-pattern pointer-events-none [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_75%,transparent_100%)] -z-10" />
 
       {/* AI Neural Mesh Background */}
-      <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center opacity-60">
-        <svg
-          className={`absolute w-[120%] h-[120%] max-w-none ${
-            isDark ? 'animate-float-orange' : 'animate-float-blue'
-          }`}
-          viewBox="0 0 800 600"
-          preserveAspectRatio="xMidYMid slice"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g stroke={isDark ? 'rgba(255,122,47,0.15)' : 'rgba(10, 68, 255, 0.2)'} strokeWidth="1.5" fill="none">
-            <path d="M100,100 L250,150 L400,100 L550,200 L700,150" />
-            <path d="M150,300 L250,150 L350,350 L550,200 L650,400" />
-            <path d="M100,500 L150,300 L300,450 L350,350 L500,500 L650,400 L750,550" />
-            <path d="M400,100 L350,350 L500,500" />
-            <path d="M700,150 L650,400" />
-            {/* Cross connections */}
-            <path d="M250,150 L300,450" className="animate-pulse" style={{ animationDuration: '3s' }} />
-            <path d="M550,200 L500,500" className="animate-pulse" style={{ animationDuration: '4s' }} />
-          </g>
-          <g fill={isDark ? 'rgba(255,122,47,0.5)' : 'rgba(10, 68, 255, 0.6)'}>
-            <circle cx="100" cy="100" r="3" className="animate-ping" style={{ animationDuration: '3s' }} />
-            <circle cx="250" cy="150" r="4" />
-            <circle cx="400" cy="100" r="3" />
-            <circle cx="550" cy="200" r="5" className="animate-pulse" />
-            <circle cx="700" cy="150" r="3" />
-            <circle cx="150" cy="300" r="4" />
-            <circle
-              cx="350"
-              cy="350"
-              r="5"
-              className="animate-ping"
-              style={{ animationDuration: '4s', animationDelay: '1s' }}
-            />
-            <circle cx="650" cy="400" r="4" />
-            <circle cx="100" cy="500" r="3" />
-            <circle cx="300" cy="450" r="4" />
-            <circle cx="500" cy="500" r="3" className="animate-pulse" />
-            <circle cx="750" cy="550" r="3" />
-          </g>
-        </svg>
+      <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center">
+        <NeuralCanvas isDark={isDark} />
         {/* Ambient Background Glow behind the nodes */}
         <div
-          className={`hidden md:block absolute w-[600px] h-[400px] rounded-full blur-[120px] bg-gradient-to-tr from-[#0A44FF] to-[#8A56FF] ${
+          className={`hidden md:block absolute w-[600px] h-[400px] rounded-full blur-[120px] bg-gradient-to-tr from-[#0A44FF] to-[#8A56FF] pointer-events-none ${
             isDark ? 'opacity-10' : 'opacity-5'
           }`}
         />
