@@ -1,7 +1,7 @@
 import { Cpu, Server, Cloud, Globe, Mic, Volume2, Headphones, Eye, Network, Radio, ExternalLink } from 'lucide-react';
-import azureLogo from '../assets/azure-logo.png';
-import plasmoLogo from '../assets/plasmo-logo.png';
-import renderLogo from '../assets/render-logo.png';
+import azureLogo from '../assets/azure-logo.webp';
+import plasmoLogo from '../assets/plasmo-logo.webp';
+import renderLogo from '../assets/render-logo.webp';
 import ScrollReveal from './ScrollReveal';
 
 interface ArchitectureSectionProps {

@@ -116,7 +116,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
               >
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#0A44FF] to-[#8A56FF] p-0.5 shrink-0 flex items-center justify-center shadow-md">
-                    <img src="/sensa-logo.png" alt="Sensa" className="w-7 h-7 object-contain" />
+                    <img src="/sensa-logo.webp" alt="Sensa" className="w-7 h-7 object-contain" />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">

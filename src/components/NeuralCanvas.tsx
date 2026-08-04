@@ -10,6 +10,7 @@ export default function NeuralCanvas({ isDark }: { isDark: boolean }) {
     if (!ctx) return;
 
     let animationFrameId: number;
+    let isVisible = true;
     let particles: Particle[] = [];
     
     // Config
@@ -68,7 +69,8 @@ export default function NeuralCanvas({ isDark }: { isDark: boolean }) {
     };
 
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (isVisible) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((p, index) => {
         p.update(canvas.width, canvas.height);
@@ -90,6 +92,7 @@ export default function NeuralCanvas({ isDark }: { isDark: boolean }) {
           }
         }
       });
+      }
 
       animationFrameId = requestAnimationFrame(animate);
     };
@@ -112,7 +115,18 @@ export default function NeuralCanvas({ isDark }: { isDark: boolean }) {
     canvas.addEventListener('mousemove', handleMouseMove);
     canvas.addEventListener('mouseleave', handleMouseLeave);
 
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+        });
+      },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
+
     return () => {
+      observer.disconnect();
       window.removeEventListener('resize', handleResize);
       canvas.removeEventListener('mousemove', handleMouseMove);
       canvas.removeEventListener('mouseleave', handleMouseLeave);

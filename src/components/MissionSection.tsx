@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { MousePointerClick, FileText, VolumeX, BellOff, Mic, Volume2, MessageSquare, Zap } from 'lucide-react';
-import sensaLogo from '../assets/sensa-logo.png';
+import sensaLogo from '../assets/sensa-logo.webp';
 import ScrollReveal from './ScrollReveal';
 
 interface MissionSectionProps {
