@@ -1,7 +1,7 @@
-import robertImg from '../assets/robert.png';
-import christianImg from '../assets/christian.png';
-import leoImg from '../assets/leo.png';
-import russellImg from '../assets/russell.png';
+import robertImg from '../assets/robert.webp';
+import christianImg from '../assets/christian.webp';
+import leoImg from '../assets/leo.webp';
+import russellImg from '../assets/russell.webp';
 import kianImg from '../assets/kian.jpg';
 import ScrollReveal from './ScrollReveal';
 
