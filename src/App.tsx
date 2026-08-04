@@ -13,8 +13,6 @@ import ArchitectureSection from './components/ArchitectureSection';
 import GuideSection from './components/GuideSection';
 import TeamSection from './components/TeamSection';
 import Footer from './components/Footer';
-import CustomCursor from './components/CustomCursor';
-
 
 type ThemeMode = 'dark' | 'light';
 
@@ -155,7 +153,6 @@ export default function App() {
       className={`min-h-screen font-sans relative overflow-x-hidden selection:bg-[#0A44FF] selection:text-white ${isDark ? 'bg-[#09090B] text-slate-200' : 'bg-[#FDFDFD] text-slate-900'
         }`}
     >
-      <CustomCursor isDark={isDark} />
       {/* Skip to Main Content Bypass Link (WCAG 2.4.1 Level AA/AAA) */}
       <a
         href="#main-content"
