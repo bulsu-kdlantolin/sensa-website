@@ -137,6 +137,14 @@ export default function Navbar({
             >
               <PanelLeft size={16} aria-hidden="true" />
             </button>
+            <div 
+              id="google_translate_element" 
+              className={`flex items-center px-2 h-9 rounded-full border backdrop-blur-md transition-all duration-300 ${
+                isDark
+                  ? 'bg-[#24262B]/80 border-slate-800 text-slate-400'
+                  : 'bg-slate-100/80 border-slate-200/60 text-slate-500'
+              } [&_.goog-te-gadget-simple]:!flex [&_.goog-te-gadget-simple]:!items-center [&_.goog-te-gadget-simple]:!gap-2`}
+            ></div>
             <button
               onClick={() => setTheme(isDark ? 'light' : 'dark')}
               role="switch"

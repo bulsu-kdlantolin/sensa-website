@@ -292,3 +292,11 @@
   white-space: nowrap;
   overflow: hidden;
 }
+/* Google Translate Widget Overrides */
+.goog-te-banner-frame.skiptranslate { display: none !important; }
+body { top: 0px !important; }
+.goog-te-gadget-icon { display: none !important; }
+.goog-te-gadget-simple { background-color: transparent !important; border: none !important; font-size: 0 !important; }
+.goog-te-gadget-simple .goog-te-menu-value { color: inherit !important; font-size: 14px !important; }
+.goog-te-gadget-simple .goog-te-menu-value span { color: inherit !important; }
+
