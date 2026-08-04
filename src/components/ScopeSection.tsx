@@ -1,4 +1,4 @@
-import { Server, ShieldCheck, CheckCircle2, Sparkles, Volume2, Smartphone, KeyRound, MicOff, Laptop, AlertTriangle } from 'lucide-react';
+import { Server, ShieldCheck, CheckCircle2, Sparkles, Volume2, Smartphone, KeyRound, Laptop, AlertTriangle, Globe } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 
 interface ScopeSectionProps {
@@ -8,8 +8,8 @@ interface ScopeSectionProps {
 export default function ScopeSection({ isDark }: ScopeSectionProps) {
   const scopeItems = [
     {
-      title: 'Desktop Chrome Browsers',
-      description: 'Fully compatible with any Chromium-based desktop browser, including Google Chrome, Brave, and Microsoft Edge.',
+      title: 'Google Chrome & Microsoft Edge',
+      description: 'Delivers optimal performance on Google Chrome and Microsoft Edge desktop browsers for seamless voice controls and live audio capture.',
       icon: Laptop,
     },
     {
@@ -31,6 +31,11 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
 
   const limitationItems = [
     {
+      title: 'Browser Compatibility',
+      description: 'Voice commands are disabled on Brave and Opera due to built-in shield restrictions, and non-Chromium browsers like Firefox or Safari are not compatible.',
+      icon: Globe,
+    },
+    {
       title: 'Desktop Computers Only',
       description: 'Designed exclusively for desktop operating systems; mobile devices (iOS and Android phones or tablets) are not supported.',
       icon: Smartphone,
@@ -44,11 +49,6 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
       title: 'Monthly Service Limits',
       description: 'Relies on free developer API tiers for translation and speech AI; features may pause if monthly quotas are reached.',
       icon: KeyRound,
-    },
-    {
-      title: 'Audio Quality Dependency',
-      description: 'Subtitles work best on clear spoken voices and may struggle to understand words during loud background music.',
-      icon: MicOff,
     },
   ];
 

@@ -83,17 +83,13 @@ export default function Footer({ isDark }: FooterProps) {
                 </a>
               </li>
               <li>
-                <a
-                  href="https://github.com/bulsu-kdlantolin/sensa-chrome-extension"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-2 transition-colors hover:text-[#0A44FF] dark:hover:text-[#6AA2FF] ${isDark ? 'text-slate-400' : 'text-slate-600'
-                    }`}
-                >
+                <span className={`inline-flex items-center gap-2 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                   <BookOpen size={14} aria-hidden="true" />
                   <span>Research Paper (PDF)</span>
-                  <ArrowUpRight size={12} className="opacity-60" aria-hidden="true" />
-                </a>
+                  <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded border bg-amber-500/10 text-amber-500 border-amber-500/20">
+                    Coming Soon
+                  </span>
+                </span>
               </li>
             </ul>
           </div>
