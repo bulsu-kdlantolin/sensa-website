@@ -15,7 +15,7 @@ export default function NeuralCanvas({ isDark }: { isDark: boolean }) {
     // Config
     const numParticles = 60;
     const maxDistance = 150;
-    const particleRadius = 2;
+    const particleRadius = 3.5;
     const color = isDark ? '255, 122, 47' : '10, 68, 255';
     
     let mouse = { x: -1000, y: -1000 };
@@ -83,7 +83,7 @@ export default function NeuralCanvas({ isDark }: { isDark: boolean }) {
           if (dist < maxDistance) {
             ctx.beginPath();
             ctx.strokeStyle = `rgba(${color}, ${1 - dist / maxDistance})`;
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 2;
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
             ctx.stroke();
@@ -123,7 +123,7 @@ export default function NeuralCanvas({ isDark }: { isDark: boolean }) {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-auto z-0 opacity-40 transition-opacity duration-1000"
+      className="absolute inset-0 w-full h-full pointer-events-auto z-0 opacity-100 transition-opacity duration-1000"
     />
   );
 }
