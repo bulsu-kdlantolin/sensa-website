@@ -4,6 +4,7 @@ import leoImg from '../assets/leo.webp';
 import russellImg from '../assets/russell.webp';
 import kianImg from '../assets/kian.jpg';
 import ScrollReveal from './ScrollReveal';
+import React from 'react';
 
 const LinkedInIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
@@ -34,17 +35,17 @@ interface TeamSectionProps {
 export default function TeamSection({ isDark }: TeamSectionProps) {
   const teamMembers = [
     {
-      name: 'Robert Shanedion Tantoco',
-      role: 'Graphics Designer & Video Editor',
-      description: 'Crafted Sensa\'s visual design branding and produced capstone video demonstrations.',
-      image: robertImg,
+      name: 'John Russell Sta.Ana',
+      role: 'Project Manager',
+      description: 'Managed project milestones, synchronized team workflows, and ensured capstone deliverables succeeded on schedule.',
+      image: russellImg,
       imageClass: 'brightness-[1.18] contrast-[1.08] saturate-[1.05]',
-      email: 'robertshanediontantoco@gmail.com',
-      linkedin: 'https://www.linkedin.com/in/robert-shanedion-tantoco/',
-      github: 'https://github.com/bulsu-rsmtantoco',
-      accentGradient: 'from-[#8A56FF] via-[#A855F7] to-purple-600',
-      roleColor: isDark ? 'text-purple-400' : 'text-purple-600',
-      hoverBorder: 'hover:border-purple-500/60',
+      email: 'staanajohnrussell75@gmail.com',
+      linkedin: 'https://www.linkedin.com/in/john-russell-sta-ana-022366403',
+      github: 'https://github.com/bulsu-jrsfstaana',
+      accentGradient: 'from-[#F59E0B] via-[#FBBF24] to-amber-500',
+      roleColor: isDark ? 'text-amber-400' : 'text-amber-600',
+      hoverBorder: 'hover:border-amber-500/60',
     },
     {
       name: 'Christian Adriano',
@@ -60,17 +61,17 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
       hoverBorder: 'hover:border-[#FF7A2F]/60',
     },
     {
-      name: 'John Russell Sta.Ana',
-      role: 'Project Manager',
-      description: 'Managed project milestones, synchronized team workflows, and ensured capstone deliverables succeeded on schedule.',
-      image: russellImg,
+      name: 'Robert Shanedion Tantoco',
+      role: 'Graphics Designer & Video Editor',
+      description: 'Crafted Sensa\'s visual design branding and produced capstone video demonstrations.',
+      image: robertImg,
       imageClass: 'brightness-[1.18] contrast-[1.08] saturate-[1.05]',
-      email: 'staanajohnrussell75@gmail.com',
-      linkedin: 'https://www.linkedin.com/in/john-russell-sta-ana-022366403',
-      github: 'https://github.com/bulsu-jrsfstaana',
-      accentGradient: 'from-[#F59E0B] via-[#FBBF24] to-amber-500',
-      roleColor: isDark ? 'text-amber-400' : 'text-amber-600',
-      hoverBorder: 'hover:border-amber-500/60',
+      email: 'robertshanediontantoco@gmail.com',
+      linkedin: 'https://www.linkedin.com/in/robert-shanedion-tantoco/',
+      github: 'https://github.com/bulsu-rsmtantoco',
+      accentGradient: 'from-[#8A56FF] via-[#A855F7] to-purple-600',
+      roleColor: isDark ? 'text-purple-400' : 'text-purple-600',
+      hoverBorder: 'hover:border-purple-500/60',
     },
     {
       name: 'Kian Davey Antolin',
@@ -133,11 +134,12 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
           </div>
         </ScrollReveal>
 
-        {/* Creative Flex Layout: 3 on top, 2 on bottom */}
+        {/* Creative Flex Layout: 2 on top, 3 on bottom */}
         <div className="flex flex-wrap justify-center gap-6 md:gap-8 max-w-6xl mx-auto">
           {teamMembers.map((member, idx) => (
-            <ScrollReveal delay={idx * 100} key={idx} className="w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-2rem)] max-w-sm h-full">
-              <article
+            <React.Fragment key={idx}>
+              <ScrollReveal delay={idx * 100} className="w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-2rem)] max-w-sm h-full">
+                <article
                 className={`group relative overflow-hidden rounded-2xl flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 shadow-lg hover:shadow-2xl w-full h-full border ${
                   isDark
                     ? 'bg-[#121214]/80 backdrop-blur-md border-white/10 ring-1 ring-white/5 ring-inset'
@@ -165,8 +167,16 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
                       className={`w-full h-full object-cover object-top rounded-[10px] group-hover:scale-110 transition-transform duration-700 ${member.imageClass}`}
                     />
                     {/* Enhanced Laser Scanline Effect */}
-                    <div className="absolute inset-0 overflow-hidden rounded-[10px] pointer-events-none">
+                    <div className="absolute inset-0 overflow-hidden rounded-[10px] pointer-events-none z-10">
                       <div className="absolute top-0 left-0 w-full h-[150%] bg-gradient-to-b from-transparent via-white/10 to-white/40 border-b-[3px] border-white/80 drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] -translate-y-[100%] group-hover:translate-y-[80%] transition-transform duration-[2.5s] ease-in-out" />
+                    </div>
+
+                    {/* Biometrics Verified Overlay */}
+                    <div className="absolute inset-0 bg-black/60 rounded-[10px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-[2s] pointer-events-none flex items-center justify-center backdrop-blur-[2px] z-20">
+                      <div className="border border-green-500/50 bg-green-500/20 px-3 py-1.5 rounded text-green-400 font-mono text-xs font-bold tracking-[0.3em] flex items-center gap-2 scale-90 group-hover:scale-100 transition-transform duration-300 delay-[2s]">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
+                        VERIFIED
+                      </div>
                     </div>
                   </div>
 
@@ -178,7 +188,6 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
                   <div className="flex flex-col mt-4 mb-2 p-3 rounded-lg border border-dashed border-current/20 bg-black/5 dark:bg-white/5" style={{ color: isDark ? '#fff' : '#000' }}>
                     <span className={`text-[10px] md:text-xs font-mono tracking-[0.2em] uppercase opacity-60 mb-1 ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>ASSIGNMENT_DATA:</span>
                     <div className="flex items-start gap-2">
-                      <span className="w-2 h-2 mt-1.5 rounded-sm bg-current animate-pulse shrink-0" />
                       <p className={`text-sm md:text-base font-mono font-bold uppercase leading-snug ${member.roleColor}`}>
                         {member.role}
                       </p>
@@ -231,8 +240,10 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
                 </div>
               </article>
             </ScrollReveal>
-          ))}
-        </div>
+            {idx === 1 && <div className="hidden lg:block w-full h-0" />}
+          </React.Fragment>
+        ))}
+      </div>
       </div>
     </section>
   );
