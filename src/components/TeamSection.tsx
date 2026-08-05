@@ -138,68 +138,91 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
           {teamMembers.map((member, idx) => (
             <ScrollReveal delay={idx * 100} key={idx} className="h-full">
               <article
-                className={`group border rounded-3xl p-6 flex flex-col items-center text-center justify-between transition-all duration-500 hover:-translate-y-2 shadow-sm hover:shadow-xl w-full h-full ${member.hoverBorder} ${isDark
-                  ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:bg-white/[0.04]'
-                  : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset hover:bg-slate-50/80'
-                  }`}
+                className={`group relative overflow-hidden rounded-2xl flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 shadow-lg hover:shadow-2xl w-full h-full border ${
+                  isDark
+                    ? 'bg-[#121214]/80 backdrop-blur-md border-white/10 ring-1 ring-white/5 ring-inset'
+                    : 'bg-white/80 backdrop-blur-md border-slate-300 ring-1 ring-black/5 ring-inset'
+                }`}
               >
-                <div className="flex flex-col items-center w-full">
-                  {/* Photo Avatar Frame with Gradient Ring */}
-                  <div className={`relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-[3px] bg-gradient-to-tr ${member.accentGradient} mb-5 shadow-xl shadow-black/25 shrink-0 overflow-hidden group-hover:scale-105 transition-transform duration-500`}>
+                {/* ID Badge Header Bar */}
+                <div className={`w-full flex justify-between items-center px-4 py-2 text-[10px] font-mono font-bold tracking-[0.2em] border-b ${isDark ? 'bg-black/40 border-white/10 text-slate-400' : 'bg-slate-100 border-slate-200 text-slate-500'}`}>
+                  <span>ID:// {10042 + idx}</span>
+                  <span className={`px-2 py-0.5 rounded-full ${member.roleColor.replace('text-', 'bg-').replace('-400', '-500/20').replace('-600', '-500/20')}`}>
+                    {isDark ? 'ACTIVE' : 'VERIFIED'}
+                  </span>
+                </div>
+
+                <div className="flex flex-col flex-1 relative p-5">
+                  {/* Glowing Overlay on Hover */}
+                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-700 bg-gradient-to-b ${member.accentGradient} pointer-events-none`} />
+
+                  {/* Square Profile Photo */}
+                  <div className={`relative w-full aspect-square rounded-xl p-[2px] bg-gradient-to-tr ${member.accentGradient} mb-5 overflow-hidden`}>
                     <img
                       src={member.image}
                       alt={member.name}
                       loading="lazy"
-                      className={`w-full h-full object-cover object-top rounded-full transform-gpu ${member.imageClass}`}
+                      className={`w-full h-full object-cover object-top rounded-[10px] group-hover:scale-110 transition-transform duration-700 ${member.imageClass}`}
                     />
+                    {/* Scanline Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/20 to-transparent -translate-y-[100%] group-hover:translate-y-[100%] transition-transform duration-[1.5s] ease-in-out pointer-events-none" />
                   </div>
 
-                  <h3 className={`text-base md:text-lg font-bold m-0 tracking-tight leading-snug ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                  <h3 className={`text-lg md:text-xl font-bold m-0 tracking-tight leading-snug uppercase ${isDark ? 'text-white' : 'text-slate-900'}`}>
                     {member.name}
                   </h3>
 
-                  {/* Clean Typography Sub-Heading Role (No tag box) */}
-                  <p className={`text-xs md:text-sm font-semibold tracking-wide my-1.5 ${member.roleColor}`}>
-                    {member.role}
-                  </p>
+                  {/* Terminal Typing Role */}
+                  <div className="flex items-center gap-2 my-2">
+                    <span className="w-2 h-2 rounded-sm bg-current animate-pulse" style={{ color: isDark ? '#fff' : '#000' }} />
+                    <p className={`text-xs md:text-sm font-mono font-bold tracking-widest uppercase ${member.roleColor} overflow-hidden whitespace-nowrap`}>
+                      {member.role}
+                    </p>
+                  </div>
 
-                  <p className={`text-xs leading-relaxed m-0 mt-2 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                  <p className={`text-sm leading-relaxed m-0 mt-2 font-normal flex-1 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                     {member.description}
                   </p>
                 </div>
 
                 {/* Social Contacts Bar */}
                 <div
-                  className={`w-full mt-6 pt-4 border-t flex items-center justify-center gap-5 ${isDark ? 'border-slate-800/80' : 'border-slate-100'
-                    }`}
+                  className={`w-full px-5 py-4 border-t flex items-center justify-between gap-2 ${
+                    isDark ? 'border-white/10 bg-black/20' : 'border-slate-200 bg-slate-50'
+                  }`}
                 >
-                  <a
-                    href={member.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${member.name} LinkedIn`}
-                    className="p-1 transition-transform duration-300 hover:-translate-y-1 hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] rounded"
-                  >
-                    <LinkedInIcon />
-                  </a>
-                  <a
-                    href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(member.email)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Send Gmail to ${member.name}`}
-                    className="p-1 transition-transform duration-300 hover:-translate-y-1 hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] rounded"
-                  >
-                    <GmailIcon />
-                  </a>
-                  <a
-                    href={member.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${member.name} GitHub`}
-                    className="p-1 transition-transform duration-300 hover:-translate-y-1 hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] rounded"
-                  >
-                    <GitHubIcon isDark={isDark} />
-                  </a>
+                  <span className={`text-[10px] font-mono tracking-widest ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
+                    CONTACT_LOG
+                  </span>
+                  <div className="flex items-center gap-3">
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${member.name} LinkedIn`}
+                      className="transition-transform hover:scale-125 focus:outline-none"
+                    >
+                      <LinkedInIcon />
+                    </a>
+                    <a
+                      href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(member.email)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Send Gmail to ${member.name}`}
+                      className="transition-transform hover:scale-125 focus:outline-none"
+                    >
+                      <GmailIcon />
+                    </a>
+                    <a
+                      href={member.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${member.name} GitHub`}
+                      className="transition-transform hover:scale-125 focus:outline-none"
+                    >
+                      <GitHubIcon isDark={isDark} />
+                    </a>
+                  </div>
                 </div>
               </article>
             </ScrollReveal>
