@@ -265,14 +265,6 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
           }`}
       />
 
-      {/* Data Stream Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
-        <div className={`absolute top-[20%] left-0 w-32 h-[1px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent blur-[1px] animate-[data-stream_4s_linear_infinite] ${isDark ? 'opacity-40' : 'opacity-20'}`} />
-        <div className={`absolute top-[45%] left-0 w-48 h-[2px] bg-gradient-to-r from-transparent via-[#8A56FF] to-transparent blur-[2px] animate-[data-stream_6s_linear_infinite_1s] ${isDark ? 'opacity-30' : 'opacity-15'}`} />
-        <div className={`absolute top-[70%] left-0 w-24 h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent blur-[1px] animate-[data-stream_5s_linear_infinite_2.5s] ${isDark ? 'opacity-50' : 'opacity-25'}`} />
-        <div className={`absolute top-[85%] left-0 w-64 h-[2px] bg-gradient-to-r from-transparent via-[#FF7A2F] to-transparent blur-[2px] animate-[data-stream_7s_linear_infinite_0.5s] ${isDark ? 'opacity-20' : 'opacity-10'}`} />
-      </div>
-
       <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
         {/* Section Header */}
         <ScrollReveal>
@@ -302,9 +294,9 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
               return (
                 <article
                   key={idx}
-                  className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.005] relative overflow-hidden backdrop-blur-2xl ${side.borderHover} ${isDark
-                      ? 'bg-[#161618]/60 border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.36)]'
-                      : 'bg-white/60 border-white/50 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)]'
+                  className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.005] relative overflow-hidden ${side.borderHover} ${isDark
+                      ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 shadow-md'
+                      : 'bg-white border-slate-200/80 ring-1 ring-black/5 shadow-md'
                     }`}
                 >
                   <div className={`absolute top-0 left-8 right-8 h-1 rounded-b-full ${side.accentLine} opacity-50`} />
@@ -333,14 +325,14 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
                             href={item.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className={`p-3.5 rounded-2xl border flex flex-col gap-0.5 transition-all duration-300 group focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] ${isDark
-                                ? 'bg-[#0f0f11]/80 border-white/5 hover:border-[#8A56FF]/50 hover:shadow-[0_0_20px_rgba(138,86,255,0.2)] hover:bg-[#161618]'
-                                : 'bg-slate-50/80 border-slate-200/60 hover:border-[#8A56FF]/50 hover:shadow-[0_0_20px_rgba(138,86,255,0.1)] hover:bg-white'
+                            className={`p-3.5 rounded-2xl border flex flex-col gap-0.5 transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] ${isDark
+                                ? 'bg-black/40 border-slate-800/80 hover:border-slate-600 hover:bg-black/60'
+                                : 'bg-slate-50/80 border-slate-200/60 hover:border-slate-300 hover:bg-slate-100'
                               }`}
                           >
                             <span className={`text-sm font-bold flex items-center justify-between gap-2.5 ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>
                               <span className="flex items-center gap-2.5">
-                                <span className={`shrink-0 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:animate-pulse ${side.color}`}>
+                                <span className={`shrink-0 flex items-center justify-center ${side.color}`}>
                                   <ItemLogo size={18} />
                                 </span>
                                 {item.name}
@@ -379,9 +371,9 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
               return (
                 <ScrollReveal delay={150 + (lIdx * 100)} key={lIdx}>
                 <div
-                  className={`border rounded-[2.5rem] p-6 md:p-8 transition-all duration-500 relative overflow-hidden backdrop-blur-2xl ${layer.borderHover} ${isDark
-                      ? 'bg-[#161618]/60 border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.36)]'
-                      : 'bg-white/60 border-white/50 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)]'
+                  className={`border rounded-[2.5rem] p-6 md:p-8 transition-all duration-500 relative overflow-hidden ${layer.borderHover} ${isDark
+                      ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 shadow-md'
+                      : 'bg-white border-slate-200/80 ring-1 ring-black/5 shadow-md'
                     }`}
                 >
                   <div className={`absolute top-0 left-8 right-8 h-1 rounded-b-full ${layer.accentLine} opacity-50`} />
@@ -395,7 +387,7 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
                       <span className={`text-xs font-mono font-bold uppercase tracking-wider ${layer.color}`}>
                         {layer.layerNumber}
                       </span>
-                      <h4 className={`text-xl md:text-2xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F]`}>
+                      <h4 className={`text-xl md:text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
                         {layer.title}
                       </h4>
                     </div>
@@ -411,15 +403,15 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
                           href={api.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={`p-4 rounded-2xl border flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] ${isDark
-                              ? 'bg-[#0f0f11]/80 border-white/5 hover:border-[#8A56FF]/50 hover:shadow-[0_0_20px_rgba(138,86,255,0.2)] hover:bg-[#161618]'
-                              : 'bg-slate-50/90 border-slate-200/70 hover:border-[#8A56FF]/50 hover:shadow-[0_0_20px_rgba(138,86,255,0.1)] hover:bg-white'
+                          className={`p-4 rounded-2xl border flex flex-col justify-between transition-all duration-300 group hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] ${isDark
+                              ? 'bg-black/40 border-slate-800/80 hover:border-slate-600 hover:bg-black/60'
+                              : 'bg-slate-50/90 border-slate-200/70 hover:border-slate-300 hover:bg-slate-100'
                             }`}
                         >
                           <div>
                             <div className="flex items-start justify-between gap-2 mb-2">
                               <span className={`text-sm font-bold flex items-center gap-2.5 ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>
-                                <span className={`shrink-0 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:animate-pulse ${layer.color}`}>
+                                <span className={`shrink-0 flex items-center justify-center ${layer.color}`}>
                                   <ApiLogoComponent size={18} />
                                 </span>
                                 {api.name}

@@ -292,8 +292,3 @@
   white-space: nowrap;
   overflow: hidden;
 }
-
-@keyframes data-stream {
-  0% { transform: translateX(-100vw); }
-  100% { transform: translateX(100vw); }
-}
