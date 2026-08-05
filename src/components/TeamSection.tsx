@@ -35,17 +35,17 @@ interface TeamSectionProps {
 export default function TeamSection({ isDark }: TeamSectionProps) {
   const teamMembers = [
     {
-      name: 'John Russell Sta.Ana',
-      role: 'Project Manager',
-      description: 'Managed project milestones, synchronized team workflows, and ensured capstone deliverables succeeded on schedule.',
-      image: russellImg,
+      name: 'Robert Shanedion Tantoco',
+      role: 'Graphics Designer & Video Editor',
+      description: 'Crafted Sensa\'s visual design branding and produced capstone video demonstrations.',
+      image: robertImg,
       imageClass: 'brightness-[1.18] contrast-[1.08] saturate-[1.05]',
-      email: 'staanajohnrussell75@gmail.com',
-      linkedin: 'https://www.linkedin.com/in/john-russell-sta-ana-022366403',
-      github: 'https://github.com/bulsu-jrsfstaana',
-      accentGradient: isDark ? 'from-[#0A44FF] to-[#3B82F6]' : 'from-[#0026AA] to-[#0A44FF]',
-      roleColor: isDark ? 'text-[#3B82F6]' : 'text-[#0A44FF]',
-      hoverBorder: isDark ? 'hover:border-[#3B82F6]/60' : 'hover:border-[#0A44FF]/60',
+      email: 'robertshanediontantoco@gmail.com',
+      linkedin: 'https://www.linkedin.com/in/robert-shanedion-tantoco/',
+      github: 'https://github.com/bulsu-rsmtantoco',
+      accentGradient: isDark ? 'from-[#FF7A2F] to-[#FF9D66]' : 'from-[#CC4900] to-[#FF7A2F]',
+      roleColor: isDark ? 'text-[#FF9D66]' : 'text-[#FF7A2F]',
+      hoverBorder: isDark ? 'hover:border-[#FF9D66]/60' : 'hover:border-[#FF7A2F]/60',
     },
     {
       name: 'Christian Adriano',
@@ -61,17 +61,17 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
       hoverBorder: isDark ? 'hover:border-[#A855F7]/60' : 'hover:border-[#8A56FF]/60',
     },
     {
-      name: 'Robert Shanedion Tantoco',
-      role: 'Graphics Designer & Video Editor',
-      description: 'Crafted Sensa\'s visual design branding and produced capstone video demonstrations.',
-      image: robertImg,
+      name: 'John Russell Sta.Ana',
+      role: 'Project Manager',
+      description: 'Managed project milestones, synchronized team workflows, and ensured capstone deliverables succeeded on schedule.',
+      image: russellImg,
       imageClass: 'brightness-[1.18] contrast-[1.08] saturate-[1.05]',
-      email: 'robertshanediontantoco@gmail.com',
-      linkedin: 'https://www.linkedin.com/in/robert-shanedion-tantoco/',
-      github: 'https://github.com/bulsu-rsmtantoco',
-      accentGradient: isDark ? 'from-[#FF7A2F] to-[#FF9D66]' : 'from-[#CC4900] to-[#FF7A2F]',
-      roleColor: isDark ? 'text-[#FF9D66]' : 'text-[#FF7A2F]',
-      hoverBorder: isDark ? 'hover:border-[#FF9D66]/60' : 'hover:border-[#FF7A2F]/60',
+      email: 'staanajohnrussell75@gmail.com',
+      linkedin: 'https://www.linkedin.com/in/john-russell-sta-ana-022366403',
+      github: 'https://github.com/bulsu-jrsfstaana',
+      accentGradient: isDark ? 'from-[#0A44FF] to-[#3B82F6]' : 'from-[#0026AA] to-[#0A44FF]',
+      roleColor: isDark ? 'text-[#3B82F6]' : 'text-[#0A44FF]',
+      hoverBorder: isDark ? 'hover:border-[#3B82F6]/60' : 'hover:border-[#0A44FF]/60',
     },
     {
       name: 'Kian Davey Antolin',
@@ -87,7 +87,11 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
       hoverBorder: isDark ? 'hover:border-[#38BDF8]/60' : 'hover:border-[#06B6D4]/60',
     },
     {
-      name: 'Leo Lorenzo Dela Cruz',
+      name: (
+        <>
+          Leo Lorenzo<br />Dela Cruz
+        </>
+      ),
       role: 'QA & Usability Tester',
       description: 'Evaluated accessibility compliance, conducted usability testing, and managed system QA bug tracking.',
       image: leoImg,
