@@ -91,15 +91,15 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
               }`}
           >
             <div>
-              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-emerald-500/30">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-bold">
+              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-[#8A56FF]/30">
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold ${isDark ? 'bg-gradient-to-br from-[#0A44FF]/20 via-[#8A56FF]/20 to-[#FF7A2F]/20 text-[#8A56FF]' : 'bg-gradient-to-br from-[#0A44FF]/10 via-[#8A56FF]/10 to-[#FF7A2F]/10 text-[#8A56FF]'}`}>
                   <CheckCircle2 size={22} aria-hidden="true" />
                 </div>
                 <div>
                   <h3 className={`text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
                     Project Scope
                   </h3>
-                  <span className="text-xs font-mono text-emerald-500 font-bold uppercase tracking-wider">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F]">
                     Supported Features
                   </span>
                 </div>
@@ -112,8 +112,8 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
                     <div key={idx} className="flex gap-4 items-start">
                       <div
                         className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border ${isDark
-                            ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
-                            : 'bg-emerald-50 text-emerald-600 border-emerald-200'
+                            ? 'bg-[#8A56FF]/10 text-[#8A56FF] border-[#8A56FF]/20'
+                            : 'bg-[#8A56FF]/5 text-[#8A56FF] border-[#8A56FF]/20'
                           }`}
                       >
                         <Icon size={20} />
@@ -143,15 +143,15 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
               }`}
           >
             <div>
-              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-rose-500/30">
-                <div className="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center font-bold">
-                  <AlertTriangle size={22} className="text-rose-500" aria-hidden="true" />
+              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-700/50">
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold ${isDark ? 'bg-slate-800/60 text-amber-500/80' : 'bg-slate-100 text-amber-600/80'}`}>
+                  <AlertTriangle size={22} aria-hidden="true" />
                 </div>
                 <div>
                   <h3 className={`text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
                     Limitations
                   </h3>
-                  <span className="text-xs font-mono text-rose-500 font-bold uppercase tracking-wider">
+                  <span className={`text-xs font-mono font-bold uppercase tracking-wider ${isDark ? 'text-amber-500/70' : 'text-amber-600/80'}`}>
                     Not Supported
                   </span>
                 </div>
@@ -164,8 +164,8 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
                     <div key={idx} className="flex gap-4 items-start">
                       <div
                         className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border ${isDark
-                            ? 'bg-rose-500/10 text-rose-400 border-rose-500/20'
-                            : 'bg-rose-50 text-rose-600 border-rose-200'
+                            ? 'bg-slate-800/40 text-amber-500/70 border-slate-700/50'
+                            : 'bg-slate-50 text-amber-600/70 border-slate-200'
                           }`}
                       >
                         <Icon size={20} />
