@@ -85,20 +85,12 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
           {/* Column 1: Project Scope (4 Items) */}
           <ScrollReveal delay={150} className="h-full">
           <div
-            className={`group relative overflow-hidden border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between h-full transition-all duration-300 backdrop-blur-2xl ${isDark
-                ? 'bg-[#161618]/60 border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] hover:border-[#8A56FF]/40'
-                : 'bg-white/60 border-white/50 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] hover:border-[#8A56FF]/40'
+            className={`border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between h-full ${isDark
+                ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5'
+                : 'bg-white border-slate-200/80 ring-1 ring-black/5 shadow-sm'
               }`}
           >
-            {/* Hover Laser Effect */}
-            <div className="absolute inset-0 overflow-hidden rounded-[2.5rem] pointer-events-none z-0">
-              <div className="absolute top-0 left-0 w-full h-[200%] bg-gradient-to-b from-transparent via-[#8A56FF]/5 to-[#0A44FF]/20 border-b-[3px] border-[#0A44FF]/60 drop-shadow-[0_0_15px_rgba(10,68,255,0.8)] -translate-y-[100%] group-hover:translate-y-[100%] transition-transform duration-[2.5s] ease-in-out" />
-            </div>
-
-            {/* Glowing Orb */}
-            <div className={`absolute -top-12 -left-12 w-64 h-64 rounded-full blur-[60px] animate-pulse pointer-events-none z-0 ${isDark ? 'bg-gradient-to-br from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F] opacity-[0.15]' : 'bg-gradient-to-br from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F] opacity-[0.08]'}`} />
-
-            <div className="relative z-10">
+            <div>
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-[#8A56FF]/30">
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold ${isDark ? 'bg-gradient-to-br from-[#0A44FF]/20 via-[#8A56FF]/20 to-[#FF7A2F]/20 text-[#8A56FF]' : 'bg-gradient-to-br from-[#0A44FF]/10 via-[#8A56FF]/10 to-[#FF7A2F]/10 text-[#8A56FF]'}`}>
                   <CheckCircle2 size={22} aria-hidden="true" />
@@ -145,20 +137,12 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
           {/* Column 2: Technical Limitations (4 Items) */}
           <ScrollReveal delay={300} className="h-full">
           <div
-            className={`group relative overflow-hidden border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between h-full transition-all duration-300 backdrop-blur-2xl ${isDark
-                ? 'bg-[#161618]/60 border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] hover:border-amber-500/30'
-                : 'bg-white/60 border-white/50 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] hover:border-amber-500/40'
+            className={`border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between h-full ${isDark
+                ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5'
+                : 'bg-white border-slate-200/80 ring-1 ring-black/5 shadow-sm'
               }`}
           >
-            {/* Hover Laser Effect */}
-            <div className="absolute inset-0 overflow-hidden rounded-[2.5rem] pointer-events-none z-0">
-              <div className="absolute top-0 left-0 w-full h-[200%] bg-gradient-to-b from-transparent via-amber-500/5 to-amber-500/15 border-b-[3px] border-amber-500/40 drop-shadow-[0_0_15px_rgba(245,158,11,0.5)] -translate-y-[100%] group-hover:translate-y-[100%] transition-transform duration-[2.5s] ease-in-out" />
-            </div>
-
-            {/* Glowing Orb */}
-            <div className={`absolute -top-12 -left-12 w-64 h-64 rounded-full blur-[60px] animate-pulse pointer-events-none z-0 ${isDark ? 'bg-amber-500 opacity-[0.08]' : 'bg-amber-500 opacity-[0.05]'}`} />
-
-            <div className="relative z-10">
+            <div>
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-700/50">
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold ${isDark ? 'bg-slate-800/60 text-amber-500/80' : 'bg-slate-100 text-amber-600/80'}`}>
                   <AlertTriangle size={22} aria-hidden="true" />
