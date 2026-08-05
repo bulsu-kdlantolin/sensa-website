@@ -18,26 +18,26 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
   const problemCards = [
     {
       id: 1,
-      title: 'Hard to Click',
-      description: 'Small buttons are hard to see and click.',
+      title: 'ERR_01: HARD_TO_CLICK',
+      description: 'SYSTEM WARNING: Small interactive elements undetected by low-vision users.',
       icon: MousePointerClick,
     },
     {
       id: 2,
-      title: 'Screen Clutter',
-      description: 'Too much text confuses screen readers.',
+      title: 'ERR_02: DATA_CLUTTER',
+      description: 'SYSTEM WARNING: Excessive DOM nodes confusing standard screen readers.',
       icon: FileText,
     },
     {
       id: 3,
-      title: 'Language & Caption Barriers',
-      description: 'Videos lack captions or are in foreign languages.',
+      title: 'ERR_03: AUDIO_BARRIER',
+      description: 'SYSTEM WARNING: Missing subtitle tracks and unsupported regional dialects.',
       icon: VolumeX,
     },
     {
       id: 4,
-      title: 'Sudden Loud Sounds',
-      description: 'Hard to hear or anticipate sudden loud noises.',
+      title: 'ERR_04: VOLUME_SPIKE',
+      description: 'SYSTEM WARNING: Sudden decibel spikes detected without prior user alert.',
       icon: BellOff,
     },
   ];
@@ -45,26 +45,26 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
   const solutionCards = [
     {
       id: 1,
-      title: 'Voice Control',
-      description: 'Control the browser with your voice.',
+      title: 'SYS_01: VOICE_CONTROL',
+      description: 'DATA PURIFIED: Hands-free vocal navigation successfully established.',
       icon: Mic,
     },
     {
       id: 2,
-      title: 'Smart Reader',
-      description: 'Reads only the important text out loud.',
+      title: 'SYS_02: SMART_READER',
+      description: 'DATA PURIFIED: Core content successfully isolated and synthesized into speech.',
       icon: Volume2,
     },
     {
       id: 3,
-      title: 'Multilingual AI Subtitles',
-      description: 'Live captions & translation into 135+ languages.',
+      title: 'SYS_03: AI_SUBTITLES',
+      description: 'DATA PURIFIED: Neural translations & live captions successfully generated.',
       icon: MessageSquare,
     },
     {
       id: 4,
-      title: 'Sudden Noise Warning',
-      description: 'Flashes visual alerts when loud sounds play.',
+      title: 'SYS_04: NOISE_WARNING',
+      description: 'DATA PURIFIED: Preventative visual biometric alerts deployed successfully.',
       icon: Zap,
     },
   ];
@@ -100,7 +100,7 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
           }`}
       />
       <div
-        className={`hidden md:block absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none -z-10 bg-emerald-500 transition-opacity duration-300 transform-gpu ${isAnyActive
+        className={`hidden md:block absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none -z-10 bg-cyan-500 transition-opacity duration-300 transform-gpu ${isAnyActive
             ? isDark
               ? 'opacity-[0.16]'
               : 'opacity-[0.08]'
@@ -146,8 +146,8 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
           <div className="w-full lg:w-[380px] text-center">
             <h3
               className={`text-sm md:text-base font-black uppercase tracking-widest transition-all duration-300 ${isAnyActive
-                  ? 'text-emerald-950 dark:text-emerald-400 opacity-100'
-                  : 'text-emerald-950/90 dark:text-emerald-400/70 opacity-90'
+                  ? 'text-cyan-600 dark:text-cyan-400 opacity-100'
+                  : 'text-cyan-600/90 dark:text-cyan-400/70 opacity-90'
                 }`}
             >
               Solution
@@ -236,8 +236,8 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
                   </div>
                   <div>
                     <h4
-                      className={`text-base font-bold mb-0.5 transition-colors ${isHovered
-                          ? 'text-red-500 dark:text-red-400 font-extrabold'
+                      className={`text-sm md:text-base font-mono font-bold mb-1 transition-colors ${isHovered
+                          ? 'text-red-500 dark:text-red-400 font-black'
                           : isDark
                             ? 'text-slate-300'
                             : 'text-slate-700'
@@ -359,10 +359,10 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
                     fill="none"
                     stroke={
                       isHovered
-                        ? 'rgba(16, 185, 129, 1)'
+                        ? 'rgba(6, 182, 212, 1)'
                         : isOtherHovered
-                          ? 'rgba(16, 185, 129, 0.15)'
-                          : 'rgba(16, 185, 129, 0.4)'
+                          ? 'rgba(6, 182, 212, 0.15)'
+                          : 'rgba(6, 182, 212, 0.4)'
                     }
                     strokeWidth={isHovered ? (isCoreHovered ? '3.5' : '4') : '2'}
                     vectorEffect="non-scaling-stroke"
@@ -380,7 +380,7 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
           {/* Column 3: The Breakthrough (Solution Cards ONLY - Explicit z-20) */}
           <div className="relative z-20 w-full lg:w-[380px] flex flex-col gap-4">
             {/* Mobile-only Solution Header */}
-            <h3 className="lg:hidden text-center text-sm md:text-base font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-2 mt-8 lg:mt-0">
+            <h3 className="lg:hidden text-center text-sm md:text-base font-black uppercase tracking-widest text-cyan-600 dark:text-cyan-400 mb-2 mt-8 lg:mt-0">
               Solution
             </h3>
             {solutionCards.map((card) => {
@@ -396,31 +396,31 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
                   onMouseLeave={() => setHoveredId(null)}
                   className={`relative z-20 p-5 md:p-6 rounded-[2rem] border flex items-center gap-4 transition-all duration-300 cursor-pointer transform-gpu ${isSpecificHover
                       ? isDark
-                        ? 'bg-[#13231a] border-emerald-500/80 shadow-lg shadow-emerald-500/10 scale-[1.02] ring-1 ring-emerald-500/40'
-                        : 'bg-[#f0fdf4] border-emerald-800 shadow-lg shadow-emerald-500/10 scale-[1.02] ring-1 ring-emerald-600'
+                        ? 'bg-[#0f172a] border-cyan-500/80 shadow-lg shadow-cyan-500/10 scale-[1.02] ring-1 ring-cyan-500/40'
+                        : 'bg-[#ecfeff] border-cyan-800 shadow-lg shadow-cyan-500/10 scale-[1.02] ring-1 ring-cyan-600'
                       : isCoreHovered
                         ? isDark
-                          ? 'bg-[#151c18] border-emerald-500/40'
-                          : 'bg-[#f8faf9] border-emerald-500'
+                          ? 'bg-[#0f172a] border-cyan-500/40'
+                          : 'bg-[#f8fafc] border-cyan-500'
                         : isOtherHovered
                           ? 'opacity-40 scale-[0.98]'
                           : isDark
-                            ? 'bg-[#161618] border-slate-800 hover:border-emerald-500/40 hover:bg-[#151c18]'
-                            : 'bg-white border-slate-200 shadow-sm hover:border-emerald-500 hover:bg-[#f8faf9]'
+                            ? 'bg-[#161618] border-slate-800 hover:border-cyan-500/40 hover:bg-[#0f172a]'
+                            : 'bg-white border-slate-200 shadow-sm hover:border-cyan-500 hover:bg-[#f8fafc]'
                     }`}
                 >
                   <div
                     className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-300 ${isHovered
-                        ? 'bg-emerald-900 text-white shadow-md shadow-emerald-900/30 scale-105 dark:bg-emerald-500'
-                        : 'bg-emerald-950/15 text-emerald-950 dark:bg-emerald-500/15 dark:text-emerald-400'
+                        ? 'bg-cyan-900 text-white shadow-md shadow-cyan-900/30 scale-105 dark:bg-cyan-500'
+                        : 'bg-cyan-950/15 text-cyan-950 dark:bg-cyan-500/15 dark:text-cyan-400'
                       }`}
                   >
                     <Icon size={24} />
                   </div>
                   <div>
                     <h4
-                      className={`text-base font-bold mb-0.5 transition-colors ${isHovered
-                          ? 'text-emerald-950 dark:text-emerald-400 font-black'
+                      className={`text-sm md:text-base font-mono font-bold mb-1 transition-colors ${isHovered
+                          ? 'text-cyan-800 dark:text-cyan-400 font-black'
                           : isDark
                             ? 'text-white'
                             : 'text-slate-900'
