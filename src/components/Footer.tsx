@@ -83,10 +83,10 @@ export default function Footer({ isDark }: FooterProps) {
                 </a>
               </li>
               <li>
-                <span className={`inline-flex items-center gap-2 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                <span className={`inline-flex items-center gap-2 opacity-50 cursor-not-allowed ${isDark ? 'text-slate-400' : 'text-slate-600'}`} title="This research paper is still being finalized.">
                   <BookOpen size={14} aria-hidden="true" />
-                  <span>Research Paper (PDF)</span>
-                  <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded border bg-amber-500/10 text-amber-500 border-amber-500/20">
+                  <span className="line-through decoration-slate-500/50">Research Paper (PDF)</span>
+                  <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded border bg-amber-500/20 text-amber-500 border-amber-500/30 uppercase tracking-widest ml-1">
                     Coming Soon
                   </span>
                 </span>
@@ -113,27 +113,31 @@ export default function Footer({ isDark }: FooterProps) {
             </div>
           </div>
 
-          {/* Column 4: Technical Standards & Compliance */}
+          {/* Column 4: Project Support & Legal */}
           <div className="space-y-3">
             <h3 className={`text-xs font-mono font-bold uppercase tracking-widest mb-3 ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
-              Standards & Specs
+              Support & Legal
             </h3>
-            <ul className="space-y-2 text-xs p-0 m-0 list-none font-mono font-bold">
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#0A44FF]" />
-                <span className="text-[#0A44FF] dark:text-[#6AA2FF]">Manifest V3</span>
+            <ul className="space-y-2 text-xs p-0 m-0 list-none font-medium">
+              <li>
+                <a href="#" className={`transition-colors hover:text-[#0A44FF] dark:hover:text-[#6AA2FF] ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                  Contact Research Team
+                </a>
               </li>
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                <span className="text-emerald-500">WCAG 2.1 AAA</span>
+              <li>
+                <a href="#" className={`transition-colors hover:text-[#0A44FF] dark:hover:text-[#6AA2FF] ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                  Accessibility Statement
+                </a>
               </li>
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#FF7A2F]" />
-                <span className="text-[#FF7A2F]">Open-Source</span>
+              <li>
+                <a href="#" className={`transition-colors hover:text-[#0A44FF] dark:hover:text-[#6AA2FF] ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                  Terms of Service
+                </a>
               </li>
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                <span className="text-emerald-500">Privacy Policy</span>
+              <li>
+                <a href="#" className={`transition-colors hover:text-[#0A44FF] dark:hover:text-[#6AA2FF] ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                  Privacy Policy
+                </a>
               </li>
             </ul>
           </div>
@@ -145,7 +149,8 @@ export default function Footer({ isDark }: FooterProps) {
             }`}
         >
           <p className="m-0 text-center max-w-3xl mx-auto leading-relaxed">
-            © 2026–2027 Sensa Capstone Research Team • Bulacan State University (BulSU) • College of Information and Communications Technology.
+            Copyright &copy; 2026&ndash;2027 Sensa Capstone Research Team. All rights reserved.<br/>
+            Bulacan State University (BulSU) &bull; College of Information and Communications Technology.
           </p>
         </div>
       </div>
