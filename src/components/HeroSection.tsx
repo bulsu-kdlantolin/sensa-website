@@ -4,6 +4,7 @@ interface HeroSectionProps {
 }
 
 import NeuralCanvas from './NeuralCanvas';
+import { playHoverSound, playClickSound } from '../utils/soundSystem';
 
 const ChromeIcon = ({ size = 22, className = '' }: { size?: number; className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" height={size} width={size} className={className}>
@@ -83,6 +84,8 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
             href="https://chromewebstore.google.com/"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={playClickSound}
+            onMouseEnter={playHoverSound}
             className={`relative z-10 inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-full font-bold text-base transition-all duration-300 ease-out active:scale-[0.98] focus:ring-2 focus:ring-offset-2 focus:outline-none no-underline shadow-sm hover:-translate-y-0.5 hover:shadow-xl border ${
               isDark
                 ? 'bg-[#1C1C1E] hover:bg-[#2C2C2E] border-slate-700/50 text-white focus:ring-[#FF7A2F] focus:ring-offset-[#09090B] hover:border-slate-600'

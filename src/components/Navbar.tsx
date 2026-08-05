@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Sun, Moon, PanelLeft, PanelTop, Menu, X } from 'lucide-react';
 import sensaLogo from '../assets/sensa-logo.webp';
+import { playHoverSound, playClickSound } from '../utils/soundSystem';
 
 export interface NavItem {
   href: string;
@@ -31,6 +32,7 @@ export default function Navbar({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleMobileNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    playClickSound();
     setIsMobileMenuOpen(false);
     handleNavClick(e, targetId);
   };
@@ -52,7 +54,8 @@ export default function Navbar({
         <div className="w-full flex items-center justify-between gap-2 md:gap-8">
           <a
             href="#hero"
-            onClick={(e) => handleNavClick(e, 'hero')}
+            onClick={(e) => { playClickSound(); handleNavClick(e, 'hero'); }}
+            onMouseEnter={playHoverSound}
             className="flex items-center gap-2 md:gap-3.5 no-underline group shrink-0 select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] rounded-lg"
           >
             <img
@@ -81,7 +84,8 @@ export default function Navbar({
                   <li key={item.id} className="relative py-1">
                     <a
                       href={item.href}
-                      onClick={(e) => handleNavClick(e, item.id)}
+                      onClick={(e) => { playClickSound(); handleNavClick(e, item.id); }}
+                      onMouseEnter={playHoverSound}
                       aria-current={isSelected ? 'page' : undefined}
                       className={`relative py-1.5 px-3 transition-colors duration-200 group no-underline block whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] rounded-md ${
                         isSelected
@@ -115,7 +119,8 @@ export default function Navbar({
           <div className="flex items-center gap-2 shrink-0">
             {/* Mobile Menu Toggle Button */}
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              onClick={() => { playClickSound(); setIsMobileMenuOpen(!isMobileMenuOpen); }}
+              onMouseEnter={playHoverSound}
               className={`flex xl:hidden p-2 rounded-full border backdrop-blur-md transition-all duration-300 cursor-pointer ${
                 isDark
                   ? 'bg-[#24262B]/80 border-slate-800 hover:bg-slate-800 text-slate-400 hover:text-white'
@@ -126,7 +131,8 @@ export default function Navbar({
               {isMobileMenuOpen ? <X size={16} aria-hidden="true" /> : <Menu size={16} aria-hidden="true" />}
             </button>
             <button
-              onClick={() => setIsSidebarMode(true)}
+              onClick={() => { playClickSound(); setIsSidebarMode(true); }}
+              onMouseEnter={playHoverSound}
               className={`hidden xl:flex mr-4 p-2 rounded-full border backdrop-blur-md transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] ${
                 isDark
                   ? 'bg-[#24262B]/80 border-slate-800 hover:bg-slate-800 text-slate-400 hover:text-white'
@@ -138,7 +144,8 @@ export default function Navbar({
               <PanelLeft size={16} aria-hidden="true" />
             </button>
             <button
-              onClick={() => setTheme(isDark ? 'light' : 'dark')}
+              onClick={() => { playClickSound(); setTheme(isDark ? 'light' : 'dark'); }}
+              onMouseEnter={playHoverSound}
               role="switch"
               aria-checked={isDark}
               aria-label={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}

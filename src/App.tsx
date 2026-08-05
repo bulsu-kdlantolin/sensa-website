@@ -13,6 +13,7 @@ import ArchitectureSection from './components/ArchitectureSection';
 import GuideSection from './components/GuideSection';
 import TeamSection from './components/TeamSection';
 import Footer from './components/Footer';
+import { initAudioContext } from './utils/soundSystem';
 
 type ThemeMode = 'dark' | 'light';
 
@@ -62,6 +63,23 @@ export default function App() {
       history.scrollRestoration = 'manual';
     }
     window.scrollTo(0, 0);
+  }, []);
+
+  // Unlock Web Audio API on first user interaction
+  useEffect(() => {
+    const unlockAudio = () => {
+      initAudioContext();
+      window.removeEventListener('click', unlockAudio);
+      window.removeEventListener('keydown', unlockAudio);
+    };
+
+    window.addEventListener('click', unlockAudio, { once: true });
+    window.addEventListener('keydown', unlockAudio, { once: true });
+
+    return () => {
+      window.removeEventListener('click', unlockAudio);
+      window.removeEventListener('keydown', unlockAudio);
+    };
   }, []);
 
   const [problemRef, isProblemVisible] = useScrollReveal();

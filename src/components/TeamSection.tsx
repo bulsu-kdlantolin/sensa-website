@@ -3,6 +3,7 @@ import christianImg from '../assets/christian.webp';
 import leoImg from '../assets/leo.webp';
 import russellImg from '../assets/russell.webp';
 import kianImg from '../assets/kian.jpg';
+import { playHoverSound } from '../utils/soundSystem';
 import ScrollReveal from './ScrollReveal';
 import React from 'react';
 
@@ -145,7 +146,8 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
             <React.Fragment key={idx}>
               <ScrollReveal delay={idx * 100} className="w-full h-full">
                 <article
-                className={`group relative overflow-hidden rounded-2xl flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 shadow-lg hover:shadow-2xl w-full h-full border ${
+                  onMouseEnter={playHoverSound}
+                  className={`group relative overflow-hidden rounded-2xl flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 shadow-lg hover:shadow-2xl w-full h-full border ${
                   isDark
                     ? 'bg-[#121214]/80 backdrop-blur-md border-white/10 ring-1 ring-white/5 ring-inset'
                     : 'bg-white/80 backdrop-blur-md border-slate-300 ring-1 ring-black/5 ring-inset'
