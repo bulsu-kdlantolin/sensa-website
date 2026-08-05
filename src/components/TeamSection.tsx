@@ -43,9 +43,9 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
       email: 'staanajohnrussell75@gmail.com',
       linkedin: 'https://www.linkedin.com/in/john-russell-sta-ana-022366403',
       github: 'https://github.com/bulsu-jrsfstaana',
-      accentGradient: 'from-[#F59E0B] via-[#FBBF24] to-amber-500',
-      roleColor: isDark ? 'text-amber-400' : 'text-amber-600',
-      hoverBorder: 'hover:border-amber-500/60',
+      accentGradient: 'from-[#0A44FF] via-[#3B82F6] to-cyan-500',
+      roleColor: isDark ? 'text-cyan-400' : 'text-cyan-600',
+      hoverBorder: 'hover:border-[#0A44FF]/60',
     },
     {
       name: 'Christian Adriano',
@@ -56,9 +56,9 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
       email: 'chrstn.adrian37@gmail.com',
       linkedin: 'https://www.linkedin.com/in/christian-adriano-092476382',
       github: 'https://github.com/bulsu-ctadriano',
-      accentGradient: 'from-[#FF7A2F] via-[#FFA066] to-orange-500',
-      roleColor: isDark ? 'text-[#FFC09B]' : 'text-[#E65C00]',
-      hoverBorder: 'hover:border-[#FF7A2F]/60',
+      accentGradient: 'from-[#0A44FF] via-[#3B82F6] to-cyan-500',
+      roleColor: isDark ? 'text-cyan-400' : 'text-cyan-600',
+      hoverBorder: 'hover:border-[#0A44FF]/60',
     },
     {
       name: 'Robert Shanedion Tantoco',
@@ -69,9 +69,9 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
       email: 'robertshanediontantoco@gmail.com',
       linkedin: 'https://www.linkedin.com/in/robert-shanedion-tantoco/',
       github: 'https://github.com/bulsu-rsmtantoco',
-      accentGradient: 'from-[#8A56FF] via-[#A855F7] to-purple-600',
-      roleColor: isDark ? 'text-purple-400' : 'text-purple-600',
-      hoverBorder: 'hover:border-purple-500/60',
+      accentGradient: 'from-[#0A44FF] via-[#3B82F6] to-cyan-500',
+      roleColor: isDark ? 'text-cyan-400' : 'text-cyan-600',
+      hoverBorder: 'hover:border-[#0A44FF]/60',
     },
     {
       name: 'Kian Davey Antolin',
@@ -82,8 +82,8 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
       email: 'kiandaveyantolin@gmail.com',
       linkedin: 'https://www.linkedin.com/in/kian-davey-antolin-13b60a372/',
       github: 'https://github.com/bulsu-kdlantolin',
-      accentGradient: 'from-[#0A44FF] via-[#3B82F6] to-blue-600',
-      roleColor: isDark ? 'text-[#6AA2FF]' : 'text-[#0A44FF]',
+      accentGradient: 'from-[#0A44FF] via-[#3B82F6] to-cyan-500',
+      roleColor: isDark ? 'text-cyan-400' : 'text-cyan-600',
       hoverBorder: 'hover:border-[#0A44FF]/60',
     },
     {
@@ -95,9 +95,9 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
       email: 'leolorenzodelacruz26@gmail.com',
       linkedin: 'https://www.linkedin.com/in/leo-lorenzo-dela-cruz-872665311?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       github: 'https://github.com/bulsu-lltdelacruz',
-      accentGradient: 'from-[#06B6D4] via-[#38BDF8] to-cyan-500',
+      accentGradient: 'from-[#0A44FF] via-[#3B82F6] to-cyan-500',
       roleColor: isDark ? 'text-cyan-400' : 'text-cyan-600',
-      hoverBorder: 'hover:border-cyan-500/60',
+      hoverBorder: 'hover:border-[#0A44FF]/60',
     },
   ];
 
@@ -138,7 +138,7 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
         <div className="flex flex-wrap justify-center gap-6 md:gap-8 max-w-6xl mx-auto">
           {teamMembers.map((member, idx) => (
             <React.Fragment key={idx}>
-              <ScrollReveal delay={idx * 100} className="w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-2rem)] max-w-sm h-full">
+              <ScrollReveal delay={idx * 100} className="w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-2rem)] max-w-[320px] h-full">
                 <article
                 className={`group relative overflow-hidden rounded-2xl flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 shadow-lg hover:shadow-2xl w-full h-full border ${
                   isDark
@@ -149,9 +149,14 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
                 {/* ID Badge Header Bar */}
                 <div className={`w-full flex justify-between items-center px-4 py-2 text-[10px] font-mono font-bold tracking-[0.2em] border-b ${isDark ? 'bg-black/40 border-white/10 text-slate-400' : 'bg-slate-100 border-slate-200 text-slate-500'}`}>
                   <span>ID:// {10042 + idx}</span>
-                  <span className={`px-2 py-0.5 rounded-full ${member.roleColor.replace('text-', 'bg-').replace('-400', '-500/20').replace('-600', '-500/20')}`}>
-                    {isDark ? 'ACTIVE' : 'VERIFIED'}
-                  </span>
+                  <div className="relative w-16 h-5">
+                    <span className={`absolute inset-0 flex items-center justify-center rounded-full bg-slate-500/20 ${isDark ? 'text-slate-400' : 'text-slate-500'} group-hover:opacity-0 transition-opacity duration-300 delay-[2s]`}>
+                      STANDBY
+                    </span>
+                    <span className={`absolute inset-0 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-[2s] ${member.roleColor.replace('text-', 'bg-').replace('-400', '-500/20').replace('-600', '-500/20')} ${member.roleColor}`}>
+                      ACTIVE
+                    </span>
+                  </div>
                 </div>
 
                 <div className="flex flex-col flex-1 relative p-5">
