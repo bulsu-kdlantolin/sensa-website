@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { MousePointerClick, FileText, VolumeX, BellOff, Mic, Volume2, MessageSquare, Zap } from 'lucide-react';
+import sensaLogo from '../assets/sensa-logo.webp';
 import ScrollReveal from './ScrollReveal';
 
 interface MissionSectionProps {
@@ -8,173 +10,433 @@ interface MissionSectionProps {
 }
 
 export default function MissionSection({ isDark, problemRef, isProblemVisible }: MissionSectionProps) {
-  // Node Component for Blueprint
-  const BlueprintNode = ({ problem, solution, desc, icon: Icon, positionClasses }: any) => (
-    <div className={`absolute z-40 group cursor-pointer ${positionClasses}`}>
-      {/* Target Node Visual */}
-      <div className="relative flex items-center justify-center w-6 h-6">
-        {/* Flashing Red Alert Ring (turns cyan on hover) */}
-        <div className="absolute inset-0 rounded-full border-2 border-red-500 group-hover:border-cyan-400 opacity-80 group-hover:animate-ping transition-colors duration-300" />
-        <div className="absolute inset-0 rounded-full bg-red-500/40 animate-pulse group-hover:bg-cyan-400/40 transition-colors duration-300" />
-        
-        {/* Core Dot */}
-        <div className="relative w-2 h-2 rounded-full bg-red-500 group-hover:bg-cyan-400 shadow-[0_0_8px_rgba(239,68,68,1)] group-hover:shadow-[0_0_12px_rgba(34,211,238,1)] transition-colors duration-300" />
-      </div>
+  // State for active hovered pair ID (1, 2, 3, or 4). Null when not hovering.
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
+  // State for hovering on the central Sensa Core engine logo
+  const [isCoreHovered, setIsCoreHovered] = useState(false);
 
-      {/* Holographic Pop-up Card */}
-      <div className="absolute top-8 left-1/2 -translate-x-1/2 w-64 p-5 rounded-xl border border-cyan-500/40 bg-[#09090b]/95 backdrop-blur-md opacity-0 group-hover:opacity-100 group-hover:translate-y-2 transition-all duration-300 pointer-events-none scale-95 group-hover:scale-100 shadow-2xl shadow-cyan-500/10 flex flex-col gap-3">
-        {/* Error State (Crossed out) */}
-        <div className="flex items-start gap-2 text-red-400/60 line-through text-xs font-mono mb-2">
-          <span className="text-red-500/50">ERROR:</span>
-          {problem}
-        </div>
-        
-        {/* Solution State (Cyan) */}
-        <div className="flex items-center gap-3 text-cyan-400">
-          <div className="p-2 bg-cyan-950 rounded-lg shrink-0">
-            <Icon size={18} />
-          </div>
-          <h4 className="font-black text-sm uppercase tracking-wide">
-            {solution}
-          </h4>
-        </div>
-        
-        <p className="text-xs text-slate-300 leading-relaxed">
-          {desc}
-        </p>
-      </div>
-    </div>
-  );
+  const problemCards = [
+    {
+      id: 1,
+      title: 'Hard to Click',
+      description: 'Small buttons are hard to see and click.',
+      icon: MousePointerClick,
+    },
+    {
+      id: 2,
+      title: 'Screen Clutter',
+      description: 'Too much text confuses screen readers.',
+      icon: FileText,
+    },
+    {
+      id: 3,
+      title: 'Language & Caption Barriers',
+      description: 'Videos lack captions or are in foreign languages.',
+      icon: VolumeX,
+    },
+    {
+      id: 4,
+      title: 'Sudden Loud Sounds',
+      description: 'Hard to hear or anticipate sudden loud noises.',
+      icon: BellOff,
+    },
+  ];
+
+  const solutionCards = [
+    {
+      id: 1,
+      title: 'Voice Control',
+      description: 'Control the browser with your voice.',
+      icon: Mic,
+    },
+    {
+      id: 2,
+      title: 'Smart Reader',
+      description: 'Reads only the important text out loud.',
+      icon: Volume2,
+    },
+    {
+      id: 3,
+      title: 'Multilingual AI Subtitles',
+      description: 'Live captions & translation into 135+ languages.',
+      icon: MessageSquare,
+    },
+    {
+      id: 4,
+      title: 'Sudden Noise Warning',
+      description: 'Flashes visual alerts when loud sounds play.',
+      icon: Zap,
+    },
+  ];
+
+  // Exact vertical centers pointing dead-center at each of the 4 cards (12.5%, 37.5%, 62.5%, 87.5%)
+  const lines = [
+    { id: 1, y: 12.5 },
+    { id: 2, y: 37.5 },
+    { id: 3, y: 62.5 },
+    { id: 4, y: 87.5 },
+  ];
+
+  const isAnyActive = hoveredId !== null || isCoreHovered;
 
   return (
     <section
       id="problem-solution"
-      className={`relative w-full min-h-screen flex flex-col justify-center py-20 md:py-32 border-t ${
-        isDark ? 'border-slate-800/80 bg-[#050505]' : 'border-slate-200/60 bg-slate-900'
-      } overflow-hidden`}
+      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
+        }`}
     >
-      <style>{`
-        @keyframes laser-scan {
-          0% { transform: translateY(-100%); }
-          100% { transform: translateY(400%); }
-        }
-        .animate-laser-scan {
-          animation: laser-scan 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        }
-        .blueprint-line {
-          background-image: linear-gradient(to right, rgba(51, 65, 85, 0.4) 50%, transparent 50%);
-          background-size: 16px 2px;
-        }
-      `}</style>
+      {/* Cybernetic Grid Layer */}
+      <div className="absolute inset-0 bg-grid-pattern pointer-events-none [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_75%,transparent_100%)] -z-10" />
 
-      {/* Blueprint Grid Background */}
-      <div className="absolute inset-0 bg-grid-pattern pointer-events-none opacity-20" />
+      {/* Dynamic Ambient Mission Gradients */}
+      <div
+        className={`hidden md:block absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none -z-10 bg-red-500 transition-opacity duration-300 transform-gpu ${isAnyActive
+            ? isDark
+              ? 'opacity-[0.16]'
+              : 'opacity-[0.08]'
+            : isDark
+              ? 'opacity-[0.06]'
+              : 'opacity-[0.03]'
+          }`}
+      />
+      <div
+        className={`hidden md:block absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none -z-10 bg-emerald-500 transition-opacity duration-300 transform-gpu ${isAnyActive
+            ? isDark
+              ? 'opacity-[0.16]'
+              : 'opacity-[0.08]'
+            : isDark
+              ? 'opacity-[0.06]'
+              : 'opacity-[0.03]'
+          }`}
+      />
 
-      <div className="max-w-6xl mx-auto px-4 md:px-8 w-full z-10">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
+        {/* Main Title & Intro Subtitle */}
         <ScrollReveal>
-          <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-20">
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4 uppercase text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-              Holographic Blueprint
-            </h2>
-            <p className="text-base md:text-xl font-mono text-cyan-500/80 tracking-wide">
-              Hover over the red anomalies to deploy Sensa augmentations.
-            </p>
-          </div>
+        <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
+          <h2
+            className={`text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-6 ${isDark ? 'text-white' : 'text-slate-900'
+              }`}
+          >
+            The Mission
+          </h2>
+          <p
+            className={`text-base md:text-xl leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-500'
+              }`}
+          >
+            Most websites are not designed for people with disabilities. Sensa helps low-vision, blind, and hearing-impaired users browse the web easily.
+          </p>
+        </div>
         </ScrollReveal>
 
-        <ScrollReveal delay={200}>
-          <div 
-            ref={problemRef}
-            className={`relative w-full aspect-[3/4] md:aspect-[16/9] border-2 border-slate-700/60 rounded-xl bg-[#0a0a0c]/80 backdrop-blur-sm p-4 md:p-8 flex flex-col gap-4 shadow-2xl transition-all duration-1000 transform-gpu ${
-              isProblemVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-95'
+        {/* Section Column Headers Row (Problem & Solution) - Desktop Only */}
+        <ScrollReveal delay={150}>
+        <div className="hidden lg:flex w-full items-center justify-between mb-6 px-2">
+          <div className="w-full lg:w-[380px] text-center">
+            <h3
+              className={`text-sm md:text-base font-black uppercase tracking-widest transition-all duration-300 ${isAnyActive
+                  ? 'text-red-500 dark:text-red-400 opacity-100'
+                  : 'text-red-500/70 dark:text-red-400/70 opacity-70'
+                }`}
+            >
+              Problem
+            </h3>
+          </div>
+          <div className="hidden lg:block w-48"></div>
+          <div className="w-full lg:w-[380px] text-center">
+            <h3
+              className={`text-sm md:text-base font-black uppercase tracking-widest transition-all duration-300 ${isAnyActive
+                  ? 'text-emerald-950 dark:text-emerald-400 opacity-100'
+                  : 'text-emerald-950/90 dark:text-emerald-400/70 opacity-90'
+                }`}
+            >
+              Solution
+            </h3>
+          </div>
+        </div>
+        </ScrollReveal>
+
+        {/* Infographic Transformation Pipeline Grid */}
+        <ScrollReveal delay={250}>
+        <div
+          ref={problemRef}
+          className={`relative w-full flex flex-col lg:flex-row items-stretch justify-between gap-12 lg:gap-0 transition-all duration-700 transform-gpu ${isProblemVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
             }`}
-          >
-            {/* The Sweeping Laser Scanner */}
-            <div className="absolute inset-0 z-30 pointer-events-none overflow-hidden rounded-xl">
-              <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-transparent via-cyan-500/5 to-cyan-400/30 border-b-[3px] border-cyan-300 drop-shadow-[0_5px_15px_rgba(34,211,238,0.6)] animate-laser-scan" />
-            </div>
+        >
+          <style>{`
+            .flow-line-red {
+              stroke-dasharray: 8 8;
+              animation: flow-red 1.5s linear infinite;
+              will-change: stroke-dashoffset;
+            }
+            .flow-line-red-active {
+              stroke-dasharray: 10 10;
+              animation: flow-red 0.6s linear infinite;
+              will-change: stroke-dashoffset;
+            }
+            @keyframes flow-red {
+              from { stroke-dashoffset: 16; }
+              to { stroke-dashoffset: 0; }
+            }
+            .flow-line-green {
+              stroke-dasharray: 8 8;
+              animation: flow-green 1.5s linear infinite;
+              will-change: stroke-dashoffset;
+            }
+            .flow-line-green-active {
+              stroke-dasharray: 10 10;
+              animation: flow-green 0.6s linear infinite;
+              will-change: stroke-dashoffset;
+            }
+            @keyframes flow-green {
+              from { stroke-dashoffset: 16; }
+              to { stroke-dashoffset: 0; }
+            }
+          `}</style>
 
-            {/* --- WIREFRAME UI --- */}
+          {/* Column 1: The Roadblocks (Problem Cards ONLY - Explicit z-20) */}
+          <div className="relative z-20 w-full lg:w-[380px] flex flex-col gap-4">
+            {/* Mobile-only Problem Header */}
+            <h3 className="lg:hidden text-center text-sm md:text-base font-black uppercase tracking-widest text-red-500 dark:text-red-400 mb-2 mt-4 lg:mt-0">
+              Problem
+            </h3>
+            {problemCards.map((card) => {
+              const Icon = card.icon;
+              const isHovered = hoveredId === card.id || isCoreHovered;
+              const isSpecificHover = hoveredId === card.id;
+              const isOtherHovered = hoveredId !== null && !isSpecificHover && !isCoreHovered;
 
-            {/* Wireframe Header */}
-            <div className="w-full h-12 md:h-16 border-2 border-slate-700/50 rounded-lg flex items-center justify-between px-4 md:px-6 relative">
-              <div className="w-24 md:w-32 h-3 md:h-4 bg-slate-700/40 rounded" />
-              <div className="flex gap-4 items-center">
-                <div className="hidden md:block w-16 h-3 bg-slate-700/40 rounded" />
-                <div className="w-12 h-3 bg-slate-700/40 rounded" />
-                <div className="w-8 md:w-20 h-6 md:h-8 border-2 border-slate-700/50 rounded-full" />
-                
-                {/* NODE 1: Hard to Click -> Voice Control */}
-                <BlueprintNode 
-                  problem="Click Target Unreachable"
-                  solution="Voice Control"
-                  desc="Navigate complex headers and small icons using completely hands-free vocal commands."
-                  icon={Mic}
-                  positionClasses="-bottom-2 -right-2"
-                />
-              </div>
-            </div>
-
-            {/* Wireframe Body */}
-            <div className="flex flex-1 gap-6 relative">
-              {/* Sidebar */}
-              <div className="hidden md:flex w-1/4 h-full border-2 border-slate-700/50 rounded-lg p-6 flex-col gap-6">
-                <div className="w-full h-24 border-2 border-slate-700/30 rounded-lg border-dashed" />
-                <div className="w-full h-32 border-2 border-slate-700/30 rounded-lg border-dashed" />
-                <div className="w-3/4 h-3 bg-slate-700/30 rounded mt-auto" />
-                <div className="w-1/2 h-3 bg-slate-700/30 rounded" />
-              </div>
-
-              {/* Main Content */}
-              <div className="flex-1 h-full border-2 border-slate-700/50 rounded-lg p-6 flex flex-col gap-6 relative">
-                
-                {/* Text Block (Screen Clutter) */}
-                <div className="w-full flex flex-col gap-3 relative">
-                  <div className="w-3/4 h-6 md:h-8 bg-slate-700/50 rounded mb-2" />
-                  <div className="w-full h-3 bg-slate-700/30 rounded" />
-                  <div className="w-full h-3 bg-slate-700/30 rounded" />
-                  <div className="w-5/6 h-3 bg-slate-700/30 rounded" />
-                  <div className="w-full h-3 bg-slate-700/30 rounded" />
-                  <div className="w-4/5 h-3 bg-slate-700/30 rounded" />
-
-                  {/* NODE 2: Screen Clutter -> Smart Reader */}
-                  <BlueprintNode 
-                    problem="Data Clutter / Node Overload"
-                    solution="Smart Reader"
-                    desc="Isolates the core article text, stripping away ads and reading it aloud clearly."
-                    icon={Volume2}
-                    positionClasses="top-1/2 -left-3"
-                  />
-                </div>
-
-                {/* Video Placeholder */}
-                <div className="w-full flex-1 border-2 border-slate-700/40 border-dashed rounded-xl mt-4 flex items-center justify-center relative bg-slate-800/10">
-                  <div className="w-16 h-16 rounded-full border-2 border-slate-700/50 flex items-center justify-center text-slate-600">
-                    <svg className="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+              return (
+                <div
+                  key={card.id}
+                  onMouseEnter={() => setHoveredId(card.id)}
+                  onMouseLeave={() => setHoveredId(null)}
+                  className={`relative z-20 p-5 md:p-6 rounded-[2rem] border flex items-center gap-4 transition-all duration-300 cursor-pointer transform-gpu ${isSpecificHover
+                      ? isDark
+                        ? 'bg-[#291717] border-red-500/80 shadow-lg shadow-red-500/10 scale-[1.02] ring-1 ring-red-500/40'
+                        : 'bg-[#fff5f5] border-red-300 shadow-lg shadow-red-500/10 scale-[1.02] ring-1 ring-red-200'
+                      : isCoreHovered
+                        ? isDark
+                          ? 'bg-[#1f1717] border-red-500/40'
+                          : 'bg-[#fffafa] border-red-200'
+                        : isOtherHovered
+                          ? 'opacity-40 scale-[0.98]'
+                          : isDark
+                            ? 'bg-[#161618] border-slate-800 hover:bg-[#1f1717] hover:border-red-500/30'
+                            : 'bg-white border-slate-200 shadow-sm hover:bg-[#fffafa] hover:border-red-200'
+                    }`}
+                >
+                  <div
+                    className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-300 ${isHovered
+                        ? 'bg-red-500 text-white shadow-md shadow-red-500/30 scale-105'
+                        : 'bg-red-500/10 text-red-500 dark:bg-red-500/15 dark:text-red-400'
+                      }`}
+                  >
+                    <Icon size={24} />
                   </div>
-                  
-                  {/* NODE 3: Audio Barriers -> AI Subtitles */}
-                  <BlueprintNode 
-                    problem="Missing Audio Captions"
-                    solution="AI Subtitles"
-                    desc="Generates live neural subtitles and translates spoken audio into 135+ languages."
-                    icon={MessageSquare}
-                    positionClasses="top-4 left-4"
-                  />
+                  <div>
+                    <h4
+                      className={`text-base font-bold mb-0.5 transition-colors ${isHovered
+                          ? 'text-red-500 dark:text-red-400 font-extrabold'
+                          : isDark
+                            ? 'text-slate-300'
+                            : 'text-slate-700'
+                        }`}
+                    >
+                      {card.title}
+                    </h4>
+                    <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-500' : 'text-slate-500'}`}>
+                      {card.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
 
-                  {/* NODE 4: Sudden Loud Sounds -> Noise Warning */}
-                  <BlueprintNode 
-                    problem="Sudden Decibel Spike"
-                    solution="Noise Warning"
-                    desc="Flashes a preventative visual alert seconds before a loud sound occurs."
-                    icon={Zap}
-                    positionClasses="bottom-4 right-4"
+          {/* Left Gap SVG Connections (Lower z-0) */}
+          <div className="hidden lg:block flex-1 relative -mx-2 z-0 pointer-events-none">
+            <svg
+              className="absolute inset-0 w-full h-full overflow-visible"
+              preserveAspectRatio="none"
+              viewBox="0 0 100 100"
+            >
+              {lines.map((line) => {
+                const isHovered = hoveredId === line.id || isCoreHovered;
+                const isSpecificHover = hoveredId === line.id;
+                const isOtherHovered = hoveredId !== null && !isSpecificHover && !isCoreHovered;
+
+                return (
+                  <path
+                    key={line.id}
+                    d={`M 0 ${line.y} C 50 ${line.y} 50 50 100 50`}
+                    fill="none"
+                    stroke={
+                      isHovered
+                        ? 'rgba(239, 68, 68, 1)'
+                        : isOtherHovered
+                          ? 'rgba(239, 68, 68, 0.15)'
+                          : 'rgba(239, 68, 68, 0.4)'
+                    }
+                    strokeWidth={isHovered ? (isCoreHovered ? '3.5' : '4') : '2'}
+                    vectorEffect="non-scaling-stroke"
+                    className={isHovered ? 'flow-line-red-active' : 'flow-line-red'}
+                    style={{
+                      opacity: isOtherHovered ? 0.2 : 1,
+                      transition: 'stroke 0.3s, stroke-width 0.3s, opacity 0.3s',
+                    }}
+                  />
+                );
+              })}
+            </svg>
+          </div>
+
+          {/* Column 2: The Sensa Protocol (Interactive Center Engine Node - Explicit z-20) */}
+          <div className="hidden lg:flex relative z-20 shrink-0 flex-col items-center justify-center py-10 lg:py-0 w-48 self-center">
+            <div
+              className="relative w-36 h-36 flex items-center justify-center cursor-pointer group"
+              onMouseEnter={() => setIsCoreHovered(true)}
+              onMouseLeave={() => setIsCoreHovered(false)}
+            >
+              {/* Interactive Sensa Core Multi-color Glow on Hover */}
+              <div
+                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-lg transition-all duration-300 pointer-events-none transform-gpu ${isCoreHovered
+                    ? 'w-[160px] h-[160px] bg-gradient-to-tr from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F] opacity-80 scale-110'
+                    : hoveredId !== null
+                      ? 'w-[140px] h-[140px] bg-gradient-to-tr from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F] opacity-40'
+                      : 'w-[125px] h-[125px] bg-gradient-to-tr from-[#0A44FF]/20 via-[#8A56FF]/20 to-[#FF7A2F]/20 opacity-20'
+                  }`}
+              />
+
+              <div
+                className={`relative z-10 w-full h-full rounded-full p-[2px] bg-gradient-to-br from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F] transition-all duration-300 transform-gpu ${isCoreHovered
+                    ? 'scale-110 shadow-xl shadow-[#8A56FF]/30 ring-2 ring-[#8A56FF]/40'
+                    : hoveredId !== null
+                      ? 'scale-105 shadow-md shadow-[#8A56FF]/20'
+                      : 'shadow-sm shadow-[#8A56FF]/10'
+                  }`}
+              >
+                <div
+                  className={`w-full h-full rounded-full flex items-center justify-center transition-transform duration-300 ${isDark ? 'bg-[#09090B]' : 'bg-white'
+                    }`}
+                >
+                  <img
+                    src={sensaLogo}
+                    alt="Sensa"
+                    className={`w-16 h-16 object-contain transition-all duration-300 transform-gpu ${isCoreHovered
+                        ? 'scale-110 rotate-3'
+                        : hoveredId !== null
+                          ? 'scale-105'
+                          : 'scale-100'
+                      }`}
                   />
                 </div>
-
               </div>
+
+              {/* Sensa Title Label */}
+              <h3 className="absolute -bottom-12 z-20 text-xl md:text-2xl font-black uppercase tracking-[0.2em] bg-clip-text text-transparent bg-gradient-to-r from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F]">
+                Sensa
+              </h3>
             </div>
           </div>
+
+          {/* Right Gap SVG Connections (Lower z-0) */}
+          <div className="hidden lg:block flex-1 relative -mx-2 z-0 pointer-events-none">
+            <svg
+              className="absolute inset-0 w-full h-full overflow-visible"
+              preserveAspectRatio="none"
+              viewBox="0 0 100 100"
+            >
+              {lines.map((line) => {
+                const isHovered = hoveredId === line.id || isCoreHovered;
+                const isSpecificHover = hoveredId === line.id;
+                const isOtherHovered = hoveredId !== null && !isSpecificHover && !isCoreHovered;
+
+                return (
+                  <path
+                    key={line.id}
+                    d={`M 0 50 C 50 50 50 ${line.y} 100 ${line.y}`}
+                    fill="none"
+                    stroke={
+                      isHovered
+                        ? 'rgba(16, 185, 129, 1)'
+                        : isOtherHovered
+                          ? 'rgba(16, 185, 129, 0.15)'
+                          : 'rgba(16, 185, 129, 0.4)'
+                    }
+                    strokeWidth={isHovered ? (isCoreHovered ? '3.5' : '4') : '2'}
+                    vectorEffect="non-scaling-stroke"
+                    className={isHovered ? 'flow-line-green-active' : 'flow-line-green'}
+                    style={{
+                      opacity: isOtherHovered ? 0.2 : 1,
+                      transition: 'stroke 0.3s, stroke-width 0.3s, opacity 0.3s',
+                    }}
+                  />
+                );
+              })}
+            </svg>
+          </div>
+
+          {/* Column 3: The Breakthrough (Solution Cards ONLY - Explicit z-20) */}
+          <div className="relative z-20 w-full lg:w-[380px] flex flex-col gap-4">
+            {/* Mobile-only Solution Header */}
+            <h3 className="lg:hidden text-center text-sm md:text-base font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-2 mt-8 lg:mt-0">
+              Solution
+            </h3>
+            {solutionCards.map((card) => {
+              const Icon = card.icon;
+              const isHovered = hoveredId === card.id || isCoreHovered;
+              const isSpecificHover = hoveredId === card.id;
+              const isOtherHovered = hoveredId !== null && !isSpecificHover && !isCoreHovered;
+
+              return (
+                <div
+                  key={card.id}
+                  onMouseEnter={() => setHoveredId(card.id)}
+                  onMouseLeave={() => setHoveredId(null)}
+                  className={`relative z-20 p-5 md:p-6 rounded-[2rem] border flex items-center gap-4 transition-all duration-300 cursor-pointer transform-gpu ${isSpecificHover
+                      ? isDark
+                        ? 'bg-[#13231a] border-emerald-500/80 shadow-lg shadow-emerald-500/10 scale-[1.02] ring-1 ring-emerald-500/40'
+                        : 'bg-[#f0fdf4] border-emerald-800 shadow-lg shadow-emerald-500/10 scale-[1.02] ring-1 ring-emerald-600'
+                      : isCoreHovered
+                        ? isDark
+                          ? 'bg-[#151c18] border-emerald-500/40'
+                          : 'bg-[#f8faf9] border-emerald-500'
+                        : isOtherHovered
+                          ? 'opacity-40 scale-[0.98]'
+                          : isDark
+                            ? 'bg-[#161618] border-slate-800 hover:border-emerald-500/40 hover:bg-[#151c18]'
+                            : 'bg-white border-slate-200 shadow-sm hover:border-emerald-500 hover:bg-[#f8faf9]'
+                    }`}
+                >
+                  <div
+                    className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-300 ${isHovered
+                        ? 'bg-emerald-900 text-white shadow-md shadow-emerald-900/30 scale-105 dark:bg-emerald-500'
+                        : 'bg-emerald-950/15 text-emerald-950 dark:bg-emerald-500/15 dark:text-emerald-400'
+                      }`}
+                  >
+                    <Icon size={24} />
+                  </div>
+                  <div>
+                    <h4
+                      className={`text-base font-bold mb-0.5 transition-colors ${isHovered
+                          ? 'text-emerald-950 dark:text-emerald-400 font-black'
+                          : isDark
+                            ? 'text-white'
+                            : 'text-slate-900'
+                        }`}
+                    >
+                      {card.title}
+                    </h4>
+                    <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                      {card.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
         </ScrollReveal>
       </div>
     </section>
