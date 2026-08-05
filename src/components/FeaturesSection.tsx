@@ -66,7 +66,6 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             {/* Card 1: Voice Command Navigation */}
             <article
               onMouseEnter={playCardHoverSound}
-              onMouseEnter={playCardHoverSound}
               className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
                   ? 'bg-[#161618] border-slate-800 hover:border-[#0A44FF]/70 hover:shadow-[0_0_35px_rgba(10,68,255,0.2)]'
                   : 'bg-white border-slate-200/80 shadow-sm hover:border-[#0A44FF]/50 hover:shadow-[0_12px_35px_rgba(10,68,255,0.12)]'

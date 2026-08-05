@@ -49,7 +49,7 @@ interface TeamMember {
 }
 
 const TeamMemberCard = ({ member, idx, isDark }: { member: TeamMember; idx: number; isDark: boolean }) => {
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleMouseEnter = () => {
     playScanSound();
