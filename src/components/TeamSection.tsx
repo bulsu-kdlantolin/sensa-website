@@ -91,11 +91,7 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
       hoverBorder: isDark ? 'hover:border-[#38BDF8]/60' : 'hover:border-[#06B6D4]/60',
     },
     {
-      name: (
-        <>
-          Leo Lorenzo<br />Dela Cruz
-        </>
-      ),
+      name: 'Leo Lorenzo\nDela Cruz',
       role: 'QA & Usability Tester',
       description: 'Evaluated accessibility compliance, conducted usability testing, and managed system QA bug tracking.',
       image: leoImg,
@@ -194,7 +190,7 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
                     </div>
                   </div>
 
-                  <h3 className={`text-base md:text-lg font-black m-0 tracking-tight leading-snug uppercase ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                  <h3 className={`text-base md:text-lg font-black m-0 tracking-tight leading-snug uppercase whitespace-pre-line ${isDark ? 'text-white' : 'text-slate-900'}`}>
                     {member.name}
                   </h3>
 
