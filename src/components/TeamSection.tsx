@@ -134,11 +134,11 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
           </div>
         </ScrollReveal>
 
-        {/* Creative Flex Layout: 2 on top, 3 on bottom */}
-        <div className="flex flex-wrap justify-center gap-6 md:gap-8 max-w-6xl mx-auto">
+        {/* 5-Column Grid Layout for smaller cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6 max-w-7xl mx-auto">
           {teamMembers.map((member, idx) => (
             <React.Fragment key={idx}>
-              <ScrollReveal delay={idx * 100} className="w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-2rem)] max-w-[320px] h-full">
+              <ScrollReveal delay={idx * 100} className="w-full h-full">
                 <article
                 className={`group relative overflow-hidden rounded-2xl flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 shadow-lg hover:shadow-2xl w-full h-full border ${
                   isDark
@@ -191,7 +191,7 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
 
                   {/* Terminal Stacking Role */}
                   <div className="flex flex-col mt-4 mb-2 p-3 rounded-lg border border-dashed border-current/20 bg-black/5 dark:bg-white/5" style={{ color: isDark ? '#fff' : '#000' }}>
-                    <span className={`text-[10px] md:text-xs font-mono tracking-[0.2em] uppercase opacity-60 mb-1 ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>ASSIGNMENT_DATA:</span>
+                    <span className={`text-[10px] md:text-xs font-mono tracking-[0.2em] uppercase opacity-60 mb-1 ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>ROLE:</span>
                     <div className="flex items-start gap-2">
                       <p className={`text-sm md:text-base font-mono font-bold uppercase leading-snug ${member.roleColor}`}>
                         {member.role}
@@ -244,11 +244,10 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
                   </div>
                 </div>
               </article>
-            </ScrollReveal>
-            {idx === 1 && <div className="hidden lg:block w-full h-0" />}
-          </React.Fragment>
-        ))}
-      </div>
+              </ScrollReveal>
+            </React.Fragment>
+          ))}
+        </div>
       </div>
     </section>
   );
