@@ -45,6 +45,7 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
       github: 'https://github.com/bulsu-rsmtantoco',
       accentGradient: isDark ? 'from-[#FF7A2F] to-[#FF9D66]' : 'from-[#CC4900] to-[#FF7A2F]',
       roleColor: isDark ? 'text-[#FF9D66]' : 'text-[#FF7A2F]',
+      badgeBg: isDark ? 'bg-[#FF9D66]/20' : 'bg-[#FF7A2F]/20',
       hoverBorder: isDark ? 'hover:border-[#FF9D66]/60' : 'hover:border-[#FF7A2F]/60',
     },
     {
@@ -58,6 +59,7 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
       github: 'https://github.com/bulsu-ctadriano',
       accentGradient: isDark ? 'from-[#8A56FF] to-[#A855F7]' : 'from-[#5514E6] to-[#8A56FF]',
       roleColor: isDark ? 'text-[#A855F7]' : 'text-[#8A56FF]',
+      badgeBg: isDark ? 'bg-[#A855F7]/20' : 'bg-[#8A56FF]/20',
       hoverBorder: isDark ? 'hover:border-[#A855F7]/60' : 'hover:border-[#8A56FF]/60',
     },
     {
@@ -71,6 +73,7 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
       github: 'https://github.com/bulsu-jrsfstaana',
       accentGradient: isDark ? 'from-[#0A44FF] to-[#3B82F6]' : 'from-[#0026AA] to-[#0A44FF]',
       roleColor: isDark ? 'text-[#3B82F6]' : 'text-[#0A44FF]',
+      badgeBg: isDark ? 'bg-[#3B82F6]/20' : 'bg-[#0A44FF]/20',
       hoverBorder: isDark ? 'hover:border-[#3B82F6]/60' : 'hover:border-[#0A44FF]/60',
     },
     {
@@ -84,6 +87,7 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
       github: 'https://github.com/bulsu-kdlantolin',
       accentGradient: isDark ? 'from-[#06B6D4] to-[#38BDF8]' : 'from-[#037A99] to-[#06B6D4]',
       roleColor: isDark ? 'text-[#38BDF8]' : 'text-[#06B6D4]',
+      badgeBg: isDark ? 'bg-[#38BDF8]/20' : 'bg-[#06B6D4]/20',
       hoverBorder: isDark ? 'hover:border-[#38BDF8]/60' : 'hover:border-[#06B6D4]/60',
     },
     {
@@ -101,6 +105,7 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
       github: 'https://github.com/bulsu-lltdelacruz',
       accentGradient: isDark ? 'from-[#4F46E5] to-[#818CF8]' : 'from-[#312E81] to-[#4F46E5]',
       roleColor: isDark ? 'text-[#818CF8]' : 'text-[#4F46E5]',
+      badgeBg: isDark ? 'bg-[#818CF8]/20' : 'bg-[#4F46E5]/20',
       hoverBorder: isDark ? 'hover:border-[#818CF8]/60' : 'hover:border-[#4F46E5]/60',
     },
   ];
@@ -157,7 +162,7 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
                     <span className={`absolute inset-0 flex items-center justify-center rounded-full bg-slate-500/20 ${isDark ? 'text-slate-400' : 'text-slate-500'} group-hover:opacity-0 transition-opacity duration-300 delay-[2s]`}>
                       STANDBY
                     </span>
-                    <span className={`absolute inset-0 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-[2s] ${member.roleColor.replace('text-', 'bg-').replace('-400', '-500/20').replace('-600', '-500/20')} ${member.roleColor}`}>
+                    <span className={`absolute inset-0 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-[2s] ${member.badgeBg} ${member.roleColor}`}>
                       ACTIVE
                     </span>
                   </div>
