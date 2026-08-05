@@ -2,6 +2,7 @@ import { Cpu, Server, Cloud, Globe, Mic, Volume2, Headphones, Eye, Network, Radi
 import azureLogo from '../assets/azure-logo.webp';
 import plasmoLogo from '../assets/plasmo-logo.webp';
 import renderLogo from '../assets/render-logo.webp';
+import { playCardHoverSound } from '../utils/soundSystem';
 import ScrollReveal from './ScrollReveal';
 
 interface ArchitectureSectionProps {
@@ -294,6 +295,7 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
               return (
                 <article
                   key={idx}
+                  onMouseEnter={playCardHoverSound}
                   className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.005] relative overflow-hidden ${side.borderHover} ${isDark
                       ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 shadow-md'
                       : 'bg-white border-slate-200/80 ring-1 ring-black/5 shadow-md'
@@ -371,6 +373,7 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
               return (
                 <ScrollReveal delay={150 + (lIdx * 100)} key={lIdx}>
                 <div
+                  onMouseEnter={playCardHoverSound}
                   className={`border rounded-[2.5rem] p-6 md:p-8 transition-all duration-500 relative overflow-hidden ${layer.borderHover} ${isDark
                       ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 shadow-md'
                       : 'bg-white border-slate-200/80 ring-1 ring-black/5 shadow-md'

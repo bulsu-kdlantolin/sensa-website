@@ -1,4 +1,5 @@
 import { Mic, Maximize2, Volume2, Ear, BellRing, Sparkles, Download, Eye, Languages, ShieldAlert, MousePointer, Activity } from 'lucide-react';
+import { playCardHoverSound } from '../utils/soundSystem';
 import ScrollReveal from './ScrollReveal';
 
 interface FeaturesSectionProps {
@@ -64,6 +65,8 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch mb-10">
             {/* Card 1: Voice Command Navigation */}
             <article
+              onMouseEnter={playCardHoverSound}
+              onMouseEnter={playCardHoverSound}
               className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
                   ? 'bg-[#161618] border-slate-800 hover:border-[#0A44FF]/70 hover:shadow-[0_0_35px_rgba(10,68,255,0.2)]'
                   : 'bg-white border-slate-200/80 shadow-sm hover:border-[#0A44FF]/50 hover:shadow-[0_12px_35px_rgba(10,68,255,0.12)]'
@@ -103,6 +106,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
 
             {/* Card 2: Screen Reader (Text-to-Speech) */}
             <article
+              onMouseEnter={playCardHoverSound}
               className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
                   ? 'bg-[#161618] border-slate-800 hover:border-[#0A44FF]/70 hover:shadow-[0_0_35px_rgba(10,68,255,0.2)]'
                   : 'bg-white border-slate-200/80 shadow-sm hover:border-[#0A44FF]/50 hover:shadow-[0_12px_35px_rgba(10,68,255,0.12)]'
@@ -140,6 +144,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
 
             {/* Card 3: Screen Magnifier */}
             <article
+              onMouseEnter={playCardHoverSound}
               className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
                   ? 'bg-[#161618] border-slate-800 hover:border-[#0A44FF]/70 hover:shadow-[0_0_35px_rgba(10,68,255,0.2)]'
                   : 'bg-white border-slate-200/80 shadow-sm hover:border-[#0A44FF]/50 hover:shadow-[0_12px_35px_rgba(10,68,255,0.12)]'
@@ -253,6 +258,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch mb-10">
             {/* Card 1: Multilingual Language Engine */}
             <article
+              onMouseEnter={playCardHoverSound}
               className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
                   ? 'bg-[#161618] border-slate-800 hover:border-[#FF7A2F]/70 hover:shadow-[0_0_35px_rgba(255,122,47,0.2)]'
                   : 'bg-white border-slate-200/80 shadow-sm hover:border-[#FF7A2F]/50 hover:shadow-[0_12px_35px_rgba(255,122,47,0.12)]'
@@ -292,6 +298,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
 
             {/* Card 2: Caption Styling & Focus Mode */}
             <article
+              onMouseEnter={playCardHoverSound}
               className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
                   ? 'bg-[#161618] border-slate-800 hover:border-[#FF7A2F]/70 hover:shadow-[0_0_35px_rgba(255,122,47,0.2)]'
                   : 'bg-white border-slate-200/80 shadow-sm hover:border-[#FF7A2F]/50 hover:shadow-[0_12px_35px_rgba(255,122,47,0.12)]'
@@ -329,6 +336,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
 
             {/* Card 3: Transcript Logging Drawer */}
             <article
+              onMouseEnter={playCardHoverSound}
               className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
                   ? 'bg-[#161618] border-slate-800 hover:border-[#FF7A2F]/70 hover:shadow-[0_0_35px_rgba(255,122,47,0.2)]'
                   : 'bg-white border-slate-200/80 shadow-sm hover:border-[#FF7A2F]/50 hover:shadow-[0_12px_35px_rgba(255,122,47,0.12)]'

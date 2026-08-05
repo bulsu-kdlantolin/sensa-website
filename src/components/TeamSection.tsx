@@ -3,9 +3,9 @@ import christianImg from '../assets/christian.webp';
 import leoImg from '../assets/leo.webp';
 import russellImg from '../assets/russell.webp';
 import kianImg from '../assets/kian.jpg';
-import { playHoverSound } from '../utils/soundSystem';
+import { playScanSound, playVerifiedSound, playClickSound } from '../utils/soundSystem';
 import ScrollReveal from './ScrollReveal';
-import React from 'react';
+import React, { useRef } from 'react';
 
 const LinkedInIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
@@ -32,6 +32,154 @@ const GmailIcon = () => (
 interface TeamSectionProps {
   isDark: boolean;
 }
+
+interface TeamMember {
+  name: string;
+  role: string;
+  description: string;
+  image: string;
+  imageClass: string;
+  email: string;
+  linkedin: string;
+  github: string;
+  accentGradient: string;
+  roleColor: string;
+  badgeBg: string;
+  hoverBorder: string;
+}
+
+const TeamMemberCard = ({ member, idx, isDark }: { member: TeamMember; idx: number; isDark: boolean }) => {
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = () => {
+    playScanSound();
+    timerRef.current = setTimeout(() => {
+      playVerifiedSound();
+    }, 2000); // Trigger verified sound exactly when the CSS verified text appears
+  };
+
+  const handleMouseLeave = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+  };
+
+  return (
+    <ScrollReveal delay={idx * 100} className="w-full h-full">
+      <article
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className={`group relative overflow-hidden rounded-2xl flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 shadow-lg hover:shadow-2xl w-full h-full border ${
+          isDark
+            ? 'bg-[#121214]/80 backdrop-blur-md border-white/10 ring-1 ring-white/5 ring-inset'
+            : 'bg-white/80 backdrop-blur-md border-slate-300 ring-1 ring-black/5 ring-inset'
+        }`}
+      >
+        {/* ID Badge Header Bar */}
+        <div className={`w-full flex justify-between items-center px-4 py-2 text-[10px] font-mono font-bold tracking-[0.2em] border-b ${isDark ? 'bg-black/40 border-white/10 text-slate-400' : 'bg-slate-100 border-slate-200 text-slate-500'}`}>
+          <span>ID:// {10042 + idx}</span>
+          <div className="relative w-16 h-5">
+            <span className={`absolute inset-0 flex items-center justify-center rounded-full bg-slate-500/20 ${isDark ? 'text-slate-400' : 'text-slate-500'} group-hover:opacity-0 transition-opacity duration-300 delay-[2s]`}>
+              STANDBY
+            </span>
+            <span className={`absolute inset-0 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-[2s] ${member.badgeBg} ${member.roleColor}`}>
+              ACTIVE
+            </span>
+          </div>
+        </div>
+
+        <div className="flex flex-col flex-1 relative p-5">
+          {/* Glowing Overlay on Hover */}
+          <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-700 bg-gradient-to-b ${member.accentGradient} pointer-events-none`} />
+
+          {/* Square Profile Photo */}
+          <div className={`relative w-full aspect-square rounded-xl p-[2px] bg-gradient-to-tr ${member.accentGradient} mb-5 overflow-hidden`}>
+            <img
+              src={member.image}
+              alt={member.name}
+              loading="lazy"
+              className={`w-full h-full object-cover object-top rounded-[10px] group-hover:scale-110 transition-transform duration-700 ${member.imageClass}`}
+            />
+            {/* Enhanced Laser Scanline Effect */}
+            <div className="absolute inset-0 overflow-hidden rounded-[10px] pointer-events-none z-10">
+              <div className="absolute top-0 left-0 w-full h-[150%] bg-gradient-to-b from-transparent via-white/10 to-white/40 border-b-[3px] border-white/80 drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] -translate-y-[100%] group-hover:translate-y-[80%] transition-transform duration-[2.5s] ease-in-out" />
+            </div>
+
+            {/* Biometrics Verified Overlay */}
+            <div className="absolute inset-0 bg-black/60 rounded-[10px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-[2s] pointer-events-none flex items-center justify-center backdrop-blur-[2px] z-20">
+              <div className="border border-green-500/50 bg-green-500/20 px-3 py-1.5 rounded text-green-400 font-mono text-xs font-bold tracking-[0.3em] flex items-center gap-2 scale-90 group-hover:scale-100 transition-transform duration-300 delay-[2s]">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
+                VERIFIED
+              </div>
+            </div>
+          </div>
+
+          <h3 className={`text-base md:text-lg font-black m-0 tracking-tight leading-snug uppercase whitespace-pre-line ${isDark ? 'text-white' : 'text-slate-900'}`}>
+            {member.name}
+          </h3>
+
+          {/* Terminal Stacking Role */}
+          <div className="flex flex-col mt-3 mb-2 p-3 rounded-lg border border-dashed border-current/20 bg-black/5 dark:bg-white/5" style={{ color: isDark ? '#fff' : '#000' }}>
+            <span className={`text-[9px] md:text-[10px] font-mono tracking-[0.2em] uppercase opacity-60 mb-1 ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>ROLE:</span>
+            <div className="flex items-start gap-2">
+              <p className={`text-xs md:text-sm font-mono font-bold uppercase leading-snug ${member.roleColor}`}>
+                {member.role}
+              </p>
+            </div>
+          </div>
+
+          <p className={`text-[11px] md:text-xs leading-relaxed m-0 mt-2 font-normal flex-1 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+            {member.description}
+          </p>
+        </div>
+
+        {/* Social Contacts Bar */}
+        <div
+          className={`w-full px-5 py-4 border-t flex items-center justify-between gap-2 ${
+            isDark ? 'border-white/10 bg-black/20' : 'border-slate-200 bg-slate-50'
+          }`}
+        >
+          <span className={`text-[10px] font-mono tracking-widest ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
+            CONTACT_LOG
+          </span>
+          <div className="flex items-center gap-3">
+            <a
+              href={member.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${member.name} LinkedIn`}
+              className="transition-transform hover:scale-125 focus:outline-none"
+              onClick={playClickSound}
+            >
+              <LinkedInIcon />
+            </a>
+            <a
+              href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(member.email)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Send Gmail to ${member.name}`}
+              className="transition-transform hover:scale-125 focus:outline-none"
+              onClick={playClickSound}
+            >
+              <GmailIcon />
+            </a>
+            <a
+              href={member.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${member.name} GitHub`}
+              className="transition-transform hover:scale-125 focus:outline-none"
+              onClick={playClickSound}
+            >
+              <GitHubIcon isDark={isDark} />
+            </a>
+          </div>
+        </div>
+      </article>
+    </ScrollReveal>
+  );
+};
 
 export default function TeamSection({ isDark }: TeamSectionProps) {
   const teamMembers = [
@@ -144,114 +292,7 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6 max-w-7xl mx-auto">
           {teamMembers.map((member, idx) => (
             <React.Fragment key={idx}>
-              <ScrollReveal delay={idx * 100} className="w-full h-full">
-                <article
-                  onMouseEnter={playHoverSound}
-                  className={`group relative overflow-hidden rounded-2xl flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 shadow-lg hover:shadow-2xl w-full h-full border ${
-                  isDark
-                    ? 'bg-[#121214]/80 backdrop-blur-md border-white/10 ring-1 ring-white/5 ring-inset'
-                    : 'bg-white/80 backdrop-blur-md border-slate-300 ring-1 ring-black/5 ring-inset'
-                }`}
-              >
-                {/* ID Badge Header Bar */}
-                <div className={`w-full flex justify-between items-center px-4 py-2 text-[10px] font-mono font-bold tracking-[0.2em] border-b ${isDark ? 'bg-black/40 border-white/10 text-slate-400' : 'bg-slate-100 border-slate-200 text-slate-500'}`}>
-                  <span>ID:// {10042 + idx}</span>
-                  <div className="relative w-16 h-5">
-                    <span className={`absolute inset-0 flex items-center justify-center rounded-full bg-slate-500/20 ${isDark ? 'text-slate-400' : 'text-slate-500'} group-hover:opacity-0 transition-opacity duration-300 delay-[2s]`}>
-                      STANDBY
-                    </span>
-                    <span className={`absolute inset-0 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-[2s] ${member.badgeBg} ${member.roleColor}`}>
-                      ACTIVE
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex flex-col flex-1 relative p-5">
-                  {/* Glowing Overlay on Hover */}
-                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-700 bg-gradient-to-b ${member.accentGradient} pointer-events-none`} />
-
-                  {/* Square Profile Photo */}
-                  <div className={`relative w-full aspect-square rounded-xl p-[2px] bg-gradient-to-tr ${member.accentGradient} mb-5 overflow-hidden`}>
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      loading="lazy"
-                      className={`w-full h-full object-cover object-top rounded-[10px] group-hover:scale-110 transition-transform duration-700 ${member.imageClass}`}
-                    />
-                    {/* Enhanced Laser Scanline Effect */}
-                    <div className="absolute inset-0 overflow-hidden rounded-[10px] pointer-events-none z-10">
-                      <div className="absolute top-0 left-0 w-full h-[150%] bg-gradient-to-b from-transparent via-white/10 to-white/40 border-b-[3px] border-white/80 drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] -translate-y-[100%] group-hover:translate-y-[80%] transition-transform duration-[2.5s] ease-in-out" />
-                    </div>
-
-                    {/* Biometrics Verified Overlay */}
-                    <div className="absolute inset-0 bg-black/60 rounded-[10px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-[2s] pointer-events-none flex items-center justify-center backdrop-blur-[2px] z-20">
-                      <div className="border border-green-500/50 bg-green-500/20 px-3 py-1.5 rounded text-green-400 font-mono text-xs font-bold tracking-[0.3em] flex items-center gap-2 scale-90 group-hover:scale-100 transition-transform duration-300 delay-[2s]">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
-                        VERIFIED
-                      </div>
-                    </div>
-                  </div>
-
-                  <h3 className={`text-base md:text-lg font-black m-0 tracking-tight leading-snug uppercase whitespace-pre-line ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                    {member.name}
-                  </h3>
-
-                  {/* Terminal Stacking Role */}
-                  <div className="flex flex-col mt-3 mb-2 p-3 rounded-lg border border-dashed border-current/20 bg-black/5 dark:bg-white/5" style={{ color: isDark ? '#fff' : '#000' }}>
-                    <span className={`text-[9px] md:text-[10px] font-mono tracking-[0.2em] uppercase opacity-60 mb-1 ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>ROLE:</span>
-                    <div className="flex items-start gap-2">
-                      <p className={`text-xs md:text-sm font-mono font-bold uppercase leading-snug ${member.roleColor}`}>
-                        {member.role}
-                      </p>
-                    </div>
-                  </div>
-
-                  <p className={`text-[11px] md:text-xs leading-relaxed m-0 mt-2 font-normal flex-1 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    {member.description}
-                  </p>
-                </div>
-
-                {/* Social Contacts Bar */}
-                <div
-                  className={`w-full px-5 py-4 border-t flex items-center justify-between gap-2 ${
-                    isDark ? 'border-white/10 bg-black/20' : 'border-slate-200 bg-slate-50'
-                  }`}
-                >
-                  <span className={`text-[10px] font-mono tracking-widest ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
-                    CONTACT_LOG
-                  </span>
-                  <div className="flex items-center gap-3">
-                    <a
-                      href={member.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${member.name} LinkedIn`}
-                      className="transition-transform hover:scale-125 focus:outline-none"
-                    >
-                      <LinkedInIcon />
-                    </a>
-                    <a
-                      href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(member.email)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Send Gmail to ${member.name}`}
-                      className="transition-transform hover:scale-125 focus:outline-none"
-                    >
-                      <GmailIcon />
-                    </a>
-                    <a
-                      href={member.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${member.name} GitHub`}
-                      className="transition-transform hover:scale-125 focus:outline-none"
-                    >
-                      <GitHubIcon isDark={isDark} />
-                    </a>
-                  </div>
-                </div>
-              </article>
-              </ScrollReveal>
+              <TeamMemberCard member={member} idx={idx} isDark={isDark} />
             </React.Fragment>
           ))}
         </div>

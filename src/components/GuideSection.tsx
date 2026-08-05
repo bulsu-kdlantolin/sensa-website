@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Download, MonitorPlay, Mic, ArrowUpRight, ShieldCheck, Pin, Volume2, Eye, Headphones, Layers } from 'lucide-react';
 
 import chromeWebStoreLogo from '../assets/chrome-webstore.svg';
+import { playCardHoverSound } from '../utils/soundSystem';
 import ScrollReveal from './ScrollReveal';
 
 interface GuideSectionProps {
@@ -88,6 +89,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
 
             {/* Step 1: Add to Chrome */}
             <article
+              onMouseEnter={playCardHoverSound}
               className={`group border rounded-3xl p-6 md:p-7 transition-all duration-300 relative overflow-hidden ${
                 isDark
                   ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:border-purple-500/50'
@@ -148,6 +150,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
 
             {/* Step 2: Pin Extension */}
             <article
+              onMouseEnter={playCardHoverSound}
               className={`group border rounded-3xl p-6 md:p-7 transition-all duration-300 ${
                 isDark
                   ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:border-purple-500/50'
@@ -187,6 +190,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
 
             {/* Step 3: Grant Permissions */}
             <article
+              onMouseEnter={playCardHoverSound}
               className={`group border rounded-3xl p-6 md:p-7 transition-all duration-300 ${
                 isDark
                   ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:border-purple-500/50'
@@ -236,6 +240,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
 
             {/* Interactive Voice Onboarding Simulator */}
             <article
+              onMouseEnter={playCardHoverSound}
               className={`border rounded-3xl p-6 md:p-7 transition-all duration-300 ${
                 isDark
                   ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset'
@@ -318,6 +323,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
 
             {/* Interactive Dock Explorer */}
             <article
+              onMouseEnter={playCardHoverSound}
               className={`border rounded-3xl p-6 md:p-7 transition-all duration-300 ${
                 isDark
                   ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset'

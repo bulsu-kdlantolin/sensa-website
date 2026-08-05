@@ -1,4 +1,5 @@
 import { Server, ShieldCheck, CheckCircle2, Sparkles, Volume2, Smartphone, KeyRound, Laptop, AlertTriangle, Globe } from 'lucide-react';
+import { playCardHoverSound } from '../utils/soundSystem';
 import ScrollReveal from './ScrollReveal';
 
 interface ScopeSectionProps {
@@ -85,6 +86,7 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
           {/* Column 1: Project Scope (4 Items) */}
           <ScrollReveal delay={150} className="h-full">
           <div
+            onMouseEnter={playCardHoverSound}
             className={`border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between h-full ${isDark
                 ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5'
                 : 'bg-white border-slate-200/80 ring-1 ring-black/5 shadow-sm'
@@ -137,6 +139,7 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
           {/* Column 2: Technical Limitations (4 Items) */}
           <ScrollReveal delay={300} className="h-full">
           <div
+            onMouseEnter={playCardHoverSound}
             className={`border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between h-full ${isDark
                 ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5'
                 : 'bg-white border-slate-200/80 ring-1 ring-black/5 shadow-sm'

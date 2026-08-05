@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { MousePointerClick, FileText, VolumeX, BellOff, Mic, Volume2, MessageSquare, Zap } from 'lucide-react';
 import sensaLogo from '../assets/sensa-logo.webp';
+import { playCardHoverSound } from '../utils/soundSystem';
 import ScrollReveal from './ScrollReveal';
 
 interface MissionSectionProps {
@@ -209,7 +210,7 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
               return (
                 <div
                   key={card.id}
-                  onMouseEnter={() => setHoveredId(card.id)}
+                  onMouseEnter={() => { setHoveredId(card.id); playCardHoverSound(); }}
                   onMouseLeave={() => setHoveredId(null)}
                   className={`relative z-20 p-5 md:p-6 rounded-[2rem] border flex items-center gap-4 transition-all duration-300 cursor-pointer transform-gpu ${isSpecificHover
                       ? isDark
@@ -295,7 +296,7 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
           <div className="hidden lg:flex relative z-20 shrink-0 flex-col items-center justify-center py-10 lg:py-0 w-48 self-center">
             <div
               className="relative w-36 h-36 flex items-center justify-center cursor-pointer group"
-              onMouseEnter={() => setIsCoreHovered(true)}
+              onMouseEnter={() => { setIsCoreHovered(true); playCardHoverSound(); }}
               onMouseLeave={() => setIsCoreHovered(false)}
             >
               {/* Interactive Sensa Core Multi-color Glow on Hover */}
@@ -392,7 +393,7 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
               return (
                 <div
                   key={card.id}
-                  onMouseEnter={() => setHoveredId(card.id)}
+                  onMouseEnter={() => { setHoveredId(card.id); playCardHoverSound(); }}
                   onMouseLeave={() => setHoveredId(null)}
                   className={`relative z-20 p-5 md:p-6 rounded-[2rem] border flex items-center gap-4 transition-all duration-300 cursor-pointer transform-gpu ${isSpecificHover
                       ? isDark

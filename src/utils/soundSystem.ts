@@ -84,3 +84,97 @@ export const playClickSound = () => {
     // Ignore errors
   }
 };
+
+// A soft, low-frequency hum for hovering over large cards
+export const playCardHoverSound = () => {
+  if (!audioCtx || isMuted || audioCtx.state === 'suspended') return;
+  
+  try {
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+    osc.frequency.linearRampToValueAtTime(200, audioCtx.currentTime + 0.05);
+    
+    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(0.015, audioCtx.currentTime + 0.02);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+    
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.1);
+  } catch (e) {
+    // Ignore errors
+  }
+};
+
+// A low-frequency descending sweep simulating a laser scanner (lasts ~2.5s)
+export const playScanSound = () => {
+  if (!audioCtx || isMuted || audioCtx.state === 'suspended') return;
+  
+  try {
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(250, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(50, audioCtx.currentTime + 2.5);
+    
+    // Low, sustained volume
+    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(0.005, audioCtx.currentTime + 0.2);
+    gainNode.gain.setValueAtTime(0.005, audioCtx.currentTime + 2.3);
+    gainNode.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 2.5);
+    
+    // Apply a lowpass filter to muffle the sawtooth harshness
+    const filter = audioCtx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.value = 800;
+    
+    osc.connect(filter);
+    filter.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    osc.start();
+    osc.stop(audioCtx.currentTime + 2.5);
+  } catch (e) {
+    // Ignore errors
+  }
+};
+
+// A quick, high-pitched two-tone chime for "Access Granted / Verified"
+export const playVerifiedSound = () => {
+  if (!audioCtx || isMuted || audioCtx.state === 'suspended') return;
+  
+  try {
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    
+    osc.type = 'sine';
+    
+    // Tone 1: 880Hz (A5)
+    osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+    // Tone 2: 1318.51Hz (E6) starting at 0.1s
+    osc.frequency.setValueAtTime(1318.51, audioCtx.currentTime + 0.1);
+    
+    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+    // Swell for Tone 1
+    gainNode.gain.linearRampToValueAtTime(0.03, audioCtx.currentTime + 0.02);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+    // Swell for Tone 2
+    gainNode.gain.setValueAtTime(0, audioCtx.currentTime + 0.1);
+    gainNode.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 0.12);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+    
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.5);
+  } catch (e) {
+    // Ignore errors
+  }
+};
