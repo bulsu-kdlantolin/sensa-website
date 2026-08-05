@@ -133,10 +133,10 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
           </div>
         </ScrollReveal>
 
-        {/* 5-Column Responsive Team Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 items-stretch">
+        {/* Creative Flex Layout: 3 on top, 2 on bottom */}
+        <div className="flex flex-wrap justify-center gap-6 md:gap-8 max-w-6xl mx-auto">
           {teamMembers.map((member, idx) => (
-            <ScrollReveal delay={idx * 100} key={idx} className="h-full">
+            <ScrollReveal delay={idx * 100} key={idx} className="w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-2rem)] max-w-sm h-full">
               <article
                 className={`group relative overflow-hidden rounded-2xl flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 shadow-lg hover:shadow-2xl w-full h-full border ${
                   isDark
@@ -164,20 +164,25 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
                       loading="lazy"
                       className={`w-full h-full object-cover object-top rounded-[10px] group-hover:scale-110 transition-transform duration-700 ${member.imageClass}`}
                     />
-                    {/* Scanline Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/20 to-transparent -translate-y-[100%] group-hover:translate-y-[100%] transition-transform duration-[1.5s] ease-in-out pointer-events-none" />
+                    {/* Enhanced Laser Scanline Effect */}
+                    <div className="absolute inset-0 overflow-hidden rounded-[10px] pointer-events-none">
+                      <div className="absolute top-0 left-0 w-full h-[150%] bg-gradient-to-b from-transparent via-white/10 to-white/40 border-b-[3px] border-white/80 drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] -translate-y-[100%] group-hover:translate-y-[80%] transition-transform duration-[2.5s] ease-in-out" />
+                    </div>
                   </div>
 
-                  <h3 className={`text-lg md:text-xl font-bold m-0 tracking-tight leading-snug uppercase ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                  <h3 className={`text-lg md:text-xl font-black m-0 tracking-tight leading-snug uppercase ${isDark ? 'text-white' : 'text-slate-900'}`}>
                     {member.name}
                   </h3>
 
-                  {/* Terminal Typing Role */}
-                  <div className="flex items-center gap-2 my-2">
-                    <span className="w-2 h-2 rounded-sm bg-current animate-pulse" style={{ color: isDark ? '#fff' : '#000' }} />
-                    <p className={`text-xs md:text-sm font-mono font-bold tracking-widest uppercase ${member.roleColor} overflow-hidden whitespace-nowrap`}>
-                      {member.role}
-                    </p>
+                  {/* Terminal Stacking Role */}
+                  <div className="flex flex-col mt-4 mb-2 p-3 rounded-lg border border-dashed border-current/20 bg-black/5 dark:bg-white/5" style={{ color: isDark ? '#fff' : '#000' }}>
+                    <span className={`text-[10px] md:text-xs font-mono tracking-[0.2em] uppercase opacity-60 mb-1 ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>ASSIGNMENT_DATA:</span>
+                    <div className="flex items-start gap-2">
+                      <span className="w-2 h-2 mt-1.5 rounded-sm bg-current animate-pulse shrink-0" />
+                      <p className={`text-sm md:text-base font-mono font-bold uppercase leading-snug ${member.roleColor}`}>
+                        {member.role}
+                      </p>
+                    </div>
                   </div>
 
                   <p className={`text-sm leading-relaxed m-0 mt-2 font-normal flex-1 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
