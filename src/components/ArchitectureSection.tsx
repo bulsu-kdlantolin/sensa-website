@@ -265,6 +265,14 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
           }`}
       />
 
+      {/* Data Stream Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+        <div className={`absolute top-[20%] left-0 w-32 h-[1px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent blur-[1px] animate-[data-stream_4s_linear_infinite] ${isDark ? 'opacity-40' : 'opacity-20'}`} />
+        <div className={`absolute top-[45%] left-0 w-48 h-[2px] bg-gradient-to-r from-transparent via-[#8A56FF] to-transparent blur-[2px] animate-[data-stream_6s_linear_infinite_1s] ${isDark ? 'opacity-30' : 'opacity-15'}`} />
+        <div className={`absolute top-[70%] left-0 w-24 h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent blur-[1px] animate-[data-stream_5s_linear_infinite_2.5s] ${isDark ? 'opacity-50' : 'opacity-25'}`} />
+        <div className={`absolute top-[85%] left-0 w-64 h-[2px] bg-gradient-to-r from-transparent via-[#FF7A2F] to-transparent blur-[2px] animate-[data-stream_7s_linear_infinite_0.5s] ${isDark ? 'opacity-20' : 'opacity-10'}`} />
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
         {/* Section Header */}
         <ScrollReveal>
