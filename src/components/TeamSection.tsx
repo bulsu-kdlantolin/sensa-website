@@ -43,9 +43,9 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
       email: 'staanajohnrussell75@gmail.com',
       linkedin: 'https://www.linkedin.com/in/john-russell-sta-ana-022366403',
       github: 'https://github.com/bulsu-jrsfstaana',
-      accentGradient: 'from-[#0A44FF] via-[#3B82F6] to-cyan-500',
-      roleColor: isDark ? 'text-cyan-400' : 'text-cyan-600',
-      hoverBorder: 'hover:border-[#0A44FF]/60',
+      accentGradient: 'from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F]',
+      roleColor: isDark ? 'text-purple-400' : 'text-purple-600',
+      hoverBorder: 'hover:border-[#8A56FF]/60',
     },
     {
       name: 'Christian Adriano',
@@ -56,9 +56,9 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
       email: 'chrstn.adrian37@gmail.com',
       linkedin: 'https://www.linkedin.com/in/christian-adriano-092476382',
       github: 'https://github.com/bulsu-ctadriano',
-      accentGradient: 'from-[#0A44FF] via-[#3B82F6] to-cyan-500',
-      roleColor: isDark ? 'text-cyan-400' : 'text-cyan-600',
-      hoverBorder: 'hover:border-[#0A44FF]/60',
+      accentGradient: 'from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F]',
+      roleColor: isDark ? 'text-purple-400' : 'text-purple-600',
+      hoverBorder: 'hover:border-[#8A56FF]/60',
     },
     {
       name: 'Robert Shanedion Tantoco',
@@ -69,9 +69,9 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
       email: 'robertshanediontantoco@gmail.com',
       linkedin: 'https://www.linkedin.com/in/robert-shanedion-tantoco/',
       github: 'https://github.com/bulsu-rsmtantoco',
-      accentGradient: 'from-[#0A44FF] via-[#3B82F6] to-cyan-500',
-      roleColor: isDark ? 'text-cyan-400' : 'text-cyan-600',
-      hoverBorder: 'hover:border-[#0A44FF]/60',
+      accentGradient: 'from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F]',
+      roleColor: isDark ? 'text-purple-400' : 'text-purple-600',
+      hoverBorder: 'hover:border-[#8A56FF]/60',
     },
     {
       name: 'Kian Davey Antolin',
@@ -82,9 +82,9 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
       email: 'kiandaveyantolin@gmail.com',
       linkedin: 'https://www.linkedin.com/in/kian-davey-antolin-13b60a372/',
       github: 'https://github.com/bulsu-kdlantolin',
-      accentGradient: 'from-[#0A44FF] via-[#3B82F6] to-cyan-500',
-      roleColor: isDark ? 'text-cyan-400' : 'text-cyan-600',
-      hoverBorder: 'hover:border-[#0A44FF]/60',
+      accentGradient: 'from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F]',
+      roleColor: isDark ? 'text-purple-400' : 'text-purple-600',
+      hoverBorder: 'hover:border-[#8A56FF]/60',
     },
     {
       name: 'Leo Lorenzo Dela Cruz',
@@ -95,9 +95,9 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
       email: 'leolorenzodelacruz26@gmail.com',
       linkedin: 'https://www.linkedin.com/in/leo-lorenzo-dela-cruz-872665311?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       github: 'https://github.com/bulsu-lltdelacruz',
-      accentGradient: 'from-[#0A44FF] via-[#3B82F6] to-cyan-500',
-      roleColor: isDark ? 'text-cyan-400' : 'text-cyan-600',
-      hoverBorder: 'hover:border-[#0A44FF]/60',
+      accentGradient: 'from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F]',
+      roleColor: isDark ? 'text-purple-400' : 'text-purple-600',
+      hoverBorder: 'hover:border-[#8A56FF]/60',
     },
   ];
 
@@ -185,21 +185,21 @@ export default function TeamSection({ isDark }: TeamSectionProps) {
                     </div>
                   </div>
 
-                  <h3 className={`text-lg md:text-xl font-black m-0 tracking-tight leading-snug uppercase ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                  <h3 className={`text-base md:text-lg font-black m-0 tracking-tight leading-snug uppercase ${isDark ? 'text-white' : 'text-slate-900'}`}>
                     {member.name}
                   </h3>
 
                   {/* Terminal Stacking Role */}
-                  <div className="flex flex-col mt-4 mb-2 p-3 rounded-lg border border-dashed border-current/20 bg-black/5 dark:bg-white/5" style={{ color: isDark ? '#fff' : '#000' }}>
-                    <span className={`text-[10px] md:text-xs font-mono tracking-[0.2em] uppercase opacity-60 mb-1 ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>ROLE:</span>
+                  <div className="flex flex-col mt-3 mb-2 p-3 rounded-lg border border-dashed border-current/20 bg-black/5 dark:bg-white/5" style={{ color: isDark ? '#fff' : '#000' }}>
+                    <span className={`text-[9px] md:text-[10px] font-mono tracking-[0.2em] uppercase opacity-60 mb-1 ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>ROLE:</span>
                     <div className="flex items-start gap-2">
-                      <p className={`text-sm md:text-base font-mono font-bold uppercase leading-snug ${member.roleColor}`}>
+                      <p className={`text-xs md:text-sm font-mono font-bold uppercase leading-snug ${member.roleColor}`}>
                         {member.role}
                       </p>
                     </div>
                   </div>
 
-                  <p className={`text-sm leading-relaxed m-0 mt-2 font-normal flex-1 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                  <p className={`text-[11px] md:text-xs leading-relaxed m-0 mt-2 font-normal flex-1 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                     {member.description}
                   </p>
                 </div>
