@@ -1,4 +1,4 @@
-import { UniversalAccess, CheckCircle2, Headphones, Eye, Keyboard, ShieldCheck } from 'lucide-react';
+import { Accessibility, CheckCircle2, Headphones, Keyboard, ShieldCheck } from 'lucide-react';
 
 interface AccessibilityStatementProps {
   isDark: boolean;
@@ -11,7 +11,7 @@ export default function AccessibilityStatement({ isDark }: AccessibilityStatemen
       {/* Header */}
       <div className="mb-16">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#FF7A2F]/10 text-[#FF7A2F] text-sm font-semibold mb-6">
-          <UniversalAccess className="w-4 h-4" />
+          <Accessibility className="w-4 h-4" />
           <span>Commitment to Inclusion</span>
         </div>
         <h1 className={`text-4xl md:text-6xl font-black tracking-tight mb-6 ${isDark ? 'text-white' : 'text-slate-900'}`}>
