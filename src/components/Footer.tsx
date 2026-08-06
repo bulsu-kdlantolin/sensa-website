@@ -120,7 +120,7 @@ export default function Footer({ isDark }: FooterProps) {
             </h3>
             <ul className="space-y-2 text-xs p-0 m-0 list-none font-medium">
               <li>
-                <a href="#" className={`transition-colors hover:text-[#0A44FF] dark:hover:text-[#6AA2FF] ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                <a href="https://github.com/bulsu-kdlantolin/sensa-chrome-extension/issues" target="_blank" rel="noopener noreferrer" className={`transition-colors hover:text-[#0A44FF] dark:hover:text-[#6AA2FF] ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                   Contact Research Team
                 </a>
               </li>
