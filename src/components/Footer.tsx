@@ -135,7 +135,7 @@ export default function Footer({ isDark }: FooterProps) {
                 </a>
               </li>
               <li>
-                <a href="#" className={`transition-colors hover:text-[#0A44FF] dark:hover:text-[#6AA2FF] ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                <a href="/privacy" className={`transition-colors hover:text-[#0A44FF] dark:hover:text-[#6AA2FF] ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                   Privacy Policy
                 </a>
               </li>

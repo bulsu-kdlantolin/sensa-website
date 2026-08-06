@@ -53,8 +53,11 @@ export default function Navbar({
       >
         <div className="w-full flex items-center justify-between gap-2 md:gap-8">
           <a
-            href="#hero"
-            onClick={(e) => { playClickSound(); handleNavClick(e, 'hero'); }}
+            href="/"
+            onClick={(e) => {
+              if (window.location.pathname.toLowerCase().startsWith('/privacy')) return;
+              handleNavClick(e, 'hero');
+            }}
             onMouseEnter={playHoverSound}
             className="flex items-center gap-2 md:gap-3.5 no-underline group shrink-0 select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] rounded-lg"
           >

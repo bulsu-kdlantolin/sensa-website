@@ -13,6 +13,7 @@ import ArchitectureSection from './components/ArchitectureSection';
 import GuideSection from './components/GuideSection';
 import TeamSection from './components/TeamSection';
 import Footer from './components/Footer';
+import PrivacyPolicy from './components/PrivacyPolicy';
 import { initAudioContext } from './utils/soundSystem';
 
 type ThemeMode = 'dark' | 'light';
@@ -166,6 +167,8 @@ export default function App() {
     { href: '#team', id: 'team', label: 'Researchers', icon: Users },
   ];
 
+  const isPrivacyPage = window.location.pathname.toLowerCase().startsWith('/privacy');
+
   return (
     <div
       className={`min-h-screen font-sans relative overflow-x-hidden selection:bg-[#0A44FF] selection:text-white ${isDark ? 'bg-[#09090B] text-slate-200' : 'bg-[#FDFDFD] text-slate-900'
@@ -203,21 +206,27 @@ export default function App() {
         setTheme={setTheme}
         isSidebarMode={isSidebarMode}
         setIsSidebarMode={setIsSidebarMode}
-        navItems={navItems}
+        navItems={isPrivacyPage ? [] : navItems}
         activeSection={activeSection}
         handleNavClick={handleNavClick}
       />
 
       {/* Main Page Content */}
       <main id="main-content" role="main" className="w-full">
-        <HeroSection isDark={isDark} handleNavClick={handleNavClick} />
-        <MissionSection isDark={isDark} problemRef={problemRef as React.RefObject<HTMLDivElement>} isProblemVisible={isProblemVisible} />
-        <FeaturesSection isDark={isDark} />
-        <DemoSection isDark={isDark} />
-        <ScopeSection isDark={isDark} />
-        <ArchitectureSection isDark={isDark} />
-        <GuideSection isDark={isDark} />
-        <TeamSection isDark={isDark} />
+        {isPrivacyPage ? (
+          <PrivacyPolicy isDark={isDark} />
+        ) : (
+          <>
+            <HeroSection isDark={isDark} handleNavClick={handleNavClick} />
+            <MissionSection isDark={isDark} problemRef={problemRef as React.RefObject<HTMLDivElement>} isProblemVisible={isProblemVisible} />
+            <FeaturesSection isDark={isDark} />
+            <DemoSection isDark={isDark} />
+            <ScopeSection isDark={isDark} />
+            <ArchitectureSection isDark={isDark} />
+            <GuideSection isDark={isDark} />
+            <TeamSection isDark={isDark} />
+          </>
+        )}
       </main>
 
       {/* Footer */}
