@@ -14,6 +14,8 @@ import GuideSection from './components/GuideSection';
 import TeamSection from './components/TeamSection';
 import Footer from './components/Footer';
 import PrivacyPolicy from './components/PrivacyPolicy';
+import AccessibilityStatement from './components/AccessibilityStatement';
+import TermsOfService from './components/TermsOfService';
 import { initAudioContext } from './utils/soundSystem';
 
 type ThemeMode = 'dark' | 'light';
@@ -168,6 +170,10 @@ export default function App() {
   ];
 
   const isPrivacyPage = window.location.pathname.toLowerCase().startsWith('/privacy');
+  const isAccessibilityPage = window.location.pathname.toLowerCase().startsWith('/accessibility');
+  const isTermsPage = window.location.pathname.toLowerCase().startsWith('/terms');
+  
+  const isSecondaryPage = isPrivacyPage || isAccessibilityPage || isTermsPage;
 
   return (
     <div
@@ -206,16 +212,18 @@ export default function App() {
         setTheme={setTheme}
         isSidebarMode={isSidebarMode}
         setIsSidebarMode={setIsSidebarMode}
-        navItems={isPrivacyPage ? [] : navItems}
+        navItems={isSecondaryPage ? [] : navItems}
         activeSection={activeSection}
         handleNavClick={handleNavClick}
       />
 
       {/* Main Page Content */}
       <main id="main-content" role="main" className="w-full">
-        {isPrivacyPage ? (
-          <PrivacyPolicy isDark={isDark} />
-        ) : (
+        {isPrivacyPage && <PrivacyPolicy isDark={isDark} />}
+        {isAccessibilityPage && <AccessibilityStatement isDark={isDark} />}
+        {isTermsPage && <TermsOfService isDark={isDark} />}
+        
+        {!isSecondaryPage && (
           <>
             <HeroSection isDark={isDark} handleNavClick={handleNavClick} />
             <MissionSection isDark={isDark} problemRef={problemRef as React.RefObject<HTMLDivElement>} isProblemVisible={isProblemVisible} />

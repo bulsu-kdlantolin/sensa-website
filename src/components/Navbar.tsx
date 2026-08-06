@@ -55,10 +55,12 @@ export default function Navbar({
           <a
             href="/"
             onClick={(e) => {
-              if (window.location.pathname.toLowerCase().startsWith('/privacy')) return;
+              const path = window.location.pathname.toLowerCase();
+              if (path.startsWith('/privacy') || path.startsWith('/accessibility') || path.startsWith('/terms')) return;
               handleNavClick(e, 'hero');
             }}
-            onMouseEnter={playHoverSound}
+            onMouseEnter={() => playHoverSound()}
+            onMouseDown={() => playClickSound()}
             className="flex items-center gap-2 md:gap-3.5 no-underline group shrink-0 select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] rounded-lg"
           >
             <img
