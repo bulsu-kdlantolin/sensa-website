@@ -132,7 +132,7 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
           spec: 'Nova-3 Model',
           purpose: 'AI-powered speech recognition engine (Nova-3) providing instant, highly accurate live subtitling.',
           Logo: DeepgramLogo,
-          url: 'https://developers.deepgram.com/docs/speech-to-text',
+          url: 'https://developers.deepgram.com/docs/stt/getting-started',
         },
         {
           name: 'Google Fonts Developer API',
