@@ -72,15 +72,18 @@ export default function App() {
   useEffect(() => {
     const unlockAudio = () => {
       initAudioContext();
-      window.removeEventListener('click', unlockAudio);
+      window.removeEventListener('pointerdown', unlockAudio);
+      window.removeEventListener('touchstart', unlockAudio);
       window.removeEventListener('keydown', unlockAudio);
     };
 
-    window.addEventListener('click', unlockAudio, { once: true });
+    window.addEventListener('pointerdown', unlockAudio, { once: true });
+    window.addEventListener('touchstart', unlockAudio, { once: true, passive: true });
     window.addEventListener('keydown', unlockAudio, { once: true });
 
     return () => {
-      window.removeEventListener('click', unlockAudio);
+      window.removeEventListener('pointerdown', unlockAudio);
+      window.removeEventListener('touchstart', unlockAudio);
       window.removeEventListener('keydown', unlockAudio);
     };
   }, []);

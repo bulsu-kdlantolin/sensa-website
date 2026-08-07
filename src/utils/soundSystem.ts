@@ -31,7 +31,13 @@ export const getGlobalMute = () => isMuted;
 
 // A very short, high-pitched "tick" for hovering over elements
 export const playHoverSound = () => {
-  if (!audioCtx || isMuted || audioCtx.state === 'suspended') return;
+  if (!audioCtx) initAudioContext();
+  if (!audioCtx || isMuted) return;
+  
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume().catch(() => {});
+    if (audioCtx.state === 'suspended') return;
+  }
   
   try {
     const osc = audioCtx.createOscillator();
@@ -59,7 +65,13 @@ export const playHoverSound = () => {
 
 // A sharp, slightly lower-pitched "blip" for clicks
 export const playClickSound = () => {
-  if (!audioCtx || isMuted || audioCtx.state === 'suspended') return;
+  if (!audioCtx) initAudioContext();
+  if (!audioCtx || isMuted) return;
+  
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume().catch(() => {});
+    if (audioCtx.state === 'suspended') return;
+  }
   
   try {
     const osc = audioCtx.createOscillator();
@@ -87,7 +99,13 @@ export const playClickSound = () => {
 
 // A soft, low-frequency hum for hovering over large cards
 export const playCardHoverSound = () => {
-  if (!audioCtx || isMuted || audioCtx.state === 'suspended') return;
+  if (!audioCtx) initAudioContext();
+  if (!audioCtx || isMuted) return;
+  
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume().catch(() => {});
+    if (audioCtx.state === 'suspended') return;
+  }
   
   try {
     const osc = audioCtx.createOscillator();
@@ -113,7 +131,13 @@ export const playCardHoverSound = () => {
 
 // A low-frequency descending sweep simulating a laser scanner (lasts ~2.5s)
 export const playScanSound = () => {
-  if (!audioCtx || isMuted || audioCtx.state === 'suspended') return;
+  if (!audioCtx) initAudioContext();
+  if (!audioCtx || isMuted) return;
+  
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume().catch(() => {});
+    if (audioCtx.state === 'suspended') return;
+  }
   
   try {
     const osc = audioCtx.createOscillator();
@@ -147,7 +171,13 @@ export const playScanSound = () => {
 
 // A quick, high-pitched two-tone chime for "Access Granted / Verified"
 export const playVerifiedSound = () => {
-  if (!audioCtx || isMuted || audioCtx.state === 'suspended') return;
+  if (!audioCtx) initAudioContext();
+  if (!audioCtx || isMuted) return;
+  
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume().catch(() => {});
+    if (audioCtx.state === 'suspended') return;
+  }
   
   try {
     const osc = audioCtx.createOscillator();
