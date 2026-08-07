@@ -138,7 +138,7 @@ export default function App() {
 
   // Track active section on scroll for navbar underline highlight
   useEffect(() => {
-    const sectionIds = ['hero', 'problem-solution', 'features', 'video', 'scope', 'tech-stack', 'guide', 'team'];
+    const sectionIds = ['hero', 'problem-solution', 'video', 'features', 'scope', 'tech-stack', 'guide', 'team'];
     const observer = new IntersectionObserver(
       (entries) => {
         if (isManualScrollingRef.current) return;
@@ -164,8 +164,8 @@ export default function App() {
 
   const navItems: NavItem[] = [
     { href: '#problem-solution', id: 'problem-solution', label: 'Mission', icon: Target },
-    { href: '#features', id: 'features', label: 'Features', icon: Sparkles },
     { href: '#video', id: 'video', label: 'Demo', icon: MonitorPlay },
+    { href: '#features', id: 'features', label: 'Features', icon: Sparkles },
     { href: '#scope', id: 'scope', label: 'Scope', icon: ShieldAlert },
     { href: '#tech-stack', id: 'tech-stack', label: 'Architecture', icon: Cpu },
     { href: '#guide', id: 'guide', label: 'Installation', icon: Download },
@@ -230,8 +230,8 @@ export default function App() {
           <>
             <HeroSection isDark={isDark} handleNavClick={handleNavClick} />
             <MissionSection isDark={isDark} problemRef={problemRef as React.RefObject<HTMLDivElement>} isProblemVisible={isProblemVisible} />
-            <FeaturesSection isDark={isDark} />
             <DemoSection isDark={isDark} />
+            <FeaturesSection isDark={isDark} />
             <ScopeSection isDark={isDark} />
             <ArchitectureSection isDark={isDark} />
             <GuideSection isDark={isDark} />
