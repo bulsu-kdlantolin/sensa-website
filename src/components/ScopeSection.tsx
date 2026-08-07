@@ -73,10 +73,10 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
         <ScrollReveal>
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className={`text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-            Scope & Limitations
+            Scope & Constraints
           </h2>
           <p className={`text-base md:text-xl leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-            Discover Sensa's core capabilities and current technical limitations.
+            Discover Sensa's core capabilities and current technical constraints.
           </p>
         </div>
         </ScrollReveal>
