@@ -1,4 +1,4 @@
-import { Server, ShieldCheck, CheckCircle2, Sparkles, Volume2, Smartphone, KeyRound, Laptop, AlertTriangle, Globe } from 'lucide-react';
+import { Server, ShieldCheck, Sparkles, Volume2, Smartphone, KeyRound, Laptop, Globe } from 'lucide-react';
 import { playCardHoverSound } from '../utils/soundSystem';
 import ScrollReveal from './ScrollReveal';
 
