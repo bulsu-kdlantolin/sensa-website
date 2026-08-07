@@ -99,9 +99,9 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
       title: 'Backend Architecture',
       tag: 'Cloud Server Infrastructure',
       icon: Server,
-      color: 'text-[#8A56FF] dark:text-[#A855F7]',
-      borderHover: 'group-hover:border-[#8A56FF]/60 group-hover:shadow-[0_0_35px_rgba(138,86,255,0.25)]',
-      accentLine: 'bg-gradient-to-r from-transparent via-[#8A56FF] to-transparent',
+      color: 'text-[#FF7A2F] dark:text-[#FFC09B]',
+      borderHover: 'group-hover:border-[#FF7A2F]/60 group-hover:shadow-[0_0_35px_rgba(255,122,47,0.25)]',
+      accentLine: 'bg-gradient-to-r from-transparent via-[#FF7A2F] to-transparent',
       items: [
         { name: 'Render Cloud Hosting', detail: 'Secure 24/7 cloud infrastructure hosting our speech relay servers with low-latency global connections.', Logo: RenderCloudLogo, url: 'https://render.com/' },
         { name: 'Node.js & WebSocket Proxy', detail: 'Real-time backend relay streaming live browser audio directly to our AI engines without delay.', Logo: NodeLogo, url: 'https://nodejs.org/' },
@@ -115,9 +115,9 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
       layerNumber: 'Layer 1',
       title: 'External Cloud APIs',
       icon: Cloud,
-      color: 'text-[#0A44FF] dark:text-[#6AA2FF]',
-      borderHover: 'hover:border-[#0A44FF]/60 hover:shadow-[0_0_30px_rgba(10,68,255,0.18)]',
-      accentLine: 'bg-[#0A44FF]',
+      color: 'text-[#FF7A2F] dark:text-[#FFC09B]',
+      borderHover: 'hover:border-[#FF7A2F]/60 hover:shadow-[0_0_30px_rgba(255,122,47,0.18)]',
+      accentLine: 'bg-[#FF7A2F]',
       gridCols: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
       apis: [
         {
@@ -147,9 +147,9 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
       layerNumber: 'Layer 2',
       title: 'Browser & Web Platform Native APIs',
       icon: Globe,
-      color: 'text-[#8A56FF] dark:text-[#A855F7]',
-      borderHover: 'hover:border-[#8A56FF]/60 hover:shadow-[0_0_30px_rgba(138,86,255,0.18)]',
-      accentLine: 'bg-[#8A56FF]',
+      color: 'text-[#0A44FF] dark:text-[#6AA2FF]',
+      borderHover: 'hover:border-[#0A44FF]/60 hover:shadow-[0_0_30px_rgba(10,68,255,0.18)]',
+      accentLine: 'bg-[#0A44FF]',
       gridCols: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
       apis: [
         {
@@ -200,9 +200,9 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
       layerNumber: 'Layer 3',
       title: 'Chrome Extension Manifest V3 APIs',
       icon: Cpu,
-      color: 'text-[#FF7A2F] dark:text-[#FFC09B]',
-      borderHover: 'hover:border-[#FF7A2F]/60 hover:shadow-[0_0_35px_rgba(255,122,47,0.18)]',
-      accentLine: 'bg-[#FF7A2F]',
+      color: 'text-[#0A44FF] dark:text-[#6AA2FF]',
+      borderHover: 'hover:border-[#0A44FF]/60 hover:shadow-[0_0_35px_rgba(10,68,255,0.18)]',
+      accentLine: 'bg-[#0A44FF]',
       gridCols: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
       apis: [
         {
