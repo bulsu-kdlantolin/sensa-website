@@ -160,14 +160,14 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
           url: 'https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API',
         },
         {
-          name: 'Web Speech API — SpeechRecognition',
+          name: 'Web Speech API â€” SpeechRecognition',
           spec: 'webkitSpeechRecognition',
           purpose: 'Captures voice commands through your microphone for complete hands-free site navigation.',
           Logo: Mic,
           url: 'https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition',
         },
         {
-          name: 'Web Speech API — SpeechSynthesis',
+          name: 'Web Speech API â€” SpeechSynthesis',
           spec: 'window.speechSynthesis, SpeechSynthesisUtterance',
           purpose: 'Converts webpage text into natural spoken audio so users can listen instead of straining their eyes.',
           Logo: Volume2,
@@ -254,52 +254,52 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
   return (
     <section
       id="tech-stack"
-      className={elative overflow-hidden w-full min-h-screen flex flex-col justify-center py-20 md:py-28 border-t }
+      className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'}`}
     >
       {/* Cybernetic Grid Layer */}
       <div className="absolute inset-0 bg-grid-pattern pointer-events-none [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_75%,transparent_100%)] -z-10" />
 
       {/* Ambient Glow */}
       <div
-        className={bsolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full blur-[160px] pointer-events-none -z-10 bg-[#0A44FF] transform-gpu }
+        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full blur-[160px] pointer-events-none -z-10 bg-[#0A44FF] transform-gpu ${isDark ? 'opacity-20' : 'opacity-10'}`}
       />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
         {/* Section Header */}
         <ScrollReveal>
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <h2 className={	ext-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4 }>
+          <h2 className={`text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}>
             How Sensa Works
           </h2>
-          <p className={	ext-base md:text-xl leading-relaxed font-normal mb-8 }>
+          <p className={`text-base md:text-xl leading-relaxed font-normal mb-8 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
             A look behind the scenes at the powerful technologies that make Sensa run smoothly and securely.
           </p>
           
           {/* Privacy Badge */}
-          <div className={inline-flex items-center gap-3 px-4 py-2.5 rounded-full border shadow-sm }>
+          <div className={`inline-flex items-center gap-3 px-4 py-2.5 rounded-full border shadow-sm ${isDark ? 'bg-[#00D26A]/10 border-[#00D26A]/30 text-[#00D26A]' : 'bg-[#00D26A]/10 border-[#00D26A]/20 text-[#00B050]'}`}>
             <ShieldCheck size={18} className="animate-pulse" />
             <span className="text-sm font-bold tracking-tight">Zero-Retention Architecture:</span>
-            <span className={	ext-sm }>Audio is streamed in-memory and instantly destroyed. No disk storage.</span>
+            <span className={`text-sm ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>Audio is streamed in-memory and instantly destroyed. No disk storage.</span>
           </div>
         </div>
         </ScrollReveal>
 
         {/* Data Pipeline Visualization */}
         <ScrollReveal delay={100}>
-        <div className={mb-20 p-6 md:p-8 rounded-3xl border }>
+        <div className={`mb-20 p-6 md:p-8 rounded-3xl border ${isDark ? 'bg-[#111] border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
           <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-500/20">
             <Network size={20} className="text-[#0A44FF] dark:text-[#6AA2FF]" aria-hidden="true" />
-            <h3 className={	ext-lg md:text-xl font-bold tracking-tight }>
+            <h3 className={`text-lg md:text-xl font-bold tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
               Real-Time Data Pipeline
             </h3>
           </div>
           
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-2">
             {/* Step 1 */}
-            <div className={lex flex-col items-center justify-center p-4 w-full md:w-1/4 rounded-2xl border  shadow-sm relative overflow-hidden group}>
+            <div className={`flex flex-col items-center justify-center p-4 w-full md:w-1/4 rounded-2xl border ${isDark ? 'bg-slate-800/40 border-slate-700' : 'bg-white border-slate-200'} shadow-sm relative overflow-hidden group`}>
               <Mic size={28} className="mb-2 text-[#8A56FF]" />
-              <span className={	ext-sm font-bold }>1. Audio Capture</span>
-              <span className={	ext-xs text-center mt-1 }>Raw PCM Buffer via TabCapture</span>
+              <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>1. Audio Capture</span>
+              <span className={`text-xs text-center mt-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Raw PCM Buffer via TabCapture</span>
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#8A56FF]/20 to-transparent -translate-x-full group-hover:animate-[typewriter_1.5s_ease-in-out_infinite]" />
             </div>
             
@@ -307,10 +307,10 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
             <ArrowDown size={20} className="md:hidden text-slate-400 animate-pulse" />
             
             {/* Step 2 */}
-            <div className={lex flex-col items-center justify-center p-4 w-full md:w-1/4 rounded-2xl border  shadow-sm relative overflow-hidden group}>
+            <div className={`flex flex-col items-center justify-center p-4 w-full md:w-1/4 rounded-2xl border ${isDark ? 'bg-slate-800/40 border-slate-700' : 'bg-white border-slate-200'} shadow-sm relative overflow-hidden group`}>
               <Cpu size={28} className="mb-2 text-[#0A44FF]" />
-              <span className={	ext-sm font-bold }>2. Extension Worker</span>
-              <span className={	ext-xs text-center mt-1 }>Offscreen Audio Processing</span>
+              <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>2. Extension Worker</span>
+              <span className={`text-xs text-center mt-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Offscreen Audio Processing</span>
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#0A44FF]/20 to-transparent -translate-x-full group-hover:animate-[typewriter_1.5s_ease-in-out_infinite]" />
             </div>
 
@@ -318,10 +318,10 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
             <ArrowDown size={20} className="md:hidden text-slate-400 animate-pulse" />
 
             {/* Step 3 */}
-            <div className={lex flex-col items-center justify-center p-4 w-full md:w-1/4 rounded-2xl border  shadow-sm relative overflow-hidden group}>
+            <div className={`flex flex-col items-center justify-center p-4 w-full md:w-1/4 rounded-2xl border ${isDark ? 'bg-slate-800/40 border-slate-700' : 'bg-white border-slate-200'} shadow-sm relative overflow-hidden group`}>
               <Server size={28} className="mb-2 text-[#FF7A2F]" />
-              <span className={	ext-sm font-bold }>3. Node Proxy</span>
-              <span className={	ext-xs text-center mt-1 }>Secure WebSocket Relay</span>
+              <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>3. Node Proxy</span>
+              <span className={`text-xs text-center mt-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Secure WebSocket Relay</span>
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FF7A2F]/20 to-transparent -translate-x-full group-hover:animate-[typewriter_1.5s_ease-in-out_infinite]" />
             </div>
 
@@ -329,10 +329,10 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
             <ArrowDown size={20} className="md:hidden text-slate-400 animate-pulse" />
 
             {/* Step 4 */}
-            <div className={lex flex-col items-center justify-center p-4 w-full md:w-1/4 rounded-2xl border  shadow-sm relative overflow-hidden group}>
+            <div className={`flex flex-col items-center justify-center p-4 w-full md:w-1/4 rounded-2xl border ${isDark ? 'bg-slate-800/40 border-slate-700' : 'bg-white border-slate-200'} shadow-sm relative overflow-hidden group`}>
               <Cloud size={28} className="mb-2 text-[#00D26A]" />
-              <span className={	ext-sm font-bold }>4. Cloud AI Engines</span>
-              <span className={	ext-xs text-center mt-1 }>Deepgram & Azure AI</span>
+              <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>4. Cloud AI Engines</span>
+              <span className={`text-xs text-center mt-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Deepgram & Azure AI</span>
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00D26A]/20 to-transparent -translate-x-full group-hover:animate-[typewriter_1.5s_ease-in-out_infinite]" />
             </div>
           </div>
@@ -344,7 +344,7 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
         <div className="mb-20">
           <div className="flex items-center gap-3 mb-8">
             <Cpu size={22} className="text-[#0A44FF] dark:text-[#6AA2FF]" aria-hidden="true" />
-            <h3 className={	ext-xl md:text-2xl font-black tracking-tight }>
+            <h3 className={`text-xl md:text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
               Frontend & Backend Core Infrastructure
             </h3>
           </div>
@@ -355,25 +355,28 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
               return (
                 <div key={idx} className="relative group rounded-[2.5rem] p-[1px] overflow-hidden transition-transform duration-500 hover:scale-[1.005]">
                   {/* Animated Border Glow Layer */}
-                  <div className={bsolute top-0 left-0 w-[200%] h-[200%] -translate-x-1/4 -translate-y-1/4 animate-[spin_6s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 } />
+                  <div className={`absolute top-0 left-0 w-[200%] h-[200%] -translate-x-1/4 -translate-y-1/4 animate-[spin_6s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ${side.accentLine}`} />
                   
                   {/* Inner Card content */}
                   <article
                     onMouseEnter={playCardHoverSound}
-                    className={elative z-10 rounded-[calc(2.5rem-1px)] h-full p-6 md:p-8 flex flex-col justify-between transition-shadow duration-500 border  }
+                    className={`relative z-10 rounded-[calc(2.5rem-1px)] h-full p-6 md:p-8 flex flex-col justify-between transition-shadow duration-500 border ${side.borderHover} ${isDark
+                        ? 'bg-[#161618] border-slate-800 shadow-md'
+                        : 'bg-white border-slate-200/80 shadow-md'
+                      }`}
                   >
-                    <div className={bsolute top-0 left-8 right-8 h-1 rounded-b-full  opacity-50} />
+                    <div className={`absolute top-0 left-8 right-8 h-1 rounded-b-full ${side.accentLine} opacity-50`} />
 
                     <div>
                       <div className="flex items-center gap-3.5 mb-6 pb-6 border-b border-slate-200/60 dark:border-slate-800/80">
-                        <div className={p-3.5 rounded-2xl  shrink-0}>
+                        <div className={`p-3.5 rounded-2xl ${isDark ? 'bg-white/5' : 'bg-slate-100'} shrink-0`}>
                           <MainIcon size={28} className={side.color} />
                         </div>
                         <div>
-                          <h4 className={	ext-2xl font-black tracking-tight }>
+                          <h4 className={`text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
                             {side.title}
                           </h4>
-                          <p className={	ext-xs font-semibold }>
+                          <p className={`text-xs font-semibold ${side.color}`}>
                             {side.tag}
                           </p>
                         </div>
@@ -388,18 +391,21 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
                               href={item.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className={p-3.5 rounded-2xl border flex flex-col gap-0.5 transition-all group/item focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] }
+                              className={`p-3.5 rounded-2xl border flex flex-col gap-0.5 transition-all group/item focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] ${isDark
+                                  ? 'bg-black/40 border-slate-800/80 hover:border-slate-600 hover:bg-black/60'
+                                  : 'bg-slate-50/80 border-slate-200/60 hover:border-slate-300 hover:bg-slate-100'
+                                }`}
                             >
-                              <span className={	ext-sm font-bold flex items-center justify-between gap-2.5 }>
+                              <span className={`text-sm font-bold flex items-center justify-between gap-2.5 ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>
                                 <span className="flex items-center gap-2.5">
-                                  <span className={shrink-0 flex items-center justify-center }>
+                                  <span className={`shrink-0 flex items-center justify-center ${side.color}`}>
                                     <ItemLogo size={18} />
                                   </span>
                                   {item.name}
                                 </span>
-                                <ExternalLink size={13} className={shrink-0 opacity-40 group-hover/item:opacity-100 transition-opacity } aria-hidden="true" />
+                                <ExternalLink size={13} className={`shrink-0 opacity-40 group-hover/item:opacity-100 transition-opacity ${side.color}`} aria-hidden="true" />
                               </span>
-                              <p className={	ext-xs leading-relaxed m-0 pl-7 font-normal }>
+                              <p className={`text-xs leading-relaxed m-0 pl-7 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                                 {item.detail}
                               </p>
                             </a>
@@ -420,7 +426,7 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
           <ScrollReveal delay={200}>
           <div className="flex items-center gap-3 mb-8">
             <Globe size={22} className="text-[#8A56FF] dark:text-[#A855F7]" aria-hidden="true" />
-            <h3 className={	ext-2xl md:text-3xl lg:text-4xl font-black m-0 tracking-tight flex items-center gap-3 }>
+            <h3 className={`text-2xl md:text-3xl lg:text-4xl font-black m-0 tracking-tight flex items-center gap-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
               The 3 Core Layers of Sensa
             </h3>
           </div>
@@ -433,27 +439,30 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
                 <ScrollReveal delay={200 + (lIdx * 100)} key={lIdx}>
                 <div
                   onMouseEnter={playCardHoverSound}
-                  className={order rounded-[2.5rem] p-6 md:p-8 transition-all duration-500 relative overflow-hidden  }
+                  className={`border rounded-[2.5rem] p-6 md:p-8 transition-all duration-500 relative overflow-hidden ${layer.borderHover} ${isDark
+                      ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 shadow-md'
+                      : 'bg-white border-slate-200/80 ring-1 ring-black/5 shadow-md'
+                    }`}
                 >
-                  <div className={bsolute top-0 left-8 right-8 h-1 rounded-b-full  opacity-50} />
+                  <div className={`absolute top-0 left-8 right-8 h-1 rounded-b-full ${layer.accentLine} opacity-50`} />
 
                   {/* Layer Header */}
                   <div className="flex items-center gap-3.5 mb-8 pb-6 border-b border-slate-200/60 dark:border-slate-800/80">
-                    <div className={p-3 rounded-2xl  shrink-0}>
+                    <div className={`p-3 rounded-2xl ${isDark ? 'bg-white/5' : 'bg-slate-100'} shrink-0`}>
                       <LayerIcon size={26} className={layer.color} />
                     </div>
                     <div>
-                      <span className={	ext-xs font-mono font-bold uppercase tracking-wider }>
+                      <span className={`text-xs font-mono font-bold uppercase tracking-wider ${layer.color}`}>
                         {layer.layerNumber}
                       </span>
-                      <h4 className={	ext-xl md:text-2xl font-black tracking-tight }>
+                      <h4 className={`text-xl md:text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
                         {layer.title}
                       </h4>
                     </div>
                   </div>
 
                   {/* API Cards Grid */}
-                  <div className={grid  gap-4 items-stretch}>
+                  <div className={`grid ${layer.gridCols} gap-4 items-stretch`}>
                     {layer.apis.map((api, aIdx) => {
                       const ApiLogoComponent = api.Logo;
                       return (
@@ -462,22 +471,25 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
                           href={api.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={p-4 rounded-2xl border flex flex-col justify-between transition-all duration-300 group hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] }
+                          className={`p-4 rounded-2xl border flex flex-col justify-between transition-all duration-300 group hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] ${isDark
+                              ? 'bg-black/40 border-slate-800/80 hover:border-slate-600 hover:bg-black/60'
+                              : 'bg-slate-50/90 border-slate-200/70 hover:border-slate-300 hover:bg-slate-100'
+                            }`}
                         >
                           <div>
                             <div className="flex items-start justify-between gap-2 mb-2">
-                              <span className={	ext-sm font-bold flex items-center gap-2.5 }>
-                                <span className={shrink-0 flex items-center justify-center }>
+                              <span className={`text-sm font-bold flex items-center gap-2.5 ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>
+                                <span className={`shrink-0 flex items-center justify-center ${layer.color}`}>
                                   <ApiLogoComponent size={18} />
                                 </span>
                                 {api.name}
                               </span>
-                              <ExternalLink size={13} className={shrink-0 opacity-40 group-hover:opacity-100 transition-opacity } aria-hidden="true" />
+                              <ExternalLink size={13} className={`shrink-0 opacity-40 group-hover:opacity-100 transition-opacity ${layer.color}`} aria-hidden="true" />
                             </div>
-                            <span className={lock text-xs font-mono font-semibold mb-2 }>
+                            <span className={`block text-xs font-mono font-semibold mb-2 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
                               {api.spec}
                             </span>
-                            <p className={	ext-xs leading-relaxed m-0 font-normal }>
+                            <p className={`text-xs leading-relaxed m-0 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                               {api.purpose}
                             </p>
                           </div>
