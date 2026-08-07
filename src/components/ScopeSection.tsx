@@ -93,35 +93,30 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
               }`}
           >
             <div>
-              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-[#8A56FF]/30">
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold ${isDark ? 'bg-gradient-to-br from-[#0A44FF]/20 via-[#8A56FF]/20 to-[#FF7A2F]/20 text-[#8A56FF]' : 'bg-gradient-to-br from-[#0A44FF]/10 via-[#8A56FF]/10 to-[#FF7A2F]/10 text-[#8A56FF]'}`}>
-                  <CheckCircle2 size={22} aria-hidden="true" />
-                </div>
-                <div>
-                  <h3 className={`text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                    Project Scope
-                  </h3>
-                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F]">
-                    Supported Features
-                  </span>
-                </div>
+              <div className="mb-6 pb-4 border-b border-[#8A56FF]/30">
+                <h3 className={`text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                  Project Scope
+                </h3>
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F]">
+                  Supported Features
+                </span>
               </div>
 
               <div className="space-y-6">
                 {scopeItems.map((item, idx) => {
                   const Icon = item.icon;
                   return (
-                    <div key={idx} className="flex gap-4 items-start">
+                    <div key={idx} className="group flex gap-4 items-start p-3 -mx-3 rounded-2xl transition-all duration-300 hover:bg-slate-500/5 cursor-default">
                       <div
-                        className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border ${isDark
-                            ? 'bg-[#8A56FF]/10 text-[#8A56FF] border-[#8A56FF]/20'
-                            : 'bg-[#8A56FF]/5 text-[#8A56FF] border-[#8A56FF]/20'
+                        className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 ${isDark
+                            ? 'bg-gradient-to-br from-[#0A44FF]/20 via-[#8A56FF]/20 to-[#FF7A2F]/20 text-[#8A56FF] border-[#8A56FF]/30 group-hover:border-[#8A56FF]/60 group-hover:shadow-[0_0_15px_rgba(138,86,255,0.3)]'
+                            : 'bg-gradient-to-br from-[#0A44FF]/10 via-[#8A56FF]/10 to-[#FF7A2F]/10 text-[#8A56FF] border-[#8A56FF]/20 group-hover:border-[#8A56FF]/50 group-hover:shadow-[0_0_15px_rgba(138,86,255,0.2)]'
                           }`}
                       >
                         <Icon size={20} />
                       </div>
                       <div>
-                        <h4 className={`text-base font-bold mb-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                        <h4 className={`text-base font-bold mb-1 transition-colors duration-300 group-hover:text-[#8A56FF] ${isDark ? 'text-white' : 'text-slate-900'}`}>
                           {item.title}
                         </h4>
                         <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
@@ -146,35 +141,30 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
               }`}
           >
             <div>
-              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-700/50">
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold ${isDark ? 'bg-slate-800/60 text-amber-500/80' : 'bg-slate-100 text-amber-600/80'}`}>
-                  <AlertTriangle size={22} aria-hidden="true" />
-                </div>
-                <div>
-                  <h3 className={`text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                    Limitations
-                  </h3>
-                  <span className={`text-xs font-mono font-bold uppercase tracking-wider ${isDark ? 'text-amber-500/70' : 'text-amber-600/80'}`}>
-                    Not Supported
-                  </span>
-                </div>
+              <div className="mb-6 pb-4 border-b border-orange-500/20">
+                <h3 className={`text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                  Technical Constraints
+                </h3>
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-[#FF7A2F] to-amber-500">
+                  Limitations & Roadmap
+                </span>
               </div>
 
               <div className="space-y-6">
                 {limitationItems.map((item, idx) => {
                   const Icon = item.icon;
                   return (
-                    <div key={idx} className="flex gap-4 items-start">
+                    <div key={idx} className="group flex gap-4 items-start p-3 -mx-3 rounded-2xl transition-all duration-300 hover:bg-slate-500/5 cursor-default">
                       <div
-                        className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border ${isDark
-                            ? 'bg-slate-800/40 text-amber-500/70 border-slate-700/50'
-                            : 'bg-slate-50 text-amber-600/70 border-slate-200'
+                        className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3 ${isDark
+                            ? 'bg-gradient-to-br from-orange-500/20 via-[#FF7A2F]/20 to-amber-500/20 text-orange-500 border-orange-500/30 group-hover:border-orange-500/60 group-hover:shadow-[0_0_15px_rgba(255,122,47,0.3)]'
+                            : 'bg-gradient-to-br from-orange-500/10 via-[#FF7A2F]/10 to-amber-500/10 text-orange-600 border-orange-500/20 group-hover:border-orange-500/50 group-hover:shadow-[0_0_15px_rgba(255,122,47,0.2)]'
                           }`}
                       >
                         <Icon size={20} />
                       </div>
                       <div>
-                        <h4 className={`text-base font-bold mb-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                        <h4 className={`text-base font-bold mb-1 transition-colors duration-300 group-hover:text-[#FF7A2F] ${isDark ? 'text-white' : 'text-slate-900'}`}>
                           {item.title}
                         </h4>
                         <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
