@@ -1,4 +1,4 @@
-import { Cpu, Server, Cloud, Globe, Mic, Volume2, Headphones, Eye, Network, Radio, ExternalLink, ShieldCheck, ArrowRight, ArrowDown } from 'lucide-react';
+import { Cpu, Server, Cloud, Globe, Mic, Volume2, Headphones, Eye, Network, Radio, ExternalLink } from 'lucide-react';
 import azureLogo from '../assets/azure-logo.webp';
 import plasmoLogo from '../assets/plasmo-logo.webp';
 import renderLogo from '../assets/render-logo.webp';
@@ -99,9 +99,9 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
       title: 'Backend Architecture',
       tag: 'Cloud Server Infrastructure',
       icon: Server,
-      color: 'text-[#FF7A2F] dark:text-[#FFC09B]',
-      borderHover: 'group-hover:border-[#FF7A2F]/60 group-hover:shadow-[0_0_35px_rgba(255,122,47,0.25)]',
-      accentLine: 'bg-gradient-to-r from-transparent via-[#FF7A2F] to-transparent',
+      color: 'text-[#8A56FF] dark:text-[#A855F7]',
+      borderHover: 'group-hover:border-[#8A56FF]/60 group-hover:shadow-[0_0_35px_rgba(138,86,255,0.25)]',
+      accentLine: 'bg-gradient-to-r from-transparent via-[#8A56FF] to-transparent',
       items: [
         { name: 'Render Cloud Hosting', detail: 'Secure 24/7 cloud infrastructure hosting our speech relay servers with low-latency global connections.', Logo: RenderCloudLogo, url: 'https://render.com/' },
         { name: 'Node.js & WebSocket Proxy', detail: 'Real-time backend relay streaming live browser audio directly to our AI engines without delay.', Logo: NodeLogo, url: 'https://nodejs.org/' },
@@ -115,9 +115,9 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
       layerNumber: 'Layer 1',
       title: 'External Cloud APIs',
       icon: Cloud,
-      color: 'text-[#FF7A2F] dark:text-[#FFC09B]',
-      borderHover: 'hover:border-[#FF7A2F]/60 hover:shadow-[0_0_30px_rgba(255,122,47,0.18)]',
-      accentLine: 'bg-[#FF7A2F]',
+      color: 'text-[#0A44FF] dark:text-[#6AA2FF]',
+      borderHover: 'hover:border-[#0A44FF]/60 hover:shadow-[0_0_30px_rgba(10,68,255,0.18)]',
+      accentLine: 'bg-[#0A44FF]',
       gridCols: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
       apis: [
         {
@@ -200,9 +200,9 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
       layerNumber: 'Layer 3',
       title: 'Chrome Extension Manifest V3 APIs',
       icon: Cpu,
-      color: 'text-[#0A44FF] dark:text-[#6AA2FF]',
-      borderHover: 'hover:border-[#0A44FF]/60 hover:shadow-[0_0_35px_rgba(10,68,255,0.18)]',
-      accentLine: 'bg-[#0A44FF]',
+      color: 'text-[#FF7A2F] dark:text-[#FFC09B]',
+      borderHover: 'hover:border-[#FF7A2F]/60 hover:shadow-[0_0_35px_rgba(255,122,47,0.18)]',
+      accentLine: 'bg-[#FF7A2F]',
       gridCols: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
       apis: [
         {
@@ -267,83 +267,20 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
       <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
         {/* Section Header */}
         <ScrollReveal>
-        <div className="text-center max-w-3xl mx-auto mb-10">
+        <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className={`text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}>
             How Sensa Works
           </h2>
-          <p className={`text-base md:text-xl leading-relaxed font-normal mb-8 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+          <p className={`text-base md:text-xl leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
             A look behind the scenes at the powerful technologies that make Sensa run smoothly and securely.
           </p>
-          
-          {/* Privacy Badge */}
-          <div className={`inline-flex items-center gap-3 px-4 py-2.5 rounded-full border shadow-sm ${isDark ? 'bg-[#00D26A]/10 border-[#00D26A]/30 text-[#00D26A]' : 'bg-[#00D26A]/10 border-[#00D26A]/20 text-[#00B050]'}`}>
-            <ShieldCheck size={18} className="animate-pulse" />
-            <span className="text-sm font-bold tracking-tight">Zero-Retention Architecture:</span>
-            <span className={`text-sm ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>Audio is streamed in-memory and instantly destroyed. No disk storage.</span>
-          </div>
-        </div>
-        </ScrollReveal>
-
-        {/* Data Pipeline Visualization */}
-        <ScrollReveal delay={100}>
-        <div className={`mb-20 p-6 md:p-8 rounded-3xl border ${isDark ? 'bg-[#111] border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-          <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-500/20">
-            <Network size={20} className="text-[#0A44FF] dark:text-[#6AA2FF]" aria-hidden="true" />
-            <h3 className={`text-lg md:text-xl font-bold tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-              Real-Time Data Pipeline
-            </h3>
-          </div>
-          
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-2">
-            {/* Step 1 */}
-            <div className={`flex flex-col items-center justify-center p-4 w-full md:w-1/4 rounded-2xl border ${isDark ? 'bg-slate-800/40 border-slate-700' : 'bg-white border-slate-200'} shadow-sm relative overflow-hidden group`}>
-              <Mic size={28} className="mb-2 text-[#8A56FF]" />
-              <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>1. Audio Capture</span>
-              <span className={`text-xs text-center mt-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Raw PCM Buffer via TabCapture</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#8A56FF]/20 to-transparent -translate-x-full group-hover:animate-[typewriter_1.5s_ease-in-out_infinite]" />
-            </div>
-            
-            <ArrowRight size={20} className="hidden md:block text-slate-400 animate-pulse" />
-            <ArrowDown size={20} className="md:hidden text-slate-400 animate-pulse" />
-            
-            {/* Step 2 */}
-            <div className={`flex flex-col items-center justify-center p-4 w-full md:w-1/4 rounded-2xl border ${isDark ? 'bg-slate-800/40 border-slate-700' : 'bg-white border-slate-200'} shadow-sm relative overflow-hidden group`}>
-              <Cpu size={28} className="mb-2 text-[#0A44FF]" />
-              <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>2. Extension Worker</span>
-              <span className={`text-xs text-center mt-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Offscreen Audio Processing</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#0A44FF]/20 to-transparent -translate-x-full group-hover:animate-[typewriter_1.5s_ease-in-out_infinite]" />
-            </div>
-
-            <ArrowRight size={20} className="hidden md:block text-slate-400 animate-pulse" />
-            <ArrowDown size={20} className="md:hidden text-slate-400 animate-pulse" />
-
-            {/* Step 3 */}
-            <div className={`flex flex-col items-center justify-center p-4 w-full md:w-1/4 rounded-2xl border ${isDark ? 'bg-slate-800/40 border-slate-700' : 'bg-white border-slate-200'} shadow-sm relative overflow-hidden group`}>
-              <Server size={28} className="mb-2 text-[#FF7A2F]" />
-              <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>3. Node Proxy</span>
-              <span className={`text-xs text-center mt-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Secure WebSocket Relay</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FF7A2F]/20 to-transparent -translate-x-full group-hover:animate-[typewriter_1.5s_ease-in-out_infinite]" />
-            </div>
-
-            <ArrowRight size={20} className="hidden md:block text-slate-400 animate-pulse" />
-            <ArrowDown size={20} className="md:hidden text-slate-400 animate-pulse" />
-
-            {/* Step 4 */}
-            <div className={`flex flex-col items-center justify-center p-4 w-full md:w-1/4 rounded-2xl border ${isDark ? 'bg-slate-800/40 border-slate-700' : 'bg-white border-slate-200'} shadow-sm relative overflow-hidden group`}>
-              <Cloud size={28} className="mb-2 text-[#00D26A]" />
-              <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>4. Cloud AI Engines</span>
-              <span className={`text-xs text-center mt-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Deepgram & Azure AI</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00D26A]/20 to-transparent -translate-x-full group-hover:animate-[typewriter_1.5s_ease-in-out_infinite]" />
-            </div>
-          </div>
         </div>
         </ScrollReveal>
 
         {/* Part 1: Frontend vs Backend Core Infrastructure */}
         <ScrollReveal delay={150}>
         <div className="mb-20">
-          <div className="flex items-center gap-3 mb-8">
-            <Cpu size={22} className="text-[#0A44FF] dark:text-[#6AA2FF]" aria-hidden="true" />
+          <div className="mb-8 text-center md:text-left">
             <h3 className={`text-xl md:text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
               Frontend & Backend Core Infrastructure
             </h3>
@@ -424,9 +361,8 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
         {/* Part 2: 15 Integrated APIs Specification across 3 Architectural Layers */}
         <div>
           <ScrollReveal delay={200}>
-          <div className="flex items-center gap-3 mb-8">
-            <Globe size={22} className="text-[#8A56FF] dark:text-[#A855F7]" aria-hidden="true" />
-            <h3 className={`text-2xl md:text-3xl lg:text-4xl font-black m-0 tracking-tight flex items-center gap-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+          <div className="mb-8 text-center md:text-left">
+            <h3 className={`text-2xl md:text-3xl lg:text-4xl font-black m-0 tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
               The 3 Core Layers of Sensa
             </h3>
           </div>
