@@ -86,9 +86,6 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
       title: 'Frontend Architecture',
       tag: 'Chrome Extension Client',
       icon: Cpu,
-      color: 'text-[#0A44FF] dark:text-[#6AA2FF]',
-      borderHover: 'group-hover:border-[#0A44FF]/60 group-hover:shadow-[0_0_35px_rgba(10,68,255,0.25)]',
-      accentLine: 'bg-gradient-to-r from-transparent via-[#0A44FF] to-transparent',
       items: [
         { name: 'Plasmo Framework', detail: 'Modern Chrome extension framework supporting Manifest V3 for high performance, security, and modularity.', Logo: PlasmoLogo, url: 'https://docs.plasmo.com/' },
         { name: 'React 18 & TypeScript', detail: 'Powers fast, interactive overlay tools with strict type-safety to prevent runtime errors.', Logo: ReactLogo, url: 'https://react.dev/' },
@@ -99,9 +96,6 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
       title: 'Backend Architecture',
       tag: 'Cloud Server Infrastructure',
       icon: Server,
-      color: 'text-[#FF7A2F] dark:text-[#FFC09B]',
-      borderHover: 'group-hover:border-[#FF7A2F]/60 group-hover:shadow-[0_0_35px_rgba(255,122,47,0.25)]',
-      accentLine: 'bg-gradient-to-r from-transparent via-[#FF7A2F] to-transparent',
       items: [
         { name: 'Render Cloud Hosting', detail: 'Secure 24/7 cloud infrastructure hosting our speech relay servers with low-latency global connections.', Logo: RenderCloudLogo, url: 'https://render.com/' },
         { name: 'Node.js & WebSocket Proxy', detail: 'Real-time backend relay streaming live browser audio directly to our AI engines without delay.', Logo: NodeLogo, url: 'https://nodejs.org/' },
@@ -115,9 +109,6 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
       layerNumber: 'Layer 1',
       title: 'External Cloud APIs',
       icon: Cloud,
-      color: 'text-[#FF7A2F] dark:text-[#FFC09B]',
-      borderHover: 'hover:border-[#FF7A2F]/60 hover:shadow-[0_0_30px_rgba(255,122,47,0.18)]',
-      accentLine: 'bg-[#FF7A2F]',
       gridCols: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
       apis: [
         {
@@ -147,9 +138,6 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
       layerNumber: 'Layer 2',
       title: 'Browser & Web Platform Native APIs',
       icon: Globe,
-      color: 'text-[#0A44FF] dark:text-[#6AA2FF]',
-      borderHover: 'hover:border-[#0A44FF]/60 hover:shadow-[0_0_30px_rgba(10,68,255,0.18)]',
-      accentLine: 'bg-[#0A44FF]',
       gridCols: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
       apis: [
         {
@@ -200,9 +188,6 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
       layerNumber: 'Layer 3',
       title: 'Chrome Extension Manifest V3 APIs',
       icon: Cpu,
-      color: 'text-[#0A44FF] dark:text-[#6AA2FF]',
-      borderHover: 'hover:border-[#0A44FF]/60 hover:shadow-[0_0_35px_rgba(10,68,255,0.18)]',
-      accentLine: 'bg-[#0A44FF]',
       gridCols: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
       apis: [
         {
@@ -292,28 +277,31 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
               return (
                 <div key={idx} className="relative group rounded-[2.5rem] p-[1px] overflow-hidden transition-transform duration-500 hover:scale-[1.005]">
                   {/* Animated Border Glow Layer */}
-                  <div className={`absolute top-0 left-0 w-[200%] h-[200%] -translate-x-1/4 -translate-y-1/4 animate-[spin_6s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ${side.accentLine}`} />
+                  <div className={`absolute top-0 left-0 w-[200%] h-[200%] -translate-x-1/4 -translate-y-1/4 animate-[spin_6s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 bg-gradient-to-r from-transparent via-[#8A56FF] to-transparent`} />
                   
                   {/* Inner Card content */}
                   <article
                     onMouseEnter={playCardHoverSound}
-                    className={`relative z-10 rounded-[calc(2.5rem-1px)] h-full p-6 md:p-8 flex flex-col justify-between transition-shadow duration-500 border ${side.borderHover} ${isDark
+                    className={`relative z-10 rounded-[calc(2.5rem-1px)] h-full p-6 md:p-8 flex flex-col justify-between transition-shadow duration-500 border group-hover:border-[#8A56FF]/50 group-hover:shadow-[0_0_35px_rgba(138,86,255,0.25)] ${isDark
                         ? 'bg-[#161618] border-slate-800 shadow-md'
                         : 'bg-white border-slate-200/80 shadow-md'
                       }`}
                   >
-                    <div className={`absolute top-0 left-8 right-8 h-1 rounded-b-full ${side.accentLine} opacity-50`} />
+                    <div className={`absolute top-0 left-8 right-8 h-1 rounded-b-full bg-gradient-to-r from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F] opacity-50`} />
 
                     <div>
                       <div className="flex items-center gap-3.5 mb-6 pb-6 border-b border-slate-200/60 dark:border-slate-800/80">
-                        <div className={`p-3.5 rounded-2xl ${isDark ? 'bg-white/5' : 'bg-slate-100'} shrink-0`}>
-                          <MainIcon size={28} className={side.color} />
+                        <div className={`p-3.5 rounded-2xl flex items-center justify-center shrink-0 border transition-all duration-500 group-hover:rotate-[5deg] group-hover:scale-110 ${isDark
+                            ? 'bg-gradient-to-br from-[#0A44FF]/20 via-[#8A56FF]/20 to-[#FF7A2F]/20 text-[#8A56FF] border-[#8A56FF]/30'
+                            : 'bg-gradient-to-br from-[#0A44FF]/10 via-[#8A56FF]/10 to-[#FF7A2F]/10 text-[#8A56FF] border-[#8A56FF]/20'
+                          }`}>
+                          <MainIcon size={28} />
                         </div>
                         <div>
                           <h4 className={`text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
                             {side.title}
                           </h4>
-                          <p className={`text-xs font-semibold ${side.color}`}>
+                          <p className="text-xs font-bold uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F]">
                             {side.tag}
                           </p>
                         </div>
@@ -328,19 +316,19 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
                               href={item.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className={`p-3.5 rounded-2xl border flex flex-col gap-0.5 transition-all group/item focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] ${isDark
-                                  ? 'bg-black/40 border-slate-800/80 hover:border-slate-600 hover:bg-black/60'
-                                  : 'bg-slate-50/80 border-slate-200/60 hover:border-slate-300 hover:bg-slate-100'
+                              className={`p-3.5 rounded-2xl border flex flex-col gap-0.5 transition-all group/item focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#8A56FF] ${isDark
+                                  ? 'bg-black/40 border-slate-800/80 hover:border-[#8A56FF]/50 hover:bg-[#8A56FF]/5'
+                                  : 'bg-slate-50/80 border-slate-200/60 hover:border-[#8A56FF]/40 hover:bg-[#8A56FF]/5'
                                 }`}
                             >
                               <span className={`text-sm font-bold flex items-center justify-between gap-2.5 ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>
-                                <span className="flex items-center gap-2.5">
-                                  <span className={`shrink-0 flex items-center justify-center ${side.color}`}>
+                                <span className="flex items-center gap-2.5 transition-colors duration-300 group-hover/item:text-[#8A56FF]">
+                                  <span className="shrink-0 flex items-center justify-center text-[#8A56FF] dark:text-[#A855F7]">
                                     <ItemLogo size={18} />
                                   </span>
                                   {item.name}
                                 </span>
-                                <ExternalLink size={13} className={`shrink-0 opacity-40 group-hover/item:opacity-100 transition-opacity ${side.color}`} aria-hidden="true" />
+                                <ExternalLink size={13} className="shrink-0 opacity-40 group-hover/item:opacity-100 transition-opacity text-[#8A56FF] dark:text-[#A855F7]" aria-hidden="true" />
                               </span>
                               <p className={`text-xs leading-relaxed m-0 pl-7 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                                 {item.detail}
@@ -375,23 +363,26 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
                 <ScrollReveal delay={200 + (lIdx * 100)} key={lIdx}>
                 <div
                   onMouseEnter={playCardHoverSound}
-                  className={`border rounded-[2.5rem] p-6 md:p-8 transition-all duration-500 relative overflow-hidden ${layer.borderHover} ${isDark
+                  className={`group border rounded-[2.5rem] p-6 md:p-8 transition-all duration-500 relative overflow-hidden hover:border-[#8A56FF]/50 hover:shadow-[0_0_35px_rgba(138,86,255,0.25)] ${isDark
                       ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 shadow-md'
                       : 'bg-white border-slate-200/80 ring-1 ring-black/5 shadow-md'
                     }`}
                 >
-                  <div className={`absolute top-0 left-8 right-8 h-1 rounded-b-full ${layer.accentLine} opacity-50`} />
+                  <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-gradient-to-r from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F] opacity-30 group-hover:opacity-100 transition-opacity duration-300" />
 
                   {/* Layer Header */}
                   <div className="flex items-center gap-3.5 mb-8 pb-6 border-b border-slate-200/60 dark:border-slate-800/80">
-                    <div className={`p-3 rounded-2xl ${isDark ? 'bg-white/5' : 'bg-slate-100'} shrink-0`}>
-                      <LayerIcon size={26} className={layer.color} />
+                    <div className={`p-3 rounded-2xl flex items-center justify-center shrink-0 border transition-all duration-500 group-hover:rotate-[5deg] group-hover:scale-110 ${isDark
+                        ? 'bg-gradient-to-br from-[#0A44FF]/20 via-[#8A56FF]/20 to-[#FF7A2F]/20 text-[#8A56FF] border-[#8A56FF]/30'
+                        : 'bg-gradient-to-br from-[#0A44FF]/10 via-[#8A56FF]/10 to-[#FF7A2F]/10 text-[#8A56FF] border-[#8A56FF]/20'
+                      }`}>
+                      <LayerIcon size={26} />
                     </div>
                     <div>
-                      <span className={`text-xs font-mono font-bold uppercase tracking-wider ${layer.color}`}>
+                      <span className="text-xs font-mono font-bold uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[#0A44FF] via-[#8A56FF] to-[#FF7A2F]">
                         {layer.layerNumber}
                       </span>
-                      <h4 className={`text-xl md:text-2xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                      <h4 className={`text-xl md:text-2xl font-black tracking-tight transition-colors duration-300 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#0A44FF] group-hover:via-[#8A56FF] group-hover:to-[#FF7A2F] ${isDark ? 'text-white' : 'text-slate-900'}`}>
                         {layer.title}
                       </h4>
                     </div>
@@ -407,20 +398,20 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
                           href={api.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={`p-4 rounded-2xl border flex flex-col justify-between transition-all duration-300 group hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0A44FF] ${isDark
-                              ? 'bg-black/40 border-slate-800/80 hover:border-slate-600 hover:bg-black/60'
-                              : 'bg-slate-50/90 border-slate-200/70 hover:border-slate-300 hover:bg-slate-100'
+                          className={`p-4 rounded-2xl border flex flex-col justify-between transition-all duration-300 group/api hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#8A56FF] ${isDark
+                              ? 'bg-black/40 border-slate-800/80 hover:border-[#8A56FF]/50 hover:bg-[#8A56FF]/5'
+                              : 'bg-slate-50/90 border-slate-200/70 hover:border-[#8A56FF]/40 hover:bg-[#8A56FF]/5'
                             }`}
                         >
                           <div>
                             <div className="flex items-start justify-between gap-2 mb-2">
-                              <span className={`text-sm font-bold flex items-center gap-2.5 ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>
-                                <span className={`shrink-0 flex items-center justify-center ${layer.color}`}>
+                              <span className={`text-sm font-bold flex items-center gap-2.5 transition-colors duration-300 group-hover/api:text-[#8A56FF] ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>
+                                <span className="shrink-0 flex items-center justify-center text-[#8A56FF] dark:text-[#A855F7]">
                                   <ApiLogoComponent size={18} />
                                 </span>
                                 {api.name}
                               </span>
-                              <ExternalLink size={13} className={`shrink-0 opacity-40 group-hover:opacity-100 transition-opacity ${layer.color}`} aria-hidden="true" />
+                              <ExternalLink size={13} className="shrink-0 opacity-40 group-hover/api:opacity-100 transition-opacity text-[#8A56FF] dark:text-[#A855F7]" aria-hidden="true" />
                             </div>
                             <span className={`block text-xs font-mono font-semibold mb-2 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
                               {api.spec}
