@@ -9,6 +9,18 @@ interface GuideSectionProps {
   isDark: boolean;
 }
 
+const InlineLoopVideo = ({ src, poster, isDark }: { src: string, poster: string, isDark: boolean }) => (
+  <div className={`w-full aspect-video rounded-2xl mt-4 mb-5 overflow-hidden border shadow-inner ${isDark ? 'border-slate-800 bg-black/40' : 'border-slate-200 bg-slate-100/50'}`}>
+    <video 
+      autoPlay muted loop playsInline preload="none"
+      className="w-full h-full object-cover opacity-90 mix-blend-luminosity hover:mix-blend-normal hover:opacity-100 transition-all duration-500"
+      poster={poster}
+    >
+      <source src={src} type="video/mp4" />
+    </video>
+  </div>
+);
+
 export default function GuideSection({ isDark }: GuideSectionProps) {
   const [activeDockTab, setActiveDockTab] = useState<'visual' | 'auditory'>('visual');
   const [simulatedVoiceCommand, setSimulatedVoiceCommand] = useState<string>('Activate Visual Mode');
@@ -106,9 +118,11 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                   </h4>
                 </div>
               </div>
-              <p className={`text-xs md:text-sm leading-relaxed mb-5 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+              <p className={`text-xs md:text-sm leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                 Open the Chrome Web Store and click <strong>Add to Chrome</strong>. Sensa compiles safely in seconds with zero configuration required.
               </p>
+              
+              <InlineLoopVideo src="/assets/clips/install-step1.mp4" poster="/assets/clips/posters/step1.jpg" isDark={isDark} />
 
               {/* Chrome Store Preview Badge Box */}
               <div
@@ -165,9 +179,11 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                   Pin to Chrome Toolbar
                 </h4>
               </div>
-              <p className={`text-xs md:text-sm leading-relaxed mb-4 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+              <p className={`text-xs md:text-sm leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                 Click the puzzle piece icon <span className="font-mono text-purple-400 font-bold">🧩</span> in your upper-right Chrome bar and click the <strong>Pin</strong> button so Sensa is always 1-click away.
               </p>
+              
+              <InlineLoopVideo src="/assets/clips/install-step2.mp4" poster="/assets/clips/posters/step2.jpg" isDark={isDark} />
 
               {/* Simulated Chrome Extensions Toolbar */}
               <div
@@ -205,9 +221,11 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                   Grant Browser Permissions
                 </h4>
               </div>
-              <p className={`text-xs md:text-sm leading-relaxed mb-4 font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+              <p className={`text-xs md:text-sm leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                 Allow microphone access for hands-free voice control and tab audio capture for live AI subtitling.
               </p>
+
+              <InlineLoopVideo src="/assets/clips/install-step3.mp4" poster="/assets/clips/posters/step3.jpg" isDark={isDark} />
 
               <div className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-3 py-2 rounded-xl border border-emerald-500/20">
                 <ShieldCheck size={16} aria-hidden="true" />

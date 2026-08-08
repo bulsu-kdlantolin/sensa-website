@@ -1,10 +1,30 @@
-import { Mic, Maximize2, Volume2, Ear, BellRing, Sparkles, Download, Eye, Languages, ShieldAlert, MousePointer, Activity } from 'lucide-react';
+import { Mic, Maximize2, Volume2, Ear, BellRing, Sparkles, Download, Eye, Languages, ShieldAlert, MousePointer, Activity, Play } from 'lucide-react';
 import { playCardHoverSound } from '../utils/soundSystem';
 import ScrollReveal from './ScrollReveal';
 
 interface FeaturesSectionProps {
   isDark: boolean;
 }
+
+const HoverVideo = ({ src, poster, color, isDark }: { src: string, poster: string, color: string, isDark: boolean }) => (
+  <div className={`w-full aspect-video rounded-2xl mb-6 relative overflow-hidden group/video border ${isDark ? 'border-slate-800 bg-slate-900/50' : 'border-slate-200 bg-slate-100'}`}>
+    <video 
+      muted loop playsInline preload="none"
+      className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500 scale-105 group-hover:scale-100"
+      poster={poster}
+      onMouseEnter={(e) => { e.currentTarget.play().catch(() => {}); }}
+      onMouseLeave={(e) => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
+    >
+      <source src={src} type="video/mp4" />
+    </video>
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
+      <div className={`w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-sm ${isDark ? 'bg-black/40' : 'bg-white/60 shadow-lg'}`}>
+        <Play size={20} className={color} fill="currentColor" />
+      </div>
+    </div>
+    <span className={`absolute bottom-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-1 rounded bg-black/60 text-white backdrop-blur-md`}>Preview</span>
+  </div>
+);
 
 export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
   return (
@@ -73,6 +93,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#0A44FF] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
               <div>
+                <HoverVideo src="/assets/clips/voice-nav.mp4" poster="/assets/clips/posters/voice.jpg" color="text-[#0A44FF]" isDark={isDark} />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] flex items-center justify-center shrink-0">
                     <Mic size={24}  aria-hidden="true"/>
@@ -113,6 +134,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#0A44FF] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
               <div>
+                <HoverVideo src="/assets/clips/screen-reader.mp4" poster="/assets/clips/posters/reader.jpg" color="text-[#0A44FF]" isDark={isDark} />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] flex items-center justify-center shrink-0">
                     <Volume2 size={24}  aria-hidden="true"/>
@@ -151,6 +173,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#0A44FF] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
               <div>
+                <HoverVideo src="/assets/clips/magnifier.mp4" poster="/assets/clips/posters/magnifier.jpg" color="text-[#0A44FF]" isDark={isDark} />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] flex items-center justify-center shrink-0">
                     <Maximize2 size={24}  aria-hidden="true"/>
@@ -265,6 +288,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#FF7A2F] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
               <div>
+                <HoverVideo src="/assets/clips/subtitles.mp4" poster="/assets/clips/posters/subtitles.jpg" color="text-[#FF7A2F]" isDark={isDark} />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] flex items-center justify-center shrink-0">
                     <Languages size={24}  aria-hidden="true"/>
@@ -305,6 +329,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#FF7A2F] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
               <div>
+                <HoverVideo src="/assets/clips/focus.mp4" poster="/assets/clips/posters/focus.jpg" color="text-[#FF7A2F]" isDark={isDark} />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] flex items-center justify-center shrink-0">
                     <Ear size={24}  aria-hidden="true"/>
@@ -343,6 +368,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#FF7A2F] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
               <div>
+                <HoverVideo src="/assets/clips/transcript.mp4" poster="/assets/clips/posters/transcript.jpg" color="text-[#FF7A2F]" isDark={isDark} />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] flex items-center justify-center shrink-0">
                     <Download size={24}  aria-hidden="true"/>
