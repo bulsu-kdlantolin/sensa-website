@@ -91,7 +91,7 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
 
       {/* Dynamic Ambient Mission Gradients */}
       <div
-        className={`hidden md:block absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none -z-10 bg-red-500 transition-opacity duration-300 transform-gpu ${isAnyActive
+        className={`hidden md:block absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none -z-10 bg-[#FF7A2F] transition-opacity duration-300 transform-gpu ${isAnyActive
             ? isDark
               ? 'opacity-[0.16]'
               : 'opacity-[0.08]'
@@ -101,7 +101,7 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
           }`}
       />
       <div
-        className={`hidden md:block absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none -z-10 bg-emerald-500 transition-opacity duration-300 transform-gpu ${isAnyActive
+        className={`hidden md:block absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none -z-10 bg-[#0A44FF] transition-opacity duration-300 transform-gpu ${isAnyActive
             ? isDark
               ? 'opacity-[0.16]'
               : 'opacity-[0.08]'
@@ -136,8 +136,8 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
           <div className="w-full lg:w-[380px] text-center">
             <h3
               className={`text-sm md:text-base font-black uppercase tracking-widest transition-all duration-300 ${isAnyActive
-                  ? 'text-red-500 dark:text-red-400 opacity-100'
-                  : 'text-red-500/70 dark:text-red-400/70 opacity-70'
+                  ? 'text-[#FF7A2F] dark:text-[#FFC09B] opacity-100'
+                  : 'text-[#FF7A2F]/70 dark:text-[#FFC09B]/70 opacity-70'
                 }`}
             >
               Problem
@@ -147,8 +147,8 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
           <div className="w-full lg:w-[380px] text-center">
             <h3
               className={`text-sm md:text-base font-black uppercase tracking-widest transition-all duration-300 ${isAnyActive
-                  ? 'text-emerald-950 dark:text-emerald-400 opacity-100'
-                  : 'text-emerald-950/90 dark:text-emerald-400/70 opacity-90'
+                  ? 'text-[#0A44FF] dark:text-[#6AA2FF] opacity-100'
+                  : 'text-[#0A44FF]/90 dark:text-[#6AA2FF]/70 opacity-90'
                 }`}
             >
               Solution
@@ -165,12 +165,12 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
             }`}
         >
           <style>{`
-            .flow-line-red {
+            .flow-line-orange {
               stroke-dasharray: 8 8;
               animation: flow-red 1.5s linear infinite;
               will-change: stroke-dashoffset;
             }
-            .flow-line-red-active {
+            .flow-line-orange-active {
               stroke-dasharray: 10 10;
               animation: flow-red 0.6s linear infinite;
               will-change: stroke-dashoffset;
@@ -179,12 +179,12 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
               from { stroke-dashoffset: 16; }
               to { stroke-dashoffset: 0; }
             }
-            .flow-line-green {
+            .flow-line-blue {
               stroke-dasharray: 8 8;
               animation: flow-green 1.5s linear infinite;
               will-change: stroke-dashoffset;
             }
-            .flow-line-green-active {
+            .flow-line-blue-active {
               stroke-dasharray: 10 10;
               animation: flow-green 0.6s linear infinite;
               will-change: stroke-dashoffset;
@@ -198,7 +198,7 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
           {/* Column 1: The Roadblocks (Problem Cards ONLY - Explicit z-20) */}
           <div className="relative z-20 w-full lg:w-[380px] flex flex-col gap-4">
             {/* Mobile-only Problem Header */}
-            <h3 className="lg:hidden text-center text-sm md:text-base font-black uppercase tracking-widest text-red-500 dark:text-red-400 mb-2 mt-4 lg:mt-0">
+            <h3 className="lg:hidden text-center text-sm md:text-base font-black uppercase tracking-widest text-[#FF7A2F] dark:text-[#FFC09B] mb-2 mt-4 lg:mt-0">
               Problem
             </h3>
             {problemCards.map((card) => {
@@ -214,23 +214,23 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
                   onMouseLeave={() => setHoveredId(null)}
                   className={`relative z-20 p-5 md:p-6 rounded-[2rem] border flex items-center gap-4 transition-all duration-300 cursor-pointer transform-gpu ${isSpecificHover
                       ? isDark
-                        ? 'bg-[#291717] border-red-500/80 shadow-lg shadow-red-500/10 scale-[1.02] ring-1 ring-red-500/40'
-                        : 'bg-[#fff5f5] border-red-300 shadow-lg shadow-red-500/10 scale-[1.02] ring-1 ring-red-200'
+                        ? 'bg-[#1A0B05] border-[#FF7A2F]/80 shadow-lg shadow-[#FF7A2F]/10 scale-[1.02] ring-1 ring-[#FF7A2F]/40'
+                        : 'bg-[#FFF0E5] border-[#FF7A2F]/40 shadow-lg shadow-[#FF7A2F]/10 scale-[1.02] ring-1 ring-[#FF7A2F]/30'
                       : isCoreHovered
                         ? isDark
-                          ? 'bg-[#1f1717] border-red-500/40'
-                          : 'bg-[#fffafa] border-red-200'
+                          ? 'bg-[#140A06] border-[#FF7A2F]/40'
+                          : 'bg-[#FFFAF5] border-[#FF7A2F]/30'
                         : isOtherHovered
                           ? 'opacity-40 scale-[0.98]'
                           : isDark
-                            ? 'bg-[#161618] border-slate-800 hover:bg-[#1f1717] hover:border-red-500/30'
-                            : 'bg-white border-slate-200 shadow-sm hover:bg-[#fffafa] hover:border-red-200'
+                            ? 'bg-[#161618] border-slate-800 hover:bg-[#140A06] hover:border-[#FF7A2F]/30'
+                            : 'bg-white border-slate-200 shadow-sm hover:bg-[#FFFAF5] hover:border-[#FF7A2F]/30'
                     }`}
                 >
                   <div
                     className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-300 ${isHovered
-                        ? 'bg-red-500 text-white shadow-md shadow-red-500/30 scale-105'
-                        : 'bg-red-500/10 text-red-500 dark:bg-red-500/15 dark:text-red-400'
+                        ? 'bg-[#FF7A2F] text-white shadow-md shadow-[#FF7A2F]/30 scale-105'
+                        : 'bg-[#FF7A2F]/10 text-[#FF7A2F] dark:bg-[#FF7A2F]/15 dark:text-[#FFC09B]'
                       }`}
                   >
                     <Icon size={24} />
@@ -238,7 +238,7 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
                   <div>
                     <h4
                       className={`text-base font-bold mb-0.5 transition-colors ${isHovered
-                          ? 'text-red-500 dark:text-red-400 font-extrabold'
+                          ? 'text-[#FF7A2F] dark:text-[#FFC09B] font-extrabold'
                           : isDark
                             ? 'text-slate-300'
                             : 'text-slate-700'
@@ -274,14 +274,14 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
                     fill="none"
                     stroke={
                       isHovered
-                        ? 'rgba(239, 68, 68, 1)'
+                        ? 'rgba(255, 122, 47, 1)'
                         : isOtherHovered
-                          ? 'rgba(239, 68, 68, 0.15)'
-                          : 'rgba(239, 68, 68, 0.4)'
+                          ? 'rgba(255, 122, 47, 0.15)'
+                          : 'rgba(255, 122, 47, 0.4)'
                     }
                     strokeWidth={isHovered ? (isCoreHovered ? '3.5' : '4') : '2'}
                     vectorEffect="non-scaling-stroke"
-                    className={isHovered ? 'flow-line-red-active' : 'flow-line-red'}
+                    className={isHovered ? 'flow-line-orange-active' : 'flow-line-orange'}
                     style={{
                       opacity: isOtherHovered ? 0.2 : 1,
                       transition: 'stroke 0.3s, stroke-width 0.3s, opacity 0.3s',
@@ -360,14 +360,14 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
                     fill="none"
                     stroke={
                       isHovered
-                        ? 'rgba(16, 185, 129, 1)'
+                        ? 'rgba(10, 68, 255, 1)'
                         : isOtherHovered
-                          ? 'rgba(16, 185, 129, 0.15)'
-                          : 'rgba(16, 185, 129, 0.4)'
+                          ? 'rgba(10, 68, 255, 0.15)'
+                          : 'rgba(10, 68, 255, 0.4)'
                     }
                     strokeWidth={isHovered ? (isCoreHovered ? '3.5' : '4') : '2'}
                     vectorEffect="non-scaling-stroke"
-                    className={isHovered ? 'flow-line-green-active' : 'flow-line-green'}
+                    className={isHovered ? 'flow-line-blue-active' : 'flow-line-blue'}
                     style={{
                       opacity: isOtherHovered ? 0.2 : 1,
                       transition: 'stroke 0.3s, stroke-width 0.3s, opacity 0.3s',
@@ -381,7 +381,7 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
           {/* Column 3: The Breakthrough (Solution Cards ONLY - Explicit z-20) */}
           <div className="relative z-20 w-full lg:w-[380px] flex flex-col gap-4">
             {/* Mobile-only Solution Header */}
-            <h3 className="lg:hidden text-center text-sm md:text-base font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-2 mt-8 lg:mt-0">
+            <h3 className="lg:hidden text-center text-sm md:text-base font-black uppercase tracking-widest text-[#0A44FF] dark:text-[#6AA2FF] mb-2 mt-8 lg:mt-0">
               Solution
             </h3>
             {solutionCards.map((card) => {
@@ -397,23 +397,23 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
                   onMouseLeave={() => setHoveredId(null)}
                   className={`relative z-20 p-5 md:p-6 rounded-[2rem] border flex items-center gap-4 transition-all duration-300 cursor-pointer transform-gpu ${isSpecificHover
                       ? isDark
-                        ? 'bg-[#13231a] border-emerald-500/80 shadow-lg shadow-emerald-500/10 scale-[1.02] ring-1 ring-emerald-500/40'
-                        : 'bg-[#f0fdf4] border-emerald-800 shadow-lg shadow-emerald-500/10 scale-[1.02] ring-1 ring-emerald-600'
+                        ? 'bg-[#050A1A] border-[#0A44FF]/80 shadow-lg shadow-[#0A44FF]/10 scale-[1.02] ring-1 ring-[#0A44FF]/40'
+                        : 'bg-[#F0F4FF] border-[#0A44FF]/40 shadow-lg shadow-[#0A44FF]/10 scale-[1.02] ring-1 ring-[#0A44FF]/30'
                       : isCoreHovered
                         ? isDark
-                          ? 'bg-[#151c18] border-emerald-500/40'
-                          : 'bg-[#f8faf9] border-emerald-500'
+                          ? 'bg-[#0A1020] border-[#0A44FF]/40'
+                          : 'bg-[#F8FAFF] border-[#0A44FF]'
                         : isOtherHovered
                           ? 'opacity-40 scale-[0.98]'
                           : isDark
-                            ? 'bg-[#161618] border-slate-800 hover:border-emerald-500/40 hover:bg-[#151c18]'
-                            : 'bg-white border-slate-200 shadow-sm hover:border-emerald-500 hover:bg-[#f8faf9]'
+                            ? 'bg-[#161618] border-slate-800 hover:border-[#0A44FF]/40 hover:bg-[#0A1020]'
+                            : 'bg-white border-slate-200 shadow-sm hover:border-[#0A44FF] hover:bg-[#F8FAFF]'
                     }`}
                 >
                   <div
                     className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-300 ${isHovered
-                        ? 'bg-emerald-900 text-white shadow-md shadow-emerald-900/30 scale-105 dark:bg-emerald-500'
-                        : 'bg-emerald-950/15 text-emerald-950 dark:bg-emerald-500/15 dark:text-emerald-400'
+                        ? 'bg-[#0A44FF] text-white shadow-md shadow-[#0A44FF]/30 scale-105 dark:bg-[#0A44FF]'
+                        : 'bg-[#0A44FF]/15 text-[#0A44FF] dark:bg-[#0A44FF]/15 dark:text-[#6AA2FF]'
                       }`}
                   >
                     <Icon size={24} />
@@ -421,7 +421,7 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
                   <div>
                     <h4
                       className={`text-base font-bold mb-0.5 transition-colors ${isHovered
-                          ? 'text-emerald-950 dark:text-emerald-400 font-black'
+                          ? 'text-[#0A44FF] dark:text-[#6AA2FF] font-black'
                           : isDark
                             ? 'text-white'
                             : 'text-slate-900'
