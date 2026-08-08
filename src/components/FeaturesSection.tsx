@@ -6,8 +6,8 @@ interface FeaturesSectionProps {
   isDark: boolean;
 }
 
-const HoverVideo = ({ src, poster, color, isDark }: { src: string, poster: string, color: string, isDark: boolean }) => (
-  <div className={`w-full aspect-video rounded-2xl mb-6 relative overflow-hidden group/video border ${isDark ? 'border-slate-800 bg-slate-900/50' : 'border-slate-200 bg-slate-100'}`}>
+const HoverVideo = ({ src, poster, color, isDark, className = "mb-6" }: { src: string, poster: string, color: string, isDark: boolean, className?: string }) => (
+  <div className={`w-full aspect-video rounded-2xl relative overflow-hidden group/video border ${isDark ? 'border-slate-800 bg-slate-900/50' : 'border-slate-200 bg-slate-100'} ${className}`}>
     <video 
       muted loop playsInline preload="none"
       className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500 scale-105 group-hover:scale-100"
@@ -226,7 +226,8 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Micro 1: Voice Guide */}
-              <div className={`p-4 rounded-xl border ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
+              <div className={`p-4 rounded-xl border flex flex-col ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
+                <HoverVideo src="/assets/clips/extra-voice-guide.mp4" poster="/assets/clips/posters/extra-voice-guide.jpg" color="text-[#0A44FF]" isDark={isDark} className="mb-4" />
                 <div className="flex items-center gap-2 mb-1.5">
                   <Mic size={16} className="text-[#0A44FF] dark:text-[#6AA2FF]"  aria-hidden="true"/>
                   <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Voice Guide</span>
@@ -237,7 +238,8 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               </div>
 
               {/* Micro 2: Highlight Reader */}
-              <div className={`p-4 rounded-xl border ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
+              <div className={`p-4 rounded-xl border flex flex-col ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
+                <HoverVideo src="/assets/clips/extra-highlight.mp4" poster="/assets/clips/posters/extra-highlight.jpg" color="text-[#0A44FF]" isDark={isDark} className="mb-4" />
                 <div className="flex items-center gap-2 mb-1.5">
                   <MousePointer size={16} className="text-[#0A44FF] dark:text-[#6AA2FF]"  aria-hidden="true"/>
                   <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Highlight Reader</span>
@@ -248,7 +250,8 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               </div>
 
               {/* Micro 3: Image Reader */}
-              <div className={`p-4 rounded-xl border ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
+              <div className={`p-4 rounded-xl border flex flex-col ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
+                <HoverVideo src="/assets/clips/extra-image-reader.mp4" poster="/assets/clips/posters/extra-image-reader.jpg" color="text-[#0A44FF]" isDark={isDark} className="mb-4" />
                 <div className="flex items-center gap-2 mb-1.5">
                   <Eye size={16} className="text-[#0A44FF] dark:text-[#6AA2FF]"  aria-hidden="true"/>
                   <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Image Reader</span>
@@ -421,27 +424,31 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {/* Micro 1: Sudden Sound Warning */}
-              <div className={`p-5 rounded-xl border flex flex-col md:flex-row items-start md:items-center justify-between gap-4 ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center shrink-0">
-                    <ShieldAlert size={20}  aria-hidden="true"/>
+              <div className={`p-5 rounded-xl border flex flex-col items-start gap-4 ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
+                <HoverVideo src="/assets/clips/extra-sound-warning.mp4" poster="/assets/clips/posters/extra-sound-warning.jpg" color="text-[#FF7A2F]" isDark={isDark} className="mb-0" />
+                <div className="flex items-center justify-between w-full">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center shrink-0">
+                      <ShieldAlert size={20}  aria-hidden="true"/>
+                    </div>
+                    <div>
+                      <h6 className={`text-sm font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                        Sudden Sound Warning
+                      </h6>
+                      <p className={`text-xs leading-relaxed m-0 mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                        Flashes a visual warning on your screen if a sudden loud noise plays, protecting your ears.
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h6 className={`text-sm font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                      Sudden Sound Warning (Loud Noise Alert)
-                    </h6>
-                    <p className={`text-xs leading-relaxed m-0 mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                      Flashes a visual warning on your screen if a sudden loud noise plays, protecting your ears.
-                    </p>
-                  </div>
+                  <span className="hidden md:inline-flex px-3 py-1 rounded-full text-[10px] font-mono font-bold border bg-rose-500/10 text-rose-500 border-rose-500/20 uppercase tracking-wider shrink-0">
+                    Visual Alert
+                  </span>
                 </div>
-                <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold border bg-rose-500/10 text-rose-500 border-rose-500/20 uppercase tracking-wider shrink-0">
-                  Visual Alert
-                </span>
               </div>
 
               {/* Micro 2: Real-time Audio Visualizer */}
-              <div className={`p-5 rounded-xl border flex flex-col md:flex-row items-start md:items-center justify-between gap-4 ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
+              <div className={`p-5 rounded-xl border flex flex-col items-start gap-4 ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
+                <HoverVideo src="/assets/clips/extra-visualizer.mp4" poster="/assets/clips/posters/extra-visualizer.jpg" color="text-[#FF7A2F]" isDark={isDark} className="mb-0" />
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-[#FF7A2F]/10 text-[#FF7A2F] flex items-center justify-center shrink-0">
                     <Activity size={20}  aria-hidden="true"/>
