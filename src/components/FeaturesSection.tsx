@@ -7,25 +7,45 @@ interface FeaturesSectionProps {
   isDark: boolean;
 }
 
-const HoverVideo = ({ src, poster, color, isDark, className = "mb-6" }: { src: string, poster: string, color: string, isDark: boolean, className?: string }) => (
-  <div className={`w-full aspect-video rounded-2xl relative overflow-hidden group/video border ${isDark ? 'border-slate-800 bg-slate-900/50' : 'border-slate-200 bg-slate-100'} ${className}`}>
-    <video 
-      muted loop playsInline preload="none"
-      className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500 scale-105 group-hover:scale-100"
-      poster={poster}
-      onMouseEnter={(e) => { e.currentTarget.play().catch(() => {}); }}
-      onMouseLeave={(e) => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
-    >
-      <source src={src} type="video/mp4" />
-    </video>
-    <div className="absolute inset-0 flex items-center justify-center pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
-      <div className={`w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-sm ${isDark ? 'bg-black/40' : 'bg-white/60 shadow-lg'}`}>
-        <Play size={20} className={color} fill="currentColor" />
-      </div>
-    </div>
-    <span className={`absolute bottom-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-1 rounded bg-black/60 text-white backdrop-blur-md`}>Preview</span>
-  </div>
-);
+const WatchDemoButton = ({ onClick, theme, isDark, label = "Watch Feature Demo" }: { onClick: () => void, theme: 'visual' | 'auditory', isDark: boolean, label?: string }) => {
+  const isVisual = theme === 'visual';
+  const baseClasses = "w-full py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 font-bold text-sm transition-all duration-300 border mb-6 group/btn";
+  
+  const visualClasses = isDark 
+    ? "bg-[#0A44FF]/10 text-[#6AA2FF] border-[#0A44FF]/20 hover:bg-[#0A44FF]/20 hover:border-[#0A44FF]/40 hover:shadow-[0_0_15px_rgba(10,68,255,0.2)]" 
+    : "bg-[#0A44FF]/5 text-[#0A44FF] border-[#0A44FF]/10 hover:bg-[#0A44FF]/10 hover:border-[#0A44FF]/30 hover:shadow-[0_4px_15px_rgba(10,68,255,0.1)]";
+    
+  const auditoryClasses = isDark
+    ? "bg-[#FF7A2F]/10 text-[#FFC09B] border-[#FF7A2F]/20 hover:bg-[#FF7A2F]/20 hover:border-[#FF7A2F]/40 hover:shadow-[0_0_15px_rgba(255,122,47,0.2)]"
+    : "bg-[#FF7A2F]/5 text-[#FF7A2F] border-[#FF7A2F]/10 hover:bg-[#FF7A2F]/10 hover:border-[#FF7A2F]/30 hover:shadow-[0_4px_15px_rgba(255,122,47,0.1)]";
+
+  return (
+    <button onClick={onClick} className={`${baseClasses} ${isVisual ? visualClasses : auditoryClasses}`}>
+      <Play size={16} fill="currentColor" className="transition-transform group-hover/btn:scale-110" />
+      {label}
+    </button>
+  );
+};
+
+const ExtrasDemoButton = ({ onClick, theme, isDark }: { onClick: () => void, theme: 'visual' | 'auditory', isDark: boolean }) => {
+  const isVisual = theme === 'visual';
+  const baseClasses = "py-1.5 px-3 rounded-lg flex items-center gap-2 font-bold text-xs transition-all duration-300 border group/btn shrink-0";
+  
+  const visualClasses = isDark 
+    ? "bg-[#0A44FF]/10 text-[#6AA2FF] border-[#0A44FF]/20 hover:bg-[#0A44FF]/20 hover:border-[#0A44FF]/40" 
+    : "bg-[#0A44FF]/5 text-[#0A44FF] border-[#0A44FF]/10 hover:bg-[#0A44FF]/10 hover:border-[#0A44FF]/30";
+    
+  const auditoryClasses = isDark
+    ? "bg-[#FF7A2F]/10 text-[#FFC09B] border-[#FF7A2F]/20 hover:bg-[#FF7A2F]/20 hover:border-[#FF7A2F]/40"
+    : "bg-[#FF7A2F]/5 text-[#FF7A2F] border-[#FF7A2F]/10 hover:bg-[#FF7A2F]/10 hover:border-[#FF7A2F]/30";
+
+  return (
+    <button onClick={onClick} className={`${baseClasses} ${isVisual ? visualClasses : auditoryClasses}`}>
+      <Play size={12} fill="currentColor" className="transition-transform group-hover/btn:scale-110" />
+      Watch Demo
+    </button>
+  );
+};
 
 export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
   const [activeVideo, setActiveVideo] = useState<{src: string, title: string, theme: 'visual'|'auditory'} | null>(null);
