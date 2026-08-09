@@ -1,4 +1,5 @@
-import { Mic, Maximize2, Volume2, Ear, BellRing, Sparkles, Download, Eye, Languages, ShieldAlert, MousePointer, Activity, Play } from 'lucide-react';
+import { useState } from 'react';
+import { Mic, Maximize2, Volume2, Ear, BellRing, Sparkles, Download, Eye, Languages, ShieldAlert, MousePointer, Activity, Play, X } from 'lucide-react';
 import { playCardHoverSound } from '../utils/soundSystem';
 import ScrollReveal from './ScrollReveal';
 
@@ -27,8 +28,25 @@ const HoverVideo = ({ src, poster, color, isDark, className = "mb-6" }: { src: s
 );
 
 export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
+  const [activeVideo, setActiveVideo] = useState<{src: string, title: string, theme: 'visual'|'auditory'} | null>(null);
+
   return (
-    <section
+    <>
+      {activeVideo && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setActiveVideo(null)} />
+          <div className={`relative w-full max-w-5xl rounded-3xl overflow-hidden border ${activeVideo.theme === 'visual' ? 'border-[#0A44FF]/50 shadow-[0_0_50px_rgba(10,68,255,0.3)]' : 'border-[#FF7A2F]/50 shadow-[0_0_50px_rgba(255,122,47,0.3)]'} bg-black z-10 animate-in fade-in zoom-in duration-300`}>
+            <div className="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-black/80 to-transparent flex justify-between items-start z-20 pointer-events-none">
+              <h3 className="text-white font-bold tracking-wide pointer-events-auto text-lg drop-shadow-md px-2 py-1 bg-black/40 rounded-lg backdrop-blur-md border border-white/10">{activeVideo.title}</h3>
+              <button onClick={() => setActiveVideo(null)} className="pointer-events-auto p-2 bg-black/50 hover:bg-white/20 rounded-full text-white backdrop-blur-md transition-colors border border-white/10">
+                <X size={24} />
+              </button>
+            </div>
+            <video src={activeVideo.src} autoPlay controls className="w-full aspect-video outline-none" />
+          </div>
+        </div>
+      )}
+      <section
       id="features"
       className={`relative overflow-hidden w-full min-h-screen flex flex-col justify-center py-20 md:py-28 border-t ${isDark ? 'border-slate-800/80' : 'border-slate-200/60'
         }`}
@@ -93,7 +111,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#0A44FF] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
               <div>
-                <HoverVideo src="/assets/clips/voice-nav.mp4" poster="/assets/clips/posters/voice.jpg" color="text-[#0A44FF]" isDark={isDark} />
+                <WatchDemoButton onClick={() => setActiveVideo({src: '/assets/clips/voice-nav.mp4', title: 'Voice Command Navigation', theme: 'visual'})} theme="visual" isDark={isDark} />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] flex items-center justify-center shrink-0">
                     <Mic size={24}  aria-hidden="true"/>
@@ -134,7 +152,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#0A44FF] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
               <div>
-                <HoverVideo src="/assets/clips/screen-reader.mp4" poster="/assets/clips/posters/reader.jpg" color="text-[#0A44FF]" isDark={isDark} />
+                <WatchDemoButton onClick={() => setActiveVideo({src: '/assets/clips/screen-reader.mp4', title: 'Screen Reader (TTS Engine)', theme: 'visual'})} theme="visual" isDark={isDark} />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] flex items-center justify-center shrink-0">
                     <Volume2 size={24}  aria-hidden="true"/>
@@ -173,7 +191,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#0A44FF] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
               <div>
-                <HoverVideo src="/assets/clips/magnifier.mp4" poster="/assets/clips/posters/magnifier.jpg" color="text-[#0A44FF]" isDark={isDark} />
+                <WatchDemoButton onClick={() => setActiveVideo({src: '/assets/clips/magnifier.mp4', title: 'Screen Magnifier', theme: 'visual'})} theme="visual" isDark={isDark} />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] flex items-center justify-center shrink-0">
                     <Maximize2 size={24}  aria-hidden="true"/>
@@ -220,14 +238,14 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
           >
             <div className="flex items-center gap-2 mb-4">
               <Sparkles size={18} className="text-[#0A44FF] dark:text-[#6AA2FF]"  aria-hidden="true"/>
-              <h5 className={`text-sm font-mono font-bold uppercase tracking-wider ${isDark ? 'text-[#6AA2FF]' : 'text-[#0A44FF]'}`}>
+              <h5 className={`text-sm font-mono font-bold uppercase tracking-wider flex-1 ${isDark ? 'text-[#6AA2FF]' : 'text-[#0A44FF]'}`}>
                 Helpful Visual Extras
               </h5>
+              <ExtrasDemoButton onClick={() => setActiveVideo({src: '/assets/clips/visual-extras.mp4', title: 'Helpful Visual Extras Demo', theme: 'visual'})} theme="visual" isDark={isDark} />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Micro 1: Voice Guide */}
               <div className={`p-4 rounded-xl border flex flex-col ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
-                <HoverVideo src="/assets/clips/extra-voice-guide.mp4" poster="/assets/clips/posters/extra-voice-guide.jpg" color="text-[#0A44FF]" isDark={isDark} className="mb-4" />
                 <div className="flex items-center gap-2 mb-1.5">
                   <Mic size={16} className="text-[#0A44FF] dark:text-[#6AA2FF]"  aria-hidden="true"/>
                   <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Voice Guide</span>
@@ -239,7 +257,6 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
 
               {/* Micro 2: Highlight Reader */}
               <div className={`p-4 rounded-xl border flex flex-col ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
-                <HoverVideo src="/assets/clips/extra-highlight.mp4" poster="/assets/clips/posters/extra-highlight.jpg" color="text-[#0A44FF]" isDark={isDark} className="mb-4" />
                 <div className="flex items-center gap-2 mb-1.5">
                   <MousePointer size={16} className="text-[#0A44FF] dark:text-[#6AA2FF]"  aria-hidden="true"/>
                   <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Highlight Reader</span>
@@ -251,7 +268,6 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
 
               {/* Micro 3: Image Reader */}
               <div className={`p-4 rounded-xl border flex flex-col ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
-                <HoverVideo src="/assets/clips/extra-image-reader.mp4" poster="/assets/clips/posters/extra-image-reader.jpg" color="text-[#0A44FF]" isDark={isDark} className="mb-4" />
                 <div className="flex items-center gap-2 mb-1.5">
                   <Eye size={16} className="text-[#0A44FF] dark:text-[#6AA2FF]"  aria-hidden="true"/>
                   <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Image Reader</span>
@@ -291,7 +307,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#FF7A2F] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
               <div>
-                <HoverVideo src="/assets/clips/subtitles.mp4" poster="/assets/clips/posters/subtitles.jpg" color="text-[#FF7A2F]" isDark={isDark} />
+                <WatchDemoButton onClick={() => setActiveVideo({src: '/assets/clips/subtitles.mp4', title: 'Multilingual AI Subtitles', theme: 'auditory'})} theme="auditory" isDark={isDark} />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] flex items-center justify-center shrink-0">
                     <Languages size={24}  aria-hidden="true"/>
@@ -332,7 +348,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#FF7A2F] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
               <div>
-                <HoverVideo src="/assets/clips/focus.mp4" poster="/assets/clips/posters/focus.jpg" color="text-[#FF7A2F]" isDark={isDark} />
+                <WatchDemoButton onClick={() => setActiveVideo({src: '/assets/clips/focus.mp4', title: 'Caption Styling & Focus Mode', theme: 'auditory'})} theme="auditory" isDark={isDark} />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] flex items-center justify-center shrink-0">
                     <Ear size={24}  aria-hidden="true"/>
@@ -371,7 +387,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#FF7A2F] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
               <div>
-                <HoverVideo src="/assets/clips/transcript.mp4" poster="/assets/clips/posters/transcript.jpg" color="text-[#FF7A2F]" isDark={isDark} />
+                <WatchDemoButton onClick={() => setActiveVideo({src: '/assets/clips/transcript.mp4', title: 'Transcript Logging Drawer', theme: 'auditory'})} theme="auditory" isDark={isDark} />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] flex items-center justify-center shrink-0">
                     <Download size={24}  aria-hidden="true"/>
@@ -418,14 +434,14 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
           >
             <div className="flex items-center gap-2 mb-4">
               <BellRing size={18} className="text-[#FF7A2F] dark:text-[#FFC09B]"  aria-hidden="true"/>
-              <h5 className={`text-sm font-mono font-bold uppercase tracking-wider ${isDark ? 'text-[#FFC09B]' : 'text-[#FF7A2F]'}`}>
+              <h5 className={`text-sm font-mono font-bold uppercase tracking-wider flex-1 ${isDark ? 'text-[#FFC09B]' : 'text-[#FF7A2F]'}`}>
                 Helpful Auditory Extras
               </h5>
+              <ExtrasDemoButton onClick={() => setActiveVideo({src: '/assets/clips/auditory-extras.mp4', title: 'Helpful Auditory Extras Demo', theme: 'auditory'})} theme="auditory" isDark={isDark} />
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {/* Micro 1: Sudden Sound Warning */}
               <div className={`p-5 rounded-xl border flex flex-col items-start gap-4 ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
-                <HoverVideo src="/assets/clips/extra-sound-warning.mp4" poster="/assets/clips/posters/extra-sound-warning.jpg" color="text-[#FF7A2F]" isDark={isDark} className="mb-0" />
                 <div className="flex items-center justify-between w-full">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center shrink-0">
@@ -448,7 +464,6 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
 
               {/* Micro 2: Real-time Audio Visualizer */}
               <div className={`p-5 rounded-xl border flex flex-col items-start gap-4 ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
-                <HoverVideo src="/assets/clips/extra-visualizer.mp4" poster="/assets/clips/posters/extra-visualizer.jpg" color="text-[#FF7A2F]" isDark={isDark} className="mb-0" />
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-[#FF7A2F]/10 text-[#FF7A2F] flex items-center justify-center shrink-0">
                     <Activity size={20}  aria-hidden="true"/>
@@ -469,5 +484,6 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
         </div>
       </div>
     </section>
+    </>
   );
 }
