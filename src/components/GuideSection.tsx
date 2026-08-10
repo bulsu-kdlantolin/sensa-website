@@ -78,7 +78,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
         {/* Stacked Layout */}
         <div className="flex flex-col gap-16 items-center">
           {/* COLUMN 1: Quick Installation */}
-          <ScrollReveal delay={100} className="w-full max-w-4xl flex flex-col gap-6">
+          <ScrollReveal delay={100} className="w-full flex flex-col gap-6">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-3">
                 <div
@@ -98,7 +98,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                 </div>
               </div>
             </div>
-
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full items-stretch">
             {/* Step 1: Add to Chrome */}
             <article
               onMouseEnter={playCardHoverSound}
@@ -232,10 +232,11 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                 <span>100% In-Memory Privacy Guarantee • No Server Logs</span>
               </div>
             </article>
+            </div>
           </ScrollReveal>
 
           {/* COLUMN 2: User Walkthrough & Interactive Docks */}
-          <ScrollReveal delay={200} className="w-full max-w-4xl flex flex-col gap-6">
+          <ScrollReveal delay={200} className="w-full flex flex-col gap-6">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-3">
                 <div
@@ -255,7 +256,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                 </div>
               </div>
             </div>
-
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full items-stretch">
             {/* Interactive Voice Onboarding Simulator */}
             <article
               onMouseEnter={playCardHoverSound}
@@ -444,6 +445,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                 </div>
               )}
             </article>
+            </div>
           </ScrollReveal>
         </div>
       </div>
