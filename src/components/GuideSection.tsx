@@ -126,7 +126,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
 
               {/* Chrome Store Preview Badge Box */}
               <div
-                className={`p-4 rounded-2xl border mb-5 flex flex-col sm:flex-row items-center justify-between gap-4 ${
+                className={`p-4 rounded-2xl border mb-5 flex flex-col items-center sm:items-start justify-center gap-4 ${
                   isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'
                 }`}
               >
@@ -187,15 +187,15 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
 
               {/* Simulated Chrome Extensions Toolbar */}
               <div
-                className={`p-3 rounded-xl border flex items-center justify-between font-mono text-xs ${
+                className={`p-3 rounded-xl border flex flex-col items-start gap-3 font-mono text-xs ${
                   isDark ? 'bg-black/50 border-slate-800 text-slate-300' : 'bg-slate-100 border-slate-200 text-slate-700'
                 }`}
               >
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 w-full border-b border-slate-500/20 pb-2 mb-1">
                   <div className="w-3 h-3 rounded-full bg-rose-500/80" />
                   <div className="w-3 h-3 rounded-full bg-amber-500/80" />
                   <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                  <span className="ml-2 opacity-60">chrome://extensions</span>
+                  <span className="ml-2 opacity-60 truncate">chrome://extensions</span>
                 </div>
                 <div className="flex items-center gap-2 bg-purple-500/10 px-3 py-1 rounded-lg border border-purple-500/20 text-purple-400 font-bold">
                   <Pin size={12} className="rotate-45" aria-hidden="true" />
@@ -227,7 +227,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
 
               <InlineLoopVideo src="/assets/clips/install-step3.mp4" poster="/assets/clips/posters/step3.jpg" isDark={isDark} />
 
-              <div className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-3 py-2 rounded-xl border border-emerald-500/20">
+              <div className="flex items-start gap-2 text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-3 py-3 rounded-xl border border-emerald-500/20 leading-relaxed">
                 <ShieldCheck size={16} aria-hidden="true" />
                 <span>100% In-Memory Privacy Guarantee • No Server Logs</span>
               </div>
@@ -286,7 +286,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                   isDark ? 'bg-black/50 border-slate-800' : 'bg-slate-50 border-slate-200'
                 }`}
               >
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col items-start gap-1 mb-2">
                   <div className="flex items-center gap-2">
                     <Mic
                       size={18}
@@ -361,7 +361,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
 
                 {/* Dock Switcher Buttons */}
                 <div
-                  className={`p-1 rounded-xl border flex items-center gap-1 ${
+                  className={`p-1 rounded-xl border flex flex-col sm:flex-row items-stretch gap-1 w-full sm:w-auto ${
                     isDark ? 'bg-black/50 border-slate-800' : 'bg-slate-100 border-slate-200'
                   }`}
                 >
@@ -399,7 +399,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                     The <strong>Visual Control Dock</strong> provides low-vision users with instantaneous text-to-speech, font dyslexia toggles, screen magnification, and voice controls.
                   </p>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  <div className="grid grid-cols-1 gap-3 text-xs">
                     <div
                       className={`p-3 rounded-xl border flex items-center gap-3 ${
                         isDark ? 'bg-black/40 border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-700'
@@ -424,7 +424,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                     The <strong>Auditory Control Dock</strong> streams real-time AI live subtitles, language translation, and audio decibel safety alerts.
                   </p>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  <div className="grid grid-cols-1 gap-3 text-xs">
                     <div
                       className={`p-3 rounded-xl border flex items-center gap-3 ${
                         isDark ? 'bg-black/40 border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-700'
