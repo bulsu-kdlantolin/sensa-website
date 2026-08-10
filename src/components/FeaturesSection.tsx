@@ -7,23 +7,34 @@ interface FeaturesSectionProps {
   isDark: boolean;
 }
 
-const WatchDemoButton = ({ onClick, theme, isDark, label = "Watch Feature Demo" }: { onClick: () => void, theme: 'visual' | 'auditory', isDark: boolean, label?: string }) => {
+const WatchDemoThumbnail = ({ onClick, poster, theme, isDark, label = "Watch Demo" }: { onClick: () => void, poster: string, theme: 'visual' | 'auditory', isDark: boolean, label?: string }) => {
   const isVisual = theme === 'visual';
-  const baseClasses = "w-full py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 font-bold text-sm transition-all duration-300 border mb-6 group/btn";
-  
-  const visualClasses = isDark 
-    ? "bg-[#0A44FF]/10 text-[#6AA2FF] border-[#0A44FF]/20 hover:bg-[#0A44FF]/20 hover:border-[#0A44FF]/40 hover:shadow-[0_0_15px_rgba(10,68,255,0.2)]" 
-    : "bg-[#0A44FF]/5 text-[#0A44FF] border-[#0A44FF]/10 hover:bg-[#0A44FF]/10 hover:border-[#0A44FF]/30 hover:shadow-[0_4px_15px_rgba(10,68,255,0.1)]";
-    
-  const auditoryClasses = isDark
-    ? "bg-[#FF7A2F]/10 text-[#FFC09B] border-[#FF7A2F]/20 hover:bg-[#FF7A2F]/20 hover:border-[#FF7A2F]/40 hover:shadow-[0_0_15px_rgba(255,122,47,0.2)]"
-    : "bg-[#FF7A2F]/5 text-[#FF7A2F] border-[#FF7A2F]/10 hover:bg-[#FF7A2F]/10 hover:border-[#FF7A2F]/30 hover:shadow-[0_4px_15px_rgba(255,122,47,0.1)]";
+  const color = isVisual ? "text-[#0A44FF]" : "text-[#FF7A2F]";
+  const hoverColor = isVisual ? "group-hover/video:bg-[#0A44FF]/20" : "group-hover/video:bg-[#FF7A2F]/20";
+  const glowShadow = isVisual ? "group-hover/video:shadow-[0_0_20px_rgba(10,68,255,0.4)]" : "group-hover/video:shadow-[0_0_20px_rgba(255,122,47,0.4)]";
 
   return (
-    <button onClick={onClick} className={`${baseClasses} ${isVisual ? visualClasses : auditoryClasses}`}>
-      <Play size={16} fill="currentColor" className="transition-transform group-hover/btn:scale-110" />
-      {label}
-    </button>
+    <div 
+      onClick={onClick}
+      className={`w-full aspect-video rounded-2xl mb-6 relative overflow-hidden group/video border cursor-pointer transition-all duration-300 ${isDark ? 'border-slate-800 bg-slate-900/50 hover:border-slate-600' : 'border-slate-200 bg-slate-100 hover:border-slate-400'}`}
+    >
+      <img 
+        src={poster} 
+        alt={label} 
+        className="w-full h-full object-cover opacity-60 group-hover/video:opacity-100 transition-all duration-500 group-hover/video:scale-105"
+      />
+      
+      {/* Central Glass Play Button */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className={`w-14 h-14 rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-300 ${isDark ? 'bg-black/50' : 'bg-white/70 shadow-lg'} ${hoverColor} ${glowShadow} group-hover/video:scale-110`}>
+          <Play size={24} className={`${color} translate-x-[2px]`} fill="currentColor" />
+        </div>
+      </div>
+      
+      <span className={`absolute bottom-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-1 rounded bg-black/60 text-white backdrop-blur-md pointer-events-none transition-all duration-300 group-hover/video:translate-y-2 group-hover/video:opacity-0`}>
+        {label}
+      </span>
+    </div>
   );
 };
 
@@ -131,7 +142,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#0A44FF] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
               <div>
-                <WatchDemoButton onClick={() => setActiveVideo({src: '/assets/clips/voice-nav.mp4', title: 'Voice Command Navigation', theme: 'visual'})} theme="visual" isDark={isDark} />
+                <WatchDemoThumbnail onClick={() => setActiveVideo({src: '/assets/clips/voice-nav.mp4', title: 'Voice Command Navigation', theme: 'visual'})} poster="/assets/clips/posters/voice.jpg" theme="visual" isDark={isDark} label="Voice Navigation" />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] flex items-center justify-center shrink-0">
                     <Mic size={24}  aria-hidden="true"/>
@@ -172,7 +183,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#0A44FF] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
               <div>
-                <WatchDemoButton onClick={() => setActiveVideo({src: '/assets/clips/screen-reader.mp4', title: 'Screen Reader (TTS Engine)', theme: 'visual'})} theme="visual" isDark={isDark} />
+                <WatchDemoThumbnail onClick={() => setActiveVideo({src: '/assets/clips/screen-reader.mp4', title: 'Screen Reader (TTS Engine)', theme: 'visual'})} poster="/assets/clips/posters/reader.jpg" theme="visual" isDark={isDark} label="Screen Reader" />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] flex items-center justify-center shrink-0">
                     <Volume2 size={24}  aria-hidden="true"/>
@@ -211,7 +222,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#0A44FF] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
               <div>
-                <WatchDemoButton onClick={() => setActiveVideo({src: '/assets/clips/magnifier.mp4', title: 'Screen Magnifier', theme: 'visual'})} theme="visual" isDark={isDark} />
+                <WatchDemoThumbnail onClick={() => setActiveVideo({src: '/assets/clips/magnifier.mp4', title: 'Screen Magnifier', theme: 'visual'})} poster="/assets/clips/posters/magnifier.jpg" theme="visual" isDark={isDark} label="Magnifier" />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] flex items-center justify-center shrink-0">
                     <Maximize2 size={24}  aria-hidden="true"/>
@@ -327,7 +338,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#FF7A2F] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
               <div>
-                <WatchDemoButton onClick={() => setActiveVideo({src: '/assets/clips/subtitles.mp4', title: 'Multilingual AI Subtitles', theme: 'auditory'})} theme="auditory" isDark={isDark} />
+                <WatchDemoThumbnail onClick={() => setActiveVideo({src: '/assets/clips/subtitles.mp4', title: 'Multilingual AI Subtitles', theme: 'auditory'})} poster="/assets/clips/posters/subtitles.jpg" theme="auditory" isDark={isDark} label="Subtitles" />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] flex items-center justify-center shrink-0">
                     <Languages size={24}  aria-hidden="true"/>
@@ -368,7 +379,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#FF7A2F] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
               <div>
-                <WatchDemoButton onClick={() => setActiveVideo({src: '/assets/clips/focus.mp4', title: 'Caption Styling & Focus Mode', theme: 'auditory'})} theme="auditory" isDark={isDark} />
+                <WatchDemoThumbnail onClick={() => setActiveVideo({src: '/assets/clips/focus.mp4', title: 'Caption Styling & Focus Mode', theme: 'auditory'})} poster="/assets/clips/posters/focus.jpg" theme="auditory" isDark={isDark} label="Focus Mode" />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] flex items-center justify-center shrink-0">
                     <Ear size={24}  aria-hidden="true"/>
@@ -407,7 +418,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#FF7A2F] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
               <div>
-                <WatchDemoButton onClick={() => setActiveVideo({src: '/assets/clips/transcript.mp4', title: 'Transcript Logging Drawer', theme: 'auditory'})} theme="auditory" isDark={isDark} />
+                <WatchDemoThumbnail onClick={() => setActiveVideo({src: '/assets/clips/transcript.mp4', title: 'Transcript Logging Drawer', theme: 'auditory'})} poster="/assets/clips/posters/transcript.jpg" theme="auditory" isDark={isDark} label="Transcript Log" />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] flex items-center justify-center shrink-0">
                     <Download size={24}  aria-hidden="true"/>
