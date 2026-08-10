@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # Ignore massive video assets
-public/assets/clips/*.mp4
+
