@@ -208,32 +208,31 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                 Upon first click, Sensa speaks a welcome prompt and listens for your spoken mode selection.
               </p>
               <InlineLoopVideo src="/assets/clips/voice-onboarding.mp4" poster="/assets/clips/posters/voice-onboarding.jpg" isDark={isDark} />
-              ) : (
-                <div className="space-y-4">
-                  <p className={`text-xs md:text-sm leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    The <strong>Auditory Control Dock</strong> streams real-time AI live subtitles, language translation, and audio decibel safety alerts.
-                  </p>
+            </article>
 
-                  <div className="grid grid-cols-1 gap-3 text-xs">
-                    <div
-                      className={`p-3 rounded-xl border flex items-center gap-3 ${
-                        isDark ? 'bg-black/40 border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-700'
-                      }`}
-                    >
-                      <Headphones size={16} className="text-[#FF7A2F] shrink-0" />
-                      <span><strong>Live Captions:</strong> Deepgram AI speech-to-text</span>
-                    </div>
-                    <div
-                      className={`p-3 rounded-xl border flex items-center gap-3 ${
-                        isDark ? 'bg-black/40 border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-700'
-                      }`}
-                    >
-                      <Layers size={16} className="text-[#FF7A2F] shrink-0" />
-                      <span><strong>Translation:</strong> 135+ Azure Neural Languages</span>
-                    </div>
-                  </div>
+            {/* Interactive Dock Explorer */}
+            <article
+              onMouseEnter={playCardHoverSound}
+              className={`border rounded-3xl p-6 md:p-7 transition-all duration-300 ${
+                isDark
+                  ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset'
+                  : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-md'
+              }`}
+            >
+              <div className="flex items-center justify-between gap-4 mb-4">
+                <div className="flex items-center gap-3">
+                  <span className="w-8 h-8 rounded-xl bg-[#0A44FF]/20 text-[#0A44FF] dark:text-[#6AA2FF] font-black flex items-center justify-center border border-[#0A44FF]/40 text-sm shrink-0">
+                    2
+                  </span>
+                  <h4 className={`text-lg font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                    Explore Floating Docks
+                  </h4>
                 </div>
-              )}
+              </div>
+              <p className={`text-xs md:text-sm leading-relaxed mb-4 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                The Floating Control Docks provide users with instantaneous text-to-speech, font dyslexia toggles, screen magnification, and real-time AI live subtitles.
+              </p>
+              <InlineLoopVideo src="/assets/clips/docks-explorer.mp4" poster="/assets/clips/posters/docks-explorer.jpg" isDark={isDark} />
             </article>
             </div>
           </ScrollReveal>
