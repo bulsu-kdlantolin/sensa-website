@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Download, MonitorPlay, Mic, ArrowUpRight, ShieldCheck, Pin, Volume2, Eye, Headphones, Layers } from 'lucide-react';
 
 import chromeWebStoreLogo from '../assets/chrome-webstore.svg';
@@ -22,17 +21,6 @@ const InlineLoopVideo = ({ src, poster, isDark }: { src: string, poster: string,
 );
 
 export default function GuideSection({ isDark }: GuideSectionProps) {
-  const [activeDockTab, setActiveDockTab] = useState<'visual' | 'auditory'>('visual');
-  const [simulatedVoiceCommand, setSimulatedVoiceCommand] = useState<string>('Activate Visual Mode');
-  const [isSimulatingMic, setIsSimulatingMic] = useState<boolean>(false);
-
-  const handleSimulateVoice = (command: string) => {
-    setSimulatedVoiceCommand(command);
-    setIsSimulatingMic(true);
-    setTimeout(() => {
-      setIsSimulatingMic(false);
-    }, 2000);
-  };
 
   return (
     <section
@@ -123,43 +111,6 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
               </p>
               
               <InlineLoopVideo src="/assets/clips/install-step1.mp4" poster="/assets/clips/posters/step1.jpg" isDark={isDark} />
-
-              {/* Chrome Store Preview Badge Box */}
-              <div
-                className={`p-4 rounded-2xl border mb-5 flex flex-col items-center sm:items-start justify-center gap-4 ${
-                  isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#0A44FF] to-[#8A56FF] p-0.5 shrink-0 flex items-center justify-center shadow-md">
-                    <img src="/sensa-logo.webp" alt="Sensa" className="w-7 h-7 object-contain" />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>Sensa Extension</span>
-                      <span className="text-[10px] font-mono font-bold text-amber-400">5.0 ★★★★★</span>
-                    </div>
-                    <span className={`text-[11px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                      BulSU Capstone Research • Accessibility
-                    </span>
-                  </div>
-                </div>
-
-                <a
-                  href="https://chromewebstore.google.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold no-underline transition-all duration-300 hover:scale-[1.03] shadow-md ${
-                    isDark
-                      ? 'bg-[#FF7A2F] text-white hover:bg-[#E65C00]'
-                      : 'bg-[#0A44FF] text-white hover:bg-[#0038E0]'
-                  }`}
-                >
-                  <img src={chromeWebStoreLogo} alt="Chrome Web Store" className="w-4 h-4 shrink-0" />
-                  <span>Get Extension</span>
-                  <ArrowUpRight size={14} aria-hidden="true" />
-                </a>
-              </div>
             </article>
 
             {/* Step 2: Pin Extension */}
@@ -184,24 +135,6 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
               </p>
               
               <InlineLoopVideo src="/assets/clips/install-step2.mp4" poster="/assets/clips/posters/step2.jpg" isDark={isDark} />
-
-              {/* Simulated Chrome Extensions Toolbar */}
-              <div
-                className={`p-3 rounded-xl border flex flex-col items-start gap-3 font-mono text-xs ${
-                  isDark ? 'bg-black/50 border-slate-800 text-slate-300' : 'bg-slate-100 border-slate-200 text-slate-700'
-                }`}
-              >
-                <div className="flex items-center gap-2 w-full border-b border-slate-500/20 pb-2 mb-1">
-                  <div className="w-3 h-3 rounded-full bg-rose-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-amber-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                  <span className="ml-2 opacity-60 truncate">chrome://extensions</span>
-                </div>
-                <div className="flex items-center gap-2 bg-purple-500/10 px-3 py-1 rounded-lg border border-purple-500/20 text-purple-400 font-bold">
-                  <Pin size={12} className="rotate-45" aria-hidden="true" />
-                  <span>Sensa Pinned</span>
-                </div>
-              </div>
             </article>
 
             {/* Step 3: Grant Permissions */}
@@ -226,11 +159,6 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
               </p>
 
               <InlineLoopVideo src="/assets/clips/install-step3.mp4" poster="/assets/clips/posters/step3.jpg" isDark={isDark} />
-
-              <div className="flex items-start gap-2 text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-3 py-3 rounded-xl border border-emerald-500/20 leading-relaxed">
-                <ShieldCheck size={16} aria-hidden="true" />
-                <span>100% In-Memory Privacy Guarantee • No Server Logs</span>
-              </div>
             </article>
             </div>
           </ScrollReveal>
@@ -277,147 +205,9 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                 </div>
               </div>
               <p className={`text-xs md:text-sm leading-relaxed mb-4 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                Upon first click, Sensa speaks a welcome prompt and listens for your spoken mode selection. Test the voice triggers below:
+                Upon first click, Sensa speaks a welcome prompt and listens for your spoken mode selection.
               </p>
-
-              {/* Interactive Voice Trigger Test Box */}
-              <div
-                className={`p-4 rounded-2xl border flex flex-col gap-3 ${
-                  isDark ? 'bg-black/50 border-slate-800' : 'bg-slate-50 border-slate-200'
-                }`}
-              >
-                <div className="flex flex-col items-start gap-1 mb-2">
-                  <div className="flex items-center gap-2">
-                    <Mic
-                      size={18}
-                      className={`${
-                        isSimulatingMic
-                          ? 'text-rose-500 animate-pulse'
-                          : isDark
-                          ? 'text-[#6AA2FF]'
-                          : 'text-[#0A44FF]'
-                      }`}
-                    />
-                    <span className={`text-xs font-mono font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                      {isSimulatingMic ? 'Listening...' : 'Voice Command:'}
-                    </span>
-                  </div>
-                  <span className="text-[11px] font-mono text-emerald-400 font-bold">
-                    "{simulatedVoiceCommand}"
-                  </span>
-                </div>
-
-                {/* Voice Command Test Buttons */}
-                <div className="grid grid-cols-2 gap-2 mt-1">
-                  <button
-                    onClick={() => handleSimulateVoice('Activate Visual Mode')}
-                    className={`py-2 px-3 rounded-xl text-xs font-mono font-bold flex items-center justify-center gap-1.5 transition-all duration-200 ${
-                      simulatedVoiceCommand === 'Activate Visual Mode'
-                        ? 'bg-[#0A44FF] text-white shadow-md'
-                        : isDark
-                        ? 'bg-white/5 hover:bg-white/10 text-slate-300'
-                        : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-200'
-                    }`}
-                  >
-                    <Eye size={13} aria-hidden="true" />
-                    <span>Visual Mode</span>
-                  </button>
-
-                  <button
-                    onClick={() => handleSimulateVoice('Activate Auditory Mode')}
-                    className={`py-2 px-3 rounded-xl text-xs font-mono font-bold flex items-center justify-center gap-1.5 transition-all duration-200 ${
-                      simulatedVoiceCommand === 'Activate Auditory Mode'
-                        ? 'bg-[#FF7A2F] text-white shadow-md'
-                        : isDark
-                        ? 'bg-white/5 hover:bg-white/10 text-slate-300'
-                        : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-200'
-                    }`}
-                  >
-                    <Headphones size={13} aria-hidden="true" />
-                    <span>Auditory Mode</span>
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            {/* Interactive Dock Explorer */}
-            <article
-              onMouseEnter={playCardHoverSound}
-              className={`border rounded-3xl p-6 md:p-7 transition-all duration-300 ${
-                isDark
-                  ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset'
-                  : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-md'
-              }`}
-            >
-              <div className="flex items-center justify-between gap-4 mb-4">
-                <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-xl bg-[#0A44FF]/20 text-[#0A44FF] dark:text-[#6AA2FF] font-black flex items-center justify-center border border-[#0A44FF]/40 text-sm shrink-0">
-                    2
-                  </span>
-                  <h4 className={`text-lg font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                    Explore Floating Docks
-                  </h4>
-                </div>
-
-                {/* Dock Switcher Buttons */}
-                <div
-                  className={`p-1 rounded-xl border flex flex-col sm:flex-row items-stretch gap-1 w-full sm:w-auto ${
-                    isDark ? 'bg-black/50 border-slate-800' : 'bg-slate-100 border-slate-200'
-                  }`}
-                >
-                  <button
-                    onClick={() => setActiveDockTab('visual')}
-                    className={`px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all duration-200 ${
-                      activeDockTab === 'visual'
-                        ? 'bg-[#0A44FF] text-white shadow-sm'
-                        : isDark
-                        ? 'text-slate-400 hover:text-white'
-                        : 'text-slate-600 hover:text-slate-900'
-                    }`}
-                  >
-                    Visual Dock
-                  </button>
-                  <button
-                    onClick={() => setActiveDockTab('auditory')}
-                    className={`px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all duration-200 ${
-                      activeDockTab === 'auditory'
-                        ? 'bg-[#FF7A2F] text-white shadow-sm'
-                        : isDark
-                        ? 'text-slate-400 hover:text-white'
-                        : 'text-slate-600 hover:text-slate-900'
-                    }`}
-                  >
-                    Auditory Dock
-                  </button>
-                </div>
-              </div>
-
-              {/* Dynamic Dock Content Box */}
-              {activeDockTab === 'visual' ? (
-                <div className="space-y-4">
-                  <p className={`text-xs md:text-sm leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    The <strong>Visual Control Dock</strong> provides low-vision users with instantaneous text-to-speech, font dyslexia toggles, screen magnification, and voice controls.
-                  </p>
-
-                  <div className="grid grid-cols-1 gap-3 text-xs">
-                    <div
-                      className={`p-3 rounded-xl border flex items-center gap-3 ${
-                        isDark ? 'bg-black/40 border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-700'
-                      }`}
-                    >
-                      <Volume2 size={16} className="text-[#0A44FF] shrink-0" />
-                      <span><strong>TTS Speed:</strong> 0.5x to 2.0x playback controls</span>
-                    </div>
-                    <div
-                      className={`p-3 rounded-xl border flex items-center gap-3 ${
-                        isDark ? 'bg-black/40 border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-700'
-                      }`}
-                    >
-                      <Eye size={16} className="text-[#0A44FF] shrink-0" />
-                      <span><strong>Magnifier:</strong> Instant 2x to 5x screen zoom</span>
-                    </div>
-                  </div>
-                </div>
+              <InlineLoopVideo src="/assets/clips/voice-onboarding.mp4" poster="/assets/clips/posters/voice-onboarding.jpg" isDark={isDark} />
               ) : (
                 <div className="space-y-4">
                   <p className={`text-xs md:text-sm leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
