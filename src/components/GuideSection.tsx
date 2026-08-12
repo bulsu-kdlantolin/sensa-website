@@ -107,8 +107,8 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                     Add to Google Chrome
                   </h4>
                 </div>
-                <div className={`p-2 rounded-full transition-colors ${isDark ? 'bg-white/5 text-slate-400 group-hover:bg-purple-500/20 group-hover:text-purple-400' : 'bg-slate-100 text-slate-500 group-hover:bg-purple-100 group-hover:text-purple-600'}`}>
-                  <Download size={18} aria-hidden="true" />
+                <div className={`transition-colors ${isDark ? 'text-slate-400 group-hover:text-purple-400' : 'text-slate-400 group-hover:text-purple-600'}`}>
+                  <Download size={20} aria-hidden="true" />
                 </div>
               </div>
               <p className={`text-xs md:text-sm leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
