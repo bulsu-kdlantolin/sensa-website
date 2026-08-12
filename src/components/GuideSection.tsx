@@ -1,6 +1,5 @@
-import { Download, MonitorPlay, Mic, ArrowUpRight, ShieldCheck, Pin, Volume2, Eye, Headphones, Layers } from 'lucide-react';
+import { Download, MonitorPlay } from 'lucide-react';
 
-import chromeWebStoreLogo from '../assets/chrome-webstore.svg';
 import { playCardHoverSound } from '../utils/soundSystem';
 import ScrollReveal from './ScrollReveal';
 
