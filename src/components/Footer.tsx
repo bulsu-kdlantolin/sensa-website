@@ -108,7 +108,7 @@ export default function Footer({ isDark }: FooterProps) {
               <div className="flex items-center gap-2 font-mono">
                 <Activity size={14} className="text-[#FF7A2F]" aria-hidden="true" />
                 <span className={isDark ? 'text-slate-400' : 'text-slate-600'}>Last Updated:</span>
-                <span className={`font-semibold ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>July 2026</span>
+                <span className={`font-semibold ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>August 2026</span>
               </div>
             </div>
           </div>

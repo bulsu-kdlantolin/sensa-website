@@ -87,12 +87,15 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full items-stretch">
             {/* Step 1: Add to Chrome */}
-            <article
+            <a
+              href="https://chromewebstore.google.com/"
+              target="_blank"
+              rel="noopener noreferrer"
               onMouseEnter={playCardHoverSound}
-              className={`group border rounded-3xl p-6 md:p-7 transition-all duration-300 relative overflow-hidden ${
+              className={`block cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-purple-500 hover:-translate-y-1 group border rounded-3xl p-6 md:p-7 transition-all duration-300 relative overflow-hidden ${
                 isDark
-                  ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:border-purple-500/50'
-                  : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-md hover:border-purple-300'
+                  ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.15)]'
+                  : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-md hover:border-purple-300 hover:shadow-lg'
               }`}
             >
               <div className="flex items-center justify-between gap-4 mb-4">
@@ -100,7 +103,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                   <span className="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 font-black flex items-center justify-center border border-purple-500/40 text-sm shrink-0">
                     1
                   </span>
-                  <h4 className={`text-lg font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                  <h4 className={`text-lg font-bold m-0 group-hover:text-purple-500 transition-colors ${isDark ? 'text-white' : 'text-slate-900'}`}>
                     Add to Google Chrome
                   </h4>
                 </div>
@@ -110,7 +113,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
               </p>
               
               <InlineLoopVideo src="/assets/clips/install-step1.mp4" poster="/assets/clips/posters/step1.jpg" isDark={isDark} />
-            </article>
+            </a>
 
             {/* Step 2: Pin Extension */}
             <article
