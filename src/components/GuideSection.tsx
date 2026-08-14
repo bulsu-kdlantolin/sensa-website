@@ -1,4 +1,5 @@
-import { Download, MonitorPlay } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { Download, MonitorPlay, Play } from 'lucide-react';
 
 import { playCardHoverSound } from '../utils/soundSystem';
 import ScrollReveal from './ScrollReveal';
@@ -7,17 +8,70 @@ interface GuideSectionProps {
   isDark: boolean;
 }
 
-const InlineLoopVideo = ({ src, poster, isDark }: { src: string, poster: string, isDark: boolean }) => (
-  <div className={`w-full aspect-video rounded-2xl mt-4 mb-5 overflow-hidden border shadow-inner ${isDark ? 'border-slate-800 bg-black/40' : 'border-slate-200 bg-slate-100/50'}`}>
-    <video 
-      autoPlay muted loop playsInline preload="none"
-      className="w-full h-full object-cover opacity-90 mix-blend-luminosity hover:mix-blend-normal hover:opacity-100 transition-all duration-500"
-      poster={poster}
+const HoverGuideVideo = ({ src, poster, isDark }: { src: string; poster: string; isDark: boolean }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+
+  return (
+    <div 
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={`relative w-full aspect-video rounded-2xl mt-4 mb-5 overflow-hidden border shadow-inner group/guidevid cursor-pointer transition-all duration-300 ${
+        isDark ? 'border-slate-800 bg-black/40 hover:border-purple-500/40' : 'border-slate-200 bg-slate-100/50 hover:border-purple-300'
+      }`}
     >
-      <source src={src} type="video/mp4" />
-    </video>
-  </div>
-);
+      <video 
+        ref={videoRef}
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        className={`w-full h-full object-cover transition-all duration-500 ease-out ${
+          isHovered 
+            ? 'scale-105 opacity-100' 
+            : 'scale-100 opacity-90 mix-blend-luminosity'
+        }`}
+        poster={poster}
+      >
+        <source src={src} type="video/mp4" />
+      </video>
+
+      {/* Floating Glass Play Badge (Visible until hovered) */}
+      <div 
+        className={`absolute inset-0 flex items-center justify-center bg-black/25 backdrop-blur-[1px] transition-all duration-300 pointer-events-none ${
+          isHovered ? 'opacity-0 scale-90' : 'opacity-100 scale-100'
+        }`}
+      >
+        <div className="w-12 h-12 rounded-full bg-black/50 border border-white/20 backdrop-blur-md flex items-center justify-center text-white shadow-xl group-hover/guidevid:scale-110 transition-transform">
+          <Play size={20} className="translate-x-[1px] fill-white" />
+        </div>
+      </div>
+
+      <span 
+        className={`absolute bottom-2.5 right-2.5 text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-black/60 text-white/90 backdrop-blur-md pointer-events-none transition-all duration-300 ${
+          isHovered ? 'opacity-0 translate-y-1' : 'opacity-100 translate-y-0'
+        }`}
+      >
+        Hover to play
+      </span>
+    </div>
+  );
+};
 
 export default function GuideSection({ isDark }: GuideSectionProps) {
 
@@ -115,7 +169,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                 Open the Chrome Web Store and click <strong>Add to Chrome</strong>. Sensa compiles safely in seconds with zero configuration required.
               </p>
               
-              <InlineLoopVideo src="/assets/clips/install-step1.mp4" poster="/assets/clips/posters/step1.jpg" isDark={isDark} />
+              <HoverGuideVideo src="/assets/clips/install-step1.mp4" poster="/assets/clips/posters/step1.jpg" isDark={isDark} />
             </a>
 
             {/* Step 2: Pin Extension */}
@@ -139,7 +193,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                 Click the puzzle piece icon <span className="font-mono text-purple-400 font-bold">🧩</span> in your upper-right Chrome bar and click the <strong>Pin</strong> button so Sensa is always 1-click away.
               </p>
               
-              <InlineLoopVideo src="/assets/clips/install-step2.mp4" poster="/assets/clips/posters/step2.jpg" isDark={isDark} />
+              <HoverGuideVideo src="/assets/clips/install-step2.mp4" poster="/assets/clips/posters/step2.jpg" isDark={isDark} />
             </article>
 
             {/* Step 3: Grant Permissions */}
@@ -163,7 +217,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                 Allow microphone access for hands-free voice control and tab audio capture for live AI subtitling.
               </p>
 
-              <InlineLoopVideo src="/assets/clips/install-step3.mp4" poster="/assets/clips/posters/step3.jpg" isDark={isDark} />
+              <HoverGuideVideo src="/assets/clips/install-step3.mp4" poster="/assets/clips/posters/step3.jpg" isDark={isDark} />
             </article>
             </div>
           </ScrollReveal>
@@ -212,7 +266,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
               <p className={`text-xs md:text-sm leading-relaxed mb-4 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                 Upon first click, Sensa speaks a welcome prompt and listens for your spoken mode selection.
               </p>
-              <InlineLoopVideo src="/assets/clips/voice-onboarding.mp4" poster="/assets/clips/posters/voice-onboarding.jpg" isDark={isDark} />
+              <HoverGuideVideo src="/assets/clips/voice-onboarding.mp4" poster="/assets/clips/posters/voice-onboarding.jpg" isDark={isDark} />
             </article>
 
             {/* Interactive Dock Explorer */}
@@ -237,7 +291,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
               <p className={`text-xs md:text-sm leading-relaxed mb-4 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                 The Floating Control Docks provide users with instantaneous text-to-speech, font dyslexia toggles, screen magnification, and real-time AI live subtitles.
               </p>
-              <InlineLoopVideo src="/assets/clips/docks-explorer.mp4" poster="/assets/clips/posters/docks-explorer.jpg" isDark={isDark} />
+              <HoverGuideVideo src="/assets/clips/docks-explorer.mp4" poster="/assets/clips/posters/docks-explorer.jpg" isDark={isDark} />
             </article>
             </div>
           </ScrollReveal>

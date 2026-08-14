@@ -14,14 +14,17 @@ const WatchDemoThumbnail = ({ onClick, poster, theme, isDark, label = "Watch Dem
   const glowShadow = isVisual ? "group-hover/video:shadow-[0_0_20px_rgba(10,68,255,0.4)]" : "group-hover/video:shadow-[0_0_20px_rgba(255,122,47,0.4)]";
 
   return (
-    <div 
+    <button 
+      type="button"
       onClick={onClick}
-      className={`w-full aspect-video rounded-2xl mb-6 relative overflow-hidden group/video border cursor-pointer transition-all duration-300 ${isDark ? 'border-slate-800 bg-slate-900/50 hover:border-slate-600' : 'border-slate-200 bg-slate-100 hover:border-slate-400'}`}
+      className={`w-full aspect-video rounded-2xl mb-6 relative overflow-hidden group/video border cursor-pointer select-none p-0 block text-left transition-all duration-300 focus:outline-none focus-visible:ring-2 ${
+        isVisual ? 'focus-visible:ring-[#0A44FF]' : 'focus-visible:ring-[#FF7A2F]'
+      } ${isDark ? 'border-slate-800 bg-slate-900/50 hover:border-slate-600' : 'border-slate-200 bg-slate-100 hover:border-slate-400'}`}
     >
       <img 
         src={poster} 
         alt={label} 
-        className="w-full h-full object-cover opacity-60 group-hover/video:opacity-100 transition-all duration-500 group-hover/video:scale-105"
+        className="w-full h-full object-cover opacity-60 group-hover/video:opacity-100 transition-all duration-500 group-hover/video:scale-105 pointer-events-none"
       />
       
       {/* Central Glass Play Button */}
@@ -34,25 +37,25 @@ const WatchDemoThumbnail = ({ onClick, poster, theme, isDark, label = "Watch Dem
       <span className={`absolute bottom-3 left-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-1 rounded bg-black/60 text-white backdrop-blur-md pointer-events-none transition-all duration-300 group-hover/video:translate-y-2 group-hover/video:opacity-0`}>
         {label}
       </span>
-    </div>
+    </button>
   );
 };
 
 const ExtrasDemoButton = ({ onClick, theme, isDark }: { onClick: () => void, theme: 'visual' | 'auditory', isDark: boolean }) => {
   const isVisual = theme === 'visual';
-  const baseClasses = "py-1.5 px-3 rounded-lg flex items-center gap-2 font-bold text-xs transition-all duration-300 border group/btn shrink-0";
+  const baseClasses = "py-1.5 px-3 rounded-lg flex items-center gap-2 font-bold text-xs transition-all duration-300 border group/btn shrink-0 cursor-pointer select-none";
   
   const visualClasses = isDark 
     ? "bg-[#0A44FF]/10 text-[#6AA2FF] border-[#0A44FF]/20 hover:bg-[#0A44FF]/20 hover:border-[#0A44FF]/40" 
     : "bg-[#0A44FF]/5 text-[#0A44FF] border-[#0A44FF]/10 hover:bg-[#0A44FF]/10 hover:border-[#0A44FF]/30";
     
   const auditoryClasses = isDark
-    ? "bg-[#FF7A2F]/10 text-[#FFC09B] border-[#FF7A2F]/20 hover:bg-[#FF7A2F]/20 hover:border-[#FF7A2F]/40"
+    ? "bg-[#FF7A2F]/10 text-[#FFC09B] border-[#FF7A2F]/20 hover:bg-[#FF7A2F]/20 hover:border-[#FF7A2F]/40" 
     : "bg-[#FF7A2F]/5 text-[#FF7A2F] border-[#FF7A2F]/10 hover:bg-[#FF7A2F]/10 hover:border-[#FF7A2F]/30";
 
   return (
-    <button onClick={onClick} className={`${baseClasses} ${isVisual ? visualClasses : auditoryClasses}`}>
-      <Play size={12} fill="currentColor" className="transition-transform group-hover/btn:scale-110" />
+    <button type="button" onClick={onClick} className={`${baseClasses} ${isVisual ? visualClasses : auditoryClasses}`}>
+      <Play size={12} fill="currentColor" className="transition-transform group-hover/btn:scale-110 pointer-events-none" />
       Watch Demo
     </button>
   );
