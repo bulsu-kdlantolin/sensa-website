@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mic, Maximize2, Volume2, Ear, BellRing, Sparkles, Download, Eye, Languages, ShieldAlert, MousePointer, Activity, Play, X } from 'lucide-react';
+import { Mic, Maximize2, Volume2, Ear, BellRing, Sparkles, Download, Eye, Languages, ShieldAlert, MousePointer, Activity, Play, X, ChevronDown } from 'lucide-react';
 import { playCardHoverSound } from '../utils/soundSystem';
 import ScrollReveal from './ScrollReveal';
 
@@ -61,8 +61,55 @@ const ExtrasDemoButton = ({ onClick, theme, isDark }: { onClick: () => void, the
   );
 };
 
+const CardExpandToggle = ({
+  isExpanded,
+  onToggle,
+  label = "Feature Details",
+  theme = "visual",
+  isDark
+}: {
+  isExpanded: boolean;
+  onToggle: () => void;
+  label?: string;
+  theme?: "visual" | "auditory";
+  isDark: boolean;
+}) => {
+  const isVisual = theme === 'visual';
+  const activeColor = isVisual
+    ? 'text-[#0A44FF] dark:text-[#6AA2FF] hover:bg-[#0A44FF]/10'
+    : 'text-[#FF7A2F] dark:text-[#FFC09B] hover:bg-[#FF7A2F]/10';
+
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      className={`w-full py-2.5 px-4 rounded-2xl border flex items-center justify-between font-mono text-xs font-bold transition-all duration-300 cursor-pointer select-none ${
+        isDark ? 'bg-white/5 border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-700'
+      } ${activeColor}`}
+      aria-expanded={isExpanded}
+    >
+      <span className="truncate">{isExpanded ? 'Minimize Details' : label}</span>
+      <div className={`p-1 rounded-md shrink-0 transition-transform duration-300 ${isExpanded ? 'rotate-180' : 'rotate-0'}`}>
+        <ChevronDown size={16} />
+      </div>
+    </button>
+  );
+};
+
 export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
   const [activeVideo, setActiveVideo] = useState<{src: string, title: string, theme: 'visual'|'auditory'} | null>(null);
+  const [expandedCards, setExpandedCards] = useState<Record<string, boolean>>({
+    'voice-nav': true,
+    'screen-reader': true,
+    'magnifier': true,
+    'subtitles': true,
+    'focus-mode': true,
+    'transcript': true,
+  });
+
+  const toggleCard = (id: string) => {
+    setExpandedCards(prev => ({ ...prev, [id]: !prev[id] }));
+  };
 
   return (
     <>
@@ -163,37 +210,52 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                 </p>
               </div>
 
-              <div className="mt-auto pt-4">
-                <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="text-xs font-mono font-bold text-[#0A44FF] dark:text-[#6AA2FF] uppercase tracking-wider block mb-2.5">
-                    Supported Commands (19):
-                  </span>
-                  <div className="flex flex-wrap gap-1.5 font-mono text-xs">
-                    {[
-                      '"activate"',
-                      '"deactivate"',
-                      '"read"',
-                      '"stop"',
-                      '"next"',
-                      '"previous"',
-                      '"restart"',
-                      '"sensa"',
-                      '"stop listening"',
-                      '"commands"',
-                      '"reading speed"',
-                      '"increase"',
-                      '"decrease"',
-                      '"settings"',
-                      '"voice guide"',
-                      '"reset"',
-                      '"minimize"',
-                      '"expand"',
-                      '"close"',
-                    ].map((cmd, i) => (
-                      <span key={i} className={`px-2.5 py-1 rounded-lg border text-[11px] font-semibold ${isDark ? 'bg-slate-900 border-slate-700 text-slate-200' : 'bg-white border-slate-300 text-slate-800 shadow-sm'}`}>
-                        {cmd}
-                      </span>
-                    ))}
+              <div className="mt-auto pt-4 w-full">
+                <CardExpandToggle
+                  isExpanded={!!expandedCards['voice-nav']}
+                  onToggle={() => toggleCard('voice-nav')}
+                  label="Supported Commands (19)"
+                  theme="visual"
+                  isDark={isDark}
+                />
+                <div
+                  className={`transition-all duration-500 ease-in-out overflow-hidden ${
+                    expandedCards['voice-nav']
+                      ? 'max-h-[600px] opacity-100 mt-3'
+                      : 'max-h-0 opacity-0 mt-0 pointer-events-none'
+                  }`}
+                >
+                  <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                    <span className="text-xs font-mono font-bold text-[#0A44FF] dark:text-[#6AA2FF] uppercase tracking-wider block mb-2.5">
+                      Supported Commands (19):
+                    </span>
+                    <div className="flex flex-wrap gap-1.5 font-mono text-xs">
+                      {[
+                        '"activate"',
+                        '"deactivate"',
+                        '"read"',
+                        '"stop"',
+                        '"next"',
+                        '"previous"',
+                        '"restart"',
+                        '"sensa"',
+                        '"stop listening"',
+                        '"commands"',
+                        '"reading speed"',
+                        '"increase"',
+                        '"decrease"',
+                        '"settings"',
+                        '"voice guide"',
+                        '"reset"',
+                        '"minimize"',
+                        '"expand"',
+                        '"close"',
+                      ].map((cmd, i) => (
+                        <span key={i} className={`px-2.5 py-1 rounded-lg border text-[11px] font-semibold ${isDark ? 'bg-slate-900 border-slate-700 text-slate-200' : 'bg-white border-slate-300 text-slate-800 shadow-sm'}`}>
+                          {cmd}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -227,30 +289,47 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                 </p>
               </div>
 
-              <div className="mt-auto pt-4 space-y-3">
-                <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="text-xs font-mono font-bold text-[#0A44FF] dark:text-[#6AA2FF] uppercase tracking-wider block mb-2">
-                    Playback Controls:
-                  </span>
-                  <div className="flex flex-wrap gap-1.5 font-mono text-xs mb-2">
-                    {['"read"', '"stop"', '"next"', '"previous"', '"restart"'].map((cmd, i) => (
-                      <span key={i} className={`px-2 py-0.5 rounded border text-[11px] font-semibold ${isDark ? 'bg-slate-900 border-slate-700 text-slate-200' : 'bg-white border-slate-300 text-slate-800 shadow-sm'}`}>
-                        {cmd}
+              <div className="mt-auto pt-4 w-full">
+                <CardExpandToggle
+                  isExpanded={!!expandedCards['screen-reader']}
+                  onToggle={() => toggleCard('screen-reader')}
+                  label="Controls & Customizations"
+                  theme="visual"
+                  isDark={isDark}
+                />
+                <div
+                  className={`transition-all duration-500 ease-in-out overflow-hidden ${
+                    expandedCards['screen-reader']
+                      ? 'max-h-[600px] opacity-100 mt-3'
+                      : 'max-h-0 opacity-0 mt-0 pointer-events-none'
+                  }`}
+                >
+                  <div className="space-y-3">
+                    <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                      <span className="text-xs font-mono font-bold text-[#0A44FF] dark:text-[#6AA2FF] uppercase tracking-wider block mb-2">
+                        Playback Controls:
                       </span>
-                    ))}
-                  </div>
-                  <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    1-click spoken playback with synchronized sentence highlighting.
-                  </p>
-                </div>
+                      <div className="flex flex-wrap gap-1.5 font-mono text-xs mb-2">
+                        {['"read"', '"stop"', '"next"', '"previous"', '"restart"'].map((cmd, i) => (
+                          <span key={i} className={`px-2 py-0.5 rounded border text-[11px] font-semibold ${isDark ? 'bg-slate-900 border-slate-700 text-slate-200' : 'bg-white border-slate-300 text-slate-800 shadow-sm'}`}>
+                            {cmd}
+                          </span>
+                        ))}
+                      </div>
+                      <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                        1-click spoken playback with synchronized sentence highlighting.
+                      </p>
+                    </div>
 
-                <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="text-xs font-mono font-bold text-[#0A44FF] dark:text-[#6AA2FF] uppercase tracking-wider block mb-1.5">
-                    Customizations:
-                  </span>
-                  <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Adjustable speech rate speed (0.5x–2.0x), natural TTS voice selector, automatic page scrolling, and custom highlight colors.
-                  </p>
+                    <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                      <span className="text-xs font-mono font-bold text-[#0A44FF] dark:text-[#6AA2FF] uppercase tracking-wider block mb-1.5">
+                        Customizations:
+                      </span>
+                      <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                        Adjustable speech rate speed (0.5x–2.0x), natural TTS voice selector, automatic page scrolling, and custom highlight colors.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </article>
@@ -283,30 +362,47 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                 </p>
               </div>
 
-              <div className="mt-auto pt-4 space-y-3">
-                <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="text-xs font-mono font-bold text-[#0A44FF] dark:text-[#6AA2FF] uppercase tracking-wider block mb-2">
-                    Instant Zoom Controls:
-                  </span>
-                  <div className="flex flex-wrap gap-1.5 font-mono text-xs mb-2">
-                    {['2.0x Zoom', '3.0x Zoom', '4.0x Zoom', '5.0x Zoom'].map((lvl, i) => (
-                      <span key={i} className={`px-2.5 py-0.5 rounded border text-[11px] font-semibold ${isDark ? 'bg-slate-900 border-slate-700 text-slate-200' : 'bg-white border-slate-300 text-slate-800 shadow-sm'}`}>
-                        {lvl}
+              <div className="mt-auto pt-4 w-full">
+                <CardExpandToggle
+                  isExpanded={!!expandedCards['magnifier']}
+                  onToggle={() => toggleCard('magnifier')}
+                  label="Zoom & Cursor Tracking"
+                  theme="visual"
+                  isDark={isDark}
+                />
+                <div
+                  className={`transition-all duration-500 ease-in-out overflow-hidden ${
+                    expandedCards['magnifier']
+                      ? 'max-h-[600px] opacity-100 mt-3'
+                      : 'max-h-0 opacity-0 mt-0 pointer-events-none'
+                  }`}
+                >
+                  <div className="space-y-3">
+                    <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                      <span className="text-xs font-mono font-bold text-[#0A44FF] dark:text-[#6AA2FF] uppercase tracking-wider block mb-2">
+                        Instant Zoom Controls:
                       </span>
-                    ))}
-                  </div>
-                  <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    High-definition optical zoom scale with instant edge enhancement.
-                  </p>
-                </div>
+                      <div className="flex flex-wrap gap-1.5 font-mono text-xs mb-2">
+                        {['2.0x Zoom', '3.0x Zoom', '4.0x Zoom', '5.0x Zoom'].map((lvl, i) => (
+                          <span key={i} className={`px-2.5 py-0.5 rounded border text-[11px] font-semibold ${isDark ? 'bg-slate-900 border-slate-700 text-slate-200' : 'bg-white border-slate-300 text-slate-800 shadow-sm'}`}>
+                            {lvl}
+                          </span>
+                        ))}
+                      </div>
+                      <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                        High-definition optical zoom scale with instant edge enhancement.
+                      </p>
+                    </div>
 
-                <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="text-xs font-mono font-bold text-[#0A44FF] dark:text-[#6AA2FF] uppercase tracking-wider block mb-1.5">
-                    Smart Cursor Tracking:
-                  </span>
-                  <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                    Intelligent floating lens glides seamlessly across paragraph boundaries without viewport jitter or obscuring adjacent layout.
-                  </p>
+                    <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                      <span className="text-xs font-mono font-bold text-[#0A44FF] dark:text-[#6AA2FF] uppercase tracking-wider block mb-1.5">
+                        Smart Cursor Tracking:
+                      </span>
+                      <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                        Intelligent floating lens glides seamlessly across paragraph boundaries without viewport jitter or obscuring adjacent layout.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </article>
@@ -410,16 +506,31 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                 </p>
               </div>
 
-              <div className="mt-auto pt-2">
-                <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <div className="space-y-3 text-xs font-mono">
-                    <div className="flex justify-between items-center pb-2 border-b border-slate-700/50">
-                      <span className={isDark ? 'text-slate-400' : 'text-slate-600'}>Spoken Audio:</span>
-                      <span className="font-bold text-[#FF7A2F] dark:text-[#FFC09B]">45+ Languages</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className={isDark ? 'text-slate-400' : 'text-slate-600'}>Translation Target:</span>
-                      <span className="font-bold text-[#FF7A2F] dark:text-[#FFC09B]">135+ Languages</span>
+              <div className="mt-auto pt-4 w-full">
+                <CardExpandToggle
+                  isExpanded={!!expandedCards['subtitles']}
+                  onToggle={() => toggleCard('subtitles')}
+                  label="Language Matrix Details"
+                  theme="auditory"
+                  isDark={isDark}
+                />
+                <div
+                  className={`transition-all duration-500 ease-in-out overflow-hidden ${
+                    expandedCards['subtitles']
+                      ? 'max-h-[600px] opacity-100 mt-3'
+                      : 'max-h-0 opacity-0 mt-0 pointer-events-none'
+                  }`}
+                >
+                  <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                    <div className="space-y-3 text-xs font-mono">
+                      <div className="flex justify-between items-center pb-2 border-b border-slate-700/50">
+                        <span className={isDark ? 'text-slate-400' : 'text-slate-600'}>Spoken Audio:</span>
+                        <span className="font-bold text-[#FF7A2F] dark:text-[#FFC09B]">45+ Languages</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className={isDark ? 'text-slate-400' : 'text-slate-600'}>Translation Target:</span>
+                        <span className="font-bold text-[#FF7A2F] dark:text-[#FFC09B]">135+ Languages</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -454,14 +565,39 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                 </p>
               </div>
 
-              <div className="mt-auto pt-2 space-y-2 text-xs">
-                <div className={`p-3 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="font-bold text-[#FF7A2F] dark:text-[#FFC09B] block mb-0.5">Custom Styling:</span>
-                  <p className={`m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Adjust text size, opacity, font family (100+ Google Fonts), & colors.</p>
-                </div>
-                <div className={`p-3 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="font-bold text-[#FF7A2F] dark:text-[#FFC09B] block mb-0.5">Focus Mode:</span>
-                  <p className={`m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Dims surrounding webpage clutter to focus entirely on live subtitles.</p>
+              <div className="mt-auto pt-4 w-full">
+                <CardExpandToggle
+                  isExpanded={!!expandedCards['focus-mode']}
+                  onToggle={() => toggleCard('focus-mode')}
+                  label="Custom Styling & Focus"
+                  theme="auditory"
+                  isDark={isDark}
+                />
+                <div
+                  className={`transition-all duration-500 ease-in-out overflow-hidden ${
+                    expandedCards['focus-mode']
+                      ? 'max-h-[600px] opacity-100 mt-3'
+                      : 'max-h-0 opacity-0 mt-0 pointer-events-none'
+                  }`}
+                >
+                  <div className="space-y-3">
+                    <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                      <span className="text-xs font-mono font-bold text-[#FF7A2F] dark:text-[#FFC09B] uppercase tracking-wider block mb-1.5">
+                        Custom Subtitle Styling:
+                      </span>
+                      <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                        Adjust font size, background opacity, font family (100+ Google Fonts catalog), and text color themes.
+                      </p>
+                    </div>
+                    <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                      <span className="text-xs font-mono font-bold text-[#FF7A2F] dark:text-[#FFC09B] uppercase tracking-wider block mb-1.5">
+                        Focus Mode Dimming:
+                      </span>
+                      <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                        Dims surrounding webpage distractions to focus completely on live streaming subtitle output.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </article>
@@ -494,22 +630,37 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                 </p>
               </div>
 
-              <div className="mt-auto pt-2">
-                <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <ul className="space-y-2 text-xs m-0 p-0 list-none">
-                    <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#FF7A2F]" />
-                      <span className={isDark ? 'text-slate-300' : 'text-slate-700'}><strong>Complete History:</strong> Live scrolling transcript drawer</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#FF7A2F]" />
-                      <span className={isDark ? 'text-slate-300' : 'text-slate-700'}><strong>Dual Export:</strong> Save original & translated logs</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#FF7A2F]" />
-                      <span className={isDark ? 'text-slate-300' : 'text-slate-700'}><strong>1-Click Download:</strong> Export as .txt document</span>
-                    </li>
-                  </ul>
+              <div className="mt-auto pt-4 w-full">
+                <CardExpandToggle
+                  isExpanded={!!expandedCards['transcript']}
+                  onToggle={() => toggleCard('transcript')}
+                  label="Export & Logging Options"
+                  theme="auditory"
+                  isDark={isDark}
+                />
+                <div
+                  className={`transition-all duration-500 ease-in-out overflow-hidden ${
+                    expandedCards['transcript']
+                      ? 'max-h-[600px] opacity-100 mt-3'
+                      : 'max-h-0 opacity-0 mt-0 pointer-events-none'
+                  }`}
+                >
+                  <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                    <ul className="space-y-2 text-xs m-0 p-0 list-none">
+                      <li className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#FF7A2F]" />
+                        <span className={isDark ? 'text-slate-300' : 'text-slate-700'}><strong>Complete History:</strong> Live scrolling transcript drawer</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#FF7A2F]" />
+                        <span className={isDark ? 'text-slate-300' : 'text-slate-700'}><strong>Dual Export:</strong> Save original & translated logs</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#FF7A2F]" />
+                        <span className={isDark ? 'text-slate-300' : 'text-slate-700'}><strong>1-Click Download:</strong> Export as .txt document</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </article>
