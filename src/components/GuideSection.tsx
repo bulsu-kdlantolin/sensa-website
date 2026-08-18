@@ -289,7 +289,7 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
                 </div>
               </div>
               <p className={`text-xs md:text-sm leading-relaxed mb-4 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                The Floating Control Docks provide users with instantaneous text-to-speech, font dyslexia toggles, screen magnification, and real-time AI live subtitles.
+                The Floating Control Docks provide users with instantaneous text-to-speech, customizable fonts, screen magnification, real-time AI live subtitles, and many more.
               </p>
               <HoverGuideVideo src="/assets/clips/docks-explorer.mp4" poster="/assets/clips/posters/docks-explorer.jpg" isDark={isDark} />
             </article>

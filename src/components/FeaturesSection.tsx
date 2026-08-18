@@ -166,7 +166,27 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                     Supported Commands:
                   </span>
                   <div className="flex flex-wrap gap-1.5 font-mono text-xs">
-                    {['"read"', '"stop"', '"next"', '"previous"', '"faster"', '"slower"', '"magnifier"'].map((cmd, i) => (
+                    {[
+                      '"read"',
+                      '"stop"',
+                      '"next"',
+                      '"previous"',
+                      '"restart"',
+                      '"activate"',
+                      '"deactivate"',
+                      '"sensa"',
+                      '"stop listening"',
+                      '"commands"',
+                      '"reading speed"',
+                      '"increase"',
+                      '"decrease"',
+                      '"settings"',
+                      '"voice guide"',
+                      '"reset"',
+                      '"minimize"',
+                      '"expand"',
+                      '"close"',
+                    ].map((cmd, i) => (
                       <span key={i} className={`px-2 py-0.5 rounded border ${isDark ? 'bg-slate-900 border-slate-700 text-slate-300' : 'bg-white border-slate-300 text-slate-700'}`}>
                         {cmd}
                       </span>
