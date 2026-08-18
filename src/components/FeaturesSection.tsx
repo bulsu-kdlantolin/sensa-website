@@ -64,33 +64,31 @@ const ExtrasDemoButton = ({ onClick, theme, isDark }: { onClick: () => void, the
 const CardExpandToggle = ({
   isExpanded,
   onToggle,
-  label = "Feature Details",
   theme = "visual",
   isDark
 }: {
   isExpanded: boolean;
   onToggle: () => void;
-  label?: string;
   theme?: "visual" | "auditory";
   isDark: boolean;
 }) => {
   const isVisual = theme === 'visual';
   const activeColor = isVisual
-    ? 'text-[#0A44FF] dark:text-[#6AA2FF] hover:bg-[#0A44FF]/10'
-    : 'text-[#FF7A2F] dark:text-[#FFC09B] hover:bg-[#FF7A2F]/10';
+    ? 'text-[#0A44FF] dark:text-[#6AA2FF] hover:bg-[#0A44FF]/10 hover:border-[#0A44FF]/30'
+    : 'text-[#FF7A2F] dark:text-[#FFC09B] hover:bg-[#FF7A2F]/10 hover:border-[#FF7A2F]/30';
 
   return (
     <button
       type="button"
       onClick={onToggle}
-      className={`w-full py-2.5 px-4 rounded-2xl border flex items-center justify-between font-mono text-xs font-bold transition-all duration-300 cursor-pointer select-none ${
+      className={`w-full py-2.5 px-4 rounded-xl border flex items-center justify-center gap-2 font-mono text-xs font-bold transition-all duration-300 cursor-pointer select-none ${
         isDark ? 'bg-white/5 border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-700'
       } ${activeColor}`}
       aria-expanded={isExpanded}
     >
-      <span className="truncate">{isExpanded ? 'Minimize Details' : label}</span>
-      <div className={`p-1 rounded-md shrink-0 transition-transform duration-300 ${isExpanded ? 'rotate-180' : 'rotate-0'}`}>
-        <ChevronDown size={16} />
+      <span>{isExpanded ? 'Minimize Details' : 'Expand Details'}</span>
+      <div className={`p-0.5 rounded transition-transform duration-300 ${isExpanded ? 'rotate-180' : 'rotate-0'}`}>
+        <ChevronDown size={15} />
       </div>
     </button>
   );
@@ -98,14 +96,7 @@ const CardExpandToggle = ({
 
 export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
   const [activeVideo, setActiveVideo] = useState<{src: string, title: string, theme: 'visual'|'auditory'} | null>(null);
-  const [expandedCards, setExpandedCards] = useState<Record<string, boolean>>({
-    'voice-nav': true,
-    'screen-reader': true,
-    'magnifier': true,
-    'subtitles': true,
-    'focus-mode': true,
-    'transcript': true,
-  });
+  const [expandedCards, setExpandedCards] = useState<Record<string, boolean>>({});
 
   const toggleCard = (id: string) => {
     setExpandedCards(prev => ({ ...prev, [id]: !prev[id] }));
@@ -211,18 +202,11 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               </div>
 
               <div className="mt-auto pt-4 w-full">
-                <CardExpandToggle
-                  isExpanded={!!expandedCards['voice-nav']}
-                  onToggle={() => toggleCard('voice-nav')}
-                  label="Supported Commands (19)"
-                  theme="visual"
-                  isDark={isDark}
-                />
                 <div
                   className={`transition-all duration-500 ease-in-out overflow-hidden ${
                     expandedCards['voice-nav']
-                      ? 'max-h-[600px] opacity-100 mt-3'
-                      : 'max-h-0 opacity-0 mt-0 pointer-events-none'
+                      ? 'max-h-[600px] opacity-100 mb-3'
+                      : 'max-h-0 opacity-0 mb-0 pointer-events-none'
                   }`}
                 >
                   <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
@@ -258,6 +242,13 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                     </div>
                   </div>
                 </div>
+
+                <CardExpandToggle
+                  isExpanded={!!expandedCards['voice-nav']}
+                  onToggle={() => toggleCard('voice-nav')}
+                  theme="visual"
+                  isDark={isDark}
+                />
               </div>
             </article>
 
@@ -290,18 +281,11 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               </div>
 
               <div className="mt-auto pt-4 w-full">
-                <CardExpandToggle
-                  isExpanded={!!expandedCards['screen-reader']}
-                  onToggle={() => toggleCard('screen-reader')}
-                  label="Controls & Customizations"
-                  theme="visual"
-                  isDark={isDark}
-                />
                 <div
                   className={`transition-all duration-500 ease-in-out overflow-hidden ${
                     expandedCards['screen-reader']
-                      ? 'max-h-[600px] opacity-100 mt-3'
-                      : 'max-h-0 opacity-0 mt-0 pointer-events-none'
+                      ? 'max-h-[600px] opacity-100 mb-3'
+                      : 'max-h-0 opacity-0 mb-0 pointer-events-none'
                   }`}
                 >
                   <div className="space-y-3">
@@ -331,6 +315,13 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                     </div>
                   </div>
                 </div>
+
+                <CardExpandToggle
+                  isExpanded={!!expandedCards['screen-reader']}
+                  onToggle={() => toggleCard('screen-reader')}
+                  theme="visual"
+                  isDark={isDark}
+                />
               </div>
             </article>
 
@@ -363,18 +354,11 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               </div>
 
               <div className="mt-auto pt-4 w-full">
-                <CardExpandToggle
-                  isExpanded={!!expandedCards['magnifier']}
-                  onToggle={() => toggleCard('magnifier')}
-                  label="Zoom & Cursor Tracking"
-                  theme="visual"
-                  isDark={isDark}
-                />
                 <div
                   className={`transition-all duration-500 ease-in-out overflow-hidden ${
                     expandedCards['magnifier']
-                      ? 'max-h-[600px] opacity-100 mt-3'
-                      : 'max-h-0 opacity-0 mt-0 pointer-events-none'
+                      ? 'max-h-[600px] opacity-100 mb-3'
+                      : 'max-h-0 opacity-0 mb-0 pointer-events-none'
                   }`}
                 >
                   <div className="space-y-3">
@@ -404,6 +388,13 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                     </div>
                   </div>
                 </div>
+
+                <CardExpandToggle
+                  isExpanded={!!expandedCards['magnifier']}
+                  onToggle={() => toggleCard('magnifier')}
+                  theme="visual"
+                  isDark={isDark}
+                />
               </div>
             </article>
           </div>
@@ -507,18 +498,11 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               </div>
 
               <div className="mt-auto pt-4 w-full">
-                <CardExpandToggle
-                  isExpanded={!!expandedCards['subtitles']}
-                  onToggle={() => toggleCard('subtitles')}
-                  label="Language Matrix Details"
-                  theme="auditory"
-                  isDark={isDark}
-                />
                 <div
                   className={`transition-all duration-500 ease-in-out overflow-hidden ${
                     expandedCards['subtitles']
-                      ? 'max-h-[600px] opacity-100 mt-3'
-                      : 'max-h-0 opacity-0 mt-0 pointer-events-none'
+                      ? 'max-h-[600px] opacity-100 mb-3'
+                      : 'max-h-0 opacity-0 mb-0 pointer-events-none'
                   }`}
                 >
                   <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
@@ -534,6 +518,13 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                     </div>
                   </div>
                 </div>
+
+                <CardExpandToggle
+                  isExpanded={!!expandedCards['subtitles']}
+                  onToggle={() => toggleCard('subtitles')}
+                  theme="auditory"
+                  isDark={isDark}
+                />
               </div>
             </article>
 
@@ -566,18 +557,11 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               </div>
 
               <div className="mt-auto pt-4 w-full">
-                <CardExpandToggle
-                  isExpanded={!!expandedCards['focus-mode']}
-                  onToggle={() => toggleCard('focus-mode')}
-                  label="Custom Styling & Focus"
-                  theme="auditory"
-                  isDark={isDark}
-                />
                 <div
                   className={`transition-all duration-500 ease-in-out overflow-hidden ${
                     expandedCards['focus-mode']
-                      ? 'max-h-[600px] opacity-100 mt-3'
-                      : 'max-h-0 opacity-0 mt-0 pointer-events-none'
+                      ? 'max-h-[600px] opacity-100 mb-3'
+                      : 'max-h-0 opacity-0 mb-0 pointer-events-none'
                   }`}
                 >
                   <div className="space-y-3">
@@ -599,6 +583,13 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                     </div>
                   </div>
                 </div>
+
+                <CardExpandToggle
+                  isExpanded={!!expandedCards['focus-mode']}
+                  onToggle={() => toggleCard('focus-mode')}
+                  theme="auditory"
+                  isDark={isDark}
+                />
               </div>
             </article>
 
@@ -631,18 +622,11 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               </div>
 
               <div className="mt-auto pt-4 w-full">
-                <CardExpandToggle
-                  isExpanded={!!expandedCards['transcript']}
-                  onToggle={() => toggleCard('transcript')}
-                  label="Export & Logging Options"
-                  theme="auditory"
-                  isDark={isDark}
-                />
                 <div
                   className={`transition-all duration-500 ease-in-out overflow-hidden ${
                     expandedCards['transcript']
-                      ? 'max-h-[600px] opacity-100 mt-3'
-                      : 'max-h-0 opacity-0 mt-0 pointer-events-none'
+                      ? 'max-h-[600px] opacity-100 mb-3'
+                      : 'max-h-0 opacity-0 mb-0 pointer-events-none'
                   }`}
                 >
                   <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
@@ -662,6 +646,13 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                     </ul>
                   </div>
                 </div>
+
+                <CardExpandToggle
+                  isExpanded={!!expandedCards['transcript']}
+                  onToggle={() => toggleCard('transcript')}
+                  theme="auditory"
+                  isDark={isDark}
+                />
               </div>
             </article>
           </div>
