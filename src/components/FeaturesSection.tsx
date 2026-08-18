@@ -138,17 +138,18 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             {/* Card 1: Voice Command Navigation */}
             <article
               onMouseEnter={playCardHoverSound}
-              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
+              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden h-full ${isDark
                   ? 'bg-[#161618] border-slate-800 hover:border-[#0A44FF]/70 hover:shadow-[0_0_35px_rgba(10,68,255,0.2)]'
                   : 'bg-white border-slate-200/80 shadow-sm hover:border-[#0A44FF]/50 hover:shadow-[0_12px_35px_rgba(10,68,255,0.12)]'
                 }`}
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#0A44FF] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
-              <div>
+              
+              <div className="flex flex-col flex-1">
                 <WatchDemoThumbnail onClick={() => setActiveVideo({src: '/assets/clips/voice-nav.mp4', title: 'Voice Command Navigation', theme: 'visual'})} poster="/assets/clips/posters/voice.jpg" theme="visual" isDark={isDark} label="Voice Navigation" />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] flex items-center justify-center shrink-0">
-                    <Mic size={24}  aria-hidden="true"/>
+                    <Mic size={24} aria-hidden="true"/>
                   </div>
                   <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold border bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] border-[#0A44FF]/20 uppercase tracking-wider">
                     Voice Recognition
@@ -160,20 +161,25 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                 <p className={`text-sm leading-relaxed mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                   Control the website using just your voice. Our smart system understands what you say, even if you don't say the command perfectly.
                 </p>
+              </div>
 
+              <div className="mt-auto pt-2">
                 <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="text-xs font-mono font-bold text-[#0A44FF] dark:text-[#6AA2FF] uppercase tracking-wider block mb-2">
-                    Supported Commands:
-                  </span>
-                  <div className="flex flex-wrap gap-1.5 font-mono text-xs">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-mono font-bold text-[#0A44FF] dark:text-[#6AA2FF] uppercase tracking-wider">
+                      Supported Commands:
+                    </span>
+                    <span className="text-[10px] font-mono text-slate-400">19 triggers</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5 font-mono text-xs max-h-28 overflow-y-auto pr-1">
                     {[
+                      '"activate"',
+                      '"deactivate"',
                       '"read"',
                       '"stop"',
                       '"next"',
                       '"previous"',
                       '"restart"',
-                      '"activate"',
-                      '"deactivate"',
                       '"sensa"',
                       '"stop listening"',
                       '"commands"',
@@ -187,7 +193,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                       '"expand"',
                       '"close"',
                     ].map((cmd, i) => (
-                      <span key={i} className={`px-2 py-0.5 rounded border ${isDark ? 'bg-slate-900 border-slate-700 text-slate-300' : 'bg-white border-slate-300 text-slate-700'}`}>
+                      <span key={i} className={`px-2 py-0.5 rounded border text-[11px] ${isDark ? 'bg-slate-900 border-slate-700 text-slate-300' : 'bg-white border-slate-300 text-slate-700'}`}>
                         {cmd}
                       </span>
                     ))}
@@ -199,17 +205,18 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             {/* Card 2: Screen Reader (Text-to-Speech) */}
             <article
               onMouseEnter={playCardHoverSound}
-              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
+              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden h-full ${isDark
                   ? 'bg-[#161618] border-slate-800 hover:border-[#0A44FF]/70 hover:shadow-[0_0_35px_rgba(10,68,255,0.2)]'
                   : 'bg-white border-slate-200/80 shadow-sm hover:border-[#0A44FF]/50 hover:shadow-[0_12px_35px_rgba(10,68,255,0.12)]'
                 }`}
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#0A44FF] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
-              <div>
+              
+              <div className="flex flex-col flex-1">
                 <WatchDemoThumbnail onClick={() => setActiveVideo({src: '/assets/clips/screen-reader.mp4', title: 'Screen Reader (TTS Engine)', theme: 'visual'})} poster="/assets/clips/posters/reader.jpg" theme="visual" isDark={isDark} label="Screen Reader" />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] flex items-center justify-center shrink-0">
-                    <Volume2 size={24}  aria-hidden="true"/>
+                    <Volume2 size={24} aria-hidden="true"/>
                   </div>
                   <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold border bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] border-[#0A44FF]/20 uppercase tracking-wider">
                     Text-to-Speech
@@ -221,16 +228,16 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                 <p className={`text-sm leading-relaxed mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                   A smart reader that reads the webpage out loud to you. It highlights each paragraph as it reads so you never lose your place.
                 </p>
+              </div>
 
-                <div className="space-y-3 text-xs">
-                  <div className={`p-3 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                    <span className="font-bold text-[#0A44FF] dark:text-[#6AA2FF] block mb-1">Playback Controls:</span>
-                    <p className={`m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Read, Stop, Next, Previous, & Restart paragraph.</p>
-                  </div>
-                  <div className={`p-3 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                    <span className="font-bold text-[#0A44FF] dark:text-[#6AA2FF] block mb-1">Customizations:</span>
-                    <p className={`m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Speech rate speed, TTS voice selector, auto-scrolling, & paragraph highlight colors.</p>
-                  </div>
+              <div className="mt-auto pt-2 space-y-2 text-xs">
+                <div className={`p-3 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                  <span className="font-bold text-[#0A44FF] dark:text-[#6AA2FF] block mb-0.5">Playback Controls:</span>
+                  <p className={`m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Read, Stop, Next, Previous, & Restart paragraph.</p>
+                </div>
+                <div className={`p-3 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                  <span className="font-bold text-[#0A44FF] dark:text-[#6AA2FF] block mb-0.5">Customizations:</span>
+                  <p className={`m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Speech rate speed, TTS voice selector, & focus highlights.</p>
                 </div>
               </div>
             </article>
@@ -238,17 +245,18 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             {/* Card 3: Screen Magnifier */}
             <article
               onMouseEnter={playCardHoverSound}
-              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
+              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden h-full ${isDark
                   ? 'bg-[#161618] border-slate-800 hover:border-[#0A44FF]/70 hover:shadow-[0_0_35px_rgba(10,68,255,0.2)]'
                   : 'bg-white border-slate-200/80 shadow-sm hover:border-[#0A44FF]/50 hover:shadow-[0_12px_35px_rgba(10,68,255,0.12)]'
                 }`}
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#0A44FF] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
-              <div>
+              
+              <div className="flex flex-col flex-1">
                 <WatchDemoThumbnail onClick={() => setActiveVideo({src: '/assets/clips/magnifier.mp4', title: 'Screen Magnifier', theme: 'visual'})} poster="/assets/clips/posters/magnifier.jpg" theme="visual" isDark={isDark} label="Magnifier" />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] flex items-center justify-center shrink-0">
-                    <Maximize2 size={24}  aria-hidden="true"/>
+                    <Maximize2 size={24} aria-hidden="true"/>
                   </div>
                   <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold border bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] border-[#0A44FF]/20 uppercase tracking-wider">
                     Magnifying Glass
@@ -258,24 +266,18 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                   Screen Magnifier
                 </h4>
                 <p className={`text-sm leading-relaxed mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  A floating magnifying glass that helps you read small text easily.
+                  A floating magnifying glass that helps you read small text easily with smooth cursor tracking and zoom.
                 </p>
+              </div>
 
-                <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <ul className="space-y-2 text-xs m-0 p-0 list-none">
-                    <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#0A44FF]" />
-                      <span className={isDark ? 'text-slate-300' : 'text-slate-700'}><strong>Instant Display:</strong> Appears the second you need it.</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#0A44FF]" />
-                      <span className={isDark ? 'text-slate-300' : 'text-slate-700'}><strong>Smart Tracking:</strong> Follows the text you are currently reading.</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#0A44FF]" />
-                      <span className={isDark ? 'text-slate-300' : 'text-slate-700'}><strong>Adjustable Zoom:</strong> Make text as big as you need.</span>
-                    </li>
-                  </ul>
+              <div className="mt-auto pt-2 space-y-2 text-xs">
+                <div className={`p-3 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                  <span className="font-bold text-[#0A44FF] dark:text-[#6AA2FF] block mb-0.5">Instant Zoom Controls:</span>
+                  <p className={`m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Adjust magnification scale from 2x to 5x dynamically.</p>
+                </div>
+                <div className={`p-3 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                  <span className="font-bold text-[#0A44FF] dark:text-[#6AA2FF] block mb-0.5">Smart Cursor Tracking:</span>
+                  <p className={`m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Glides effortlessly with reading focus without jitter.</p>
                 </div>
               </div>
             </article>
@@ -354,17 +356,18 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             {/* Card 1: Multilingual Language Engine */}
             <article
               onMouseEnter={playCardHoverSound}
-              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
+              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden h-full ${isDark
                   ? 'bg-[#161618] border-slate-800 hover:border-[#FF7A2F]/70 hover:shadow-[0_0_35px_rgba(255,122,47,0.2)]'
                   : 'bg-white border-slate-200/80 shadow-sm hover:border-[#FF7A2F]/50 hover:shadow-[0_12px_35px_rgba(255,122,47,0.12)]'
                 }`}
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#FF7A2F] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
-              <div>
+              
+              <div className="flex flex-col flex-1">
                 <WatchDemoThumbnail onClick={() => setActiveVideo({src: '/assets/clips/subtitles.mp4', title: 'Multilingual AI Subtitles', theme: 'auditory'})} poster="/assets/clips/posters/subtitles.jpg" theme="auditory" isDark={isDark} label="Subtitles" />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] flex items-center justify-center shrink-0">
-                    <Languages size={24}  aria-hidden="true"/>
+                    <Languages size={24} aria-hidden="true"/>
                   </div>
                   <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold border bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] border-[#FF7A2F]/20 uppercase tracking-wider">
                     Language Matrix
@@ -376,7 +379,9 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                 <p className={`text-sm leading-relaxed mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                   Instantly turns any spoken audio into subtitles and translates it into your preferred language.
                 </p>
+              </div>
 
+              <div className="mt-auto pt-2">
                 <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
                   <div className="space-y-3 text-xs font-mono">
                     <div className="flex justify-between items-center pb-2 border-b border-slate-700/50">
@@ -395,17 +400,18 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             {/* Card 2: Caption Styling & Focus Mode */}
             <article
               onMouseEnter={playCardHoverSound}
-              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
+              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden h-full ${isDark
                   ? 'bg-[#161618] border-slate-800 hover:border-[#FF7A2F]/70 hover:shadow-[0_0_35px_rgba(255,122,47,0.2)]'
                   : 'bg-white border-slate-200/80 shadow-sm hover:border-[#FF7A2F]/50 hover:shadow-[0_12px_35px_rgba(255,122,47,0.12)]'
                 }`}
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#FF7A2F] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
-              <div>
+              
+              <div className="flex flex-col flex-1">
                 <WatchDemoThumbnail onClick={() => setActiveVideo({src: '/assets/clips/focus.mp4', title: 'Caption Styling & Focus Mode', theme: 'auditory'})} poster="/assets/clips/posters/focus.jpg" theme="auditory" isDark={isDark} label="Focus Mode" />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] flex items-center justify-center shrink-0">
-                    <Ear size={24}  aria-hidden="true"/>
+                    <Ear size={24} aria-hidden="true"/>
                   </div>
                   <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold border bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] border-[#FF7A2F]/20 uppercase tracking-wider">
                     Custom Subtitle Studio
@@ -417,16 +423,16 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                 <p className={`text-sm leading-relaxed mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                   Make subtitles look exactly how you want, and dim the rest of the page to help you focus.
                 </p>
+              </div>
 
-                <div className="space-y-3 text-xs">
-                  <div className={`p-3 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                    <span className="font-bold text-[#FF7A2F] dark:text-[#FFC09B] block mb-1">Custom Styling:</span>
-                    <p className={`m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Adjust text size, opacity, font family (100+ Google Fonts catalog), & colors.</p>
-                  </div>
-                  <div className={`p-3 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                    <span className="font-bold text-[#FF7A2F] dark:text-[#FFC09B] block mb-1">Focus Mode:</span>
-                    <p className={`m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Dims surrounding webpage clutter to focus entirely on live audio subtitles.</p>
-                  </div>
+              <div className="mt-auto pt-2 space-y-2 text-xs">
+                <div className={`p-3 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                  <span className="font-bold text-[#FF7A2F] dark:text-[#FFC09B] block mb-0.5">Custom Styling:</span>
+                  <p className={`m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Adjust text size, opacity, font family (100+ Google Fonts), & colors.</p>
+                </div>
+                <div className={`p-3 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                  <span className="font-bold text-[#FF7A2F] dark:text-[#FFC09B] block mb-0.5">Focus Mode:</span>
+                  <p className={`m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Dims surrounding webpage clutter to focus entirely on live subtitles.</p>
                 </div>
               </div>
             </article>
@@ -434,17 +440,18 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             {/* Card 3: Transcript Logging Drawer */}
             <article
               onMouseEnter={playCardHoverSound}
-              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
+              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden h-full ${isDark
                   ? 'bg-[#161618] border-slate-800 hover:border-[#FF7A2F]/70 hover:shadow-[0_0_35px_rgba(255,122,47,0.2)]'
                   : 'bg-white border-slate-200/80 shadow-sm hover:border-[#FF7A2F]/50 hover:shadow-[0_12px_35px_rgba(255,122,47,0.12)]'
                 }`}
             >
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#FF7A2F] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
-              <div>
+              
+              <div className="flex flex-col flex-1">
                 <WatchDemoThumbnail onClick={() => setActiveVideo({src: '/assets/clips/transcript.mp4', title: 'Transcript Logging Drawer', theme: 'auditory'})} poster="/assets/clips/posters/transcript.jpg" theme="auditory" isDark={isDark} label="Transcript Log" />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] flex items-center justify-center shrink-0">
-                    <Download size={24}  aria-hidden="true"/>
+                    <Download size={24} aria-hidden="true"/>
                   </div>
                   <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold border bg-[#FF7A2F]/10 text-[#FF7A2F] dark:text-[#FFC09B] border-[#FF7A2F]/20 uppercase tracking-wider">
                     Transcript History
@@ -456,7 +463,9 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                 <p className={`text-sm leading-relaxed mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                   Saves everything that was spoken so you can read it later or download it to your computer.
                 </p>
+              </div>
 
+              <div className="mt-auto pt-2">
                 <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
                   <ul className="space-y-2 text-xs m-0 p-0 list-none">
                     <li className="flex items-center gap-2">
@@ -469,7 +478,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#FF7A2F]" />
-                      <span className={isDark ? 'text-slate-300' : 'text-slate-700'}><strong>1-Click Download:</strong> Export as .txt</span>
+                      <span className={isDark ? 'text-slate-300' : 'text-slate-700'}><strong>1-Click Download:</strong> Export as .txt document</span>
                     </li>
                   </ul>
                 </div>
