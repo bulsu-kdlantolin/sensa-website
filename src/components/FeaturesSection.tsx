@@ -163,15 +163,12 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                 </p>
               </div>
 
-              <div className="mt-auto pt-2">
+              <div className="mt-auto pt-4">
                 <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-mono font-bold text-[#0A44FF] dark:text-[#6AA2FF] uppercase tracking-wider">
-                      Supported Commands:
-                    </span>
-                    <span className="text-[10px] font-mono text-slate-400">19 triggers</span>
-                  </div>
-                  <div className="flex flex-wrap gap-1.5 font-mono text-xs max-h-28 overflow-y-auto pr-1">
+                  <span className="text-xs font-mono font-bold text-[#0A44FF] dark:text-[#6AA2FF] uppercase tracking-wider block mb-2.5">
+                    Supported Commands (19):
+                  </span>
+                  <div className="flex flex-wrap gap-1.5 font-mono text-xs">
                     {[
                       '"activate"',
                       '"deactivate"',
@@ -193,7 +190,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                       '"expand"',
                       '"close"',
                     ].map((cmd, i) => (
-                      <span key={i} className={`px-2 py-0.5 rounded border text-[11px] ${isDark ? 'bg-slate-900 border-slate-700 text-slate-300' : 'bg-white border-slate-300 text-slate-700'}`}>
+                      <span key={i} className={`px-2.5 py-1 rounded-lg border text-[11px] font-semibold ${isDark ? 'bg-slate-900 border-slate-700 text-slate-200' : 'bg-white border-slate-300 text-slate-800 shadow-sm'}`}>
                         {cmd}
                       </span>
                     ))}
@@ -230,14 +227,30 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                 </p>
               </div>
 
-              <div className="mt-auto pt-2 space-y-2 text-xs">
-                <div className={`p-3 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="font-bold text-[#0A44FF] dark:text-[#6AA2FF] block mb-0.5">Playback Controls:</span>
-                  <p className={`m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Read, Stop, Next, Previous, & Restart paragraph.</p>
+              <div className="mt-auto pt-4 space-y-3">
+                <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                  <span className="text-xs font-mono font-bold text-[#0A44FF] dark:text-[#6AA2FF] uppercase tracking-wider block mb-2">
+                    Playback Controls:
+                  </span>
+                  <div className="flex flex-wrap gap-1.5 font-mono text-xs mb-2">
+                    {['"read"', '"stop"', '"next"', '"previous"', '"restart"'].map((cmd, i) => (
+                      <span key={i} className={`px-2 py-0.5 rounded border text-[11px] font-semibold ${isDark ? 'bg-slate-900 border-slate-700 text-slate-200' : 'bg-white border-slate-300 text-slate-800 shadow-sm'}`}>
+                        {cmd}
+                      </span>
+                    ))}
+                  </div>
+                  <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                    1-click spoken playback with synchronized sentence highlighting.
+                  </p>
                 </div>
-                <div className={`p-3 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="font-bold text-[#0A44FF] dark:text-[#6AA2FF] block mb-0.5">Customizations:</span>
-                  <p className={`m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Speech rate speed, TTS voice selector, & focus highlights.</p>
+
+                <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                  <span className="text-xs font-mono font-bold text-[#0A44FF] dark:text-[#6AA2FF] uppercase tracking-wider block mb-1.5">
+                    Customizations:
+                  </span>
+                  <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                    Adjustable speech rate speed (0.5x–2.0x), natural TTS voice selector, automatic page scrolling, and custom highlight colors.
+                  </p>
                 </div>
               </div>
             </article>
@@ -270,14 +283,30 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                 </p>
               </div>
 
-              <div className="mt-auto pt-2 space-y-2 text-xs">
-                <div className={`p-3 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="font-bold text-[#0A44FF] dark:text-[#6AA2FF] block mb-0.5">Instant Zoom Controls:</span>
-                  <p className={`m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Adjust magnification scale from 2x to 5x dynamically.</p>
+              <div className="mt-auto pt-4 space-y-3">
+                <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                  <span className="text-xs font-mono font-bold text-[#0A44FF] dark:text-[#6AA2FF] uppercase tracking-wider block mb-2">
+                    Instant Zoom Controls:
+                  </span>
+                  <div className="flex flex-wrap gap-1.5 font-mono text-xs mb-2">
+                    {['2.0x Zoom', '3.0x Zoom', '4.0x Zoom', '5.0x Zoom'].map((lvl, i) => (
+                      <span key={i} className={`px-2.5 py-0.5 rounded border text-[11px] font-semibold ${isDark ? 'bg-slate-900 border-slate-700 text-slate-200' : 'bg-white border-slate-300 text-slate-800 shadow-sm'}`}>
+                        {lvl}
+                      </span>
+                    ))}
+                  </div>
+                  <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                    High-definition optical zoom scale with instant edge enhancement.
+                  </p>
                 </div>
-                <div className={`p-3 rounded-xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="font-bold text-[#0A44FF] dark:text-[#6AA2FF] block mb-0.5">Smart Cursor Tracking:</span>
-                  <p className={`m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Glides effortlessly with reading focus without jitter.</p>
+
+                <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
+                  <span className="text-xs font-mono font-bold text-[#0A44FF] dark:text-[#6AA2FF] uppercase tracking-wider block mb-1.5">
+                    Smart Cursor Tracking:
+                  </span>
+                  <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                    Intelligent floating lens glides seamlessly across paragraph boundaries without viewport jitter or obscuring adjacent layout.
+                  </p>
                 </div>
               </div>
             </article>
