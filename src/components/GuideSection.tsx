@@ -31,7 +31,7 @@ const HoverGuideVideo = ({ src, poster, isDark }: { src: string; poster: string;
     <div 
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative w-full aspect-video rounded-2xl mt-4 mb-5 overflow-hidden border shadow-inner group/guidevid cursor-pointer transition-all duration-300 ${
+      className={`relative w-full aspect-video rounded-2xl mt-5 overflow-hidden border shadow-inner group/guidevid cursor-pointer transition-all duration-300 shrink-0 ${
         isDark ? 'border-slate-800 bg-black/40 hover:border-purple-500/40' : 'border-slate-200 bg-slate-100/50 hover:border-purple-300'
       }`}
     >
@@ -142,32 +142,34 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full items-stretch">
             {/* Step 1: Add to Chrome */}
             <a
-              href="https://chromewebstore.google.com/"
+              href="https://chromewebstore.google.com/detail/sensa-accessibility-senso/eopieokgfbpkoipbdepfdbjfkofmamnj?authuser=1&hl=en"
               target="_blank"
               rel="noopener noreferrer"
               onMouseEnter={playCardHoverSound}
-              className={`block cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-purple-500 hover:-translate-y-1 group border rounded-3xl p-6 md:p-7 transition-all duration-300 relative overflow-hidden ${
+              className={`flex flex-col justify-between cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-purple-500 hover:-translate-y-1 group border rounded-3xl p-6 md:p-7 transition-all duration-300 relative overflow-hidden h-full ${
                 isDark
                   ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.15)]'
                   : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-md hover:border-purple-300 hover:shadow-lg'
               }`}
             >
-              <div className="flex items-center justify-between gap-4 mb-4">
-                <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 font-black flex items-center justify-center border border-purple-500/40 text-sm shrink-0">
-                    1
-                  </span>
-                  <h4 className={`text-lg font-bold m-0 group-hover:text-purple-500 transition-colors ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                    Add to Google Chrome
-                  </h4>
+              <div className="flex-1 flex flex-col">
+                <div className="flex items-center justify-between gap-4 mb-4">
+                  <div className="flex items-center gap-3">
+                    <span className="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 font-black flex items-center justify-center border border-purple-500/40 text-sm shrink-0">
+                      1
+                    </span>
+                    <h4 className={`text-lg font-bold m-0 group-hover:text-purple-500 transition-colors ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                      Add to Google Chrome
+                    </h4>
+                  </div>
+                  <div className={`transition-colors ${isDark ? 'text-slate-400 group-hover:text-purple-400' : 'text-slate-400 group-hover:text-purple-600'}`}>
+                    <Download size={20} aria-hidden="true" />
+                  </div>
                 </div>
-                <div className={`transition-colors ${isDark ? 'text-slate-400 group-hover:text-purple-400' : 'text-slate-400 group-hover:text-purple-600'}`}>
-                  <Download size={20} aria-hidden="true" />
-                </div>
+                <p className={`text-xs md:text-sm leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                  Open the Chrome Web Store and click <strong>Add to Chrome</strong>. Sensa compiles safely in seconds with zero configuration required.
+                </p>
               </div>
-              <p className={`text-xs md:text-sm leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                Open the Chrome Web Store and click <strong>Add to Chrome</strong>. Sensa compiles safely in seconds with zero configuration required.
-              </p>
               
               <HoverGuideVideo src="/assets/clips/install-step1.mp4" poster="/assets/clips/posters/step1.jpg" isDark={isDark} />
             </a>
@@ -175,23 +177,25 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
             {/* Step 2: Pin Extension */}
             <article
               onMouseEnter={playCardHoverSound}
-              className={`group border rounded-3xl p-6 md:p-7 transition-all duration-300 ${
+              className={`flex flex-col justify-between group border rounded-3xl p-6 md:p-7 transition-all duration-300 h-full ${
                 isDark
                   ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:border-purple-500/50'
                   : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-md hover:border-purple-300'
               }`}
             >
-              <div className="flex items-center gap-3 mb-3">
-                <span className="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 font-black flex items-center justify-center border border-purple-500/40 text-sm shrink-0">
-                  2
-                </span>
-                <h4 className={`text-lg font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                  Pin to Chrome Toolbar
-                </h4>
+              <div className="flex-1 flex flex-col">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 font-black flex items-center justify-center border border-purple-500/40 text-sm shrink-0">
+                    2
+                  </span>
+                  <h4 className={`text-lg font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                    Pin to Chrome Toolbar
+                  </h4>
+                </div>
+                <p className={`text-xs md:text-sm leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                  Click the puzzle piece icon <span className="font-mono text-purple-400 font-bold">🧩</span> in your upper-right Chrome bar and click the <strong>Pin</strong> button so Sensa is always 1-click away.
+                </p>
               </div>
-              <p className={`text-xs md:text-sm leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                Click the puzzle piece icon <span className="font-mono text-purple-400 font-bold">🧩</span> in your upper-right Chrome bar and click the <strong>Pin</strong> button so Sensa is always 1-click away.
-              </p>
               
               <HoverGuideVideo src="/assets/clips/install-step2.mp4" poster="/assets/clips/posters/step2.jpg" isDark={isDark} />
             </article>
@@ -199,23 +203,25 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
             {/* Step 3: Grant Permissions */}
             <article
               onMouseEnter={playCardHoverSound}
-              className={`group border rounded-3xl p-6 md:p-7 transition-all duration-300 ${
+              className={`flex flex-col justify-between group border rounded-3xl p-6 md:p-7 transition-all duration-300 h-full ${
                 isDark
                   ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset hover:border-purple-500/50'
                   : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-md hover:border-purple-300'
               }`}
             >
-              <div className="flex items-center gap-3 mb-3">
-                <span className="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 font-black flex items-center justify-center border border-purple-500/40 text-sm shrink-0">
-                  3
-                </span>
-                <h4 className={`text-lg font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                  Grant Browser Permissions
-                </h4>
+              <div className="flex-1 flex flex-col">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 font-black flex items-center justify-center border border-purple-500/40 text-sm shrink-0">
+                    3
+                  </span>
+                  <h4 className={`text-lg font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                    Grant Browser Permissions
+                  </h4>
+                </div>
+                <p className={`text-xs md:text-sm leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                  Allow microphone access for hands-free voice control and tab audio capture for live AI subtitling.
+                </p>
               </div>
-              <p className={`text-xs md:text-sm leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                Allow microphone access for hands-free voice control and tab audio capture for live AI subtitling.
-              </p>
 
               <HoverGuideVideo src="/assets/clips/install-step3.mp4" poster="/assets/clips/posters/step3.jpg" isDark={isDark} />
             </article>
@@ -247,50 +253,54 @@ export default function GuideSection({ isDark }: GuideSectionProps) {
             {/* Interactive Voice Onboarding Simulator */}
             <article
               onMouseEnter={playCardHoverSound}
-              className={`border rounded-3xl p-6 md:p-7 transition-all duration-300 ${
+              className={`flex flex-col justify-between border rounded-3xl p-6 md:p-7 transition-all duration-300 h-full ${
                 isDark
                   ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset'
                   : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-md'
               }`}
             >
-              <div className="flex items-center justify-between gap-4 mb-4">
-                <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-xl bg-[#0A44FF]/20 text-[#0A44FF] dark:text-[#6AA2FF] font-black flex items-center justify-center border border-[#0A44FF]/40 text-sm shrink-0">
-                    1
-                  </span>
-                  <h4 className={`text-lg font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                    Interactive Voice Onboarding
-                  </h4>
+              <div className="flex-1 flex flex-col">
+                <div className="flex items-center justify-between gap-4 mb-4">
+                  <div className="flex items-center gap-3">
+                    <span className="w-8 h-8 rounded-xl bg-[#0A44FF]/20 text-[#0A44FF] dark:text-[#6AA2FF] font-black flex items-center justify-center border border-[#0A44FF]/40 text-sm shrink-0">
+                      1
+                    </span>
+                    <h4 className={`text-lg font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                      Interactive Voice Onboarding
+                    </h4>
+                  </div>
                 </div>
+                <p className={`text-xs md:text-sm leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                  Upon first click, Sensa speaks a welcome prompt and listens for your spoken mode selection.
+                </p>
               </div>
-              <p className={`text-xs md:text-sm leading-relaxed mb-4 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                Upon first click, Sensa speaks a welcome prompt and listens for your spoken mode selection.
-              </p>
               <HoverGuideVideo src="/assets/clips/voice-onboarding.mp4" poster="/assets/clips/posters/voice-onboarding.jpg" isDark={isDark} />
             </article>
 
             {/* Interactive Dock Explorer */}
             <article
               onMouseEnter={playCardHoverSound}
-              className={`border rounded-3xl p-6 md:p-7 transition-all duration-300 ${
+              className={`flex flex-col justify-between border rounded-3xl p-6 md:p-7 transition-all duration-300 h-full ${
                 isDark
                   ? 'bg-[#161618] border-slate-800 ring-1 ring-white/5 ring-inset'
                   : 'bg-white border-slate-200/80 ring-1 ring-black/5 ring-inset shadow-md'
               }`}
             >
-              <div className="flex items-center justify-between gap-4 mb-4">
-                <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-xl bg-[#0A44FF]/20 text-[#0A44FF] dark:text-[#6AA2FF] font-black flex items-center justify-center border border-[#0A44FF]/40 text-sm shrink-0">
-                    2
-                  </span>
-                  <h4 className={`text-lg font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                    Explore Floating Docks
-                  </h4>
+              <div className="flex-1 flex flex-col">
+                <div className="flex items-center justify-between gap-4 mb-4">
+                  <div className="flex items-center gap-3">
+                    <span className="w-8 h-8 rounded-xl bg-[#0A44FF]/20 text-[#0A44FF] dark:text-[#6AA2FF] font-black flex items-center justify-center border border-[#0A44FF]/40 text-sm shrink-0">
+                      2
+                    </span>
+                    <h4 className={`text-lg font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                      Explore Floating Docks
+                    </h4>
+                  </div>
                 </div>
+                <p className={`text-xs md:text-sm leading-relaxed font-normal ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                  The Floating Control Docks provide users with instantaneous text-to-speech, customizable fonts, screen magnification, real-time AI live subtitles, and many more.
+                </p>
               </div>
-              <p className={`text-xs md:text-sm leading-relaxed mb-4 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                The Floating Control Docks provide users with instantaneous text-to-speech, customizable fonts, screen magnification, real-time AI live subtitles, and many more.
-              </p>
               <HoverGuideVideo src="/assets/clips/docks-explorer.mp4" poster="/assets/clips/posters/docks-explorer.jpg" isDark={isDark} />
             </article>
             </div>

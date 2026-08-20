@@ -81,7 +81,7 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
           />
 
           <a
-            href="https://chromewebstore.google.com/"
+            href="https://chromewebstore.google.com/detail/sensa-accessibility-senso/eopieokgfbpkoipbdepfdbjfkofmamnj?authuser=1&hl=en"
             target="_blank"
             rel="noopener noreferrer"
             onClick={playClickSound}
