@@ -28,9 +28,9 @@ Most modern websites are not inherently designed to support individuals with vis
 ### 👁️ Visual Accommodation Mode
 Tailored for low-vision and blind users to consume web content effortlessly.
 
-- **🎤 Hands-Free Voice Control:** Voice navigation powered by Web Speech API (`webkitSpeechRecognition`) supporting commands like `"Activate Visual Mode"`, `"Read"`, `"Stop"`, `"Faster"`, and `"Slower"`.
-- **🔊 Screen Reader & Text-to-Speech:** Paragraph-by-paragraph webpage narrator (`SpeechSynthesisUtterance`) with live DOM highlighting via `MutationObserver`.
-- **🔍 Dynamic Screen Magnifier:** Circular zoom lens providing 2x to 5x screen magnification with smooth element tracking.
+- **🎤 Hands-Free Voice Control:** Voice-commanded interface powered by Web Speech API (`webkitSpeechRecognition`) supporting commands like `"Activate"`, `"Read"`, `"Stop"`, `"Faster"`, and `"Slower"`.
+- **🔊 Screen Reader & Text-to-Speech:** Paragraph-by-paragraph webpage narrator (`SpeechSynthesisUtterance`) with adjustable 0.5x–3.0x speech rate and live DOM highlighting via `MutationObserver`.
+- **🔍 Dynamic Screen Magnifier:** Circular zoom lens providing 1.5x to 4.0x screen magnification with customizable 160px–360px lens sizing and smooth element tracking.
 - **✨ Visual Micro-Accommodations:**
   - **Voice Guide:** Audio hover feedback speaking UI button labels out loud.
   - **Highlight Reader:** Instant speech narration of mouse-selected text.
@@ -41,12 +41,12 @@ Tailored for low-vision and blind users to consume web content effortlessly.
 ### 👂 Auditory Accommodation Mode
 Designed for deaf and hard-of-hearing users to visualize audio across any webpage.
 
-- **🌐 Live AI Subtitles & Translation:** Low-latency live speech transcription powered by **Deepgram Nova-3** STT and instant neural translation via **Azure Translator API v3.0** (supporting 135+ languages).
-- **🎨 Custom Subtitle Studio & Focus Mode:** Customizable subtitle overlay (typography, sizing, position, transparency) paired with page-dimming **Focus Mode**.
+- **🌐 Live AI Subtitles & Translation:** Low-latency live speech transcription powered by **Deepgram Nova-3** STT (45+ source languages) and instant neural translation via **Azure Translator API v3.0** (supporting 135+ languages).
+- **🎨 Custom Subtitle Studio & Focus Mode:** Customizable subtitle overlay (typography 12px–100px, sizing, position, 0%–100% transparency) paired with page-dimming **Focus Mode**.
 - **📥 Real-Time Transcript Drawer:** Live scrolling log drawer recording spoken captions with 1-click `.txt` file export.
 - **🔔 Auditory Micro-Accommodations:**
-  - **Sudden Sound Safety Warning:** Web Audio API RMS analyzer monitoring decibel frequencies to trigger visual alerts for sudden loud noises (>85dB).
-  - **FFT Audio Visualizer:** Smooth, real-time frequency spectrum visualizer displaying active audio playback.
+  - **Sudden Sound Safety Warning:** Web Audio API dynamic RMS spike analyzer monitoring audio amplitude to trigger visual alerts for sudden loud noise bursts (~85dB equivalent).
+  - **FFT Audio Visualizer:** Smooth, real-time 5-bar frequency spectrum visualizer displaying active audio playback.
 
 ---
 

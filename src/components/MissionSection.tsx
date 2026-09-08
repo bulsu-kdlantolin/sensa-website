@@ -19,8 +19,8 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
   const problemCards = [
     {
       id: 1,
-      title: 'Hard to Click',
-      description: 'Small buttons are hard to see and click.',
+      title: 'Manual Tool Navigation',
+      description: 'Relying on a mouse to activate assistive features is difficult.',
       icon: MousePointerClick,
     },
     {
@@ -46,8 +46,8 @@ export default function MissionSection({ isDark, problemRef, isProblemVisible }:
   const solutionCards = [
     {
       id: 1,
-      title: 'Voice Control',
-      description: 'Control the browser with your voice.',
+      title: 'Voice-Operated Interface',
+      description: 'Activate features and manage reading without touching a mouse.',
       icon: Mic,
     },
     {

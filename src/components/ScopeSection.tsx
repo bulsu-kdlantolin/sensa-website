@@ -9,8 +9,8 @@ interface ScopeSectionProps {
 export default function ScopeSection({ isDark }: ScopeSectionProps) {
   const scopeItems = [
     {
-      title: 'Google Chrome & Microsoft Edge',
-      description: 'Delivers optimal performance on Google Chrome and Microsoft Edge desktop browsers for seamless voice controls and live audio capture.',
+      title: 'Google Chrome Desktop',
+      description: 'Engineered specifically for Google Chrome on desktop to ensure peak performance, responsive voice controls, and real-time audio capture.',
       icon: Laptop,
     },
     {
@@ -33,7 +33,7 @@ export default function ScopeSection({ isDark }: ScopeSectionProps) {
   const limitationItems = [
     {
       title: 'Browser Compatibility',
-      description: 'Voice commands are disabled on Brave and Opera due to built-in shield restrictions, and non-Chromium browsers like Firefox or Safari are not compatible.',
+      description: 'Other browsers (such as Microsoft Edge, Brave, or Opera) will not offer the same optimal performance and may experience audio or shield restrictions, while non-Chromium browsers like Firefox or Safari are not compatible.',
       icon: Globe,
     },
     {

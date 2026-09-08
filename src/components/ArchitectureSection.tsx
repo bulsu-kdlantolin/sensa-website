@@ -150,7 +150,7 @@ export default function ArchitectureSection({ isDark }: ArchitectureSectionProps
         {
           name: 'Web Speech API — SpeechRecognition',
           spec: 'webkitSpeechRecognition',
-          purpose: 'Captures voice commands through your microphone for complete hands-free site navigation.',
+          purpose: 'Captures voice commands through your microphone to operate Sensa’s assistive tools and screen reader hands-free.',
           Logo: Mic,
           url: 'https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition',
         },

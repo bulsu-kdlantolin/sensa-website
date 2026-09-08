@@ -172,11 +172,11 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
 
           {/* 3 Main Visual Feature Cards */}
           <ScrollReveal delay={200}>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start mb-10">
-            {/* Card 1: Voice Command Navigation */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch mb-10">
+            {/* Card 1: Hands-Free Voice Commands */}
             <article
               onMouseEnter={playCardHoverSound}
-              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
+              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between h-full transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
                   ? 'bg-[#161618] border-slate-800 hover:border-[#0A44FF]/70 hover:shadow-[0_0_35px_rgba(10,68,255,0.2)]'
                   : 'bg-white border-slate-200/80 shadow-sm hover:border-[#0A44FF]/50 hover:shadow-[0_12px_35px_rgba(10,68,255,0.12)]'
                 }`}
@@ -184,7 +184,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
               <div className="absolute top-0 left-8 right-8 h-1 rounded-b-full bg-[#0A44FF] opacity-40 group-hover:opacity-100 transition-opacity duration-300" />
               
               <div className="flex flex-col flex-1">
-                <WatchDemoThumbnail onClick={() => setActiveVideo({src: '/assets/clips/voice-nav.mp4', title: 'Voice Command Navigation', theme: 'visual'})} poster="/assets/clips/posters/voice.jpg" theme="visual" isDark={isDark} label="Voice Navigation" />
+                <WatchDemoThumbnail onClick={() => setActiveVideo({src: '/assets/clips/voice-nav.mp4', title: 'Hands-Free Voice Commands', theme: 'visual'})} poster="/assets/clips/posters/voice.jpg" theme="visual" isDark={isDark} label="Voice Commands" />
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-[#0A44FF]/10 text-[#0A44FF] dark:text-[#6AA2FF] flex items-center justify-center shrink-0">
                     <Mic size={24} aria-hidden="true"/>
@@ -193,11 +193,11 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                     Voice Recognition
                   </span>
                 </div>
-                <h4 className={`text-xl font-bold tracking-tight mb-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                  Voice Command Navigation
+                <h4 className={`text-xl font-bold tracking-tight mb-3 lg:min-h-[3.5rem] flex items-center ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                  Hands-Free Voice Commands
                 </h4>
                 <p className={`text-sm leading-relaxed mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Control the website using just your voice. Our smart system understands what you say, even if you don't say the command perfectly.
+                  Operate your screen reader and accessibility tools completely hands-free. Our voice engine understands what you say, even without exact phrasing.
                 </p>
               </div>
 
@@ -229,7 +229,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                         '"increase"',
                         '"decrease"',
                         '"settings"',
-                        '"voice guide"',
+                        '"voice selection"',
                         '"reset"',
                         '"minimize"',
                         '"expand"',
@@ -255,7 +255,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             {/* Card 2: Screen Reader (Text-to-Speech) */}
             <article
               onMouseEnter={playCardHoverSound}
-              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
+              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between h-full transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
                   ? 'bg-[#161618] border-slate-800 hover:border-[#0A44FF]/70 hover:shadow-[0_0_35px_rgba(10,68,255,0.2)]'
                   : 'bg-white border-slate-200/80 shadow-sm hover:border-[#0A44FF]/50 hover:shadow-[0_12px_35px_rgba(10,68,255,0.12)]'
                 }`}
@@ -272,7 +272,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                     Text-to-Speech
                   </span>
                 </div>
-                <h4 className={`text-xl font-bold tracking-tight mb-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                <h4 className={`text-xl font-bold tracking-tight mb-3 lg:min-h-[3.5rem] flex items-center ${isDark ? 'text-white' : 'text-slate-900'}`}>
                   Screen Reader (TTS Engine)
                 </h4>
                 <p className={`text-sm leading-relaxed mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
@@ -310,7 +310,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                         Customizations:
                       </span>
                       <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                        Adjustable speech rate speed (0.5x–2.0x), natural TTS voice selector, automatic page scrolling, and custom highlight colors.
+                        Adjustable speech rate speed (0.5x–3.0x with 1x–2x quick presets), natural TTS voice selector, automatic page scrolling, and custom highlight colors.
                       </p>
                     </div>
                   </div>
@@ -328,7 +328,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             {/* Card 3: Screen Magnifier */}
             <article
               onMouseEnter={playCardHoverSound}
-              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
+              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between h-full transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
                   ? 'bg-[#161618] border-slate-800 hover:border-[#0A44FF]/70 hover:shadow-[0_0_35px_rgba(10,68,255,0.2)]'
                   : 'bg-white border-slate-200/80 shadow-sm hover:border-[#0A44FF]/50 hover:shadow-[0_12px_35px_rgba(10,68,255,0.12)]'
                 }`}
@@ -345,11 +345,11 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                     Magnifying Glass
                   </span>
                 </div>
-                <h4 className={`text-xl font-bold tracking-tight mb-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                <h4 className={`text-xl font-bold tracking-tight mb-3 lg:min-h-[3.5rem] flex items-center ${isDark ? 'text-white' : 'text-slate-900'}`}>
                   Screen Magnifier
                 </h4>
                 <p className={`text-sm leading-relaxed mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                  A floating magnifying glass that helps you read small text easily with smooth cursor tracking and zoom.
+                  A floating magnifying glass that helps you read small text easily with smooth cursor tracking, 1.5x–4.0x zoom, and custom lens sizes.
                 </p>
               </div>
 
@@ -367,14 +367,14 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                         Instant Zoom Controls:
                       </span>
                       <div className="flex flex-wrap gap-1.5 font-mono text-xs mb-2">
-                        {['2.0x Zoom', '3.0x Zoom', '4.0x Zoom', '5.0x Zoom'].map((lvl, i) => (
+                        {['1.5x Zoom', '2.0x Zoom', '3.0x Zoom', '4.0x Zoom'].map((lvl, i) => (
                           <span key={i} className={`px-2.5 py-0.5 rounded border text-[11px] font-semibold ${isDark ? 'bg-slate-900 border-slate-700 text-slate-200' : 'bg-white border-slate-300 text-slate-800 shadow-sm'}`}>
                             {lvl}
                           </span>
                         ))}
                       </div>
                       <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                        High-definition optical zoom scale with instant edge enhancement.
+                        High-definition 1.5x to 4.0x optical zoom with customizable lens diameter (160px–360px).
                       </p>
                     </div>
 
@@ -468,11 +468,11 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
 
           {/* Main Auditory Feature Section: Multilingual Live Subtitles */}
           <ScrollReveal delay={200}>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start mb-10">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch mb-10">
             {/* Card 1: Multilingual Language Engine */}
             <article
               onMouseEnter={playCardHoverSound}
-              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
+              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between h-full transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
                   ? 'bg-[#161618] border-slate-800 hover:border-[#FF7A2F]/70 hover:shadow-[0_0_35px_rgba(255,122,47,0.2)]'
                   : 'bg-white border-slate-200/80 shadow-sm hover:border-[#FF7A2F]/50 hover:shadow-[0_12px_35px_rgba(255,122,47,0.12)]'
                 }`}
@@ -489,7 +489,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                     Language Matrix
                   </span>
                 </div>
-                <h4 className={`text-xl font-bold tracking-tight mb-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                <h4 className={`text-xl font-bold tracking-tight mb-3 lg:min-h-[3.5rem] flex items-center ${isDark ? 'text-white' : 'text-slate-900'}`}>
                   Multilingual AI Subtitles
                 </h4>
                 <p className={`text-sm leading-relaxed mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
@@ -531,7 +531,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             {/* Card 2: Caption Styling & Focus Mode */}
             <article
               onMouseEnter={playCardHoverSound}
-              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
+              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between h-full transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
                   ? 'bg-[#161618] border-slate-800 hover:border-[#FF7A2F]/70 hover:shadow-[0_0_35px_rgba(255,122,47,0.2)]'
                   : 'bg-white border-slate-200/80 shadow-sm hover:border-[#FF7A2F]/50 hover:shadow-[0_12px_35px_rgba(255,122,47,0.12)]'
                 }`}
@@ -548,7 +548,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                     Custom Subtitle Studio
                   </span>
                 </div>
-                <h4 className={`text-xl font-bold tracking-tight mb-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                <h4 className={`text-xl font-bold tracking-tight mb-3 lg:min-h-[3.5rem] flex items-center ${isDark ? 'text-white' : 'text-slate-900'}`}>
                   Caption Styling & Focus Mode
                 </h4>
                 <p className={`text-sm leading-relaxed mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
@@ -570,7 +570,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                         Custom Subtitle Styling:
                       </span>
                       <p className={`text-xs leading-relaxed m-0 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                        Adjust font size, background opacity, font family (100+ Google Fonts catalog), and text color themes.
+                        Adjust font size (12px–100px), continuous background opacity (0%–100%), font family (100+ Google Fonts catalog), and text color themes.
                       </p>
                     </div>
                     <div className={`p-4 rounded-2xl border ${isDark ? 'bg-black/40 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
@@ -596,7 +596,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
             {/* Card 3: Transcript Logging Drawer */}
             <article
               onMouseEnter={playCardHoverSound}
-              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
+              className={`group border rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-between h-full transition-all duration-500 hover:scale-[1.02] relative overflow-hidden ${isDark
                   ? 'bg-[#161618] border-slate-800 hover:border-[#FF7A2F]/70 hover:shadow-[0_0_35px_rgba(255,122,47,0.2)]'
                   : 'bg-white border-slate-200/80 shadow-sm hover:border-[#FF7A2F]/50 hover:shadow-[0_12px_35px_rgba(255,122,47,0.12)]'
                 }`}
@@ -613,7 +613,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                     Transcript History
                   </span>
                 </div>
-                <h4 className={`text-xl font-bold tracking-tight mb-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                <h4 className={`text-xl font-bold tracking-tight mb-3 lg:min-h-[3.5rem] flex items-center ${isDark ? 'text-white' : 'text-slate-900'}`}>
                   Transcript Logging Drawer
                 </h4>
                 <p className={`text-sm leading-relaxed mb-6 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
@@ -686,7 +686,7 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
                         Sudden Sound Warning
                       </h6>
                       <p className={`text-xs leading-relaxed m-0 mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                        Flashes a visual warning on your screen if a sudden loud noise plays, protecting your ears.
+                        Flashes a visual screen alert when sudden loud audio spikes occur (~85dB equivalent), protecting your ears.
                       </p>
                     </div>
                   </div>
@@ -698,17 +698,27 @@ export default function FeaturesSection({ isDark }: FeaturesSectionProps) {
 
               {/* Micro 2: Real-time Audio Visualizer */}
               <div className={`p-5 rounded-xl border flex flex-col items-start gap-4 ${isDark ? 'bg-[#161618] border-slate-800' : 'bg-white border-slate-200'}`}>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#FF7A2F]/10 text-[#FF7A2F] flex items-center justify-center shrink-0">
-                    <Activity size={20}  aria-hidden="true"/>
+                <div className="flex items-center justify-between w-full">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#FF7A2F]/10 text-[#FF7A2F] flex items-center justify-center shrink-0">
+                      <Activity size={20}  aria-hidden="true"/>
+                    </div>
+                    <div>
+                      <h6 className={`text-sm font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                        Real-time Audio Visualizer
+                      </h6>
+                      <p className={`text-xs leading-relaxed m-0 mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                        Shows dynamic 5-bar audio frequencies so you know when sound is currently playing on the page.
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h6 className={`text-sm font-bold m-0 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                      Real-time Audio Visualizer
-                    </h6>
-                    <p className={`text-xs leading-relaxed m-0 mt-0.5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                      Shows visual audio bars so you know when sound is currently playing on the page.
-                    </p>
+                  {/* Animated 5-Bar EQ Visualizer Preview */}
+                  <div className="hidden sm:flex items-end gap-1 h-6 px-2.5 py-1 rounded-lg bg-[#FF7A2F]/10 border border-[#FF7A2F]/20" aria-label="Audio Visualizer Active">
+                    <span className="w-1 bg-[#FF7A2F] rounded-full animate-[pulse_0.8s_ease-in-out_infinite] h-2.5" />
+                    <span className="w-1 bg-[#FF7A2F] rounded-full animate-[pulse_0.6s_ease-in-out_infinite_0.15s] h-4" />
+                    <span className="w-1 bg-[#FF7A2F] rounded-full animate-[pulse_0.9s_ease-in-out_infinite_0.3s] h-5" />
+                    <span className="w-1 bg-[#FF7A2F] rounded-full animate-[pulse_0.7s_ease-in-out_infinite_0.2s] h-3.5" />
+                    <span className="w-1 bg-[#FF7A2F] rounded-full animate-[pulse_0.85s_ease-in-out_infinite_0.1s] h-2" />
                   </div>
                 </div>
               </div>
