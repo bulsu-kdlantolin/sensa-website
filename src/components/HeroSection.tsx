@@ -35,7 +35,7 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
   return (
     <section
       id="hero"
-      className="relative w-full min-h-screen flex flex-col justify-center pt-28 pb-24 md:pt-36 md:pb-32 px-4 md:px-8 overflow-hidden"
+      className="relative w-full min-h-screen flex flex-col justify-center pt-24 pb-16 sm:pt-28 sm:pb-24 md:pt-36 md:pb-32 px-4 sm:px-6 md:px-8 overflow-hidden"
     >
       {/* Hero Cybernetic Grid Layer */}
       <div className="absolute inset-0 bg-grid-pattern pointer-events-none [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_75%,transparent_100%)] -z-10" />
@@ -52,9 +52,19 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
+        {/* Soft Ambient Readability Shield behind hero text */}
+        <div
+          aria-hidden="true"
+          className={`absolute -inset-x-4 -inset-y-6 sm:-inset-x-10 sm:-inset-y-10 rounded-3xl pointer-events-none -z-10 transition-opacity duration-700 ${
+            isDark
+              ? 'bg-[#09090B]/60 [mask-image:radial-gradient(ellipse_at_center,black_35%,transparent_80%)] backdrop-blur-[1.5px]'
+              : 'bg-white/65 [mask-image:radial-gradient(ellipse_at_center,black_35%,transparent_80%)] backdrop-blur-[1.5px]'
+          }`}
+        />
+
         {/* Liquid Water Flow Title Gradient */}
         <h1
-          className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter mb-6 py-2 pb-3 leading-[1.15] max-w-4xl text-transparent animate-pop cursor-pointer transition-all duration-700 bg-[length:200%_auto] hover:animate-water-flow hover:scale-[1.02] hover:drop-shadow-[0_10px_20px_rgba(10,68,255,0.15)]`}
+          className={`text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter mb-4 sm:mb-6 py-2 pb-3 leading-[1.18] sm:leading-[1.15] max-w-4xl text-transparent animate-pop cursor-pointer transition-all duration-700 bg-[length:200%_auto] hover:animate-water-flow hover:scale-[1.02] drop-shadow-[0_2px_10px_rgba(10,68,255,0.12)] hover:drop-shadow-[0_10px_20px_rgba(10,68,255,0.2)]`}
           style={{
             backgroundImage: `linear-gradient(to right, #0A44FF, #8A56FF, #FF7A2F, #8A56FF, #0A44FF)`,
             WebkitBackgroundClip: 'text',
@@ -65,8 +75,8 @@ export default function HeroSection({ isDark }: HeroSectionProps) {
         </h1>
 
         <p
-          className={`text-base sm:text-lg md:text-xl max-w-3xl mb-10 leading-relaxed font-normal animate-pop ${
-            isDark ? 'text-slate-400' : 'text-slate-600'
+          className={`text-[15px] sm:text-lg md:text-xl max-w-3xl mb-8 sm:mb-10 leading-relaxed font-normal animate-pop ${
+            isDark ? 'text-slate-300 sm:text-slate-400' : 'text-slate-700 sm:text-slate-600'
           }`}
         >
           Created by 4th-Year Information Technology students from Bulacan State University to make the internet accessible for people with low vision or hearing impairments. It features hands-free voice controls, live AI subtitles, a high-contrast reading guide, and real-time audio capture.
