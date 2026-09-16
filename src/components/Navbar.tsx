@@ -41,10 +41,10 @@ export default function Navbar({
     <>
       {/* TOP NAVBAR (Horizontal) */}
       <header
-        className={`fixed top-3 left-3 right-3 md:top-6 md:left-1/2 z-50 w-[calc(100%-24px)] md:w-[calc(100%-64px)] md:max-w-7xl backdrop-blur-xl border py-2.5 md:py-3.5 px-4 md:px-8 rounded-3xl md:rounded-full shadow-lg transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+        className={`fixed top-3 left-3 right-3 md:top-6 md:left-1/2 md:right-auto md:-translate-x-1/2 z-50 w-[calc(100%-24px)] md:w-[calc(100%-64px)] md:max-w-7xl backdrop-blur-xl border py-2.5 md:py-3.5 px-4 md:px-8 rounded-3xl md:rounded-full shadow-lg transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
           isSidebarMode
-            ? 'lg:-translate-y-[150%] lg:opacity-0 lg:pointer-events-none md:-translate-x-1/2'
-            : 'translate-y-0 opacity-100 md:-translate-x-1/2'
+            ? 'lg:-translate-y-[150%] lg:opacity-0 lg:pointer-events-none'
+            : 'translate-y-0 opacity-100'
         } ${
           isDark
             ? 'bg-[#1C1C1E]/70 border-white/10 ring-1 ring-white/5 ring-inset shadow-black/50'
@@ -184,7 +184,7 @@ export default function Navbar({
 
       {/* MOBILE MENU OVERLAY (Dropdown) */}
       <div
-        className={`fixed inset-x-3 top-[76px] z-40 xl:hidden flex flex-col backdrop-blur-xl border py-4 px-4 rounded-3xl shadow-2xl transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-top ${
+        className={`fixed top-[75px] md:top-[98px] left-3 right-3 md:left-1/2 md:right-auto md:-translate-x-1/2 z-40 w-[calc(100%-24px)] md:w-[calc(100%-64px)] md:max-w-7xl xl:hidden flex flex-col backdrop-blur-xl border py-4 px-4 rounded-3xl shadow-2xl transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-top box-border ${
           isMobileMenuOpen ? 'scale-y-100 opacity-100 pointer-events-auto' : 'scale-y-95 opacity-0 pointer-events-none'
         } ${
           isDark
